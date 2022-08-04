@@ -1,0 +1,17 @@
+com\coffice\user\controller\SubPayController.class
+com\coffice\controller\WebSocketHandler.class
+com\coffice\user\controller\BoardController.class
+com\coffice\user\controller\CafeController.class
+com\coffice\admin\controller\AdminPointController.class
+com\coffice\admin\controller\AdminMemberController.class
+com\coffice\user\controller\MypageController.class
+com\coffice\admin\controller\AdminReportController.class
+com\coffice\user\controller\CafeSNSController.class
+com\coffice\admin\controller\AdminAllianceController.class
+com\coffice\storeowner\controller\StoreownerHomeController.class
+com\coffice\user\controller\homeController.class
+com\coffice\user\controller\UserMemberController.class
+com\coffice\admin\controller\AdminHomeController.class
+com\coffice\admin\controller\AdminBoardController.class
+com\coffice\admin\controller\AdminChttController.class
+com\coffice\admin\controller\AdminStoreOwnerMemberController.class
