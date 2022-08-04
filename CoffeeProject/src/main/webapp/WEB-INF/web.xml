@@ -10,9 +10,6 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee; http://xmlns.jcp.org/xml
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
-	<!-- 웹소캣을 위한 설정(비동기 지원) -->
-	<async-supported>true</async-supported>
-	
 	<!-- 리스너 설정 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
