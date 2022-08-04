@@ -242,11 +242,12 @@ function getListItem(index, places) {
 function addMarker(position, idx, title) {
 	var imageSrc = '/CoffeeProject/resources/img/기본_coffee1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 		imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
-		imgOptions = {
+		imgOptions = {offset: new kakao.maps.Point(27, 69)},
+		/*imgOptions = {
 			spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
 			spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
 			offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-		},
+		},*/
 		markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
 		marker = new kakao.maps.Marker({
 			position: position, // 마커의 위치
@@ -302,7 +303,7 @@ function displayPagination(pagination) {
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
 	//var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-	console.log(marker);
+	//console.log(marker);
 	var content = '<div class="mapPin cafe" lat="33.4985602371075" lng="126.529953850416" id="761">' +
 		'<i class="ico"></i>' +
 		'<strong>' + title + '</strong>' +
