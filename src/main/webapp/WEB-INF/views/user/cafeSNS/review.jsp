@@ -26,7 +26,9 @@
 
 
 <body>
-	
+	<ul>
+		<li>커밋</li>
+	</ul>
 	<!-- content -->
 	<table id="show_data" style="border: 1px; solid; black;0"></table>
 	<button type="button" id="testbtn">더보기</button>
