@@ -61,7 +61,7 @@
 						</div>
 						<p class="mb-4">ㅇㅊㅇ아무말이나 적어봅니다</p>
 
-						<form onsubmit="searchPlaces(); return false;">
+						<form onsubmit="searchPlaces(); return false;" class="mapform">
 
 							<div class="input-group">
 							  <input type="text" class="form-control" placeholder="검색" id="keyword" size="15">

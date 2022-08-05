@@ -19,6 +19,8 @@ if (navigator.geolocation) {
 
 		var lat = position.coords.latitude, // 위도
 			lon = position.coords.longitude; // 경도
+			
+			console.log(lat+"/"+lon);
 
 		var locPosition = new kakao.maps.LatLng(lat, lon) // geolocation으로 얻어온 좌표
 		presentPosition = locPosition;
@@ -40,7 +42,7 @@ var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-const searchForm = document.querySelector('.form');
+const searchForm = document.querySelector('.mapform');
 searchForm.addEventListener('submit', function(e) {
 	e.preventDefault();
 	// 키워드로 장소를 검색합니다
@@ -134,7 +136,7 @@ function displayPlaces(places) {
 		// mouseout 했을 때는 인포윈도우를 닫습니다
 		(function(marker, title) {
 			kakao.maps.event.addListener(marker, 'mouseover', function() {
-				displayInfowindow(marker, title);
+				displayInfowindow(marker, title, places);
 			});
 
 			kakao.maps.event.addListener(marker, 'mouseout', function() {
@@ -163,6 +165,7 @@ function displayPlaces(places) {
 
 			itemEl.onclick = function() {
 				searchDetailAddrFromCoords(presentPosition, function(result, status) {
+					
 					if (status === kakao.maps.services.Status.OK) {
 						detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
 						location.href = "https://map.kakao.com/?sName=" + detailAddr + "&eName=" + title
@@ -301,7 +304,7 @@ function displayPagination(pagination) {
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
-function displayInfowindow(marker, title) {
+function displayInfowindow(marker, title, places) {
 	//var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 	//console.log(marker);
 	var content = '<div class="mapPin cafe" lat="33.4985602371075" lng="126.529953850416" id="761">' +
