@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="service.CafeSNSImpl">
+	<resultMap type="dto.StoreDTO" id="StoreMap">
+		<id property="store_idx" column="store_idx"/>	
+		<id property="postdate" column="postdate"/>	
+		<id property="storeName" column="storeName"/>	
+		<id property="latitude" column="latitude"/>	
+		<id property="longitude" column="longitude"/>	
+	</resultMap>
+	
+	<resultMap type="dto.User_infoDTO" id="UserMap">
+		<id property="userId" column="userId"/>
+		<id property="userName" column="userName"/>
+		<id property="nickName" column="nickName"/>
+		<id property="email" column="email"/>
+		<id property="phoneNumber" column="phoneNumber"/>
+	</resultMap>
+	
+	<resultMap type="dto.CafeSNSDTO" id="SNSMap">
+		<result property="review_idx" column="review_idx"/>
+		<result property="content" column="content"/>
+		<result property="start_point" column="start_point"/>
+		<result property="review_img" column="review_img"/>
+		<collection property="storeDTO" resultMap="StoreMap"/>
+		<collection property="user_infoDTO" resultMap="UserMap"/>
+	</resultMap>
+	<select id="list" resultMap="SNSMap">
+		select * from cafesnsdto LEFT join storeboard on cafesnsdto.store_idx = storeboard.store_idx
+	</select>
+	
+	<select id="getTotalCount" resultType="int"
+		parameterType="dto.ParameterDTO">
+		select count(*) from cafesnsdto LEFT join storeboard on cafesnsdto.store_idx = storeboard.store_idx
+			<if test="review_idx !=null">
+				where
+				<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">
+					review_idx = #{idx}
+				</foreach>
+			</if>
+	</select>
+	
+	
+	<select id="getnewList" resultMap="SNSMap" parameterType="dto.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM(
+				SELECT * FROM cafesnsdto LEFT join storeboard on cafesnsdto.store_idx = storeboard.store_idx
+				<if test="review_idx!=null">
+					where
+					<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">
+						review_idx = #{idx}
+					</foreach>
+				</if>
+				ORDER BY review_idx DESC
+			)Tb
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
+	</select>
+	
+	
+	
+</mapper>
