@@ -25,9 +25,10 @@
 
 
 <body>
-	
+
 	<!-- content -->
-	page
+
+	
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
