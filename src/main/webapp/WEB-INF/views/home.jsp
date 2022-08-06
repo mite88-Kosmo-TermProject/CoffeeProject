@@ -20,7 +20,55 @@
 <!-- Go Trip CSS -->
 
 <meta charset="utf-8">
+<script>
+//카카오 결제 API
+var IMP = window.IMP; // 생략가능
+IMP.init('imp56165372');  // 가맹점 식별코드
+// IMP.request_pay(param, callback) 결제창 호출
+IMP.request_pay({
+    pg : 'kakaopay', //pg사 선택 (kakao, kakaopay 둘다 가능)
+    pay_method: 'card',
+    merchant_uid : 'merchant_' + new Date().getTime(), //주문번호
+    name : '커피패스 30잔 구독권', // 상품명
+    amount : 1004,
+    //customer_uid 파라메터가 있어야 빌링키 발급을 시도함
+    customer_uid : new Date().getTime(),
+    buyer_email : 'madcats92@gmail.com',
+    buyer_name : '이준희',
+    buyer_tel : '010-4316-8802',
+}, function(rsp) { //callback
+    if ( rsp.success ) {
+      console.log('빌링키 발급 성공', rsp)
+      //빌링키 발급이 완료되었으므로, 서버에 결제 요청
+      alert('예약 결제가 완료되었습니다!');
+    } else {
+      var msg = '결제에 실패하였습니다.\n';
+      msg += rsp.error_msg;
+      alert(msg);
+      return false;
+    }
+    $("#final-support-submit").onClick();
+});
 
+
+/* 	IMP.init("imp56165372"); 
+	IMP.request_pay({
+		pay_method : 'card', // 기능 없음.
+		merchant_uid: "coffeesub_" + new Date().getTime(), // 상점에서 관리하는 주문 번호
+		name : '커피패스구독권',
+		amount : 33000, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.
+		customer_uid : 'your-customer-unique-id', // 필수 입력
+		buyer_email : 'iamport@siot.do',
+		buyer_name : '아임포트',
+		buyer_tel : '02-1234-1234'
+	}, function(rsp) {
+		if ( rsp.success ) {
+			alert('빌링키 발급 성공');
+		} else {
+			alert('빌링키 발급 실패');
+		}
+	}); */
+</script>
 
 </head>
 

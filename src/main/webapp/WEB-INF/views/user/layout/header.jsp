@@ -34,7 +34,10 @@
     <!-- Template Stylesheet -->
     <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
     
-    
+    <!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
   
 </head>
 
