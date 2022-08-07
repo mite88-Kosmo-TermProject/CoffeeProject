@@ -75,14 +75,14 @@
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
-	color: #888;
-	padding: 40px 0;
+	color: #fff;
+	padding: 1rem 0;
 	border-bottom: 2px solid #888;
-	background: #f7f7f7;
+	background: #b8895e;
 }
 
 .tabs a:hover, .tabs a.active {
-	background: #ddd;
+	background: #7e5835;
 }
 
 .tabgroup>div {
@@ -220,326 +220,90 @@ p.txt:before {
 }
 
 /*리뷰*/
-.start_info{    background: #e6ded8;}
+.start_info {
+	
+}
 
 .rating-box {
-    width: 130px;
-    text-align: center;
-
+	width: 130px;
+	text-align: center;
 }
 
 .rating-label {
-    font-weight: bold
+	font-weight: bold
 }
 
-.fa-star{color:#fd5a0f;}
+.fa-star {
+	color: #fd5a0f;
+}
 
 .rating-bar {
-    width: 300px;
-    padding: 8px;
-    border-radius: 5px
+	width: 300px;
+	padding: 8px;
+	border-radius: 5px
 }
 
 .bar-container {
-    width: 100%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-bottom: 5px
+	width: 100%;
+	background-color: #f1f1f1;
+	text-align: center;
+	color: white;
+	border-radius: 20px;
+	cursor: pointer;
+	margin-bottom: 5px
 }
 
 .bar-5 {
-    width: 70%;
-    height: 13px;
-    background-color: #fd5a0f;
-    border-radius: 20px
+	width: 70%;
+	height: 13px;
+	background-color: #fd5a0f;
+	border-radius: 20px
 }
 
 .bar-4 {
-    width: 30%;
-    height: 13px;
-    background-color: #fd5a0f;
-    border-radius: 20px
+	width: 30%;
+	height: 13px;
+	background-color: #fd5a0f;
+	border-radius: 20px
 }
 
 .bar-3 {
-    width: 20%;
-    height: 13px;
-    background-color: #fd5a0f;
-    border-radius: 20px
+	width: 20%;
+	height: 13px;
+	background-color: #fd5a0f;
+	border-radius: 20px
 }
 
 .bar-2 {
-    width: 10%;
-    height: 13px;
-    background-color: #fd5a0f;
-    border-radius: 20px
+	width: 10%;
+	height: 13px;
+	background-color: #fd5a0f;
+	border-radius: 20px
 }
 
 .bar-1 {
-    width: 0%;
-    height: 13px;
-    background-color: #fd5a0f;
-    border-radius: 20px
+	width: 0%;
+	height: 13px;
+	background-color: #fd5a0f;
+	border-radius: 20px
 }
+/*구매 베너*/
+#cafe_passBar *{color:#fff;}
+#cafe_passBar .card {background:#b38255; cursor: pointer;}
+
+#cafe_passBar i{}
 
 /*리뷰*/
 .reviewList {
-    border-top: 1px solid #202020
+	border-top: 1px solid #202020
 }
 
-.reviewList li {
-    position: relative;
-    border-bottom: 1px solid #eaeaea;
-    padding: 24px 0 24px 8px
-}
 
-.reviewList li .reviewSet {
-    display: flex;
-    align-items: center;
-    line-height: 1
-}
 
-.reviewList li .reviewSet .thum {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden
-}
-
-.reviewList li .reviewSet .name {
-    font-size: 1.6rem;
-    color: #202020;
-    font-weight: 600;
-    margin-left: 10px
-}
-
-.reviewList li .reviewSet .date {
-    font-size: 1.4rem;
-    color: gray;
-    font-weight: 400;
-    margin-left: 12px
-}
-
-.reviewList li .txt {
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    height: auto;
-    margin: 14px 0 10px;
-    max-height: 72px
-}
-
-.reviewList li .txt+.btLink {
-    display: block;
-    margin: -15px 0 0 -5px;
-    color: #202020;
-    font-size: 1.6rem
-}
-
-.reviewList li .txt+.btLink .more {
-    display: block
-}
-
-.reviewList li .txt+.btLink .close {
-    display: none
-}
-
-.reviewList li .txt.txtFull {
-    overflow: visible;
-    text-overflow: inherit;
-    -webkit-line-clamp: inherit;
-    max-height: inherit
-}
-
-.reviewList li .txt.txtFull+.btLink .more {
-    display: none
-}
-
-.reviewList li .txt.txtFull+.btLink .close {
-    display: block
-}
-
-.reviewList li .btWrap {
-    position: absolute;
-    right: 0;
-    top: 33px;
-    padding: 0;
-    border: 0
-}
-
-.reviewList li .btWrap>button {
-    position: relative;
-    padding-left: 20px;
-    font-size: 1.6rem;
-    line-height: 1;
-    height: 18px
-}
-
-.reviewList li .btWrap>button:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18px;
-    height: 18px;
-    margin-top: -9px;
-    margin-left: -9px;
-    left: 0;
-    margin-left: 0;
-    background: url(/resource/PC/images/esg/ico_edit.png) no-repeat
-}
-
-.reviewList li .btWrap>button.btDel:after {
-    background-image: url(/resource/PC/images/esg/ico_delete.png)
-}
-
-.reviewList li .btWrap>button+button {
-    margin-left: 25px
-}
-
-.reviewList li .btWrap>button+button:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 12px;
-    margin-top: -6px;
-    margin-left: -0.5px;
-    left: -12px;
-    margin-left: 0;
-    background-color: #eaeaea
-}
-.reviewList li {
-    min-height: 178px
-}
-
-.reviewList li .flag {
-    margin-left: 12px
-}
-
-.reviewList li .tumblerBadge {
-    margin-left: 6px;
-    color: gray;
-    font-size: 1.5rem
-}
-
-.reviewList li .tumblerBadge:before {
-    content: '';
-    display: inline-block;
-    width: 1px;
-    height: 12px;
-    margin: 0 8px 0 5px;
-    background-color: #EAEAEA
-}
-
-.reviewList li .reviewSet+.reviewSet {
-    margin: 11px 0 -11px
-}
-
-.reviewList li .reviewSet+.frmLike {
-    margin-top: 48px
-}
-
-.reviewList li .TumbLevel {
-    color: gray;
-    font-size: 1.5rem
-}
-
-.reviewList li .TumbLevel:before {
-    content: '';
-    display: inline-block;
-    width: 1px;
-    height: 12px;
-    margin: 0 8px;
-    background-color: #EAEAEA
-}
-
-.reviewList li.photoY {
-    min-height: 202px
-}
-
-.reviewList li.photoY .txt {
-    padding-right: 160px
-}
-
-.reviewList li.photoY .photoSet {
-    overflow: hidden;
-    position: absolute;
-    top: 24px;
-    right: 8px;
-    width: 96px;
-    height: 96px;
-    border-radius: 12px
-}
-
-.reviewList li.photoY .photoSet a {
-    display: block;
-    width: 96px;
-    height: 96px
-}
-
-.reviewList li.photoY .photoSet a img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover
-}
-
-.reviewList li.photoY .photoSet:after {
-    content: attr(data-count);
-    position: absolute;
-    top: 66px;
-    right: 6px;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    line-height: 1.89;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-align: center;
-    border-radius: 50%;
-    background: rgba(32, 32, 32, 0.6)
-}
-
-.frmLike {
-    display: inline-block;
-    position: relative
-}
-
-.frmLike label {
-    padding-left: 28px
-}
-
-.frmLike label:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-top: -12px;
-    margin-left: -12px;
-    left: 0;
-    margin-left: 0;
-    border: 0;
-    background: rgba(0, 0, 0, 0) url(/resource/PC/images/esg/ico_like.png) no-repeat
-}
-
-.frmLike input:checked+label:before,
-.frmLike.active label:before {
-    background-image: url(/resource/PC/images/esg/ico_like_on.png)
-}
 </style>
+
+<link href="<%= request.getContextPath() %>/resources/css/review.css" rel="stylesheet">
+
 
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
@@ -572,6 +336,8 @@ p.txt:before {
 						</div>
 
 					</div>
+					
+					<img class="img-fluid" src="<%=request.getContextPath()%>/resources/img/패스가입베너.png" alt="">
 				</div>
 				<div class="col-md-8 pt-4 pt-lg-0">
 					<!-- 할인항목 -->
@@ -620,6 +386,28 @@ p.txt:before {
 				</div>
 			</div>
 		</div>
+	</section>
+	
+	<!-- 구매바 -->
+	<section id="cafe_passBar" class="content container-xxl py-5">
+		<div class="container aos-init aos-animate" data-aos="fade-up">
+			<!-- 링크넣기 -->
+			<div class="card mb-3" onclick="#">
+				<div class="row g-0" style="align-items: center;">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">패스구매하기</h5>
+							<p class="card-text">이매장은 패스 사용이 가능한 매장입니다</p>
+						</div>
+					</div>
+					<div class="col-md-4" style=" text-align: right; padding-right: 20px;">
+						<i class="fas fa-mug-hot fa-4x"></i>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+			
 	</section>
 
 	<!-- 하단설명 -->
@@ -686,18 +474,17 @@ p.txt:before {
 				</div>
 				<div id="tab3">
 					<!-- 별점정보 -->
-					<div class="start_info">
+					<div class="start_info mb-4">
 						<div class="row justify-content-left d-flex ">
-							<div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-3">
+							<div
+								class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-3">
 								<div class="rating-box">
 									<h1 class="pt-4">4.0</h1>
 								</div>
 								<div class="rating-box">
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="far fa-star"></i>
+									<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+										class="far fa-star"></i>
 								</div>
 							</div>
 							<div class="col-md-8">
@@ -714,7 +501,7 @@ p.txt:before {
 												</td>
 												<td class="text-right">123</td>
 											</tr>
-											
+
 											<!-- 4점 -->
 											<tr>
 												<td class="rating-label">4</td>
@@ -725,7 +512,7 @@ p.txt:before {
 												</td>
 												<td class="text-right">23</td>
 											</tr>
-											
+
 											<!-- 3점 -->
 											<tr>
 												<td class="rating-label">3</td>
@@ -736,7 +523,7 @@ p.txt:before {
 												</td>
 												<td class="text-right">10</td>
 											</tr>
-											
+
 											<!-- 2점 -->
 											<tr>
 												<td class="rating-label">2</td>
@@ -747,7 +534,7 @@ p.txt:before {
 												</td>
 												<td class="text-right">3</td>
 											</tr>
-											
+
 											<!-- 1점 -->
 											<tr>
 												<td class="rating-label">1</td>
@@ -764,72 +551,37 @@ p.txt:before {
 							</div>
 						</div>
 						<!-- //row -->
-						
-						
+
+
 					</div>
-					
+
 					
 					<!-- 리뷰 -->
-						<ul class="reviewList" jpp-list="reviews" style="">
-							<li class="photoY">
-								<div class="reviewSet">
-									<span class="thum"><img
-										src="https://static-www.jejupass.com/resource/PC/images/mypage/@default_img.png"
-										alt=""></span> <strong class="name">김*마</strong>
+					<!-- 필터 -->
+					<div class="d-flex mb-3 review_filter">
+						<div class="flex-shrink-0">
+							<select id="sendNotification" class="form-select" name="sendNotification">
+								<option selected="">최신순</option>
+								<option>좋아요순</option>
+								<option>별점높은순</option>
+								<option>별점낮은순</option>
+							</select>
+						</div>
+						<div class="flex-grow-1 row">
+							<div class="col text-end">
+								<div class="form-check form-switch">
+									<label style="margin-right: 45px;">포토리뷰만</label>
+									<input class="form-check-input float-end" type="checkbox" role="switch" checked="">
 								</div>
-								<div class="reviewSet">
-									<div class="rating">
-										<div class="ratingOn" style="width: 100%"></div>
-									</div>
-									<em class="date">2022-08-05</em>
-								</div>
-								<div class="txt">분위기도 좋고~ 에그타르트도 맛있었어요. 제주 마지막날 방문한다면 선물로
-									들고 가면 좋을 것 같아요.</div> <a class="frmLike"><input type="checkbox"
-									id="chkLike0" title="좋아요"
-									onclick="fnAddReviewLike(927489, 'CAFE', 0, 1041);"
-									href="javascript:;"><label for="chkLike0">0</label></a>
-
-							</li>
-							<li class="photoY">
-								<div class="reviewSet">
-									<span class="thum"><img
-										src="https://static-www.jejupass.com/resource/PC/images/mypage/@default_img.png"
-										alt=""></span> <strong class="name">김*마</strong>
-								</div>
-								<div class="reviewSet">
-									<div class="rating">
-										<div class="ratingOn" style="width: 100%"></div>
-									</div>
-									<em class="date">2022-08-04</em>
-								</div>
-								<div class="txt">에그타르트 존맛탱이에요~~~! 꼭 하나 드셔보세요.</div> <a
-								class="frmLike"><input type="checkbox" id="chkLike1"
-									title="좋아요" onclick="fnAddReviewLike(927324, 'CAFE', 1, 1041);"
-									href="javascript:;"><label for="chkLike1">0</label></a>
-
-							</li>
-							<li class="photoY">
-								<div class="reviewSet">
-									<span class="thum"><img
-										src="https://static-file.jejupass.com/download/759565" alt=""></span>
-									<strong class="name">오*경</strong>
-								</div>
-								<div class="reviewSet">
-									<div class="rating">
-										<div class="ratingOn" style="width: 100%"></div>
-									</div>
-									<em class="date">2022-08-01</em>
-								</div>
-								<div class="txt">만델링이랑 예가체프 중 만델링 먹었는데 커피가 너무 맛있네요~에그타르트도
-									맛있구요~카페 깔끔하고 무엇보다 화장실이 너무 깨끗하고 향기로워 기분 좋게 다녀간 커피숍이예요~친절은
-									덤이였구요~애월 대로변에 있으니 찾기도 쉽고 지나는길에 꼭 한번 들려보면 좋을것 같아요</div> <a
-								class="frmLike"><input type="checkbox" id="chkLike2"
-									title="좋아요" onclick="fnAddReviewLike(926586, 'CAFE', 2, 1041);"
-									href="javascript:;"><label for="chkLike2">0</label></a>
-
-							</li>
-						</ul>
-						<!-- //리뷰 -->
+							</div>
+						</div>
+					</div>
+					
+					<!-- 리뷰시작 -->
+					<ul class="reviewList">
+						<%@ include file="/WEB-INF/views/user/cafe/review.jsp"%>
+					</ul>
+					<!-- //리뷰 -->
 
 				</div>
 
@@ -842,42 +594,55 @@ p.txt:before {
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
 	<script>
 		$(function() {
 			//alert("!!");
 			$(".owl-carousel").owlCarousel(
-					{
-						autoplay : true,
-						smartSpeed : 1500,
-						items : 1,
-						dots : true,
-						loop : true,
-						nav : false,
-						navText : [ '<i class="bi bi-chevron-left"></i>',
-								'<i class="bi bi-chevron-right"></i>' ]
-					});
+			{
+				autoplay : true,
+				smartSpeed : 1500,
+				items : 1,
+				dots : true,
+				loop : true,
+				nav : false,
+				navText : [ '<i class="bi bi-chevron-left"></i>',
+						'<i class="bi bi-chevron-right"></i>' ]
+			});
 
 			//tab
 			$('.tabgroup > div').hide();
 			$('.tabgroup > div:first-of-type').show();
-			$('.tabs a')
-					.click(
-							function(e) {
-								e.preventDefault();
-								var $this = $(this), tabgroup = '#'
-										+ $this.parents('.tabs').data(
-												'tabgroup'), others = $this
-										.closest('li').siblings().children('a'), target = $this
-										.attr('href');
-								others.removeClass('active');
-								$this.addClass('active');
-								$(tabgroup).children('div').hide();
-								$(target).show();
+			$('.tabs a') .click( function(e) { e.preventDefault();
+				var $this = $(this), tabgroup = '#'
+					+ $this.parents('.tabs').data(
+							'tabgroup'), others = $this
+					.closest('li').siblings().children('a'), target = $this
+					.attr('href');
+				others.removeClass('active');
+				$this.addClass('active');
+				$(tabgroup).children('div').hide();
+				$(target).show();
 
-							})
+			})
 
 		});
+	
+		//사진보기
+		lightbox.option({
+		    resizeDuration: 200,
+		    wrapAround: true,
+		    disableScrolling: false,
+		    fitImagesInViewport:false
+		})
+		
+		// 좋아요 - 바꾸실분은 바꾸어서 쓰세요(review.jsp에 있음)
+		function fnAddReviewLike(){
+			
+		}
 	</script>
 
 	<script type="text/javascript"
