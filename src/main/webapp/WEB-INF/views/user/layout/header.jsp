@@ -77,6 +77,8 @@
 				<a href="<%=request.getContextPath() %>/community/boardList.do" class="nav-item nav-link">게시판</a>
 				<a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
 				
+				<a href="<%=request.getContextPath() %>/order/subPay.do" class="nav-item nav-link">패스구매</a>
+				
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">Pages</a>

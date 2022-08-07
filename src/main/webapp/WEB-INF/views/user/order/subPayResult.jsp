@@ -27,7 +27,8 @@
 <body>
 	
 	<!-- content -->
-
+	<h1>결제완료페이지</h1>
+	
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 
