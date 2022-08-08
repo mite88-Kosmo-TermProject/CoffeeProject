@@ -1,8 +1,11 @@
 package com.coffice.user.controller;
 
+import org.springframework.context.annotation.Conditional;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
 public class UserMemberController {
 
 	// 로그인
@@ -45,6 +48,13 @@ public class UserMemberController {
 	public String findPwResult() {
 
 		return "/user/member/findPwResult";
+	}
+	
+	// 회원가입전1단계
+	@RequestMapping(value = "/member/signup.do", method = RequestMethod.GET)
+	public String signup() {
+
+		return "/user/member/signup";
 	}
 
 	// 회원가입
