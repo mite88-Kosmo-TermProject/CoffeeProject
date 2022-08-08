@@ -8,7 +8,7 @@
 <head>
 <!-- header -->
 <%@ include file="/WEB-INF/views/user/layout/header.jsp"%>
-
+<link href="<%= request.getContextPath() %>/resources/assets/js/login.js" rel="stylesheet">
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
 

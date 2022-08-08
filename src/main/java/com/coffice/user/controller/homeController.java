@@ -16,4 +16,35 @@ public class homeController {
 	}
 	
 
+	@RequestMapping("/login.do")
+	public String login() {
+
+		return "/user/member/login";
+	}
+
+	@RequestMapping("/SignUp.do")
+	public String signup() {
+
+		return "/user/member/signup";
+	}
+
+	@RequestMapping("/Nextsignup.do")
+	public String nextsignup() {
+
+		return "/user/member/nextsignup";
+	}
+
+	@RequestMapping("/write.do")
+	public String write() {
+
+		return "/user/member/write";
+	}
+	@RequestMapping("/table.do")
+	public String table() {
+		
+		return "/user/member/table";
+	}
+
+	
+
 }
