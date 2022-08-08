@@ -87,7 +87,7 @@
 				</div>
 				
 			</div>
-			<a href="<%= request.getContextPath() %>/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
+			<a href="<%= request.getContextPath() %>/member/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
 			</a>
 		</div>
 	</nav>
