@@ -59,7 +59,7 @@ IMP.request_pay({
 pay_method : 'card', // 기능 없음.
 merchant_uid: "coffeesub_" + new Date().getTime(), // 상점에서 관리하는 주문 번호
 name : '커피패스구독권',
-amount : 33000, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.
+amount : 33000, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.   
 customer_uid : 'your-customer-unique-id', // 필수 입력
 buyer_email : 'iamport@siot.do',
 buyer_name : '아임포트',
@@ -237,7 +237,7 @@ $(document).ready(function(){
 
 
 <body>
-	
+	   
 	<!-- content -->
 	<h5>이용권</h5>		
 		<table class = pay border="1">
