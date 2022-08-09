@@ -1,4 +1,4 @@
-package dto;
+package com.coffice.dto;
 
 import java.util.ArrayList;
 

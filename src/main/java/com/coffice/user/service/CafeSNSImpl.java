@@ -1,11 +1,12 @@
-package service;
+package com.coffice.user.service;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import dto.CafeSNSDTO;
-import dto.ParameterDTO;
+import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.reviewDTO;
+
 import dto.StoreDTO;
 
 @Service
@@ -18,8 +19,8 @@ public interface CafeSNSImpl {
 	public int getTotalCount(ParameterDTO parameterDTO);
 	
 	/*리뷰테이블 리스트가져오기*/
-	public ArrayList<CafeSNSDTO> list();
+	public ArrayList<reviewDTO> list();
 	
 	/*새로운 리뷰 리스트*/
-	public ArrayList<CafeSNSDTO> getnewList(ParameterDTO parameterDTO);
+	public ArrayList<reviewDTO> getnewList(ParameterDTO parameterDTO);
 }

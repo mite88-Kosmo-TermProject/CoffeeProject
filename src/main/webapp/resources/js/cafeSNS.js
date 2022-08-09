@@ -50,12 +50,12 @@ function getCafeList(list){
 	    
 	    //거리계산..
 	    for(let i=0; i<list.length; i++){
-	        let distance = getdistance(latitude , longitude , list[i].storeDTO.latitude ,list[i].storeDTO.longitude ,"K");
+	        let distance = getdistance(latitude , longitude , list[i].storeDTO.store_latitude ,list[i].storeDTO.store_longitude ,"K");
 	        list[i].distance = distance;
 
-	       /*  console.log(list[i].distance); */
+	        console.log(list[i].distance); 
 	        //5 키로미터 이내의 카페를 저장해준다.
-	        if(list[i].distance < 100){
+	        if(list[i].distance < 500){
 	            newcafelist.push(list[i].review_idx);
 	        }
 	    }
@@ -76,10 +76,10 @@ function getCafeList(list){
 					$(data).each(function (index, data) {
 						tableData +=""
 						+"<tr>"
-						+"	<td>가게이름: "+data.storeDTO.storeName+"</td>"
-						+"	<td>유저아이디: "+data.user_infoDTO.userId+"</td>"
-						+"	<td>별점: "+data.start_point+"</td>"
-						+"	<td>리뷰: "+data.content+"</td>"
+						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
+						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
+						+"	<td>별점: "+data.review_star+"</td>"
+						+"	<td>리뷰: "+data.review_content+"</td>"
 						+"</tr>";
 					});
 					$('#show_data').append(tableData);
