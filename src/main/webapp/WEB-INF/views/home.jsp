@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -172,6 +173,9 @@
 				<h1 class="display-6 mb-5">이달의 카페</h1>
 			</div>
 			<div class="row g-4">
+			
+			<c:forEach items="${mainCafeList }" var="cafe" varStatus="loop">
+			
 				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="service-item">
 						<div class="overflow-hidden">
@@ -181,99 +185,16 @@
 						</div>
 						<div
 							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">General Carpentry</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
+							<h4 class="mb-3">${cafe.store_name }</h4>
+							<p>카페전화번호 : ${cafe.store_phone } </p>
+							<p> 카페주소: ${cafe.store_localaddr }</p>
 							<a class="fw-medium" href="">Read More<i
 								class="fa fa-arrow-right ms-2"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-2.jpg"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Manufacturing</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-3.jpg"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Furniture Remodeling</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-4.jpg"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Wooden Floor</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-5.jpg"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Wooden Furniture</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-6.jpg"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Custom Work</h4>
-							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
-								lorem diam.</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
-						</div>
-					</div>
-				</div>
+			</c:forEach>
+				
 			</div>
 		</div>
 	</div>
