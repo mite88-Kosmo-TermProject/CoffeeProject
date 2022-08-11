@@ -5,6 +5,7 @@ import lombok.Data;
 //매장정보
 @Data
 public class StoresDTO {
+	
 	private int store_idx;
 	private String mem_id;
 	private String store_name;

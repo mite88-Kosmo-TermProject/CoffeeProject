@@ -221,6 +221,13 @@ p.txt:before {
 	padding: 8px 32px 7px 0
 }
 
+/*슬라이드*/
+.item {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
 /*리뷰*/
 .start_info {
 	
@@ -321,7 +328,7 @@ p.txt:before {
 
 <body>
 
-	${resultList }
+	<%-- ${resultList } --%>
 	<!-- content -->
 	<!-- 상단 간단내용 -->
 	<c:forEach items="${resultList}" var="resultList">
@@ -444,15 +451,13 @@ p.txt:before {
 									<dt>
 										<i class="fas fa-clock"></i>
 									</dt>
-									<dd>
-										${resultList.store_time}
-									</dd>
+									<dd class="store_time">${resultList.store_time} </dd>
 
 									<!-- 휴무일 -->
-									<dt>
+									<!-- <dt>
 										<i class="fas fa-calendar-alt"></i>
 									</dt>
-									<dd holiday="">목요일 휴무</dd>
+									<dd holiday="">목요일 휴무</dd> -->
 
 									<!-- 전화번호 -->
 									<dt>
@@ -650,6 +655,15 @@ p.txt:before {
 			})
 
 		});
+		
+		//설명 및 시간 \n 치환
+		var txt = $('.txt').html();
+		txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('.txt').html(txt);
+		
+		var store_time = $('.store_time').html();
+		store_time = store_time.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		$('.store_time').html(store_time);
 	
 		//사진보기
 		lightbox.option({
@@ -714,6 +728,9 @@ p.txt:before {
 				map.setCenter(coords);
 			}
 		});
+		
+		
+		
 	</script>
 </body>
 
