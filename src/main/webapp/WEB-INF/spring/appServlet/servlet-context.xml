@@ -32,8 +32,10 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
+			<!-- <property name="url"
+			value="jdbc:oracle:thin:@3.34.167.83:1521:xe" /> -->
 		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:xe" />
+			value="jdbc:oracle:thin:@localhost:1521:xe" /> 
 		<property name="username" value="kosmo" />
 		<property name="password" value="1234" />
 	</bean>
@@ -47,7 +49,8 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<!-- 데이터 근원지(오라클 연결정보)에 대한 빈 -->
 		<property name="dataSource" ref="dataSource"/>
-		<property name="mapperLocations" value="classpath:mybatis/mapper/**/*Mapper.xml"/>
+		<property name="mapperLocations" 
+		value="classpath:mybatis/mapper/**/*.xml"/>
 	</bean>
 	<!-- 생성자를 통해 빈 생성. 우리가 최종적으로 사용할 Mybatis 빈. -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
