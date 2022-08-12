@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -40,6 +40,28 @@
 
 <body>
 
+	 	<%--  <li>
+			<a href="<%= request.getContextPath() %>/login.do" target="_blank">로그인페이지</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/SignUp.do" target="_blank">약관동의 페이지</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/Nextsignup.do" target="_blank">회원가입 페이지</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/write.do" target="_blank">글쓰기</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/table.do" target="_blank">테이블</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/pay.do" target="_blank">pay</a>
+		</li>
+		<li>
+			<a href="<%= request.getContextPath() %>/subPayResult.do" target="_blank">payapyapyapya</a>
+		</li>  --%>
+ 
 <!-- Spinner Start -->
 	<div id="spinner"
 		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -71,7 +93,7 @@
 			<div class="navbar-nav ms-auto p-4 p-lg-0">
 				<a href="<%=request.getContextPath() %>/cafe/map.do" class="nav-item nav-link active">검색</a> 
 				<a href="<%=request.getContextPath() %>/cafeSNS/review.do" class="nav-item nav-link">카페SNS</a> 
-				<a href="<%=request.getContextPath() %>/community/boardList.do" class="nav-item nav-link">게시판</a>
+				<a href="<%=request.getContextPath() %>/table.do" class="nav-item nav-link">게시판</a>
 				<a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
 				
 				<div class="nav-item dropdown">

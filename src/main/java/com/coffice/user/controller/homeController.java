@@ -44,6 +44,16 @@ public class homeController {
 		
 		return "/user/member/table";
 	}
+	@RequestMapping("/pay.do")
+	public String pay() {
+		
+		return "/user/order/subPay";
+	}
+	@RequestMapping("/subPayResult.do")
+	public String paypay() {
+		
+		return "/user/order/subPayResult";
+	}
 
 	
 

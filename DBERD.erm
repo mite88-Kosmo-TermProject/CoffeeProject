@@ -10,13 +10,13 @@
 		<right_margin>30</right_margin>
 	</page_setting>
 	<category_index>0</category_index>
-	<zoom>1.0</zoom>
-	<x>990</x>
-	<y>333</y>
+	<zoom>0.75</zoom>
+	<x>0</x>
+	<y>130</y>
 	<default_color>
-		<r>128</r>
-		<g>128</g>
-		<b>192</b>
+		<r>255</r>
+		<g>255</g>
+		<b>255</b>
 	</default_color>
 	<color>
 		<r>255</r>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2022-07-29 09:51:31</creation_date>
-			<updated_date>2022-08-05 11:08:19</updated_date>
+			<updated_date>2022-08-10 10:54:30</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -2073,7 +2073,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>85</word_id>
+					<word_id>86</word_id>
 					<id>10</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2580,7 +2580,7 @@
 			<connections>
 				<relation>
 					<id>3</id>
-					<source>15</source>
+					<source>5</source>
 					<target>4</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2602,7 +2602,7 @@
 				</relation>
 				<relation>
 					<id>4</id>
-					<source>5</source>
+					<source>15</source>
 					<target>4</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2666,7 +2666,7 @@
 				<normal_column>
 					<id>24</id>
 					<referenced_column>85</referenced_column>
-					<relation>3</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2700,7 +2700,7 @@
 				<normal_column>
 					<id>25</id>
 					<referenced_column>28</referenced_column>
-					<relation>4</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4038,7 +4038,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>86</word_id>
+					<word_id>85</word_id>
 					<id>59</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
