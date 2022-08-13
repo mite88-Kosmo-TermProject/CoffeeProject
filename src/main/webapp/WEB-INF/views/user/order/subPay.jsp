@@ -191,14 +191,16 @@ $(document).ready(function(){
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp56165372'); 
 		IMP.request_pay({
+			pg : 'kakaopay',
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
 			merchant_uid : new Date().getTime(),
 			name : 'test05',
 			amount : 2000, 
-			customer_uid : "madcatz92", //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
+			customer_uid : "madcatz92"+ new Date().getTime(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
 			buyer_email : 'iamport@siot.do',
 			buyer_name : '아임포트',
-			buyer_tel : '02-1234-1234'
+			buyer_tel : '02-1234-1234',
+			
 		}, function(rsp) {
 			if ( rsp.success ) {
 				$.ajax({
@@ -253,7 +255,7 @@ $(document).ready(function(){
 		</table>
 			
 		<div class ="btns">
-			<input type="button" id="check1" value="구매">
+			<input type="button" id="check1" value="구매" onclick="kakaopay();">
 			<!-- <input type="button" id="check2" value="환불"> -->
 		</div>
 	<!-- footer -->

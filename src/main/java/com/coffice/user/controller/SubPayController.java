@@ -1,7 +1,5 @@
 package com.coffice.user.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,14 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Controller
 public class SubPayController {
@@ -74,17 +66,17 @@ public class SubPayController {
 		return "/user/order/subPayResult";
 	}
 
-	@PostMapping("/payment1")
-	public @ResponseBody void getImportToken(@RequestParam Map<String, Object> map)
-			throws JsonMappingException, JsonProcessingException {
-		int customer_uid = Integer.parseInt((String) map.get("customer_uid"));
-		int price = Integer.parseInt((String) map.get("price"));
-		long merchant_uid =  Long.parseLong((String) map.get("merchant_uid"));
-
-		if(getPayementStatus.paymentStatus(merchant_uid).equals("paid")) {
-			scheduler.startScheduler(customer_uid,price);
-		}
-	}
+//	@PostMapping("/payment1")
+//	public @ResponseBody void getImportToken(@RequestParam Map<String, Object> map)
+//			throws JsonMappingException, JsonProcessingException {
+//		int customer_uid = Integer.parseInt((String) map.get("customer_uid"));
+//		int price = Integer.parseInt((String) map.get("price"));
+//		long merchant_uid =  Long.parseLong((String) map.get("merchant_uid"));
+//
+//		if(getPayementStatus.paymentStatus(merchant_uid).equals("paid")) {
+//			scheduler.startScheduler(customer_uid,price);
+//		}
+//	}
 	
 	
 //	@RequestMapping(value = "/coupon_cancel.do")
