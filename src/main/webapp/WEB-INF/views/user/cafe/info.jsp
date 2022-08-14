@@ -328,7 +328,7 @@ p.txt:before {
 
 <body>
 
-	<%-- ${resultList } --%>
+	<%-- ${resultList }  --%>
 	<!-- content -->
 	<!-- 상단 간단내용 -->
 	<c:forEach items="${resultList}" var="resultList">
@@ -344,7 +344,7 @@ p.txt:before {
 						
 							<c:forEach items="${fn:split(resultList.store_img,',') }" var="loopImg" varStatus="loop">
 								<div class="item">
-									<img class="img-fluid"
+									<img class="img-fluid" id="code_${loop.index }"
 										src="<%=request.getContextPath()%>/resources/img/${loopImg}" alt="">
 								</div>
 							</c:forEach>
@@ -389,9 +389,9 @@ p.txt:before {
 									</ul>
 								</div>
 								<div class="btn-group" role="group"">
-									<button type="button" class="btn btn-primary">길찾기</button>
-									<button type="button" class="btn btn-primary">즐겨찾기</button>
-									<button type="button" class="btn btn-primary">리뷰쓰기</button>
+									<button type="button" class="btn btn-primary" id="map_url">길찾기</button>
+									<button type="button" class="btn btn-primary" id="send_url">즐겨찾기</button>
+									<button type="button" class="btn btn-primary" id="review_coffee">리뷰쓰기</button>
 								</div>
 							</div>
 
@@ -407,7 +407,7 @@ p.txt:before {
 			<section id="cafe_passBar" class="content container-xxl py-5">
 				<div class="container aos-init aos-animate" data-aos="fade-up">
 					<!-- 링크넣기 -->
-					<div class="card mb-3" onclick="#">
+					<div class="card mb-3" onclick="location.href='<%= request.getContextPath()%>/order/subPay.do';">
 						<div class="row g-0" style="align-items: center;">
 							<div class="col-md-8">
 								<div class="card-body">
@@ -623,60 +623,145 @@ p.txt:before {
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
-	<script>
-		$(function() {
-			//alert("!!");
-			$(".owl-carousel").owlCarousel(
-			{
-				autoplay : true,
-				smartSpeed : 1500,
-				items : 1,
-				dots : true,
-				loop : true,
-				nav : false,
-				navText : [ '<i class="bi bi-chevron-left"></i>',
-						'<i class="bi bi-chevron-right"></i>' ]
-			});
-
-			//tab
-			$('.tabgroup > div').hide();
-			$('.tabgroup > div:first-of-type').show();
-			$('.tabs a') .click( function(e) { e.preventDefault();
-				var $this = $(this), tabgroup = '#'
-					+ $this.parents('.tabs').data(
-							'tabgroup'), others = $this
-					.closest('li').siblings().children('a'), target = $this
-					.attr('href');
-				others.removeClass('active');
-				$this.addClass('active');
-				$(tabgroup).children('div').hide();
-				$(target).show();
-
-			})
-
-		});
-		
-		//설명 및 시간 \n 치환
-		var txt = $('.txt').html();
-		txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-		$('.txt').html(txt);
-		
-		var store_time = $('.store_time').html();
-		store_time = store_time.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-		$('.store_time').html(store_time);
+	<!--kakaotalk link share api-->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
-		//사진보기
-		lightbox.option({
-		    resizeDuration: 200,
-		    wrapAround: true,
-		    disableScrolling: false,
-		    fitImagesInViewport:false
+	<script>
+	$(function() {
+		//alert("!!");
+		
+		var name = $(".titDep1"); //가게명
+		var addr = $(".compInfo #addr") ; //주소
+
+		
+		//길찾기 url
+		$("#map_url").on("click", function() {
+			//alert(addr.text());
+			 if (Mobile()){// 모바일일 경우
+				 window.open('https://m.map.kakao.com/actions/routeView?exEnc=LRVRTU&eyEnc=QNMNSSL&endLoc='+addr.text()+'&ids=%2CLRVRTU%2CQNMNSSL',  '_self');
+				 
+				 } else {// 모바일 외
+			    	 window.open('https://map.kakao.com/?eName='+addr.text(),  '_self');
+			    	 
+			    }
 		})
 		
-		// 좋아요 - 바꾸실분은 바꾸어서 쓰세요(review.jsp에 있음)
-		function fnAddReviewLike(){
-			
-		}
+		//카카오톡 url 보내기
+		$("#send_url").on("click", function() {
+			sendLinkDefault(name, addr);
+		})
+		
+		//슬라이더
+		$(".owl-carousel").owlCarousel(
+		{
+			autoplay : true,
+			smartSpeed : 1500,
+			items : 1,
+			dots : true,
+			loop : true,
+			nav : false,
+			navText : [ '<i class="bi bi-chevron-left"></i>',
+					'<i class="bi bi-chevron-right"></i>' ]
+		});
+
+		//tab
+		$('.tabgroup > div').hide();
+		$('.tabgroup > div:first-of-type').show();
+		$('.tabs a') .click( function(e) { e.preventDefault();
+			var $this = $(this), tabgroup = '#'
+				+ $this.parents('.tabs').data(
+						'tabgroup'), others = $this
+				.closest('li').siblings().children('a'), target = $this
+				.attr('href');
+			others.removeClass('active');
+			$this.addClass('active');
+			$(tabgroup).children('div').hide();
+			$(target).show();
+
+		})
+
+	});
+	
+	//설명 및 시간 \n 치환
+	var txt = $('.txt').html();
+	txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$('.txt').html(txt);
+	
+	var store_time = $('.store_time').html();
+	store_time = store_time.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$('.store_time').html(store_time);
+
+	//사진보기
+	lightbox.option({
+	    resizeDuration: 200,
+	    wrapAround: true,
+	    disableScrolling: false,
+	    fitImagesInViewport:false
+	})
+	
+	//모바일분류
+	function Mobile(){
+		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+	
+	}
+	
+	function sendLinkDefault(name, addr){
+		var img1 = $("#code_0") ; //첫번째이미지
+		//http://cofficepass.ml/CoffeeProject/
+		
+		console.log(img1.attr("src"));
+   		// 카카오톡 링크 생성
+   		
+      // 중복 initialization 방지
+      if (!Kakao.isInitialized()) {
+          // 두번째 step 에서 가져온 javascript key 를 이용하여 initialize
+    	  Kakao.init("1719acb269a938b6750fa57d8a6c11cb");
+      }
+   		
+      // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+       Kakao.Link.createDefaultButton({
+          container: '#send_url',
+          objectType: 'location',
+          address:addr.text(),    // 공유할 위치의 주소
+          addressTitle:name.text(),   // 카카오톡 내의 지도 뷰에서 사용되는 타이틀
+          content: {
+              title: name.text(),
+              description: '주소 :'+addr.text()+"\n",
+              imageUrl: "http://cofficepass.ml/"+img1.attr("src"),
+              link: {
+                  mobileWebUrl: window.location.href,
+                  webUrl: window.location.href
+              }
+          },
+          social: {
+        	  likeCount: 1234, // 콘텐츠의 좋아요 수
+        	  subscriberCount: 3489, // 콘텐츠의 구독 수
+          },
+          buttons: [
+              {
+                  title: '가게정보보기',
+                  link: {
+                      mobileWebUrl: window.location.href,
+                      webUrl:window.location.href
+                  }
+              },
+              {
+                  title: '위치 보기',
+                  link: {
+                      mobileWebUrl: window.location.href,
+                      webUrl: window.location.href
+                  }
+              }
+          ]
+      });
+
+    }
+	
+	
+	// 좋아요 - 바꾸실분은 바꾸어서 쓰세요(review.jsp에 있음)
+	function fnAddReviewLike(){
+		
+	}
 	</script>
 
 	<script type="text/javascript"
@@ -732,6 +817,8 @@ p.txt:before {
 		
 		
 	</script>
+	
+	
 </body>
 
 </html>

@@ -176,7 +176,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-1.jpg"
 								alt="">
 						</div>
 						<div
@@ -193,7 +193,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-2.jpg"
 								alt="">
 						</div>
 						<div
@@ -210,7 +210,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-3.jpg"
 								alt="">
 						</div>
 						<div
@@ -227,7 +227,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-4.jpg"
 								alt="">
 						</div>
 						<div
@@ -244,7 +244,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-5.jpg"
 								alt="">
 						</div>
 						<div
@@ -261,7 +261,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/img/service-6.jpg"
 								alt="">
 						</div>
 						<div
@@ -422,7 +422,7 @@
 					<div class="single-place mb-30">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services1.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
@@ -450,7 +450,7 @@
 					<div class="single-place mb-30 wow fadeInUp" data-wow-delay="0.10s">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services2.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
@@ -478,7 +478,7 @@
 					<div class="single-place mb-30">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services3.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
@@ -506,7 +506,7 @@
 					<div class="single-place mb-30">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services4.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
@@ -534,7 +534,7 @@
 					<div class="single-place mb-30">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services5.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
@@ -562,7 +562,7 @@
 					<div class="single-place mb-30">
 						<div class="place-img">
 							<img
-								src="<%=request.getContextPath()%>/resources/img/커피2.png"
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services6.jpg"
 								alt="">
 						</div>
 						<div class="place-cap">
