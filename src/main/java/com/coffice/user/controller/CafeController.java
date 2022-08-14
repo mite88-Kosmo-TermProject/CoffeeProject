@@ -50,6 +50,8 @@ public class CafeController {
 		cafeImpl = sqlSession.getMapper(CafeImpl.class);
 		 List<StoresDTO> resultList = cafeImpl.getCafeData(store_idx);
 		 
+		 System.out.println("!!"+resultList);
+		 
 		System.out.println("!!"+store_idx);
 
 		model.addAttribute("resultList", resultList);

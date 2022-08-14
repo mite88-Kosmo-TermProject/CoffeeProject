@@ -16,23 +16,7 @@
 
 
 <style>
-/* form {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	display: block;
-	width: 100%;
-	max-width: 400px;
-	background-color: #FFF;
-	margin: 0;
-	padding: 2.25em;
-	box-sizing: border-box;
-	border: solid 1px #DDD;
-	border-radius: 0.5em;
-	font-family: "Source Sans Pro", sans-serif;
-}
- */
+
 form {
  	max-width: 700px;
     margin: 0 auto;
@@ -352,9 +336,11 @@ form .inputGroup1.focusWithText .helper {
 						</div>
 						<div class="inputGroup inputGroup3 btn-group">
 							<button type="submit" id="login">Log in</button>
+							&nbsp;&nbsp;
 							<button type="button" id="join" onclick="location.href='<%=request.getContextPath() %>/member/signup.do'">회원가입</button>
+							&nbsp;&nbsp;
 							<img src="<%=request.getContextPath() %>/resources/img/카카오로그인.png"  type="button" 
-							 onclick="location.href='<%=request.getContextPath() %>/member/signup.do'"
+							 onclick="kakaoLogin();"
 							  style="width: auto; height: 50px; cursor: pointer;" alt="">
 						</div>
 					</form>
@@ -574,6 +560,63 @@ form .inputGroup1.focusWithText .helper {
 	TweenMax.set(armL, {x: -93, y: 220, rotation: 105, transformOrigin: "top left"});
 	TweenMax.set(armR, {x: -93, y: 220, rotation: -105, transformOrigin: "top right"});
 	</script>
+	
+	
+	<!-- d111b929650250ba880557f494275c43 -->
+	<script src="http://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+
+	<script>
+		/* JavaScript  앱키 */
+		window.Kakao.init("d111b929650250ba880557f494275c43")
+		
+
+		
+		function kakaoLogin(){
+			window.Kakao.Auth.login({
+				/* 아래꺼는 카카오에서 얻을수있는 정보입니다 없어도 상관없습니다 배열에 저절로 들어간대요 */
+				/* scope:'profile_nickname,profile_image,account_email,gender,talk_message',  */
+				success : function(authObj){
+					console.log(authObj);
+					window.Kakao.API.request({
+						url:'/v2/user/me',
+						success: res=>{
+							const kakao_account = res.kakao_account;
+							console.log(kakao_account);
+						}
+					});
+				}
+			});
+		}
+		
+		/* 복붙한거라 아는게 없습니다 */
+		//카카오로그아웃  
+		function kakaoLogout() {
+		    if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		        url: '/v1/user/unlink',
+		        success: function (response) {
+		        	console.log(response)
+		        },
+		        fail: function (error) {
+		          console.log(error)
+		        },
+		      })
+		      Kakao.Auth.setAccessToken(undefined)
+		    }
+		  }  
+		
+	</script>
+	
+	<a href="javascript:kakaoLogin();">카카오 소셜로그인</a>
+	<br>
+	<br>
+	<li onclick="kakaoLogout();"><a href="javascript:void(0)"> <span>카카오
+				로그아웃</span>
+	</a></li>
+	
+	
 </body>
 
 </html>
