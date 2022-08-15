@@ -7,6 +7,11 @@
   
 <mapper namespace="com.coffice.user.service.SubPaylmpl">
 
+	<insert id="insert" parameterType="com.coffice.dto.SubPayDTO">
+		INSERT INTO tests VALUES 
+		(#{customer_id}, #{pay_import_key}, #{pay_idx}, #{pay_price}, #{pay_result_status}, #{sub_idx}, #{pay_successed_at})
+	</insert>
+
 <!--
 	이용권 결제내역 추가
 	<insert id ="insert_pay" parameterType="Payed_listVO">

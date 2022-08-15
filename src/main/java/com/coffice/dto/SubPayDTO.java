@@ -1,34 +1,38 @@
 package com.coffice.dto;
 
-import java.sql.Date;
-
 import lombok.Data;
 
 @Data
 public class SubPayDTO {
 	
-		//결제일련번호
-		private int pay_idx;
-		//구독권일련번호
-		private int sub_idx;
 		//구매한멤버아이디
-		private String mem_id;
+		private String customer_id;
+		//아임포트 결제 일련번호
+		private String pay_import_key;		
+		//결제일련번호
+		private String pay_idx;
 		//결제금액
-		private int pay_price;
-		//결제요청시간
-		private Date pay_created_at;
-		//결제성공시간
-		private Date pay_successed_at;
-		//사용만료일
-		private Date pay_expiration_date;
-		//다음결제일
-		private Date pay_next_order_day;
-		//빌링키
-		private String pay_billing_key;
+		private String pay_price;	
 		//결제상태
-		private String pay_result_status;
-		//결제결과메세지
-		private String pay_result_msg;
+		private String pay_result_status;		
+		//주문명
+		private String sub_idx;		
+		//결제성공시간
+		private String pay_successed_at;
+		
+/*		//구독권일련번호
+		private String sub_idx;
+		//결제요청시간
+		private String pay_created_at;
+		//사용만료일
+		private String pay_expiration_date;
+		//다음결제일
+		private String pay_next_order_day;
+		//빌링키
+		private String pay_billing_key;*/
+
+
+
 	
 }
 //

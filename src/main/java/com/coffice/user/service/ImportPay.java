@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 
 @Service
 public class ImportPay {
-
 	
 	public String getToken() {
 			
@@ -35,7 +34,6 @@ public class ImportPay {
 	   
 	    HttpEntity<String> entity = new HttpEntity<>(json,headers);
 		return restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
-		
 		
 	}
 }

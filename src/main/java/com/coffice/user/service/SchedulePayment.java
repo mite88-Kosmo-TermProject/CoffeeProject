@@ -18,20 +18,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import lombok.Setter;
-
 @Service
 public class SchedulePayment {
 
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private ImportPay pay;
 	
 	public String schedulePay(long customer_uid, int price) {
 		String token = pay.getToken();
 		long timestamp = 0;
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
 		cal.add(Calendar.MINUTE, +1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
 		String date = sdf.format(cal.getTime());
 		try {
 			Date stp = sdf.parse(date);

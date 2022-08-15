@@ -18,7 +18,6 @@ import lombok.Setter;
 @Service
 public class RequestSubPayment {
 
-	
 	@Setter(onMethod_ = @Autowired)
 	private ImportPay pay;
 
@@ -28,7 +27,7 @@ public class RequestSubPayment {
 		Gson str = new Gson();
 		token = token.substring(token.indexOf("response") + 10);
 		token = token.substring(0, token.length() - 1);
-
+		
 		GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
 
 		String access_token = vo.getAccess_token();
@@ -52,6 +51,5 @@ public class RequestSubPayment {
 		HttpEntity<String> entity = new HttpEntity<>(json, headers);
 		
 		return restTemplate.postForObject("https://api.iamport.kr/subscribe/payments/again", entity, String.class);
-
 	}
 }
