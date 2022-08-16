@@ -151,9 +151,21 @@
 		
 		<!-- 이메일 전송 의존설정 -->
 		<dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-email</artifactId>
-		<version>1.2</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+		</dependency>
+		<!--qr코드-->
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>core</artifactId>
+		    <version>3.4.0</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>com.google.zxing</groupId>
+		  <artifactId>javase</artifactId>
+		  <version>3.4.0</version>
 		</dependency>
 
 
