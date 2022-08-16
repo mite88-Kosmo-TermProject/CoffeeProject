@@ -31,7 +31,6 @@ public class RequestSubPayment {
 		GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
 
 		String access_token = vo.getAccess_token();
-		System.out.println(access_token);
 
 		RestTemplate restTemplate = new RestTemplate();
 

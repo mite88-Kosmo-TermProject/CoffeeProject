@@ -26,7 +26,7 @@ public class SubPayController {
 	//Mybatis를 사용하기 위한 빈 자동주입
 	@Autowired
 	public SqlSession sqlSession;
-	
+	@Autowired
 	public ReqPaymentScheduler scheduler;
 	
 	
@@ -114,7 +114,7 @@ public class SubPayController {
 //		return map;
 //	}
 //	
-	@RequestMapping("/order/insertSubscribe.do")
+	@RequestMapping(value = "/order/insertSubscribe.do", method = RequestMethod.POST)
 	public String modifyAction(HttpSession session, SubPayDTO subPayDTO) {
 		
 		
@@ -130,10 +130,10 @@ public class SubPayController {
 	@ResponseBody
 	public void getImportToken(@RequestParam Map<String, Object> map)
 			throws JsonMappingException, JsonProcessingException {
-		int customer_uid = Integer.parseInt((String) map.get("customer_uid"));
-		int price = Integer.parseInt((String) map.get("price"));
-
-		scheduler.startScheduler(customer_uid, price);
+		String customer_uid = (String)map.get("customer_uid");
+		String price = (String)map.get("price");
+		String merchant_uid = (String)map.get("merchant_uid");
+		scheduler.startScheduler(customer_uid, price, merchant_uid);
 	}
 	
 	// 패스구매완료

@@ -33,6 +33,8 @@ public class ImportPay {
 		//서버로 요청할 Body
 	   
 	    HttpEntity<String> entity = new HttpEntity<>(json,headers);
+	    String token = restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
+	    System.out.println("token=" + token);
 		return restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
 		
 	}

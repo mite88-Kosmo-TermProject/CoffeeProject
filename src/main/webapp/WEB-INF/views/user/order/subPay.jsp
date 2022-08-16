@@ -73,9 +73,9 @@ IMP.init("imp56165372"); // 예: imp00000000
 			pg: "kakaopay",
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
 			merchant_uid : new Date().getTime(),
-			name : 'test06',
+			name : 'CoffeePass 30잔',
 			amount : 2000, 
-			customer_uid : "customer_uid" + new Date().getTime(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
+			customer_uid : $('#customer_id').val(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
 			buyer_email : 'madcatz92@naver.com',
 			buyer_name : '이준희',
 			buyer_tel : '02-4316-8802'
@@ -83,6 +83,7 @@ IMP.init("imp56165372"); // 예: imp00000000
 			if ( rsp.success ) {
 				$.ajax({
 					url:'../order/insertSubscribe.do', //DB에 구독정보 등록하는 부분..
+					type : 'post',
 					data:{
 						customer_id : $('#customer_id').val(),
 						pay_import_key : rsp.imp_uid, // 아임포트 고유 결제번호
@@ -101,11 +102,11 @@ IMP.init("imp56165372"); // 예: imp00000000
 			    
 				$.ajax({
 					url:'../order/payment.do', //결제 상태를 확인하고 스케줄러를 호출하는 부분
-					type : 'POST',
+					type : 'post',
 					data:{
-						"customer_uid" : $('#customer_id').val(),
-						"price" : 2000, 
-						"merchant_uid" : rsp.merchant_uid
+						customer_uid : $('#customer_id').val(),
+						price : 2000, 
+						merchant_uid : rsp.merchant_uid
 					},
 					success:function(result) {
 						alert('다음 결제 예약');

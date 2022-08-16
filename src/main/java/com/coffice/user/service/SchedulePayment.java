@@ -24,8 +24,9 @@ public class SchedulePayment {
 	@Autowired
 	private ImportPay pay;
 	
-	public String schedulePay(long customer_uid, int price) {
+	public String schedulePay(String customer_uid, String price, String merchant_uid) {
 		String token = pay.getToken();
+		System.out.println("tokenReq======="+token);
 		long timestamp = 0;
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, +1);
@@ -44,6 +45,7 @@ public class SchedulePayment {
 		 token = token.substring(0, token.length() - 1);
 		 GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
 		 String access_token = vo.getAccess_token();
+		 System.out.println("access_token=====" + access_token);
 		 
 		 
 		 RestTemplate restTemplate = new RestTemplate();
@@ -52,13 +54,15 @@ public class SchedulePayment {
 		 headers.setBearerAuth(access_token);
 		 
 		 JsonObject jsonObject = new JsonObject();
-		 jsonObject.addProperty("merchant_uid", timestamp);
+		 jsonObject.addProperty("merchant_uid", merchant_uid);
 		 jsonObject.addProperty("schedule_at", timestamp);
+		 jsonObject.addProperty("currency ", "KRW");
 		 jsonObject.addProperty("amount", price);
 		 
 		 JsonArray jsonArr = new JsonArray();
 		 
-		 jsonArr.add(jsonObject); JsonObject reqJson = new JsonObject();
+		 jsonArr.add(jsonObject); 
+		 JsonObject reqJson = new JsonObject();
 		 
 		 reqJson.addProperty("customer_uid", customer_uid); 
 		 reqJson.add("schedules",jsonArr);
