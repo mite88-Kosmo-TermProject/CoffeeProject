@@ -16,5 +16,13 @@ public class CafeSNSController {
 		return "/user/cafeSNS/review";
 	}
 	
+	//좋아요 버튼
+	@RequestMapping("/cafeSNS/ajax_like.do")
+	public String ajaxlike() {
+		
+		
+		return "/cafeSNS/ajax_like.do";
+	}
+	
 
 }

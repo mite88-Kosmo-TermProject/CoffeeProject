@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +12,21 @@
 	rel="stylesheet">
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
+<!-- <script type="text/javascript">
+function loginValidate(f)
+{
+	if(f.mem_id.value==""){
+		alert("아이디를 입력하세요");
+		f.id.focus();
+		return false;
+	}
+	if(f.mem_pw.value==""){
+		alert("패스워드를 입력하세요"); 
+		f.pass.focus();
+		return false;
+	} 
+}
+</script> -->
 
 
 
@@ -186,8 +201,8 @@ form .inputGroup1.focusWithText .helper {
 			<div class="row g-4">
 				<div class="col-12">
 				
-				
-					<form>
+				<span style="font-size:1.5em; color:red;">${LoginNG }</span>
+				<form name="loginForm" method="post" action="./loginAction.do" onsubmit="return loginValidate(this);">
 						<div class="svgContainer">
 							<div>
 								<svg class="mySVG" xmlns="http://www.w3.org/2000/svg"
@@ -341,23 +356,31 @@ form .inputGroup1.focusWithText .helper {
 						</div>
 
 						<div class="inputGroup inputGroup1">
-							<label for="email1">Email</label> <input type="text" id="email"
+							<label for="email1">ID</label> <input type="text" id="email" name="mem_id"
 								class="email" maxlength="256" />
-							<p class="helper helper1">email@domain.com</p>
+							<p class="helper helper1">ID</p>
 							<span class="indicator"></span>
 						</div>
 						<div class="inputGroup inputGroup2">
 							<label for="password">Password</label> <input type="password"
-								id="password" class="password" />
+								id="password" name="mem_pw" class="password" />
 						</div>
 						<div class="inputGroup inputGroup3 btn-group">
 							<button type="submit" id="login">Log in</button>
 							<button type="button" id="join" onclick="location.href='<%=request.getContextPath() %>/member/signup.do'">회원가입</button>
-							<img src="<%=request.getContextPath() %>/resources/img/카카오로그인.png"  type="button" 
-							 onclick="location.href='<%=request.getContextPath() %>/member/signup.do'"
-							  style="width: auto; height: 50px; cursor: pointer;" alt="">
 						</div>
 					</form>
+							<form method="post" action="./kakaologin.do" name="kakaologin" id="kakaologin">
+							<div id="kakao">
+							<input type="hidden" name="kakaoemail" id="kakaoemail"/>
+							<input type="hidden" name="kakaoname" id="kakaoname"/>
+							<input type="hidden" name="kakaogender" id="kakaogender"/>
+							<!-- <a href="javascript:kakaoLogin();" > -->
+								<img src="<%=request.getContextPath() %>/resources/img/카카오로그인.png" 
+							  	style="width: auto; height: 50px; cursor: pointer;" alt=""  onclick="javascript:kakaoLogin();"/>
+							<!-- </a> -->
+							</div>
+							</form>
 					
 					
 				</div>
@@ -369,6 +392,7 @@ form .inputGroup1.focusWithText .helper {
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+	
 	<script>
 	var email = document.querySelector('#email'), password = document.querySelector('#password'), mySVG = document.querySelector('.svgContainer'), armL = document.querySelector('.armL'), armR = document.querySelector('.armR'), eyeL = document.querySelector('.eyeL'), eyeR = document.querySelector('.eyeR'), nose = document.querySelector('.nose'), mouth = document.querySelector('.mouth'), mouthBG = document.querySelector('.mouthBG'), mouthSmallBG = document.querySelector('.mouthSmallBG'), mouthMediumBG = document.querySelector('.mouthMediumBG'), mouthLargeBG = document.querySelector('.mouthLargeBG'), mouthMaskPath = document.querySelector('#mouthMaskPath'), mouthOutline = document.querySelector('.mouthOutline'), tooth = document.querySelector('.tooth'), tongue = document.querySelector('.tongue'), chin = document.querySelector('.chin'), face = document.querySelector('.face'), eyebrow = document.querySelector('.eyebrow'), outerEarL = document.querySelector('.earL .outerEar'), outerEarR = document.querySelector('.earR .outerEar'), earHairL = document.querySelector('.earL .earHair'), earHairR = document.querySelector('.earR .earHair'), hair = document.querySelector('.hair');
 	var caretPos, curEmailIndex, screenCenter, svgCoords, eyeMaxHorizD = 20, eyeMaxVertD = 10, noseMaxHorizD = 23, noseMaxVertD = 10, dFromC, eyeDistH, eyeLDistV, eyeRDistV, eyeDistR, mouthStatus = "small";
@@ -574,6 +598,89 @@ form .inputGroup1.focusWithText .helper {
 	TweenMax.set(armL, {x: -93, y: 220, rotation: 105, transformOrigin: "top left"});
 	TweenMax.set(armR, {x: -93, y: 220, rotation: -105, transformOrigin: "top right"});
 	</script>
+	
+	<script src="http://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		/* JavaScript  앱키 */
+		window.Kakao.init("ae0ab443d0a9774378e3781de244bd95")
+		
+
+		function kakaoLogin(){
+			window.Kakao.Auth.login({
+				/* 아래꺼는 카카오에서 얻을수있는 정보입니다 없어도 상관없습니다 배열에 저절로 들어간대요 */
+				/* scope:'profile_nickname,profile_image,account_email,gender,talk_message',  */
+				success : function(response){
+					console.log(response);
+					window.Kakao.API.request({
+						url:'/v2/user/me',
+						success: res=>{
+							const kakao_account = res.kakao_account;
+							const mem_id = kakao_account.email;
+							const mem_gender = kakao_account.gender;
+							const mem_name = res.properties.nickname;
+							//kakaoLoginPro(response)
+							console.log(kakao_account);
+							console.log(mem_id);
+							console.log(mem_gender);
+							console.log(mem_name);
+							
+							$('#kakaoemail').val(mem_id);
+							$('#kakaoname').val(mem_name);
+							$('#kakaogender').val(mem_gender);
+							
+							document.kakaologin.submit();
+						}
+					});
+				}
+			});
+		}
+		
+		/* function kakaoLoginPro(response){
+			var data = {id:response.id,email:response.kakao_account.email}
+			$.ajax({
+				type : 'POST',
+				url : '/member/kakaoLoginPro.do',
+				data : data,
+				dataType : 'json',
+				success : function(data){
+					console.log(data)
+					if(data.JavaData == "YES"){
+						alert("로그인되었습니다.");
+						location.href = '/member/list.do'
+					}else if(data.JavaData == "register"){
+						$("#kakaoEmail").val(response.kakao_account.email);
+						$("#kakaoId").val(response.id);
+						$("#kakaoForm").submit();
+					}else{
+						alert("로그인에 실패했습니다");
+					}
+					
+				},
+				error: function(xhr, status, error){
+					alert("로그인에 실패했습니다."+error);
+				}
+			}); */
+		
+		/* 복붙한거라 아는게 없습니다 */
+		//카카오로그아웃  
+		function kakaoLogout() {
+		    if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		        url: '/v1/user/unlink',
+		        success: function (response) {
+		        	console.log(response)
+		        },
+		        fail: function (error) {
+		          console.log(error)
+		        },
+		      })
+		      Kakao.Auth.setAccessToken(undefined)
+		    }
+		  }  
+		
+	</script>
+	
+	
 </body>
 
 </html>
