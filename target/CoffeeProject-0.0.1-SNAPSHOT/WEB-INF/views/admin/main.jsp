@@ -105,7 +105,7 @@
 
 								<!-- 관리자 -->
 								<div class="tab-pane active" id="admin">
-									<form class="form-horizontal login-form">
+									<form class="form-horizontal login-form" action="<%= request.getContextPath() %>/admin/index.do">
 
 										<div class="form-group relative">
 											<input class="form-control input-lg mb-3" id="login_username"

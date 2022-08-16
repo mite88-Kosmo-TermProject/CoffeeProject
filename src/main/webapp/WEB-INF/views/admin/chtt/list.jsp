@@ -53,7 +53,7 @@
 													</div>
 												</div>
 												<div class="inbox_chat">
-													<div class="chat_list active_chat">
+													<!-- <div class="chat_list active_chat">
 														<div class="chat_people">
 															<div class="chat_img">
 																<img
@@ -64,101 +64,12 @@
 																<h5>
 																	Sunil Rajput <span class="chat_date">Dec 25</span>
 																</h5>
-																<!-- <p>Test, which is a new approach to have all
-																	solutions astrology under one roof.</p> -->
+																<p>Test, which is a new approach to have all
+																	solutions astrology under one roof.</p>
 															</div>
 														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
-													<div class="chat_list">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																
-															</div>
-														</div>
-													</div>
+													</div> -->
+									
 												</div>
 											</div>
 										</div>
@@ -269,6 +180,10 @@
 				</div>
 
 				<!-- / Content -->
+				
+				<div id="list"></div>
+
+				<div id="temp" > </div>
 
 				<!-- footer -->
 				<%@ include file="/WEB-INF/views/admin/layout/footer.jsp"%>
@@ -291,13 +206,52 @@
 	<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 	<script type="text/javascript">
-			$(function() {
-				$('#action_menu_btn').click(function(){
-					$('.action_menu').toggle();
-				});
-				
-			})
-		</script>
+		$(function() {
+			$('#action_menu_btn').click(function(){
+				$('.action_menu').toggle();
+			});
+			
+			//리스트
+			 $.ajax({
+		         type : "get",
+		         url : "../chat.user",
+		         dataType : "json",
+		         success : function(data) {
+		        	// alert(data);
+		        	 var lists="";
+		        	 $.each(data, function(key, value){
+		        		 var sender = value.sender;
+		        		 
+		        		 lists+='<div class="chat_list">'+
+							'<div class="chat_people">'+
+								'<div class="chat_img">'+
+									'<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">'+
+								'</div>'+
+								'<div class="chat_ib">'+
+									'<h5><a href="#" id="chat" onclick="chatPage(this);">'+sender+'</a></h5>'+
+								'</div>'+
+							'</div>'+
+						'</div>';
+		        		 
+		        		 
+		        		 //'<a href="#" id="chat" onclick="chatPage(this);">'+sender+'</a></br>';
+		       		 });
+		        	 
+		        	 $(".inbox_chat").html(lists);
+		        	 
+		        	
+		         }
+		      });
+	
+		})
+		
+		
+		function chatPage(that) {
+			//alert($(that).text());
+			window.open("../chat?chat_id=" + $(that).text(), "chat",
+					"width=500, height=800, top=200, left=900");
+		}
+	</script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
 	data-wow-delay="0.1s">
 	<div class="container py-5">
 		<div class="row g-5">
-			<div class="col-lg-3 col-md-6">
+			<div class="col-lg-9 col-md-6">
 				<h4 class="text-light mb-4">Address</h4>
 				<p class="mb-2">
 					<i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA
@@ -30,21 +30,7 @@
 						class="fab fa-linkedin-in"></i></a>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6">
-				<h4 class="text-light mb-4">Services</h4>
-				<a class="btn btn-link" href="">General Carpentry</a> <a
-					class="btn btn-link" href="">Furniture Remodeling</a> <a
-					class="btn btn-link" href="">Wooden Floor</a> <a
-					class="btn btn-link" href="">Wooden Furniture</a> <a
-					class="btn btn-link" href="">Custom Carpentry</a>
-			</div>
-			<div class="col-lg-3 col-md-6">
-				<h4 class="text-light mb-4">Quick Links</h4>
-				<a class="btn btn-link" href="">About Us</a> <a class="btn btn-link"
-					href="">Contact Us</a> <a class="btn btn-link" href="">Our
-					Services</a> <a class="btn btn-link" href="">Terms & Condition</a> <a
-					class="btn btn-link" href="">Support</a>
-			</div>
+			
 			<div class="col-lg-3 col-md-6">
 				<h4 class="text-light mb-4">Newsletter</h4>
 				<p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>

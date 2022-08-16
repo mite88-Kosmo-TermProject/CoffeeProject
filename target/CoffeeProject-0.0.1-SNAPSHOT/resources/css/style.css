@@ -1342,7 +1342,7 @@ ul, ol {
 .mapPin {
     position: relative;
     padding: 8px 24px 8px 54px;
-    background: #fff;
+    background: transparent;
     border-radius: 50px;
 }
 .mapPin .ico {
@@ -1352,7 +1352,7 @@ ul, ol {
     width: 18px;
     height: 18px;
     transform: translateY(-50%);
-    background: url(CoffeeProject/resources/img/spr_kind.png) no-repeat;
+    background: url(/CoffeeProject/resources/img/spr_kind.png) no-repeat;
 }
 .mapPin strong {
     white-space: nowrap;
@@ -1403,7 +1403,7 @@ ul, ol {
     border-width: 5px;
 }
 .mapPin.cafe {
-    border: 1px solid #00cdd2;
+    /*border: 1px solid #00cdd2;*/
 }
 .mapPin.cafe .ico {
     background-position: -18px 0;

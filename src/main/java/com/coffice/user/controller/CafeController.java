@@ -44,7 +44,7 @@ public class CafeController {
 	
 	//카페상세
 	@RequestMapping(value = "/cafe/info.do", method = RequestMethod.GET)
-	public  String info(HttpServletRequest req, HttpServletResponse resp, Model model) throws Exception {
+	public  String cafeinfo(HttpServletRequest req, HttpServletResponse resp, Model model) throws Exception {
 		
 		int store_idx = Integer.parseInt(req.getParameter("store_idx"));
 		cafeImpl = sqlSession.getMapper(CafeImpl.class);

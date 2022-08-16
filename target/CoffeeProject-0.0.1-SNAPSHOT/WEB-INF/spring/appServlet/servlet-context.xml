@@ -5,10 +5,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/websocket
-       http://www.springframework.org/schema/websocket/spring-websocket.xsd">
-
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
 	<mvc:annotation-driven />
 
@@ -26,8 +23,9 @@
 	<!-- 애플리케이션 시작시 자동으로 스캔할 기본패키지 지정 -->
 	<context:component-scan base-package="com.coffice.controller" />
 	<context:component-scan base-package="com.coffice.user.controller" />
-	<context:component-scan base-package="com.coffice.admin.controller" />
 	<context:component-scan base-package="com.coffice.storeowner.controller" />
+	<context:component-scan base-package="com.coffice.admin.controller" />
+	
 
 	<!-- 데이터 근원지에대한 설정으로 오라클 DB연결정보를 가진다. -->
 	<bean name="dataSource"
@@ -55,13 +53,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-	
-	 <!-- 웹 소켓 핸들러 -->
-    <websocket:handlers>
-        <websocket:mapping path="/websocket/echo.do" handler="myHandler"/>
-    </websocket:handlers>
- 
-    <beans:bean id="myHandler" class="com.fp.neezit.chat.controller.WebSocketHandler"/>
+
 	
 	
 </beans>
