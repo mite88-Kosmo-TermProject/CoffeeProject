@@ -11,7 +11,7 @@
 		<id property="store_longitude" column="store_longitude"/>	
 	</resultMap>
 	
-	<resultMap type="com.coffice.dto.memberDTO" id="UserMap">
+	<resultMap type="com.coffice.dto.MemberDTO" id="UserMap">
 		<id property="mem_id" column="mem_id"/>
 		<id property="mem_name" column="mem_name"/>
 		<id property="mem_nickname" column="mem_nickname"/>

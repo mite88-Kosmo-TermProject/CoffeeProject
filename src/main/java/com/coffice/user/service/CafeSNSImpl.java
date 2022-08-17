@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.coffice.dto.ParameterDTO;
-import com.coffice.dto.memberDTO;
+import com.coffice.dto.MemberDTO;
 import com.coffice.dto.reviewDTO;
 
 import dto.StoreDTO;

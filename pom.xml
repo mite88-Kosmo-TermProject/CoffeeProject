@@ -154,6 +154,7 @@
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-email</artifactId>
 		<version>1.2</version>
+		</dependency>
 
 		<!--qr코드-->
 		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->

@@ -15,7 +15,7 @@ public class reviewDTO {
 	
 	private storeDTO storeDTO;
 	
-	private memberDTO memberDTO;
+	private MemberDTO memberDTO;
 	
 	private String review_star;
 	

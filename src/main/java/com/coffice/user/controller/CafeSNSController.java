@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.coffice.dto.ParameterDTO;
-import com.coffice.dto.memberDTO;
+import com.coffice.dto.MemberDTO;
 import com.coffice.dto.reviewDTO;
 import com.coffice.user.service.CafeSNSImpl;
 
@@ -39,7 +39,7 @@ public class CafeSNSController {
 		
 		try {
 			//로그인된 정보중에 id를 가져온다.
-			String writer = ((memberDTO)session.getAttribute("login")).getMem_id();
+			String writer = ((MemberDTO)session.getAttribute("login")).getMem_id();
 			
 			//날짜별로 폴더를 생성해서 파일을 관리
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
