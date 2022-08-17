@@ -1,31 +1,191 @@
 package com.coffice.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.coffice.dto.PointDTO;
+import com.coffice.dto.PointRuleDTO;
+import com.coffice.service.AdminPointImpl;
+import com.fasterxml.jackson.core.JsonParser;
+
+import netscape.javascript.JSObject;
 
 @Controller
 public class AdminPointController {
-
+	@Autowired
+	private SqlSession sqlsession;
 	// 어드민 포인트기본설정
 	@RequestMapping(value = "/admin/point/index1.do", method = RequestMethod.GET)
 	public String index1() {
 
 		return "/admin/point/index1";
 	}
+	
+		@RequestMapping(value = "/admin/point/list.do", method = RequestMethod.GET)
+		public String iist() {
 
+			return "/admin/point/list";
+		}
+	
+	//어드민 포인트규칙보기(ajax)
+	@RequestMapping(value = "/admin/point/getPointRule.do",method = RequestMethod.GET)
+	@ResponseBody
+	public JSONArray getPointRuleList() {
+		JSONArray objLists = new JSONArray();
+		ArrayList<PointRuleDTO> ruledto = sqlsession.getMapper(AdminPointImpl.class).getRuleList();
+		System.out.println(ruledto);
+		for(PointRuleDTO dto : ruledto ) {
+			JSONObject ruleObj = new JSONObject();
+			ruleObj.put("rule_name", dto.getRule_name());
+			ruleObj.put("rule_point", dto.getRule_point());
+			objLists.add(ruleObj);
+		}
+		return objLists;
+	}
+	
+	//어드민페이지 포인트규칙설정
+	@RequestMapping(value = "/admin/point/updatePointRule.do" , method = RequestMethod.GET)
+	@ResponseBody
+	public void setPointRule (HttpServletRequest req) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("회원가입", Integer.parseInt(req.getParameter("register")));
+		paramMap.put("추천인", Integer.parseInt(req.getParameter("recommand")));
+		paramMap.put("리뷰작성", Integer.parseInt(req.getParameter("review")));
+		paramMap.put("리뷰삭제", Integer.parseInt(req.getParameter("deletereview")));
+		
+		sqlsession.getMapper(AdminPointImpl.class).setPointRule(paramMap);
+		
+	}
+
+
+	// 어드민 포인트조회
+	@RequestMapping(value = "/admin/point/getpointlist.do", method = RequestMethod.GET)
+	@ResponseBody
+	public JSONObject getPointlist(HttpServletRequest req) {
+		JSONObject data = new JSONObject();
+		JSONArray arr = new JSONArray();
+
+		ArrayList<PointDTO> pointlist = sqlsession.getMapper(AdminPointImpl.class).getPointList();
+		for(PointDTO dto : pointlist) {
+			JSONObject data2 = new JSONObject();
+			data2.put("point_idx", dto.getPoint_idx());
+			data2.put("point_entry_exit", dto.getPoint_entry_exit());
+			data2.put("mem_id", dto.getMem_id());
+			data2.put("point_postdate", dto.getPoint_postdate());
+			int rule = dto.getRule_idx();
+			String rulestr = null;
+			switch (rule) {
+				case 1:
+					rulestr = "회원가입";
+					break;
+			
+				case 2:
+					rulestr = "리뷰작성";
+					break;
+				
+				case 3:
+					rulestr = "추천인";
+					break;
+				
+				case 4:
+					rulestr = "리뷰삭제";
+					break;
+			}
+			data2.put("rule_idx", rulestr);
+			arr.add(data2);
+		}
+		data.put("data", arr);
+		return data;
+	}
+	// 어드민 포인트조건조회
+		@RequestMapping(value = "/admin/point/getPointListToSearchFiled.do", method = RequestMethod.GET)
+		@ResponseBody
+		public JSONObject getPointlistToSearchFiled(HttpServletRequest req) {
+			JSONObject data = new JSONObject();
+			JSONArray arr = new JSONArray();
+			int search = (req.getParameter("searchField")== "") ? 1 : Integer.parseInt(req.getParameter("searchField")); 
+					
+			ArrayList<PointDTO> pointlist = sqlsession.getMapper(AdminPointImpl.class).getPointListToSearchFiled(search);
+			for(PointDTO dto : pointlist) {
+				JSONObject data2 = new JSONObject();
+				data2.put("point_idx", dto.getPoint_idx());
+				data2.put("point_entry_exit", dto.getPoint_entry_exit());
+				data2.put("mem_id", dto.getMem_id());
+				data2.put("point_postdate", dto.getPoint_postdate());
+				int rule = dto.getRule_idx();
+				String rulestr = null;
+				switch (rule) {
+					case 1:
+						rulestr = "회원가입";
+						break;
+				
+					case 2:
+						rulestr = "리뷰작성";
+						break;
+					
+					case 3:
+						rulestr = "추천인";
+						break;
+					
+					case 4:
+						rulestr = "리뷰삭제";
+						break;
+				}
+				data2.put("rule_idx", rulestr);
+				arr.add(data2);
+			}
+			data.put("data", arr);
+			return data;
+		}
+		
+		// 어드민 회원포인트삭제하기
+		@RequestMapping(value = "/admin/point/deletePoint.do", method = RequestMethod.GET)
+		@ResponseBody
+		public void deletePoint(HttpServletRequest req) throws ParseException {
+			ArrayList<String> list = new ArrayList<String>();
+			String param = req.getParameter("values");
+			JSONParser jsonParse = new JSONParser();
+			JSONArray jsonArr = (JSONArray) jsonParse.parse(param);
+			jsonArr.toArray();
+			for(int i =0; i<jsonArr.size(); i++) {
+			list.add(jsonArr.get(i).toString());
+			System.out.println("지우기");
+			}
+			sqlsession.getMapper(AdminPointImpl.class).deletePoint(list);
+		}
+		// 어드민 회원포인트insert하기
+		@RequestMapping(value = "/admin/point/insertPoint.do", method = RequestMethod.GET)
+		@ResponseBody
+		public void insertPoint(HttpServletRequest req) {
+			String user_name = req.getParameter("user");
+			int point = Integer.parseInt(req.getParameter("point"));
+			int select = Integer.parseInt(req.getParameter("select"));
+			
+			sqlsession.getMapper(AdminPointImpl.class).insertPoint(user_name, point, select);
+		}
 	// 어드민 출책이벤트설정(룰렛)
 	@RequestMapping(value = "/admin/point/index2.do", method = RequestMethod.GET)
 	public String index2() {
-
+		
 		return "/admin/point/index2";
-	}
-
-	// 어드민 회원포인트조회
-	@RequestMapping(value = "/admin/point/list.do", method = RequestMethod.GET)
-	public String list() {
-
-		return "/admin/point/list";
 	}
 
 	// 어드민 회원포인트상세보기
