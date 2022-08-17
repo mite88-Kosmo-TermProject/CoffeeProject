@@ -1,4 +1,4 @@
-var nowPage=0;
+var nowPage=1;
 //거리 계산해주는 함수...
 
 function getdistance(lat1, lon1, lat2, lon2, unit) {
@@ -55,11 +55,39 @@ function getCafeList(list){
 
 	        console.log(list[i].distance); 
 	        //5 키로미터 이내의 카페를 저장해준다.
-	        if(list[i].distance < 500){
+	        if(list[i].distance < 50){
 	            newcafelist.push(list[i].review_idx);
 	        }
 	    }
 	        console.log(newcafelist);
+	       $(function(){
+	        $.ajax({
+	        	type : 'POST',
+	        	url : '../cafeSNS/newcafelist?nowPage='+nowPage,
+	        	data :{"list": newcafelist},
+	        	async : false,
+	        	dataType : 'json',
+	        	success : function (data) {
+	        		let tableData="";
+					console.log("콜백성공"+data);
+					console.log(data[0].review_idx);
+					/*append 부분*/
+					$(data).each(function (index, data) {
+						tableData +=""
+						+"<tr>"
+						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
+						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
+						+"	<td>별점: "+data.review_star+"</td>"
+						+"	<td>리뷰: "+data.review_content+"</td>"
+						+"</tr>";
+					});
+					$('#show_data').append(tableData);
+					
+				},
+	        	error : function (err) {
+					console.log("에러발생" + err.status);
+				}
+	        })});
 	        $('#testbtn').on("click",function(){
 	        	nowPage++;
 	        $.ajax({

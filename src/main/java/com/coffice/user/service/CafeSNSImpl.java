@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.memberDTO;
 import com.coffice.dto.reviewDTO;
 
 import dto.StoreDTO;
 
 @Service
 public interface CafeSNSImpl {
-
+	
+	/*리뷰 작성*/
+	public int insert(reviewDTO reviewDTO);
+	
 	/*카페들의 정보를 가져온다.*/
 	public ArrayList<StoreDTO> getcafeList();
 	

@@ -20,4 +20,8 @@ public class reviewDTO {
 	private String review_star;
 	
 	private String review_img;
+	
+	private String store_idx;
+	
+	private String mem_id;
 }

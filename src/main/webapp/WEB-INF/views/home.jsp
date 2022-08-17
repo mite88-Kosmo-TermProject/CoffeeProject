@@ -199,8 +199,6 @@
 		</div>
 	</div>
 	<!-- Service End -->
-
-
 	<style>
 #main_story .owl-stage-outer {
 	border-radius: 2rem;

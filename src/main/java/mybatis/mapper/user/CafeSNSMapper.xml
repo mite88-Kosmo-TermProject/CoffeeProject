@@ -42,7 +42,6 @@
 			</if>
 	</select>
 	
-	
 	<select id="getnewList" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM (
 			SELECT Tb.*, rownum rNum FROM(
@@ -58,6 +57,13 @@
 		)
 		WHERE rNum BETWEEN #{start} AND #{end}
 	</select>
+	
+	<insert id="writeReview">
+	
+	</insert>
+	
+	
+	
 	
 	
 	
