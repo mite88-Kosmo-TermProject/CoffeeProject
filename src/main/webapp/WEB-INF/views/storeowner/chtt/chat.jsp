@@ -8,6 +8,8 @@
 <title>채팅</title>
 <!-- 개인 css -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/admin/assets/css/style.css" />
+<link rel="stylesheet"
+	href="<%= request.getContextPath() %>/resources/admin/assets/vendor/fonts/boxicons.css" />
 
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -26,7 +28,6 @@
 }
 
 .chat_wrap #chat {
-	padding-bottom: 100px;
 	width: 100%;
 }
 
@@ -83,7 +84,13 @@
     width: 90%;
 }
 
+
+.messaging .card {
+    height: 85%;
+}
+
 .msg_history{
+	height: height: calc(700px - 150px);
     overflow-x: hidden;
 }
 </style>
@@ -108,17 +115,15 @@
 								<!-- card -->
 								<div class="card">
 									<div class="card-header header-elements p-3 my-n1">
-										<h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">채팅</h5>
+										
 										<div class="card-action-element ms-auto py-0">
 
 											<span id="action_menu_btn"><i
 												class='bx bx-dots-vertical-rounded'></i></span>
 											<div class="action_menu">
 												<ul>
-													<li>View profile</li>
-													<li>Add to close friends</li>
-													<li>Add to group</li>
-													<li>Block</li>
+													<li id="chat_close">채팅방나가기</li>
+													<li id="chat_toggle">취소</li>
 												</ul>
 											</div>
 										</div>
@@ -135,13 +140,13 @@
       											<div class="incoming_msg {{printLeftRight sender}}">
 
 													<div class="incoming_msg_img">
-														<img src="<%= request.getContextPath() %>/resources/user/{{photo}}" 
+														<img src="<%= request.getContextPath() %>/resources/img/user/{{mem_img}}" 
 														style="width:50px;border-radius:50%" alt="sunil">
 														{{sender}}
 													</div>
 													<div class="received_msg">
 														<div class="received_withd_msg">
-															<p>{{message}}<a href="{{id}}" style="display:{{printNone sender}}">X</a></p>
+															<p>{{message}}</p>
 															<span class="time_date"> {{regdate}}</span>
 														</div>
 													</div>
@@ -153,7 +158,7 @@
       	
 												<div class="outgoing_msg {{printLeftRight sender}}">
 													<div class="sent_msg">
-														<p>{{message}}<a href="{{id}}" style="display:{{printNone sender}}">X</a></p>
+														<p>{{message}}</p>
 														<span class="time_date">{{regdate}}</span>
 													</div>
 												</div>
@@ -211,6 +216,7 @@
 	//var urlParams = new URL(location.href).searchParams;
 	//alert($('#chat_id').val());
 	getList();
+	timer = setInterval( function () {getList();},2000);
 	var uid = $('#chat_id').val();
 	var photo = "${photo}";
 	//삭제
@@ -230,6 +236,14 @@
 				getList();
 			}
 		});
+	});
+	
+	$('#action_menu_btn').click(function(){
+		$('.action_menu').toggle();
+	});
+	
+	$('#chat_toggle').click(function(){
+		$('.action_menu').toggle();
 	});
 
 	$("#txtMessage").on("keydown", function(e) {
@@ -295,18 +309,26 @@
 		window.scrollTo(0, $('#chat').prop('scrollHeight'));
 	}
 
-	function getList() {;
+	function getList() {
 		$.ajax({
 			type : "get",
-			url : $(location).attr('origin')+"/CoffeeProject/admin/chat.json",
+			url : $(location).attr('origin')+"/CoffeeProject/storeowner/chat.json",
 			data : {"sender": uid},
 			dataType : "json",
 			success : function(data) {
 				var template = Handlebars.compile($("#temp").html());
+				$('#chat').children().remove();
 				$("#chat").html(template(data));
+				
+				//스크롤이동
+				$(".msg_history").scrollTop($('.msg_history').height());
+
+
 			}
 		});
 	}
+	
+
 </script>
 </html>
 

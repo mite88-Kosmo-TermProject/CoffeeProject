@@ -28,7 +28,6 @@
 }
 
 .chat_wrap #chat {
-	padding-bottom: 100px;
 	width: 100%;
 }
 
@@ -85,8 +84,16 @@
     width: 90%;
 }
 
+.messaging .card {
+    height: 85%;
+}
+
 .msg_history{
+	height: height: calc(700px - 150px);
     overflow-x: hidden;
+}
+
+.mesgs{
 }
 </style>
 </head>
@@ -211,6 +218,7 @@
 	//var urlParams = new URL(location.href).searchParams;
 	//alert($('#chat_id').val());
 	getList();
+	timer = setInterval( function () {getList();},2000);
 	var uid = $('#chat_id').val();
 	var photo = "${photo}";
 	//삭제
@@ -303,7 +311,7 @@
 		window.scrollTo(0, $('#chat').prop('scrollHeight'));
 	}
 
-	function getList() {;
+	function getList() {
 		$.ajax({
 			type : "get",
 			url : $(location).attr('origin')+"/CoffeeProject/admin/chat.json",
@@ -311,10 +319,20 @@
 			dataType : "json",
 			success : function(data) {
 				var template = Handlebars.compile($("#temp").html());
+				$('#chat').children().remove();
 				$("#chat").html(template(data));
+				
+				//스크롤이동
+				$(".msg_history").scrollTop($('.msg_history').height());
+
+
 			}
 		});
 	}
+
+
+
+
 </script>
 </html>
 
