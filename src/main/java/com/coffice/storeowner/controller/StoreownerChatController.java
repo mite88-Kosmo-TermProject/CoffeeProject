@@ -1,4 +1,4 @@
-package com.coffice.admin.controller;
+package com.coffice.storeowner.controller;
 
 import java.io.FileInputStream;
 import java.net.http.HttpRequest;
@@ -21,22 +21,22 @@ import com.coffice.dto.*;
 
 
 @RestController
-public class AdminChatController {
+public class StoreownerChatController {
 	@Autowired
 	ChatDAO dao;
 	
 
-	@RequestMapping("/admin/chat.json")
+	@RequestMapping("/storeowner/chat.json")
 	public List<ChatVO> list(@RequestParam("sender") String sender) {
 		return dao.list(sender);
 	}
 
-	@RequestMapping("/admin/chat.user")
+	@RequestMapping("/storeowner/chat.user")
 	public List<ChatVO> listUser() {
 		return dao.listUser();
 	}
 
-	@RequestMapping(value = "/admin/chat/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/storeowner/chat/insert", method = RequestMethod.POST)
 	public int insert(ChatVO chatvo) {
 		System.out.println(chatvo.getSender());
 		System.out.println(chatvo.getMessage());
@@ -48,18 +48,16 @@ public class AdminChatController {
 		return last;
 	}
 
-	@RequestMapping(value = "/admin/chat/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/storeowner/chat/delete", method = RequestMethod.POST)
 	public void insert(int id) {
 		dao.delete(id);
 	}
 
-	@RequestMapping("/admin/display")
+	@RequestMapping("/storeowner/display")
 	public byte[] display(String file, HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws Exception {
 		String path = req.getRealPath("/resourecs/img/user");
 		FileInputStream in = new FileInputStream(path + "/" + file);
 		byte[] image = IOUtils.toByteArray(in);
-		
-		System.out.println("image:"+image);
 		in.close();
 		return image;
 	}

@@ -26,8 +26,9 @@
 						<div class="inbox_msg">
 							<div class="row">
 
+								<div class="col-md-3 col-12 mb-3"></div>
 								<!-- 채팅목록 -->
-								<div class="col-md-12 col-lg-4 mb-3">
+								<div class="col-md-6 col-12  mb-3">
 
 
 									<div class="card">
@@ -53,22 +54,9 @@
 													</div>
 												</div>
 												<div class="inbox_chat">
-													<!-- <div class="chat_list active_chat">
-														<div class="chat_people">
-															<div class="chat_img">
-																<img
-																	src="https://ptetutorials.com/images/user-profile.png"
-																	alt="sunil">
-															</div>
-															<div class="chat_ib">
-																<h5>
-																	Sunil Rajput <span class="chat_date">Dec 25</span>
-																</h5>
-																<p>Test, which is a new approach to have all
-																	solutions astrology under one roof.</p>
-															</div>
-														</div>
-													</div> -->
+												
+											
+													<!-- 리스트넣기 -->
 									
 												</div>
 											</div>
@@ -76,9 +64,11 @@
 
 									</div>
 								</div>
+								
+								<div class="col-md-3 col-12 mb-3"></div>
 
 								<!-- message -->
-								<div class="col-md-12 col-lg-8 mb-3">
+								<!-- <div class="col-md-12 col-lg-8 mb-3">
 
 
 									<div class="card">
@@ -101,6 +91,7 @@
 
 											<div class="mesgs">
 												<div class="msg_history">
+												
 													<div class="incoming_msg">
 														<div class="incoming_msg_img">
 															<img
@@ -154,7 +145,7 @@
 																<span class="time_date"> 11:01 AM | Today</span>
 															</div>
 														</div>
-													</div>
+													</div> 
 												</div>
 												<div class="type_msg">
 													<div class="input_msg_write">
@@ -170,7 +161,7 @@
 
 
 									</div>
-								</div>
+								</div> -->
 
 							</div>
 						</div>
@@ -181,10 +172,6 @@
 
 				<!-- / Content -->
 				
-				<div id="list"></div>
-
-				<div id="temp" > </div>
-
 				<!-- footer -->
 				<%@ include file="/WEB-INF/views/admin/layout/footer.jsp"%>
 				<!-- / Footer -->
@@ -202,6 +189,7 @@
 	<!-- / Layout wrapper -->
 
 	<!-- 여기에 새로운 js파일있으면 넣기 -->
+	
 	<!-- https://hankong.tistory.com/19 -->
 	<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
@@ -242,14 +230,33 @@
 		        	
 		         }
 		      });
-	
+			
+			
+			//input에 keyup 이벤트 등록
+			 $(".search-bar").keyup(function(){
+				var searchText = $(this).val();
+				//div중 같은 아이디 찾아서 출력함
+				$(".inbox_chat> .chat_list").each(function(index) {
+		            $row = $(this);
+
+		            var id = $row.find(".chat_ib h5").text();
+
+		            if (id.indexOf(searchText) != 0) {
+		                $(this).hide();
+		            }
+		            else {
+		                $(this).show();
+		            }
+			    });
+
+			});
+
 		})
-		
-		
+
 		function chatPage(that) {
-			//alert($(that).text());
-			window.open("../chat?chat_id=" + $(that).text(), "chat",
-					"width=500, height=800, top=200, left=900");
+			//var user =$(that).text();
+			 window.open("../chat?chat_id=" + $(that).text(), "chat",
+					"width=700, height=800, top=200, left=900");  
 		}
 	</script>
 </body>

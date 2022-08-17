@@ -22,7 +22,7 @@ public class AdminChttController {
 	
 	@RequestMapping(value = "/admin/chat", method = { RequestMethod.GET })
 	public String chat (HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
-		return "chat";
+		return "/admin/chtt/chat";
 	}
 
 	/*

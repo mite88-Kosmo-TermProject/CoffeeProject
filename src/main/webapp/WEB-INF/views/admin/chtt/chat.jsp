@@ -8,6 +8,8 @@
 <title>채팅</title>
 <!-- 개인 css -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/admin/assets/css/style.css" />
+<link rel="stylesheet"
+	href="<%= request.getContextPath() %>/resources/admin/assets/vendor/fonts/boxicons.css" />
 
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -108,17 +110,15 @@
 								<!-- card -->
 								<div class="card">
 									<div class="card-header header-elements p-3 my-n1">
-										<h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">채팅</h5>
+										
 										<div class="card-action-element ms-auto py-0">
 
 											<span id="action_menu_btn"><i
 												class='bx bx-dots-vertical-rounded'></i></span>
 											<div class="action_menu">
 												<ul>
-													<li>View profile</li>
-													<li>Add to close friends</li>
-													<li>Add to group</li>
-													<li>Block</li>
+													<li id="chat_close">채팅방나가기</li>
+													<li id="chat_toggle">취소</li>
 												</ul>
 											</div>
 										</div>
@@ -135,7 +135,7 @@
       											<div class="incoming_msg {{printLeftRight sender}}">
 
 													<div class="incoming_msg_img">
-														<img src="<%= request.getContextPath() %>/resources/user/{{photo}}" 
+														<img src="<%= request.getContextPath() %>/resources/img/user/{{mem_img}}" 
 														style="width:50px;border-radius:50%" alt="sunil">
 														{{sender}}
 													</div>
@@ -162,16 +162,16 @@
 										  		var uid =$('#chat_id').val();
 										         Handlebars.registerHelper("printLeftRight", function(sender) {
 										            if (uid != sender) {
-										               return "left";
-										            } else {
 										               return "right";
+										            } else {
+										               return "left";
 										            }
 										         });
 										         Handlebars.registerHelper("printNone", function(sender) {
-										             if (uid != sender) return "none";             
+										             if (uid == sender) return "none";             
 										         });
 										         Handlebars.registerHelper("printImg", function(sender) {
-										             if (uid== sender) return "none";             
+										             if (uid!= sender) return "none";             
 										         });
 										      </script>
 												<!-- <div class="input-div">
@@ -231,6 +231,14 @@
 			}
 		});
 	});
+	
+	$('#action_menu_btn').click(function(){
+		$('.action_menu').toggle();
+	});
+	
+	$('#chat_toggle').click(function(){
+		$('.action_menu').toggle();
+	});
 
 	$("#txtMessage").on("keydown", function(e) {
 		if (e.keyCode == 13 && !e.shiftKey) {
@@ -247,8 +255,8 @@
 				type : "post",
 				url : $(location).attr('origin')+"/CoffeeProject/admin/chat/insert",
 				data : {
-					"sender" : uid,
-					"chat_id" : "admin",
+					"sender" : "admin",
+					"chat_id" : uid,
 					"message" : message
 				},
 				success : function(data) {
