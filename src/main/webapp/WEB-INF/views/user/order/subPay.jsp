@@ -70,15 +70,15 @@ IMP.init("imp56165372"); // 예: imp00000000
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp56165372'); 
 		IMP.request_pay({
-			pg: "kakaopay",
+			pg: "kakaopay", // 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 누락되거나 매칭되지 않는 경우 관리자 콘솔에서 설정한 기본PG가 호출됨 값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
-			merchant_uid : new Date().getTime(),
-			name : 'CoffeePass 30잔',
-			amount : 2000, 
+			merchant_uid : new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
+			name : 'CoffeePass 30잔', //주문명 (구독권 이름)
+			amount : 2000, // 결제할 금액
 			customer_uid : $('#customer_id').val(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
-			buyer_email : 'madcatz92@naver.com',
-			buyer_name : '이준희',
-			buyer_tel : '02-4316-8802'
+			buyer_email : 'madcatz92@naver.com', // 주문자 이메일[페이먼트월 필수]
+			buyer_name : '이준희', //주문자명
+			buyer_tel : '02-4316-8802' // 주문자 연락처(누락되거나 공백일때 일부 PG사[엑심베이]에서 오류 발생)
 		}, function(rsp) {
 			if ( rsp.success ) {
 				$.ajax({
@@ -106,7 +106,7 @@ IMP.init("imp56165372"); // 예: imp00000000
 					data:{
 						customer_uid : $('#customer_id').val(),
 						price : 2000, 
-						merchant_uid : rsp.merchant_uid
+						merchant_uid : new Date().getTime()+1
 					},
 					success:function(result) {
 						alert('다음 결제 예약');

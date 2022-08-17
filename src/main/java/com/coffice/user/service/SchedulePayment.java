@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +28,9 @@ public class SchedulePayment {
 	
 	public String schedulePay(String customer_uid, String price, String merchant_uid) {
 		String token = pay.getToken();
+		String access_token = "";
 		System.out.println("tokenReq======="+token);
+		
 		long timestamp = 0;
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, +1);
@@ -40,12 +44,32 @@ public class SchedulePayment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
+		JSONParser jsonParser = new JSONParser();
+		
+		JSONObject jsonObj = null;
+		try {
+			jsonObj = (JSONObject) jsonParser.parse(token);
+		} catch (org.json.simple.parser.ParseException e) {
+			e.printStackTrace();
+		}
+
+		if((Long)jsonObj.get("code")  == 0){
+
+			JSONObject getToken = (JSONObject) jsonObj.get("response");
+
+			System.out.println("getToken==>>"+getToken.get("access_token") );
+
+			access_token = (String)getToken.get("access_token");
+
+		}
+		
 		 Gson str = new Gson(); 
-		 token = token.substring(token.indexOf("response") +10); 
-		 token = token.substring(0, token.length() - 1);
-		 GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
-		 String access_token = vo.getAccess_token();
-		 System.out.println("access_token=====" + access_token);
+//		 token = token.substring(token.indexOf("response") +10); 
+//		 token = token.substring(0, token.length() - 1);
+//		 GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
+//		 String access_token = vo.getAccess_token();
+//		 System.out.println("access_token=====" + access_token);
 		 
 		 
 		 RestTemplate restTemplate = new RestTemplate();

@@ -19,7 +19,7 @@ public class ImportPay {
 		RestTemplate restTemplate = new RestTemplate();
 	
 		//서버로 요청할 Header
-		 HttpHeaders headers = new HttpHeaders();
+		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 		
 	    
@@ -33,8 +33,10 @@ public class ImportPay {
 		//서버로 요청할 Body
 	   
 	    HttpEntity<String> entity = new HttpEntity<>(json,headers);
-	    String token = restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
-	    System.out.println("token=" + token);
+	    
+//	    String token = restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
+//	    System.out.println("token=" + token);
+	    
 		return restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
 		
 	}
