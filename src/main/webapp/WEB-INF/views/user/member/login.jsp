@@ -31,23 +31,7 @@ function loginValidate(f)
 
 
 <style>
-/* form {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	display: block;
-	width: 100%;
-	max-width: 400px;
-	background-color: #FFF;
-	margin: 0;
-	padding: 2.25em;
-	box-sizing: border-box;
-	border: solid 1px #DDD;
-	border-radius: 0.5em;
-	font-family: "Source Sans Pro", sans-serif;
-}
- */
+
 form {
  	max-width: 700px;
     margin: 0 auto;
@@ -367,6 +351,7 @@ form .inputGroup1.focusWithText .helper {
 						</div>
 						<div class="inputGroup inputGroup3 btn-group">
 							<button type="submit" id="login">Log in</button>
+							&nbsp;&nbsp;
 							<button type="button" id="join" onclick="location.href='<%=request.getContextPath() %>/member/signup.do'">회원가입</button>
 						</div>
 					</form>
@@ -599,6 +584,7 @@ form .inputGroup1.focusWithText .helper {
 	TweenMax.set(armR, {x: -93, y: 220, rotation: -105, transformOrigin: "top right"});
 	</script>
 	
+
 	<script src="http://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		/* JavaScript  앱키 */
@@ -609,12 +595,15 @@ form .inputGroup1.focusWithText .helper {
 			window.Kakao.Auth.login({
 				/* 아래꺼는 카카오에서 얻을수있는 정보입니다 없어도 상관없습니다 배열에 저절로 들어간대요 */
 				/* scope:'profile_nickname,profile_image,account_email,gender,talk_message',  */
+
 				success : function(response){
 					console.log(response);
+
 					window.Kakao.API.request({
 						url:'/v2/user/me',
 						success: res=>{
 							const kakao_account = res.kakao_account;
+
 							const mem_id = kakao_account.email;
 							const mem_gender = kakao_account.gender;
 							const mem_name = res.properties.nickname;
@@ -629,38 +618,16 @@ form .inputGroup1.focusWithText .helper {
 							$('#kakaogender').val(mem_gender);
 							
 							document.kakaologin.submit();
+
+							console.log(kakao_account);
+
 						}
 					});
 				}
 			});
 		}
 		
-		/* function kakaoLoginPro(response){
-			var data = {id:response.id,email:response.kakao_account.email}
-			$.ajax({
-				type : 'POST',
-				url : '/member/kakaoLoginPro.do',
-				data : data,
-				dataType : 'json',
-				success : function(data){
-					console.log(data)
-					if(data.JavaData == "YES"){
-						alert("로그인되었습니다.");
-						location.href = '/member/list.do'
-					}else if(data.JavaData == "register"){
-						$("#kakaoEmail").val(response.kakao_account.email);
-						$("#kakaoId").val(response.id);
-						$("#kakaoForm").submit();
-					}else{
-						alert("로그인에 실패했습니다");
-					}
-					
-				},
-				error: function(xhr, status, error){
-					alert("로그인에 실패했습니다."+error);
-				}
-			}); */
-		
+
 		/* 복붙한거라 아는게 없습니다 */
 		//카카오로그아웃  
 		function kakaoLogout() {
@@ -679,7 +646,6 @@ form .inputGroup1.focusWithText .helper {
 		  }  
 		
 	</script>
-	
 	
 </body>
 

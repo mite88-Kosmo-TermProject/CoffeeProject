@@ -15,5 +15,10 @@ public class ParameterDTO {
 	//select 구간을 위한 멤버변수
 	private int start;
 	private int end;
+
+	private String num;
 	
+	private ArrayList<String> review_idx;
+
 }
+
