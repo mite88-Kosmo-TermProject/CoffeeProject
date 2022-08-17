@@ -36,5 +36,4 @@
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
 </body>
-
 </html>
