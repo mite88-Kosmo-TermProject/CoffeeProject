@@ -418,7 +418,7 @@ form .inputGroup1.focusWithText .helper {
 								type="hidden" name="kakaogender" id="kakaogender" />
 							<!-- <a href="javascript:kakaoLogin();" > -->
 							<img
-								src="<%=request.getContextPath()%>/resources/img/카카오로그인.png"
+								src="<%=request.getContextPath()%>/resources/img/kakao_login_medium_narrow.png"
 								style="width: auto; height: 50px; cursor: pointer;" alt=""
 								onclick="javascript:kakaoLogin();" />
 							<!-- </a> -->
