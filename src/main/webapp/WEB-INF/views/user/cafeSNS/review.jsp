@@ -277,9 +277,6 @@ pageEncoding="UTF-8"%>
       </div>
     </div>
 
-    <!-- footer -->
-    <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-    <!-- 여기에 새로운 js파일있으면 넣기 -->
 
     <script>
       //찜

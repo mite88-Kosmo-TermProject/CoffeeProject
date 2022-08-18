@@ -202,7 +202,7 @@ input[type="date"] {
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<form id="join" action="../member/joinResult.do" method="post" >
+			<form id="join" action="../member/joinResult.do" method="post" >
 				<div class="form-group has-feedback">
 					<label class="control-label" for="mem_id">아이디</label>
 					<input class="form-control" type="text" id="mem_id" name="mem_id" />
@@ -267,7 +267,7 @@ input[type="date"] {
 						<div class="col-2"></div>
 						<div class="col-8">
 							<div class="step01_con">
-								<form action="" style="position: relative;" autocomplete="off">
+								<form id="join" action="./joinResult.do" method="post" >
 
 
 
@@ -277,7 +277,7 @@ input[type="date"] {
 												이름<span class="essential">*</span>
 											</h1>
 											<label for="" style="font-size: 15px;"> <input
-												type="text" style="height: 50px;">
+												type="text" id="mem_name" name="mem_name" style="height: 50px;" >
 											</label>
 										</div>
 										<div class="col-6">
@@ -326,16 +326,24 @@ input[type="date"] {
 											아이디<span class="essential">*</span>
 										</h1>
 										<label for="" style="font-size: 15px; width: 100%;"> <input
-											type="text" size="50" style="height: 50px; width: 100%;">
+											type="text" size="50" id="mem_id" name="mem_id" style="height: 50px; width: 100%;">
 										</label>
-										<div class="overlap-wrap">
-											<button class="btn overlap">중복체크</button>
+										<p id="id_check"></p>
+									</div>
+									<div class="row mt-20">
+										<div class="col-6">
+											<h1>
+												닉네임<span class="essential">*</span>
+											</h1>
+											<label for="" style="font-size: 15px;"> <input
+												type="text" id="mem_nickname" name="mem_nickname" size="50" style="height: 50px;">
+											</label>
 										</div>
 									</div>
 									<!-- 아이디 끝 -->
 
 									<!-- 회원구분1 -->
-									<div class="mt-20">
+									<!-- <div class="mt-20">
 										<h1>
 											회원구분1<span class="essential">*</span>
 										</h1>
@@ -363,11 +371,11 @@ input[type="date"] {
 												name="member_selec_01">3
 											</label>
 										</div>
-									</div>
+									</div> -->
 									<!-- 회원구분1 끝 -->
 
 									<!-- 회원구분2 -->
-									<div class="mt-20">
+									<!-- <div class="mt-20">
 										<h1>
 											회원구분2<span class="essential">*</span>
 										</h1>
@@ -386,18 +394,8 @@ input[type="date"] {
 												id="selec02_01" name="member_selec_02">짱
 											</label>
 										</div>
-									</div>
+									</div> -->
 									<!-- 회원구분 2 끝 -->
-
-									<div class="mt-20">
-										<h1>
-											평의원취득년<span class="essential">*</span>
-										</h1>
-										<label for=""> <input type="text" size="50"
-											style="height: 50px;">
-										</label>
-									</div>
-
 
 
 									<div class="mt-20">
@@ -405,7 +403,15 @@ input[type="date"] {
 											비밀번호<span class="essential">*</span>
 										</h1>
 										<label for="" style="font-size: 15px;"> <input
-											type="password" size="50" style="height: 50px;">
+											type="password" id="mem_pw" name="mem_pw" size="50" style="height: 50px;">
+										</label>
+									</div>
+									<div class="mt-20">
+										<h1>
+											비밀번호 확인<span class="essential">*</span>
+										</h1>
+										<label for="" style="font-size: 15px;"> <input
+											type="password" id="mem_pw2" name="mem_pw2" size="50" style="height: 50px;">
 										</label>
 									</div>
 
@@ -417,13 +423,14 @@ input[type="date"] {
 												E-mail<span class="essential">*</span>
 											</h1>
 											<label for="" style="font-size: 15px;"> <input
-												type="text" size="50" style="height: 50px;">
+												type="text" id="mem_email" name="mem_email" size="50" style="height: 50px;">
 											</label>
+											<p id="email_check"></p>
 										</div>
 									</div>
 
 									<!-- 번호 -->
-									<div class="col-12 call mt-20">
+									<!-- <div class="col-12 call mt-20">
 										<h1>
 											전화번호<span class="essential">*</span>
 										</h1>
@@ -450,22 +457,20 @@ input[type="date"] {
 										</select> - <input type="tel" style="height: 50px;"> - <input
 											type="tel" style="height: 50px;">
 										</label>
-									</div>
+									</div> -->
 
 									<div class="col-12 call mt-20">
 										<h1>
 											휴대폰<span class="essential">*</span>
 										</h1>
 										<label for="" style="font-size: 15px;"> <input
-											type="tel" size="20" style="height: 50px;"> - <input
-											type="tel" size="20" style="height: 50px;"> - <input
-											type="tel" size="20" style="height: 50px;">
+											type="tel" id="mem_phone" name="mem_phone" size="60" style="height: 50px;">
 										</label>
 									</div>
 									<!-- 번호 끝 -->
 
 									<!-- 주소 -->
-									<div style="position: relative;">
+									<!-- <div style="position: relative;">
 										<h1>
 											우편번호<span class="essential">*</span>
 										</h1>
@@ -498,7 +503,7 @@ input[type="date"] {
 												</label>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<!-- 주소 끝 -->
 
 									<!--  성별 -->
@@ -508,33 +513,30 @@ input[type="date"] {
 										</h1>
 										<div class="member_selec">
 											<label style="font-size: 13px;" for="male"> <input
-												type="radio" id="male" name="gender">남자
+												type="radio" id="male" name="mem_gender">남자
 											</label> <label style="font-size: 13px;" for="famale"> <input
-												type="radio" id="famale" name="gender">여자
+												type="radio" id="famale" name="mem_gender">여자
 											</label>
 										</div>
 									</div>
 									<!--성별끝 -->
 
+								<div class="col">
+									<div class="join_btn">
+										<button class="btn btn-danger" type="button" onclick="history.go(-1);">취소</button>
+										<button type="submit" id="joinBtn"
+											class="btn btn-primary">다음</button>
+									</div>
+								</div>
 								</form>
 
 
 								<br> <br>
-								<div class="col">
-									<div class="join_btn">
-										<button class="btn btn-danger">취소</button>
-										<button onclick="f_link(); return false;"
-											class="btn btn-primary">다음</button>
-									</div>
-								</div>
 							</div>
 							<!--join_con end-->
 						</div>
 						<!--col-7 end-->
-
-						<div class="col-2"></div>
 					</div>
-
 				</div>
 			</div>
 			<!--row end-->
@@ -552,6 +554,8 @@ input[type="date"] {
 	
 	<script type="text/javascript">
 	$(function(){
+		var idResult = "";
+		var emailResult = "";
 		$("#join").submit(function(){
 			if($("#mem_pw").val() !== $("#mem_pw2").val()){
 				alert("비밀번호가 다릅니다.");
@@ -562,7 +566,12 @@ input[type="date"] {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#mem_pw").val("").focus();
 				return false;
-			}else if($.trim($("#mem_pw").val()) !== $("#mem_pw").val() || $.trim($("#mem_email").val()) !== $("#mem_email").val() || $.trim($("#mem_id").val()) !== $("#mem_id").val()){
+			}else if($("#mem_id").val()=="" || $("#mem_email").val()==""){
+				alert("아이디 혹은 이메일을 입력 해주세요.")
+				$("#mem_id").focus();
+				return false;
+			}
+			else if($.trim($("#mem_pw").val()) !== $("#mem_pw").val() || $.trim($("#mem_email").val()) !== $("#mem_email").val() || $.trim($("#mem_id").val()) !== $("#mem_id").val()){
 				alert("공백은 입력이 불가능합니다.");
 				return false;
 			}
@@ -579,11 +588,18 @@ input[type="date"] {
 					if (cnt == 1) {
 						$("#id_check").html("중복된 아이디가 있습니다.");
 						$("#id_check").css("color","red");
-						$("#joinBtn").attr("+", "disabled");
+						idResult = "N";
+						console.log(idResult);
+						$("#joinBtn").attr("disabled", true);
 					} else {
 						$("#id_check").html("사용 가능한 아이디 입니다.");
 						$("#id_check").css("color","blue");
-						$("#joinBtn").removeAttr("disabled");
+						idResult = "Y";
+						console.log(idResult);
+						if(emailResult=="Y" && idResult=="Y"){
+							console.log(emailResult+"RR"+idResult+"EE");	
+							$("#joinBtn").removeAttr("disabled");
+						}
 					}
 				},  
 				error:function(request,status,error){       
@@ -605,12 +621,23 @@ input[type="date"] {
 					if (cnt == 1) {
 						$("#email_check").html("중복된 이메일이 있습니다.");
 						$("#email_check").css("color","red");
+						emailResult = "N";
+						console.log(emailResult);
+						$("#joinBtn").attr("disabled", true);
 					} else {
-						$("#email_check").html("");
+						$("#email_check").html("사용 가능한 이메일 입니다.");
+						$("#email_check").css("color","blue");
+						emailResult = "Y";
+						console.log(emailResult);
+						if(emailResult=="Y" && idResult=="Y"){
+							console.log(emailResult+"RR"+idResult+"EE");	
+							$("#joinBtn").removeAttr("disabled");
+						}
 					}
 				},
 			})
 		});
+		
 	})
 	</script>
 </body>

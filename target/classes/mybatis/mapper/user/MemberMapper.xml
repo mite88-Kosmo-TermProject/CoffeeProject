@@ -136,7 +136,7 @@ namespace의 속성
   		INSERT INTO member (MEM_ID, MEM_CASE, MEM_NAME, MEM_NICKNAME, MEM_PHONE,
   		MEM_EMAIL, MEM_GENDER, MEM_PW)
   		VALUES
-  		(#{mem_id}, #{mem_case}, #{mem_name}, #{mem_nickname}, #{mem_phone}, 
+  		(#{mem_id}, 1, #{mem_name}, #{mem_nickname}, #{mem_phone}, 
   		#{mem_email}, #{mem_gender}, #{mem_pw})
   	</insert>
   	

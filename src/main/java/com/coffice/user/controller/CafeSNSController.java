@@ -129,7 +129,7 @@ public class CafeSNSController {
 			,@RequestParam(value = "list[]")ArrayList<String> review_idx
 			,Model model) {
 		
-		System.out.println(review_idx);
+		System.out.println("ddd"+review_idx);
 		ArrayList<reviewDTO> list = new ArrayList<reviewDTO>();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setReview_idx(review_idx);

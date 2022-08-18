@@ -190,7 +190,7 @@ public class UserMemberController {
 		int result = sqlSession.getMapper(UserMemberImpl.class).join(memberDTO);
 		
 		System.out.println("입력결과:"+result);
-		//return "redirect:/admin/member/list.do";
+		//return "redirect:/";
 		return "/user/member/joinResult";
 	}
 
