@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import DTO.StoreDTO;
-import service.ShopMemberImpl;
+import com.coffice.dto.StoresDTO;
 
 @Controller
 public class AdminStoreOwnerMemberController {
