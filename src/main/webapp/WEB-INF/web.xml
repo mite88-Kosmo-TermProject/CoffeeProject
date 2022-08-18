@@ -24,6 +24,13 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee; http://xmlns.jcp.org/xml
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- multipart 업로드 설정 -->
+		<multipart-config>
+        <max-file-size>104857600</max-file-size> <!-- 10MB limit -->
+        <max-request-size>104857600</max-request-size>
+        <file-size-threshold>0</file-size-threshold>
+   		</multipart-config>
+   		<!-- multipart 업로드 설정 -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>

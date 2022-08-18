@@ -57,4 +57,20 @@
   	insert into point values(POINT_SEQUENCE.nextval,#{param2},#{param1},sysdate,#{param3})
   </insert>
   
+  <update id="setEventSetting" parameterType="Object">
+  update event set 
+  	event_name = #{param1},
+  	event_img = trim(concat('이벤트이미지',#{param2})),
+  	event_explanation = #{param3}
+  	where event_idx = 1
+  </update>
+  
+  <select id="loadEventSetting" resultType="com.coffice.dto.EventDTO">
+  	select * from event where event_idx = 1
+  </select>
+  
+  <select id="loadEventItems" resultType="com.coffice.dto.Event_ItemDTO">
+  	select * from event_items
+  </select>
+  
   </mapper>

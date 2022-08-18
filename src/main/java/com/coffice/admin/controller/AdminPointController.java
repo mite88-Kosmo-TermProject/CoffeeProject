@@ -1,10 +1,13 @@
 package com.coffice.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,8 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.coffice.dto.EventDTO;
+import com.coffice.dto.Event_ItemDTO;
 import com.coffice.dto.PointDTO;
 import com.coffice.dto.PointRuleDTO;
 import com.coffice.service.AdminPointImpl;
@@ -188,12 +195,67 @@ public class AdminPointController {
 		return "/admin/point/index2";
 	}
 
-	// 어드민 회원포인트상세보기
-	@RequestMapping(value = "/admin/point/view.do", method = RequestMethod.GET)
-	public String view() {
-
-		return "/admin/point/view";
+	// 이벤트 설정변경
+	@RequestMapping(value = "/admin/point/eventSetting.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String eventSetting(@RequestParam("file") MultipartFile file , HttpServletRequest req)throws IllegalStateException {
+		ServletContext servletContext = req.getSession().getServletContext();
+	    //String realPath = servletContext.getRealPath("/resources/img/event");
+	    String realPath = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/event";
+		String eventName = req.getParameter("eventname");
+		String eventImg = file.getOriginalFilename();
+		String fileType = eventImg.substring(eventImg.lastIndexOf("."));
+		String eventDesc = req.getParameter("desc");
+		
+		sqlsession.getMapper(AdminPointImpl.class).setEventSetting(eventName, fileType, eventDesc);
+		
+		if(! file.getOriginalFilename().isEmpty()) {
+			try {
+				file.transferTo(new File(realPath,"이벤트이미지"+fileType)) ;
+			
+			} catch (IOException e) {
+				System.out.println("업로드실패");
+				e.printStackTrace();
+			}
+				System.out.println("업로드성공!");  
+		}
+		return "/admin/point/index2";
 	}
+	//이벤트 환경설정미리보기
+	@RequestMapping("/admin/point/loadeventsetting.do")
+	@ResponseBody
+	public JSONObject loadEventSetting () {
+		ArrayList<EventDTO> evedto = sqlsession.getMapper(AdminPointImpl.class).loadEventSetting();
+		JSONObject eventobj = new JSONObject();
+		for(EventDTO dto : evedto) {
+			eventobj.put("name", dto.getEvent_name());
+			eventobj.put("desc", dto.getEvent_explanation());
+		}
+		return eventobj;
+		
+	}
+	//이벤트 아이템항목 가져오기
+	@RequestMapping("/admin/point/loadevent_item.do")
+	@ResponseBody
+	public JSONArray loadEventItem () {
+		JSONArray topArray = new JSONArray();
+		
+		ArrayList<Event_ItemDTO> itemdto = sqlsession.getMapper(AdminPointImpl.class).loadEventItems();
+		for(Event_ItemDTO dto : itemdto) {
+			int i = 0;
+			JSONArray arr = new JSONArray();
+			arr.add(i++ , dto.getEvent_items_num());
+			arr.add(i++ ,dto.getEvent_items_name());
+			arr.add(i++ , dto.getEvent_item_ratio());
+			arr.add(i++ , dto.getEvent_items_prbbl());
+			arr.add(i++ , dto.getEvent_items_result());
+			topArray.add(arr);
+			
+		}
+		return topArray;	
+	}
+	
+
 
 	// 어드민 회원포인트지급
 	@RequestMapping(value = "/admin/point/pay.do", method = RequestMethod.GET)

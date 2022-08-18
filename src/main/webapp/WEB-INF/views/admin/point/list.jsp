@@ -149,6 +149,9 @@ function insertPoint() {
 			  "select":selectedvalue
 			},
 			success:function(){
+				user.value = "";
+			  	point.value = "";
+			 	selectedvalue = "";
 				$('#example').DataTable().destroy();
 				makeJqueryTable(null);
 			}
