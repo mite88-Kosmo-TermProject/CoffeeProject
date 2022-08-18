@@ -21,23 +21,17 @@ public class ImportPay {
 		//서버로 요청할 Header
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
-		
 	    
 	    Map<String, Object> map = new HashMap<>();
 	    map.put("imp_key", "6830327705823154");
 	    map.put("imp_secret", "3MK5ZkkAl4POqZUqodVcxB8cskrg2ElwYtyRkjGo0A5EbCL3pRyD1ppXxjkKHNXmbXGrhwPLkQZrOfOM");
 	    
-	   
 	    Gson var = new Gson();
 	    String json=var.toJson(map);
 		//서버로 요청할 Body
 	   
 	    HttpEntity<String> entity = new HttpEntity<>(json,headers);
 	    
-//	    String token = restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
-//	    System.out.println("token=" + token);
-	    
 		return restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
-		
 	}
 }

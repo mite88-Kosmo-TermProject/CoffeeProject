@@ -24,47 +24,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-<!-- 
-<script>
-var IMP = window.IMP; // 생략 가능
-IMP.init("imp56165372"); // 예: imp00000000
 
-  function requestPay() {
-    // IMP.request_pay(param, callback) 결제창 호출
-    IMP.request_pay({ // param
-        pg: "kakaopay",
-        pay_method: "card",
-        merchant_uid: "ORD20180131-0000011",
-        name: "노르웨이 회전 의자",
-        amount: 64900,
-        buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
-        buyer_tel: "010-4242-4242",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181"
-    }, function (rsp) { // callback
-        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-        	alert("결제에 성공하였습니다. 내용: " +  rsp.error_msg);
-        	/* 
-        	// jQuery로 HTTP 요청
-            jQuery.ajax({
-                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                data: {
-                    imp_uid: rsp.imp_uid,
-                    merchant_uid: rsp.merchant_uid
-                }
-            }).done(function (data) {
-             // 가맹점 서버 결제 API 성공시 로직
-            }) */
-        } else {
-        	alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-        }
-    });
-  }
-</script>
- -->
 <script>
 	function kakaopay(){
 		var IMP = window.IMP; // 생략가능
@@ -74,7 +34,7 @@ IMP.init("imp56165372"); // 예: imp00000000
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
 			merchant_uid : new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
 			name : 'CoffeePass 30잔', //주문명 (구독권 이름)
-			amount : 2000, // 결제할 금액
+			amount : 1, // 포인트등을 사용한 첫 결제금액
 			customer_uid : $('#customer_id').val(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
 			buyer_email : 'madcatz92@naver.com', // 주문자 이메일[페이먼트월 필수]
 			buyer_name : '이준희', //주문자명
@@ -105,11 +65,14 @@ IMP.init("imp56165372"); // 예: imp00000000
 					type : 'post',
 					data:{
 						customer_uid : $('#customer_id').val(),
-						price : 2000, 
-						merchant_uid : new Date().getTime()+1
+						price : 2, // 첫결제는 포인트사용한 금액이고 여기는 원래구독권가격 넣기
+						merchant_uid : rsp.merchant_uid+1
 					},
 					success:function(result) {
-						alert('다음 결제 예약');
+						alert('정기결제 예약성공');
+					},
+					error : function(errData) {
+						alert('정기결제 예약실패')
 					}
 				});
 			} else {
@@ -124,9 +87,7 @@ IMP.init("imp56165372"); // 예: imp00000000
 
 
 <body>
-
-	<button onclick="requestPay()">결제하기</button>
-	   
+   
 	<!-- content -->
 	<h5>이용권</h5>		
 		<table class = pay border="1">
@@ -141,12 +102,10 @@ IMP.init("imp56165372"); // 예: imp00000000
 			</tr>
 		</table>
 		<div>
-			<!-- <input type="text" id="package_id" value="구독권"> -->
 			<input type="text" id="customer_id" value="madcatz92">
 		</div>	
 		<div class ="btns">
 			<input type="button" id="check1" value="구매" onclick="kakaopay();">
-			<!-- <input type="button" id="check2" value="환불"> -->
 		</div>
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>

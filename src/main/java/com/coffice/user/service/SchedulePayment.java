@@ -39,9 +39,8 @@ public class SchedulePayment {
 		try {
 			Date stp = sdf.parse(date);
 			timestamp = stp.getTime()/1000;
-			System.out.println(timestamp);
+			System.out.println("timestamp="+timestamp);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -65,13 +64,6 @@ public class SchedulePayment {
 		}
 		
 		 Gson str = new Gson(); 
-//		 token = token.substring(token.indexOf("response") +10); 
-//		 token = token.substring(0, token.length() - 1);
-//		 GetTokenVO vo = str.fromJson(token, GetTokenVO.class);
-//		 String access_token = vo.getAccess_token();
-//		 System.out.println("access_token=====" + access_token);
-		 
-		 
 		 RestTemplate restTemplate = new RestTemplate();
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setContentType(MediaType.APPLICATION_JSON);
