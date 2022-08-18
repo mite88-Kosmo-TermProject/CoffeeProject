@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +72,12 @@
 				<a href="<%=request.getContextPath() %>/cafe/map.do" class="nav-item nav-link active">검색</a> 
 				<a href="<%=request.getContextPath() %>/cafeSNS/review.do" class="nav-item nav-link">카페SNS</a> 
 				<a href="<%=request.getContextPath() %>/community/boardList.do" class="nav-item nav-link">게시판</a>
-				<a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
+				<c:if test="${sessionScope.siteUserInfo!=null}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
+               </span>
+           		</c:if>
+				
 				
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle"
@@ -85,10 +90,18 @@
 							href="404.html" class="dropdown-item">404 Page</a>
 					</div>
 				</div>
-				
+
 			</div>
-			<a href="<%= request.getContextPath() %>/member/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
+			<c:if test="${sessionScope.siteUserInfo!=null}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/member/logout.do">로그아웃</a>
+                  
+               </span>
+            </c:if>
+            <c:if test="${sessionScope.siteUserInfo==null}">
+               <a href="<%= request.getContextPath() %>/member/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
 			</a>
+            </c:if>
 		</div>
 	</nav>
 	<!-- Navbar End -->

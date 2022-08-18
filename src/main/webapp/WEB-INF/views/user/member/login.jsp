@@ -1,7 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +11,25 @@
 	rel="stylesheet">
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
+<!-- <script type="text/javascript">
+function loginValidate(f)
+{
+	if(f.mem_id.value==""){
+		alert("아이디를 입력하세요");
+		f.id.focus();
+		return false;
+	}
+	if(f.mem_pw.value==""){
+		alert("패스워드를 입력하세요"); 
+		f.pass.focus();
+		return false;
+	} 
+}
+</script> -->
 
 
 
 <style>
-
 form {
  	max-width: 700px;
     margin: 0 auto;
@@ -33,7 +46,6 @@ form .svgContainer {
 	overflow: hidden;
 	pointer-events: none;
 }
-
 form .svgContainer div {
 	position: relative;
 	width: 100%;
@@ -41,7 +53,6 @@ form .svgContainer div {
 	overflow: hidden;
 	padding-bottom: 100%;
 }
-
 form .svgContainer .mySVG {
 	position: absolute;
 	left: 0;
@@ -50,17 +61,14 @@ form .svgContainer .mySVG {
 	height: 100%;
 	pointer-events: none;
 }
-
 form .inputGroup {
 	margin: 0 0 2em;
 	padding: 0;
 	position: relative;
 }
-
 form .inputGroup:last-of-type {
 	margin-bottom: 0;
 }
-
 form label {
 	margin: 0 0 12px;
 	display: block;
@@ -69,7 +77,6 @@ form label {
 	font-weight: 700;
 	font-family: inherit;
 }
-
 form input[type=email], form input[type=text], form input[type=password]
 	{
 	display: block;
@@ -88,18 +95,15 @@ form input[type=email], form input[type=text], form input[type=password]
 	font-family: inherit;
 	transition: box-shadow 0.2s linear, border-color 0.25s ease-out;
 }
-
 form input[type=email]:focus, form input[type=text]:focus, form input[type=password]:focus
 	{
 	outline: none;
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 	border: solid 2px #4eb8dd;
 }
-
 form input[type=email], form input[type=text] {
 	padding: 14px 1em 0px;
 }
-
 form button {
 	display: block;
 	margin: 0;
@@ -117,17 +121,14 @@ form button {
 	font-family: inherit;
 	transition: background-color 0.2s ease-out;
 }
-
 form button:hover, form button:active {
 	background-color: #bc9068;
 }
-
 form .inputGroup1 .helper {
 	position: absolute;
 	z-index: 1;
 	font-family: inherit;
 }
-
 form .inputGroup1 .helper1 {
 	top: 25%;
 	left: 0;
@@ -140,11 +141,75 @@ form .inputGroup1 .helper1 {
 	pointer-events: none;
 	transition: transform 0.2s ease-out, opacity 0.2s linear;
 }
-
 form .inputGroup1.focusWithText .helper {
 	/*input[type='email']:focus + .helper {*/
 	transform: translate(1.4em, 1.2em) scale(0.65);
 	opacity: 1;
+}
+
+/*구분선*/
+.line_or {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.line_or .txt_or {
+    display: inline-block;
+    width: 40px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.line_or:before, .line_or:after {
+    display: inline-block;
+    width: calc(50% - 20px);
+    height: 1px;
+    margin: 8px 0;
+    background-color: rgba(0,0,0,0.06);
+    vertical-align: top;
+    content: '';
+}
+
+/*아래*/
+.info_user {
+    max-width: 700px;
+    margin:0 auto;
+}
+
+.info_user .link_join {
+    float: left;
+}
+.info_user .list_user {
+    float: right;
+}
+
+.info_user .list_user li {
+    float: left;
+}
+
+.info_user:after {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    content: '';
+}
+.info_user .list_user li:before {
+    content: '';
+    float: left;
+    width: 1px;
+    height: 10px;
+    margin: 4px 10px;
+    background-color: #e5e5e5;
+}
+.info_user .list_user .link_user {
+    float: left;
 }
 </style>
 
@@ -170,8 +235,8 @@ form .inputGroup1.focusWithText .helper {
 			<div class="row g-4">
 				<div class="col-12">
 				
-				
-					<form>
+				<span style="font-size:1.5em; color:red;">${LoginNG }</span>
+				<form name="loginForm" method="post" action="./loginAction.do" onsubmit="return loginValidate(this);">
 						<div class="svgContainer">
 							<div>
 								<svg class="mySVG" xmlns="http://www.w3.org/2000/svg"
@@ -325,27 +390,56 @@ form .inputGroup1.focusWithText .helper {
 						</div>
 
 						<div class="inputGroup inputGroup1">
-							<label for="email1">Email</label> <input type="text" id="email"
+							<label for="email1">ID</label> <input type="text" id="email" name="mem_id"
 								class="email" maxlength="256" />
-							<p class="helper helper1">email@domain.com</p>
+							<p class="helper helper1">ID</p>
 							<span class="indicator"></span>
 						</div>
 						<div class="inputGroup inputGroup2">
 							<label for="password">Password</label> <input type="password"
-								id="password" class="password" />
+								id="password" name="mem_pw" class="password" />
 						</div>
 						<div class="inputGroup inputGroup3 btn-group">
 							<button type="submit" id="login">Log in</button>
 							&nbsp;&nbsp;
-							<button type="button" id="join" onclick="location.href='<%=request.getContextPath() %>/member/signup.do'">회원가입</button>
-							&nbsp;&nbsp;
-							<img src="<%=request.getContextPath() %>/resources/img/카카오로그인.png"  type="button" 
-							 onclick="kakaoLogin();"
-							  style="width: auto; height: 50px; cursor: pointer;" alt="">
+							<%-- <button type="button" id="join" onclick="location.href='<%=request.getContextPath() %>/member/signup.do'">회원가입</button> --%>
 						</div>
 					</form>
 					
+					<!-- 구분선 -->
+					<span class="line_or"><span class="txt_or">또는</span></span>
+
+
+					<form method="post" action="./kakaologin.do" name="kakaologin"
+						id="kakaologin">
+						<div id="kakao">
+							<input type="hidden" name="kakaoemail" id="kakaoemail" /> <input
+								type="hidden" name="kakaoname" id="kakaoname" /> <input
+								type="hidden" name="kakaogender" id="kakaogender" />
+							<!-- <a href="javascript:kakaoLogin();" > -->
+							<img
+								src="<%=request.getContextPath()%>/resources/img/카카오로그인.png"
+								style="width: auto; height: 50px; cursor: pointer;" alt=""
+								onclick="javascript:kakaoLogin();" />
+							<!-- </a> -->
+						</div>
+					</form>
 					
+					<br/><br/><br/>
+					<!-- 하단 -->
+					<div class="info_user">
+				      <a href="<%=request.getContextPath() %>/member/signup.do" class="link_join">회원가입</a>
+				    <ul class="list_user">
+				      <li>
+				        <a href="<%=request.getContextPath() %>/member/findId.do" class="link_user">아이디 찾기</a>
+				      </li>
+				      <li>
+				        <a href="<%=request.getContextPath() %>/member/findPw.do" class="link_user">비밀번호 찾기</a>
+				      </li>
+				    </ul>
+				  </div>
+
+
 				</div>
 			</div>
 		</div>
@@ -355,10 +449,10 @@ form .inputGroup1.focusWithText .helper {
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+	
 	<script>
 	var email = document.querySelector('#email'), password = document.querySelector('#password'), mySVG = document.querySelector('.svgContainer'), armL = document.querySelector('.armL'), armR = document.querySelector('.armR'), eyeL = document.querySelector('.eyeL'), eyeR = document.querySelector('.eyeR'), nose = document.querySelector('.nose'), mouth = document.querySelector('.mouth'), mouthBG = document.querySelector('.mouthBG'), mouthSmallBG = document.querySelector('.mouthSmallBG'), mouthMediumBG = document.querySelector('.mouthMediumBG'), mouthLargeBG = document.querySelector('.mouthLargeBG'), mouthMaskPath = document.querySelector('#mouthMaskPath'), mouthOutline = document.querySelector('.mouthOutline'), tooth = document.querySelector('.tooth'), tongue = document.querySelector('.tongue'), chin = document.querySelector('.chin'), face = document.querySelector('.face'), eyebrow = document.querySelector('.eyebrow'), outerEarL = document.querySelector('.earL .outerEar'), outerEarR = document.querySelector('.earR .outerEar'), earHairL = document.querySelector('.earL .earHair'), earHairR = document.querySelector('.earR .earHair'), hair = document.querySelector('.hair');
 	var caretPos, curEmailIndex, screenCenter, svgCoords, eyeMaxHorizD = 20, eyeMaxVertD = 10, noseMaxHorizD = 23, noseMaxVertD = 10, dFromC, eyeDistH, eyeLDistV, eyeRDistV, eyeDistR, mouthStatus = "small";
-
 	function getCoord(e) {
 		var 	carPos = email.selectionEnd,
 			div = document.createElement('div'),
@@ -390,7 +484,6 @@ form .inputGroup1.focusWithText .helper {
 			pFromC -= 2;
 			pFromC = Math.abs(pFromC);
 		}
-
 		eyeDistH = -dFromC * .05;
 		if(eyeDistH > eyeMaxHorizD) {
 			eyeDistH = eyeMaxHorizD;
@@ -443,7 +536,6 @@ form .inputGroup1.focusWithText .helper {
 		
 		document.body.removeChild(div);
 	};
-
 	function onEmailInput(e) {
 		getCoord(e);
 		var value = e.target.value;
@@ -479,39 +571,32 @@ form .inputGroup1.focusWithText .helper {
 			TweenMax.to([eyeL, eyeR], 1, {scaleX: 1, scaleY: 1, ease: Expo.easeOut});
 		}
 	}
-
 	function onEmailFocus(e) {
 		e.target.parentElement.classList.add("focusWithText");
 		getCoord();
 	}
-
 	function onEmailBlur(e) {
 		if(e.target.value == "") {
 			e.target.parentElement.classList.remove("focusWithText");
 		}
 		resetFace();
 	}
-
 	function onPasswordFocus(e) {
 		coverEyes();
 	}
-
 	function onPasswordBlur(e) {
 		uncoverEyes();
 	}
-
 	function coverEyes() {
 		TweenMax.to(armL, .45, {x: -93, y: 2, rotation: 0, ease: Quad.easeOut});
 		TweenMax.to(armR, .45, {x: -93, y: 2, rotation: 0, ease: Quad.easeOut, delay: .1});
 	}
-
 	function uncoverEyes() {
 		TweenMax.to(armL, 1.35, {y: 220, ease: Quad.easeOut});
 		TweenMax.to(armL, 1.35, {rotation: 105, ease: Quad.easeOut, delay: .1});
 		TweenMax.to(armR, 1.35, {y: 220, ease: Quad.easeOut});
 		TweenMax.to(armR, 1.35, {rotation: -105, ease: Quad.easeOut, delay: .1});
 	}
-
 	function resetFace() {
 		TweenMax.to([eyeL, eyeR], 1, {x: 0, y: 0, ease: Expo.easeOut});
 		TweenMax.to(nose, 1, {x: 0, y: 0, scaleX: 1, scaleY: 1, ease: Expo.easeOut});
@@ -520,22 +605,18 @@ form .inputGroup1.focusWithText .helper {
 		TweenMax.to([face, eyebrow], 1, {x: 0, y: 0, skewX: 0, ease: Expo.easeOut});
 		TweenMax.to([outerEarL, outerEarR, earHairL, earHairR, hair], 1, {x: 0, y: 0, scaleY: 1, ease: Expo.easeOut});
 	}
-
 	function getAngle(x1, y1, x2, y2) {
 		var angle = Math.atan2(y1 - y2, x1 - x2);
 		return angle;
 	}
-
 	function getPosition(el) {
 		var xPos = 0;
 		var yPos = 0;
-
 		while (el) {
 			if (el.tagName == "BODY") {
 				// deal with browser quirks with body/window/document and page scroll
 				var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
 				var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
 				xPos += (el.offsetLeft - xScroll + el.clientLeft);
 				yPos += (el.offsetTop - yScroll + el.clientTop);
 			} else {
@@ -543,7 +624,6 @@ form .inputGroup1.focusWithText .helper {
 				xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
 				yPos += (el.offsetTop - el.scrollTop + el.clientTop);
 			}
-
 			el = el.offsetParent;
 		}
 		return {
@@ -551,7 +631,6 @@ form .inputGroup1.focusWithText .helper {
 			y: yPos
 		};
 	}
-
 	email.addEventListener('focus', onEmailFocus);
 	email.addEventListener('blur', onEmailBlur);
 	email.addEventListener('input', onEmailInput);
@@ -561,28 +640,36 @@ form .inputGroup1.focusWithText .helper {
 	TweenMax.set(armR, {x: -93, y: 220, rotation: -105, transformOrigin: "top right"});
 	</script>
 	
-	
-	<!-- d111b929650250ba880557f494275c43 -->
+
 	<script src="http://developers.kakao.com/sdk/js/kakao.js"></script>
-
-
-
 	<script>
 		/* JavaScript  앱키 */
-		window.Kakao.init("d111b929650250ba880557f494275c43")
-		
-
+		window.Kakao.init("ae0ab443d0a9774378e3781de244bd95")
 		
 		function kakaoLogin(){
 			window.Kakao.Auth.login({
 				/* 아래꺼는 카카오에서 얻을수있는 정보입니다 없어도 상관없습니다 배열에 저절로 들어간대요 */
 				/* scope:'profile_nickname,profile_image,account_email,gender,talk_message',  */
-				success : function(authObj){
-					console.log(authObj);
+				success : function(response){
+					console.log(response);
 					window.Kakao.API.request({
 						url:'/v2/user/me',
 						success: res=>{
 							const kakao_account = res.kakao_account;
+							const mem_id = kakao_account.email;
+							const mem_gender = kakao_account.gender;
+							const mem_name = res.properties.nickname;
+							//kakaoLoginPro(response)
+							console.log(kakao_account);
+							console.log(mem_id);
+							console.log(mem_gender);
+							console.log(mem_name);
+							
+							$('#kakaoemail').val(mem_id);
+							$('#kakaoname').val(mem_name);
+							$('#kakaogender').val(mem_gender);
+							
+							document.kakaologin.submit();
 							console.log(kakao_account);
 						}
 					});
@@ -608,14 +695,6 @@ form .inputGroup1.focusWithText .helper {
 		  }  
 		
 	</script>
-	
-	<a href="javascript:kakaoLogin();">카카오 소셜로그인</a>
-	<br>
-	<br>
-	<li onclick="kakaoLogout();"><a href="javascript:void(0)"> <span>카카오
-				로그아웃</span>
-	</a></li>
-	
 	
 </body>
 

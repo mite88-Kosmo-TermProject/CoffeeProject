@@ -16,5 +16,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDTO login(String mem_id) {
 		return session.selectOne(namespace + ".login", mem_id);
 	}
+	
+	
 
 }

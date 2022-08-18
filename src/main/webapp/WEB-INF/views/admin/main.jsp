@@ -105,6 +105,7 @@
 
 								<!-- 관리자 -->
 								<div class="tab-pane active" id="admin">
+								
 									<form class="form-horizontal login-form" action="<%= request.getContextPath() %>/admin/index.do">
 
 										<div class="form-group relative">
@@ -121,11 +122,11 @@
 											<button class="btn btn-success btn-lg mb-3 btn-block"
 												type="submit">Login</button>
 										</div>
-										<div class="checkbox checkbox-success">
+										<!-- <div class="checkbox checkbox-success">
 											<input id="stay-sign" type="checkbox"> <label
 												for="stay-sign">Stay signed in</label>
-										</div>
-										<hr />
+										</div> -->
+										
 										<div class="text-center">
 											<label><a href="#">Forgot your password?</a></label>
 										</div>
@@ -151,13 +152,19 @@
 											<button class="btn btn-success btn-lg mb-3 btn-block"
 												type="submit">Login</button>
 										</div>
-										<div class="checkbox checkbox-success">
+										<!-- <div class="checkbox checkbox-success">
 											<input id="stay-sign" type="checkbox"> <label
 												for="stay-sign">Stay signed in</label>
-										</div>
+										</div> -->
 										<hr />
 										<div class="text-center">
 											<label><a href="#">Forgot your password?</a></label>
+										</div>
+										
+										<hr />
+										<div class="text-center">
+											<button class="btn btn-success btn-lg mb-3 btn-block"
+												type="button" onclick="location.href='<%= request.getContextPath() %>/admin/alliance.do';">제휴문의</button>
 										</div>
 									</form>
 								</div>

@@ -27,7 +27,7 @@ private Date postdate;
 	private String store_menu;
 	private int store_star;
 	private int store_afltd;
-	private String store_img;
+	private String store_menu_img;
 	private String store_time;
 	
 }

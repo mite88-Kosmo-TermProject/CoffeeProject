@@ -91,4 +91,6 @@ public class UserMemberController {
 
 		return "/user/member/delete";
 	}
+	
+	
 }
