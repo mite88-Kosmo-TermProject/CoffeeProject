@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class ChatVO extends MemberVO{
+public class ChatDTO extends MemberDTO{
 	private int id;
 	private String sender; //보내는 id
 	private String message;

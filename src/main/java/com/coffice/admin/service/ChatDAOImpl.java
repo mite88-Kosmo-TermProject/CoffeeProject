@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.coffice.dto.ChatVO;
+import com.coffice.dto.ChatDTO;
 
 
 @Repository
@@ -16,12 +16,12 @@ public class ChatDAOImpl implements ChatDAO{
 	String namespace="mybatis.mapper.admin.ChatMapper";
 	
 	@Override
-	public List<ChatVO> list(String sender) {
+	public List<ChatDTO> list(String sender) {
 		return session.selectList(namespace + ".list", sender);
 	}
 
 	@Override
-	public void insert(ChatVO vo) {
+	public void insert(ChatDTO vo) {
 		session.insert(namespace + ".insert", vo);
 	}
 
@@ -31,12 +31,12 @@ public class ChatDAOImpl implements ChatDAO{
 	}
 
 	@Override
-	public int last(ChatVO vo) {
+	public int last(ChatDTO vo) {
 		return session.selectOne(namespace + ".last", vo);
 	}
 
 	@Override
-	public List<ChatVO> listUser() {
+	public List<ChatDTO> listUser() {
 		return session.selectList(namespace + ".listUser");
 	}
 

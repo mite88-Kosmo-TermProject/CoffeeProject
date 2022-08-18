@@ -38,7 +38,7 @@ $(function(){
 
 function getCafeList(list){
 	for(let i=0; i<list.length; i++){
-		/* console.log(list[i]); */
+		console.log(list[i]);
 	}
 	navigator.geolocation.getCurrentPosition(showPosition, showError);
 	// 위치얻기에 성공한 경우 호출되는 콜백함수
@@ -50,7 +50,7 @@ function getCafeList(list){
 	    
 	    //거리계산..
 	    for(let i=0; i<list.length; i++){
-	        let distance = getdistance(latitude , longitude , list[i].storeDTO.store_latitude ,list[i].storeDTO.store_longitude ,"K");
+	        let distance = getdistance(latitude , longitude , list[i].storesDTO.store_latitude ,list[i].storesDTO.store_longitude ,"K");
 	        list[i].distance = distance;
 
 	        console.log(list[i].distance); 
@@ -75,7 +75,7 @@ function getCafeList(list){
 					$(data).each(function (index, data) {
 						tableData +=""
 						+"<tr>"
-						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
+						+"	<td>가게이름: "+data.storesDTO.store_name+"</td>"
 						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
 						+"	<td>별점: "+data.review_star+"</td>"
 						+"	<td>리뷰: "+data.review_content+"</td>"
@@ -104,7 +104,7 @@ function getCafeList(list){
 					$(data).each(function (index, data) {
 						tableData +=""
 						+"<tr>"
-						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
+						+"	<td>가게이름: "+data.storesDTO.store_name+"</td>"
 						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
 						+"	<td>별점: "+data.review_star+"</td>"
 						+"	<td>리뷰: "+data.review_content+"</td>"

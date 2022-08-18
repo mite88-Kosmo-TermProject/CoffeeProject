@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.coffice.dto.storeDTO;
+import com.coffice.dto.*;
 
 @Service
 public interface HomeImpl {
 
 	/*카페리스트 가져오기*/
-	public ArrayList<storeDTO> getList();
+	public ArrayList<StoresDTO> getList();
 }

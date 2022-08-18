@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class reviewDTO {
+public class ReviewDTO {
 
 	private String review_idx;
 	
@@ -13,9 +13,9 @@ public class reviewDTO {
 	
 	private Date review_postdate;
 	
-	private storeDTO storeDTO;
+	private StoresDTO storesDTO;
 	
-	private memberDTO memberDTO;
+	private MemberDTO memberDTO;
 	
 	private String review_star;
 	

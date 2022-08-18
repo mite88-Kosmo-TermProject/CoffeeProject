@@ -6,7 +6,7 @@
 <mapper namespace="com.coffice.user.service.HomeImpl">
 
 
-<select id="getList" resultType="com.coffice.dto.storeDTO">
+<select id="getList" resultType="com.coffice.dto.StoresDTO">
 	SELECT store_idx, store_name, store_owner, store_phone,store_localaddr
 	 FROM (SELECT Tb.*, rownum rNum FROM(SELECT * 
 	FROM stores ORDER BY store_idx DESC

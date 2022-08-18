@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import lombok.Data;
 @Data
-public class memberDTO {
+public class MemberDTO {
 
 	private String mem_id;
 	//멤버분류 - 1,고객, 2.제휴점주, 3.일반점주, 4.관리자

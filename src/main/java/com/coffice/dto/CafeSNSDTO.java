@@ -1,4 +1,4 @@
-package dto;
+package com.coffice.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ public class CafeSNSDTO {
 	
 	private User_infoDTO user_infoDTO; //유저정보 
 	
-	private StoreDTO storeDTO; //카페정보
+	private StoresDTO storesDTO; //카페정보
 	
 	private String content; //리뷰내용
 	

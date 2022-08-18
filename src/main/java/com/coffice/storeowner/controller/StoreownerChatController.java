@@ -27,23 +27,24 @@ public class StoreownerChatController {
 	
 
 	@RequestMapping("/storeowner/chat.json")
-	public List<ChatVO> list(@RequestParam("sender") String sender) {
+	public List<ChatDTO> list(@RequestParam("sender") String sender) {
 		return dao.list(sender);
 	}
 
 	@RequestMapping("/storeowner/chat.user")
-	public List<ChatVO> listUser() {
+	public List<ChatDTO> listUser() {
 		return dao.listUser();
 	}
 
 	@RequestMapping(value = "/storeowner/chat/insert", method = RequestMethod.POST)
-	public int insert(ChatVO chatvo) {
-		System.out.println(chatvo.getSender());
-		System.out.println(chatvo.getMessage());
-		System.out.println(chatvo.getChat_id());
+	public int insert(ChatDTO chatDTO) {
+		
+		System.out.println(chatDTO.getSender());
+		System.out.println(chatDTO.getMessage());
+		System.out.println(chatDTO.getChat_id());
 
-		dao.insert(chatvo);
-		int last = dao.last(chatvo);
+		dao.insert(chatDTO);
+		int last = dao.last(chatDTO);
 		System.out.println("last......." + last);
 		return last;
 	}

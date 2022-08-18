@@ -1,7 +1,7 @@
 package com.coffice.admin.service;
 
-import com.coffice.dto.MemberVO;
+import com.coffice.dto.*;
 
 public interface MemberDAO {
-	public MemberVO login(String mem_id);
+	public MemberDTO login(String mem_id);
 }
