@@ -1,7 +1,6 @@
 package com.coffice.user.controller;
 
 import java.io.File;
-import java.net.http.HttpRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
-import com.coffice.dto.memberDTO;
-import com.coffice.dto.reviewDTO;
+import com.coffice.dto.ReviewDTO;
 import com.coffice.user.service.CafeSNSImpl;
 
 
@@ -32,14 +31,20 @@ public class CafeSNSController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@RequestMapping("/cafeSNS/writePage.do")
+	public String writePage() {
+		
+		return "/user/cafeSNS/write";
+	}
+	
 	/*리뷰작성 페이지*/
 	@ResponseBody
 	@PostMapping("/cafeSNS/write.do")
-	public String uploadReview(MultipartFile file, reviewDTO reviewDTO , HttpSession session ,HttpServletRequest req) {
+	public String uploadReview(MultipartFile file, ReviewDTO reviewDTO , HttpSession session ,HttpServletRequest req) {
 		
 		try {
 			//로그인된 정보중에 id를 가져온다.
-			String writer = ((memberDTO)session.getAttribute("login")).getMem_id();
+			String writer = ((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id();
 			
 			//날짜별로 폴더를 생성해서 파일을 관리
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -47,7 +52,7 @@ public class CafeSNSController {
 			String fileLoca = sdf.format(date);
 			
 			//저장할 폴더 경로 
-			String uploadPath = "";
+			String uploadPath = req.getContextPath()+"/resources/img/review";
 			
 			File folder = new File(uploadPath);
 			if(!folder.exists()) {
@@ -73,7 +78,7 @@ public class CafeSNSController {
 			System.out.println("변경해서 저장할 파일명:" + fileName);
 			
 			//업로드한 파일을 서버 컴퓨터의 지정한 경로 내에서 실제로 저장.
-			File saveFile = new File(uploadPath + "\\"+ fileName);
+			File saveFile = new File(uploadPath + "/"+ fileName);
 			file.transferTo(saveFile);
 			reviewDTO.setReview_content(req.getParameter("content"));
 			reviewDTO.setMem_id(writer);
@@ -102,26 +107,26 @@ public class CafeSNSController {
 	
 	@ResponseBody
 	@RequestMapping("/cafeSNS/getList.do")
-	public ArrayList<reviewDTO> getCafeList() {
+	public ArrayList<ReviewDTO> getCafeList() {
 		System.out.println("controller 연결성공");
-		ArrayList<reviewDTO> getCafeList = sqlSession.getMapper(CafeSNSImpl.class).list();
+		ArrayList<ReviewDTO> getCafeList = sqlSession.getMapper(CafeSNSImpl.class).list();
 		//내용 부분 줄바꿈 처리를 해준다.
-		for(reviewDTO dto : getCafeList) {
+		for(ReviewDTO dto : getCafeList) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-//			System.out.println(dto);
+			System.out.println(dto);
 		}
 		
 		return getCafeList;
 	}
 	@ResponseBody
 	@RequestMapping(value =  "/cafeSNS/newcafelist" , method = RequestMethod.POST)
-	public ArrayList<reviewDTO> pagingCafeList(HttpServletRequest req 
+	public ArrayList<ReviewDTO> pagingCafeList(HttpServletRequest req 
 			,@RequestParam(value = "list[]")ArrayList<String> review_idx
 			,Model model) {
 		
 		System.out.println(review_idx);
-		ArrayList<reviewDTO> list = new ArrayList<reviewDTO>();
+		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setReview_idx(review_idx);
 		int totalRecordCount =
@@ -137,9 +142,9 @@ public class CafeSNSController {
 		parameterDTO.setStart(start);
 		parameterDTO.setEnd(end);
 		
-		ArrayList<reviewDTO> lists = sqlSession.getMapper(CafeSNSImpl.class).getnewList(parameterDTO);
+		ArrayList<ReviewDTO> lists = sqlSession.getMapper(CafeSNSImpl.class).getnewList(parameterDTO);
 		
-		for(reviewDTO dto : lists) {
+		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
 			/* System.out.println(dto); */

@@ -50,7 +50,7 @@ function getCafeList(list){
 	    
 	    //거리계산..
 	    for(let i=0; i<list.length; i++){
-	        let distance = getdistance(latitude , longitude , list[i].storeDTO.store_latitude ,list[i].storeDTO.store_longitude ,"K");
+	        let distance = getdistance(latitude , longitude , list[i].storesDTO.store_latitude ,list[i].storesDTO.store_longitude ,"K");
 	        list[i].distance = distance;
 
 	        console.log(list[i].distance); 
@@ -74,12 +74,63 @@ function getCafeList(list){
 					/*append 부분*/
 					$(data).each(function (index, data) {
 						tableData +=""
-						+"<tr>"
-						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
-						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
-						+"	<td>별점: "+data.review_star+"</td>"
-						+"	<td>리뷰: "+data.review_content+"</td>"
-						+"</tr>";
+						+'<div class="col-md-6 col-lg-4 mb-5">'
+			            +'<div id="snsList">'
+			            +    '<div class="username">'
+			            +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+			            +     '<span id="grade">'
+			            +        '<div class="common-grade-badge d small has-text mb-2">'
+			            +          '<i class="fas fa-coffee"></i>'
+			            +          '<p>다이아</p>'
+			            +        '</div>'
+			            +      '</span>'
+			            +      '<span id="name">'
+			            +        '<b>'+data.memberDTO.mem_id+'</b>'
+			            +           '</span>'
+			            +      '<i class="fas fa-ellipsis-v"></i>'
+			            +    '</div>'
+			            +    '<div style="position: relative">'
+			                  <!-- 사진 -->
+			            +      '<figure class="photoSet" data-count="2">'
+			            +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
+			            +          'class="img-fluid"'
+			            +          'data-lightbox="example-set">'
+			            +          '<img src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"'
+			            +           'class="img-fluid image"'
+			            +            'id="post"/>'
+			            +        '</a>'
+			            +        '<a style="display: none"'
+			            +         'href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
+			            +         'class="img-fluid"'
+			            +         'data-lightbox="example-set">'
+			            +          '<img src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
+			            +          'class="img-fluid image"'
+			            +           'id="post"/>'
+			            +        '</a>'
+			            +      '</figure>'
+			            +    '</div>'
+			            +    '<div class="options">'
+			            +      '<div class="username">'
+			                    <!-- 업체정보 -->
+			            +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+			            +        '<span id="cafename">'
+			            + 		 '<b>'+data.storesDTO.store_name+'</b> </span>'
+			            +        '<i class="far fa-heart fa-lg"'
+			            +        'id="heart"'
+			            +         'onclick="heart()"></i>'
+			            +        '<span id="like">'
+			            +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
+			            +          '<small>100</small></span></div></div>'
+			            +    '<div class="info">'
+			            +      '<div class="txt">'
+			                    +data.review_content+
+			                  '</div>'
+			
+			            +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+			            +    '</div>'
+			            +    '<br />'
+			            +  '</div>'
+			            +'</div>'
 					});
 					$('#show_data').append(tableData);
 					
@@ -103,12 +154,63 @@ function getCafeList(list){
 					/*append 부분*/
 					$(data).each(function (index, data) {
 						tableData +=""
-						+"<tr>"
-						+"	<td>가게이름: "+data.storeDTO.store_name+"</td>"
-						+"	<td>유저아이디: "+data.memberDTO.mem_id+"</td>"
-						+"	<td>별점: "+data.review_star+"</td>"
-						+"	<td>리뷰: "+data.review_content+"</td>"
-						+"</tr>";
+						+'<div class="col-md-6 col-lg-4 mb-5">'
+			            +'<div id="snsList">'
+			            +    '<div class="username">'
+			            +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+			            +     '<span id="grade">'
+			            +        '<div class="common-grade-badge d small has-text mb-2">'
+			            +          '<i class="fas fa-coffee"></i>'
+			            +          '<p>다이아</p>'
+			            +        '</div>'
+			            +      '</span>'
+			            +      '<span id="name">'
+			            +        '<b>'+data.memberDTO.mem_id+'</b>'
+			            +           '</span>'
+			            +      '<i class="fas fa-ellipsis-v"></i>'
+			            +    '</div>'
+			            +    '<div style="position: relative">'
+			                  <!-- 사진 -->
+			            +      '<figure class="photoSet" data-count="2">'
+			            +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
+			            +          'class="img-fluid"'
+			            +          'data-lightbox="example-set">'
+			            +          '<img src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"'
+			            +           'class="img-fluid image"'
+			            +            'id="post"/>'
+			            +        '</a>'
+			            +        '<a style="display: none"'
+			            +         'href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
+			            +         'class="img-fluid"'
+			            +         'data-lightbox="example-set">'
+			            +          '<img src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
+			            +          'class="img-fluid image"'
+			            +           'id="post"/>'
+			            +        '</a>'
+			            +      '</figure>'
+			            +    '</div>'
+			            +    '<div class="options">'
+			            +      '<div class="username">'
+			                    <!-- 업체정보 -->
+			            +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+			            +        '<span id="cafename">'
+			            + 		 '<b>'+data.storesDTO.store_name+'</b> </span>'
+			            +        '<i class="far fa-heart fa-lg"'
+			            +        'id="heart"'
+			            +         'onclick="heart()"></i>'
+			            +        '<span id="like">'
+			            +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
+			            +          '<small>100</small></span></div></div>'
+			            +    '<div class="info">'
+			            +      '<div class="txt">'
+			                    +data.review_content+
+			                  '</div>'
+			
+			            +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+			            +    '</div>'
+			            +    '<br />'
+			            +  '</div>'
+			            +'</div>'
 					});
 					$('#show_data').append(tableData);
 					

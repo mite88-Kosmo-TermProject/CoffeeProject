@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ErrorSettingController {
 
-    @GetMapping("/error404")
-    public String Error404(HttpServletResponse res, Model model, Exception ex) {
-        model.addAttribute("code", "ERROR_404:"+ex.getMessage());
-        return "Error/404";
-    }
+	/*
+	 * @GetMapping("/error404") public String Error404(HttpServletResponse res,
+	 * Model model, Exception ex) { model.addAttribute("code",
+	 * "ERROR_404:"+ex.getMessage());
+	 * 
+	 * return "Error/404"; }
+	 * 
+	 * @GetMapping("/error500") public String Error500(HttpServletResponse res,
+	 * Model model, Exception ex) { model.addAttribute("code",
+	 * "ERROR_500:"+ex.getMessage()); return "Error/500"; }
+	 */
     
-    @GetMapping("/error500")
-    public String Error500(HttpServletResponse res, Model model,  Exception ex) {
-    	model.addAttribute("code", "ERROR_500:"+ex.getMessage());
-        return "Error/500";
-    }
+  
 }
