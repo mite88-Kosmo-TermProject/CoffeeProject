@@ -45,7 +45,7 @@
             }
             if (v.type === 'edit') {
                 var td = $("<td/>")
-                    .html('<button class="' + options.saveClass + '">' + options.saveContent + '</button>')
+                    .html('<button type="button" class="' + options.saveClass + '">' + options.saveContent + '</button>')
                     .attr('data-tabullet-type', 'save')
                     .appendTo(insertRow);
                 td.find('button').click(function (event) {
@@ -73,7 +73,7 @@
             $(metadata).each(function (mi, mv) {
                 if (mv.type === 'delete') {
                     var td = $("<td/>")
-                        .html('<button class="' + options.deleteClass + '">' + options.deleteContent + '</button>')
+                        .html('<button type="button" class="' + options.deleteClass + '">' + options.deleteContent + '</button>')
                         .attr('data-tabullet-type', mv.type)
                         .appendTo(tr);
                     td.find('button').click(function (event) {
@@ -83,7 +83,7 @@
                 }
                 else if (mv.type === 'edit') {
                     var td = $("<td/>")
-                        .html('<button class="' + options.editClass + '">' + options.editContent + '</button>')
+                        .html('<button type="button" class="' + options.editClass + '">' + options.editContent + '</button>')
                         .attr('data-tabullet-type', mv.type)
                         .appendTo(tr);
                     td.find('button').click(function (event) {

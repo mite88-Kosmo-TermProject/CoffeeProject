@@ -35,5 +35,7 @@ public class AdminMemberController {
 
 		return "/admin/member/delete.do";
 	}
+	
+	
 
 }

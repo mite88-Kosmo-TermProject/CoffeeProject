@@ -26,12 +26,12 @@
 	<!-- 애플리케이션 시작시 자동으로 스캔할 기본패키지 지정 -->
 	<context:component-scan base-package="com.coffice.controller" />
 	<context:component-scan base-package="com.coffice.user.controller" />
+	<context:component-scan base-package="com.coffice.user.service" />
 	<context:component-scan base-package="com.coffice.storeowner.controller" />
 	<context:component-scan base-package="com.coffice.admin.controller" />
 	
 	<context:component-scan base-package="com.coffice.admin.service" />
 	
-
 	
 	<!-- 데이터 근원지에대한 설정으로 오라클 DB연결정보를 가진다. -->
 	<bean name="dataSource"
@@ -59,8 +59,8 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-
-
+	<!--파일업로드용 multipartResolver빈 (정다운) -->
+	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
  		<property name="maxUploadSize" value="10485760"/>
 	</bean>

@@ -27,7 +27,13 @@
 <body>
 	
 	<!-- content -->
-
+	<h2>회원가입 성 공 !!</h2>
+		
+		<li>
+			<a href="<%request.getContextPath(); %>../user/member/list.do" target="_self">
+			메인 가기
+			</a>
+		</li>
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 

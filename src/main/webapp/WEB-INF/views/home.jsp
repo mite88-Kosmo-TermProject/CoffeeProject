@@ -22,11 +22,9 @@
 
 <meta charset="utf-8">
 
-
 </head>
 
 <body>
-
 
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">

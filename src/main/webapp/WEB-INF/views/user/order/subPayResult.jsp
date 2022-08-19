@@ -160,8 +160,6 @@ img+div {
 
 </head>
 
-
-
 <body class="Email"
 	style="margin: 0; padding: 0; border: 0; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; min-width: 100% !important; width: 100% !important;">
 
