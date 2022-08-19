@@ -342,10 +342,10 @@ p.txt:before {
 					<div class="col-md-4">
 						<div class="owl-carousel">
 						
-							<c:forEach items="${fn:split(resultList.store_img,',') }" var="loopImg" varStatus="loop">
+							<c:forEach items="${fn:split(resultList.store_menu,',') }" var="loopImg" varStatus="loop">
 								<div class="item">
 									<img class="img-fluid" id="code_${loop.index }"
-										src="<%=request.getContextPath()%>/resources/img/${loopImg}" alt="">
+										src="<%=request.getContextPath()%>/resources/img/stores/${loopImg}" alt="">
 								</div>
 							</c:forEach>
 
@@ -484,7 +484,7 @@ p.txt:before {
 						<div class="bg-white border" style="text-align: center;">
 						
 						<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/${resultList.store_menu}"
+								src="<%=request.getContextPath()%>/resources/img/stores/${resultList.store_menu_img}"
 								alt="">
 							<!-- <img class="img-fluid"
 								src="https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Fpostfiles8.naver.net%2FMjAyMDAxMjNfMjYz%2FMDAxNTc5NzU0MzAwMTY5.NNPA_9J_DejIQHX4wmOAHce09R0YbeJg7AdAbMDwIScg.unCHym7bBOEkwYPc5UaWjkMrUmiIzzXYnzoF1B3aC5og.JPEG.ajsay%2FSE-71f049be-bf15-42a0-b719-858f273622ca.jpg%3Ftype%3Dw966"
@@ -793,7 +793,7 @@ p.txt:before {
 				//alert(result[0].y+"/"+result[0].x);
 
 				// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-				var imageSrc = '/CoffeeProject/resources/img/기본_coffee1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+				var imageSrc = '/CoffeeProject/resources/img/stores/기본_coffee1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 				imageSize = new kakao.maps.Size(35, 40), // 마커 이미지의 크기
 				
 				imgOptions = {

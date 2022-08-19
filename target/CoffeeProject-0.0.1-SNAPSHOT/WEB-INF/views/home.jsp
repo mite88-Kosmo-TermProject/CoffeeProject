@@ -9,7 +9,18 @@
 <!-- header -->
 <%@ include file="/WEB-INF/views/user/layout/header.jsp"%>
 
+
+<!-- Go Trip -->
+<!-- Go Trip CSS  -->
+
+<link rel="stylesheet"
+	href="<%= request.getContextPath() %>/resources/css/main.css">
+
+
+<!-- Go Trip CSS -->
+
 <meta charset="utf-8">
+
 
 </head>
 
@@ -31,12 +42,42 @@
 							<div class="col-12 col-lg-8 text-center">
 								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
 									To WooDY</h5>
-								<h1 class="display-3 text-white animated slideInDown mb-4">Best
+								<h1 class="display-6 text-white animated slideInDown mb-4">Best
 									Carpenter & Craftsman Services</h1>
+								<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?</p>
+								<!-- 이거 누르면 회원가입으로 갑니다 -->
+								<a href="<%= request.getContextPath() %>/SignUp.do"
+									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+									More</a> <a href=""
+									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
+									Quote</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="owl-carousel-item position-relative">
+				<img class="img-fluid"
+					src="<%=request.getContextPath()%>/resources/img/커피2.png" alt="">
+				<div
+					class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+					style="background: rgba(53, 53, 53, .7);">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-12 col-lg-8 text-center">
+								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
+									To WooDY</h5>
+								<h1 class="display-6 text-white animated slideInDown mb-4">카페
+									추천1</h1>
 								<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr
 									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
 									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-								<a href=""
+
+
+								<!-- 이거 누르면 회원가입으로 갑니다 -->
+								<a href="<%= request.getContextPath() %>/SignUp.do"
 									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
 									More</a> <a href=""
 									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
@@ -48,8 +89,7 @@
 			</div>
 			<div class="owl-carousel-item position-relative">
 				<img class="img-fluid"
-					src="<%=request.getContextPath()%>/resources/img/carousel-2.jpg"
-					alt="">
+					src="<%=request.getContextPath()%>/resources/img/커피3.png" alt="">
 				<div
 					class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
 					style="background: rgba(53, 53, 53, .7);">
@@ -58,39 +98,13 @@
 							<div class="col-12 col-lg-8 text-center">
 								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
 									To WooDY</h5>
-								<h1 class="display-3 text-white animated slideInDown mb-4">Best
+								<h1 class="display-6 text-white animated slideInDown mb-4">Best
 									Carpenter & Craftsman Services</h1>
 								<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr
 									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
 									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-								<a href=""
-									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-									More</a> <a href=""
-									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-									Quote</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="owl-carousel-item position-relative">
-				<img class="img-fluid"
-					src="<%=request.getContextPath()%>/resources/img/carousel-3.jpg"
-					alt="">
-				<div
-					class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-					style="background: rgba(53, 53, 53, .7);">
-					<div class="container">
-						<div class="row justify-content-center">
-							<div class="col-12 col-lg-8 text-center">
-								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-									To WooDY</h5>
-								<h1 class="display-3 text-white animated slideInDown mb-4">Best
-									Carpenter & Craftsman Services</h1>
-								<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr
-									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
-									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-								<a href=""
+								<!-- 이거 누르면 회원가입으로 갑니다 -->
+								<a href="<%= request.getContextPath() %>/SignUp.do"
 									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
 									More</a> <a href=""
 									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
@@ -105,124 +119,57 @@
 	<!-- Carousel End -->
 
 
-	<!-- Feature Start -->
-	<div class="container-xxl py-5">
+	<!-- 검색창 -->
+	<div class="container-xxl py-3">
 		<div class="container">
-			<div class="row g-5">
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-					<div class="d-flex align-items-center justify-content-between mb-2">
-						<div
-							class="d-flex align-items-center justify-content-center bg-light"
-							style="width: 60px; height: 60px;">
-							<i class="fa fa-user-check fa-2x text-primary"></i>
-						</div>
-						<h1 class="display-1 text-light mb-0">01</h1>
-					</div>
-					<h5>Creative Designers</h5>
+			<!-- <div class="section-title text-center">
+				<h1 class="display-6 mb-5">Our Services</h1>
+			</div> -->
+			<div class="row">
+				<div class="col wow fadeInUp" data-wow-delay="0.1s"
+					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+
 				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-					<div class="d-flex align-items-center justify-content-between mb-2">
-						<div
-							class="d-flex align-items-center justify-content-center bg-light"
-							style="width: 60px; height: 60px;">
-							<i class="fa fa-check fa-2x text-primary"></i>
+
+				<div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+					<!-- 검색창 -->
+
+					<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+						data-bs-toggle="offcanvas" data-bs-target="#searchcanvasTop"
+						aria-controls="offcanvasTop">
+						<div class="input-group">
+							<input type="search" placeholder="여기에 카페를 검색하세요"
+								aria-describedby="button-addon1"
+								class="form-control border-0 bg-light">
+							<div class="input-group-append">
+								<button id="button-addon1" type="submit"
+									class="btn btn-link text-primary">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
 						</div>
-						<h1 class="display-1 text-light mb-0">02</h1>
 					</div>
-					<h5>Quality Products</h5>
+
 				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-					<div class="d-flex align-items-center justify-content-between mb-2">
-						<div
-							class="d-flex align-items-center justify-content-center bg-light"
-							style="width: 60px; height: 60px;">
-							<i class="fa fa-drafting-compass fa-2x text-primary"></i>
-						</div>
-						<h1 class="display-1 text-light mb-0">03</h1>
-					</div>
-					<h5>Free Consultation</h5>
+
+				<div class="col wow fadeInUp" data-wow-delay="0.1s"
+					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+
 				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-					<div class="d-flex align-items-center justify-content-between mb-2">
-						<div
-							class="d-flex align-items-center justify-content-center bg-light"
-							style="width: 60px; height: 60px;">
-							<i class="fa fa-headphones fa-2x text-primary"></i>
-						</div>
-						<h1 class="display-1 text-light mb-0">04</h1>
-					</div>
-					<h5>Customer Support</h5>
-				</div>
+
+
 			</div>
 		</div>
 	</div>
-	<!-- Feature Start -->
+	<!-- 검색 end -->
 
 
-
-	<!-- About Start -->
-	<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
-		<div class="container about px-lg-0">
-			<div class="row g-0 mx-lg-0">
-				<div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
-					<div class="position-relative h-100">
-						<img class="position-absolute img-fluid w-100 h-100"
-							src="<%=request.getContextPath()%>/resources/img/about.jpg"
-							style="object-fit: cover;" alt="">
-					</div>
-				</div>
-				<div class="col-lg-6 about-text py-5 wow fadeIn"
-					data-wow-delay="0.5s">
-					<div class="p-lg-5 pe-lg-0">
-						<div class="section-title text-start">
-							<h1 class="display-5 mb-4">About Us</h1>
-						</div>
-						<p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam
-							dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat
-							ipsum et lorem et sit, sed stet lorem sit clita duo justo erat
-							amet</p>
-						<div class="row g-4 mb-4 pb-2">
-							<div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-users fa-2x text-primary"></i>
-									</div>
-									<div class="ms-3">
-										<h2 class="text-primary mb-1" data-toggle="counter-up">1234</h2>
-										<p class="fw-medium mb-0">Happy Clients</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-check fa-2x text-primary"></i>
-									</div>
-									<div class="ms-3">
-										<h2 class="text-primary mb-1" data-toggle="counter-up">1234</h2>
-										<p class="fw-medium mb-0">Projects Done</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<a href="" class="btn btn-primary py-3 px-5">Explore More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- About End -->
-
-
-	<!-- Service Start -->
+	<!-- 이달의 카페 -->
 	<div class="container-xxl py-5">
 		<div class="container">
 			<div class="section-title text-center">
-				<h1 class="display-5 mb-5">Our Services</h1>
+				<h1 class="display-6 mb-5">이달의 카페</h1>
 			</div>
 			<div class="row g-4">
 				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -251,7 +198,7 @@
 						</div>
 						<div
 							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">Furniture Manufacturing</h4>
+							<h4 class="mb-3">Manufacturing</h4>
 							<p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam
 								lorem diam.</p>
 							<a class="fw-medium" href="">Read More<i
@@ -333,449 +280,426 @@
 	<!-- Service End -->
 
 
-	<!-- Feature Start -->
-	<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
-		<div class="container feature px-lg-0">
-			<div class="row g-0 mx-lg-0">
-				<div class="col-lg-6 feature-text py-5 wow fadeIn"
-					data-wow-delay="0.5s">
-					<div class="p-lg-5 ps-lg-0">
-						<div class="section-title text-start">
-							<h1 class="display-5 mb-4">Why Choose Us</h1>
-						</div>
-						<p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam
-							dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat
-							ipsum et lorem et sit, sed stet lorem sit clita duo justo erat
-							amet</p>
-						<div class="row g-4">
-							<div class="col-6">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-check fa-2x text-primary"></i>
-									</div>
-									<div class="ms-4">
-										<p class="mb-2">Quality</p>
-										<h5 class="mb-0">Services</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-user-check fa-2x text-primary"></i>
-									</div>
-									<div class="ms-4">
-										<p class="mb-2">Creative</p>
-										<h5 class="mb-0">Designers</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-drafting-compass fa-2x text-primary"></i>
-									</div>
-									<div class="ms-4">
-										<p class="mb-2">Free</p>
-										<h5 class="mb-0">Consultation</h5>
-									</div>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="d-flex align-items-center">
-									<div
-										class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white"
-										style="width: 60px; height: 60px;">
-										<i class="fa fa-headphones fa-2x text-primary"></i>
-									</div>
-									<div class="ms-4">
-										<p class="mb-2">Customer</p>
-										<h5 class="mb-0">Support</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
-					<div class="position-relative h-100">
-						<img class="position-absolute img-fluid w-100 h-100"
-							src="<%=request.getContextPath()%>/resources/img/feature.jpg"
-							style="object-fit: cover;" alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Feature End -->
+	<style>
+#main_story .owl-stage-outer {
+	border-radius: 2rem;
+}
+</style>
 
+	<!-- 중앙 Start -->
 
-	<!-- Projects Start -->
-	<div class="container-xxl py-5">
+	<div class="container-xxl py-5" id="main_story">
 		<div class="container">
 			<div class="section-title text-center">
-				<h1 class="display-5 mb-5">Our Projects</h1>
-			</div>
-			<div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
-				<div class="col-12 text-center">
-					<ul class="list-inline mb-5" id="portfolio-flters">
-						<li class="mx-2 active" data-filter="*">All</li>
-						<li class="mx-2" data-filter=".first">General Carpentry</li>
-						<li class="mx-2" data-filter=".second">Custom Carpentry</li>
-					</ul>
-				</div>
-			</div>
-			<div class="row g-4 portfolio-container">
-				<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp"
-					data-wow-delay="0.1s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-1.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-1.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">General Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp"
-					data-wow-delay="0.3s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-2.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-2.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">Custom Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp"
-					data-wow-delay="0.5s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-3.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-3.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">General Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp"
-					data-wow-delay="0.1s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-4.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-4.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">Custom Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp"
-					data-wow-delay="0.3s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-5.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-5.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">General Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp"
-					data-wow-delay="0.5s">
-					<div class="rounded overflow-hidden">
-						<div class="position-relative overflow-hidden">
-							<img class="img-fluid w-100"
-								src="<%=request.getContextPath()%>/resources/img/portfolio-6.jpg"
-								alt="">
-							<div class="portfolio-overlay">
-								<a class="btn btn-square btn-outline-light mx-1"
-									href="img/portfolio-6.jpg" data-lightbox="portfolio"><i
-									class="fa fa-eye"></i></a> <a
-									class="btn btn-square btn-outline-light mx-1" href=""><i
-									class="fa fa-link"></i></a>
-							</div>
-						</div>
-						<div class="border border-5 border-light border-top-0 p-4">
-							<p class="text-primary fw-medium mb-2">Custom Carpentry</p>
-							<h5 class="lh-base mb-0">
-								Wooden Furniture Manufacturing And Remodeling</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Projects End -->
-
-
-	<!-- Quote Start -->
-	<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
-		<div class="container quote px-lg-0">
-			<div class="row g-0 mx-lg-0">
-				<div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
-					<div class="position-relative h-100">
-						<img class="position-absolute img-fluid w-100 h-100"
-							src="<%=request.getContextPath()%>/resources/img/quote.jpg"
-							style="object-fit: cover;" alt="">
-					</div>
-				</div>
-				<div class="col-lg-6 quote-text py-5 wow fadeIn"
-					data-wow-delay="0.5s">
-					<div class="p-lg-5 pe-lg-0">
-						<div class="section-title text-start">
-							<h1 class="display-5 mb-4">Free Quote</h1>
-						</div>
-						<p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam
-							dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat
-							ipsum et lorem et sit, sed stet lorem sit clita duo justo erat
-							amet</p>
-						<form>
-							<div class="row g-3">
-								<div class="col-12 col-sm-6">
-									<input type="text" class="form-control border-0"
-										placeholder="Your Name" style="height: 55px;">
-								</div>
-								<div class="col-12 col-sm-6">
-									<input type="email" class="form-control border-0"
-										placeholder="Your Email" style="height: 55px;">
-								</div>
-								<div class="col-12 col-sm-6">
-									<input type="text" class="form-control border-0"
-										placeholder="Your Mobile" style="height: 55px;">
-								</div>
-								<div class="col-12 col-sm-6">
-									<select class="form-select border-0" style="height: 55px;">
-										<option selected>Select A Service</option>
-										<option value="1">Service 1</option>
-										<option value="2">Service 2</option>
-										<option value="3">Service 3</option>
-									</select>
-								</div>
-								<div class="col-12">
-									<textarea class="form-control border-0"
-										placeholder="Special Note"></textarea>
-								</div>
-								<div class="col-12">
-									<button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Quote End -->
-
-
-	<!-- Team Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="section-title text-center">
-				<h1 class="display-5 mb-5">Team Members</h1>
+				<h1 class="display-6 mb-5">카페 STORY</h1>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="team-item">
-						<div class="overflow-hidden position-relative">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/team-1.jpg"
-								alt="">
-							<div class="team-social">
-								<a class="btn btn-square" href=""><i
-									class="fab fa-facebook-f"></i></a> <a class="btn btn-square"
-									href=""><i class="fab fa-twitter"></i></a> <a
-									class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+				<div class="col-12">
+
+					<!-- Carousel Start -->
+					<div class="container-fluid p-0 pb-5" id='box'>
+						<div class="owl-carousel story-carousel position-relative"
+							id='box'>
+							<div class="owl-carousel-item position-relative" id='box'>
+								<img class="img-fluid"
+									src="<%=request.getContextPath()%>/resources/img/main커피1.png"
+									alt="">
+								<div
+									class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+									style="background: rgba(53, 53, 53, .7);">
+									<div class="container">
+										<div class="row justify-content-center">
+											<div class="col-12 col-lg-8 text-center">
+												<h5
+													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
+													To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">Best
+													Carpenter & Craftsman Services</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?
+												</p>
+												<a href=""
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+													More</a> <a href=""
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
+													Quote</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="owl-carousel-item position-relative ">
+								<img class="img-fluid"
+									src="<%=request.getContextPath()%>/resources/img/커피2.png"
+									alt="">
+								<div
+									class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+									style="background: rgba(53, 53, 53, .7);">
+									<div class="container">
+										<div class="row justify-content-center">
+											<div class="col-12 col-lg-8 text-center">
+												<h5
+													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
+													To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">카페
+													추천1</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
+													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
+													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
+													elitr.</p>
+												<a href=""
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+													More</a> <a href=""
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
+													Quote</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="owl-carousel-item position-relative">
+								<img class="img-fluid"
+									src="<%=request.getContextPath()%>/resources/img/커피3.png"
+									alt="">
+								<div
+									class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+									style="background: rgba(53, 53, 53, .7);">
+									<div class="container">
+										<div class="row justify-content-center">
+											<div class="col-12 col-lg-8 text-center">
+												<h5
+													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
+													To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">Best
+													Carpenter & Craftsman Services</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
+													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
+													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
+													elitr.</p>
+												<a href=""
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+													More</a> <a href=""
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
+													Quote</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div
-							class="text-center border border-5 border-light border-top-0 p-4">
-							<h5 class="mb-0">Full Name</h5>
-							<small>Designation</small>
-						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="team-item">
-						<div class="overflow-hidden position-relative">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/team-2.jpg"
-								alt="">
-							<div class="team-social">
-								<a class="btn btn-square" href=""><i
-									class="fab fa-facebook-f"></i></a> <a class="btn btn-square"
-									href=""><i class="fab fa-twitter"></i></a> <a
-									class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-							</div>
-						</div>
-						<div
-							class="text-center border border-5 border-light border-top-0 p-4">
-							<h5 class="mb-0">Full Name</h5>
-							<small>Designation</small>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="team-item">
-						<div class="overflow-hidden position-relative">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/team-3.jpg"
-								alt="">
-							<div class="team-social">
-								<a class="btn btn-square" href=""><i
-									class="fab fa-facebook-f"></i></a> <a class="btn btn-square"
-									href=""><i class="fab fa-twitter"></i></a> <a
-									class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-							</div>
-						</div>
-						<div
-							class="text-center border border-5 border-light border-top-0 p-4">
-							<h5 class="mb-0">Full Name</h5>
-							<small>Designation</small>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-					<div class="team-item">
-						<div class="overflow-hidden position-relative">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/team-4.jpg"
-								alt="">
-							<div class="team-social">
-								<a class="btn btn-square" href=""><i
-									class="fab fa-facebook-f"></i></a> <a class="btn btn-square"
-									href=""><i class="fab fa-twitter"></i></a> <a
-									class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-							</div>
-						</div>
-						<div
-							class="text-center border border-5 border-light border-top-0 p-4">
-							<h5 class="mb-0">Full Name</h5>
-							<small>Designation</small>
-						</div>
-					</div>
+					<!-- Carousel End -->
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Team End -->
 
 
-	<!-- Testimonial Start -->
-	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+
+
+	<!-- 중앙 END -->
+
+
+	<!-- Go Trip start -->
+
+
+	<!-- Favourite Places Start -->
+	<div class="favourite-place place-padding ">
 		<div class="container">
-			<div class="section-title text-center">
-				<h1 class="display-5 mb-5">Testimonial</h1>
+			<!-- Section Tittle -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h1 class="display-6 mb-5">인플루언서 STORY</h1>
+					</div>
+				</div>
 			</div>
-			<div class="owl-carousel testimonial-carousel">
-				<div class="testimonial-item text-center">
-					<img class="img-fluid bg-light p-2 mx-auto mb-3"
-						src="<%=request.getContextPath()%>/resources/img/testimonial-1.jpg"
-						style="width: 90px; height: 90px;">
-					<div class="testimonial-text text-center p-4">
-						<p>Clita clita tempor justo dolor ipsum amet kasd amet duo
-							justo duo duo labore sed sed. Magna ut diam sit et amet stet eos
-							sed clita erat magna elitr erat sit sit erat at rebum justo sea
-							clita.</p>
-						<h5 class="mb-1">Client Name</h5>
-						<span class="fst-italic">Profession</span>
+			<div class="row">
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="0.6s">
+					<div class="single-place mb-30">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services1.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>50</span> </span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									<!-- $1870 -->
+									<span>#제주공항근처카페 #감성카페 #디저트카페</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li>기본음료_아메리카노음료</li>
+									<li>변경 가능_2천원 할인</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="testimonial-item text-center">
-					<img class="img-fluid bg-light p-2 mx-auto mb-3"
-						src="<%=request.getContextPath()%>/resources/img/testimonial-2.jpg"
-						style="width: 90px; height: 90px;">
-					<div class="testimonial-text text-center p-4">
-						<p>Clita clita tempor justo dolor ipsum amet kasd amet duo
-							justo duo duo labore sed sed. Magna ut diam sit et amet stet eos
-							sed clita erat magna elitr erat sit sit erat at rebum justo sea
-							clita.</p>
-						<h5 class="mb-1">Client Name</h5>
-						<span class="fst-italic">Profession</span>
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="0.7s">
+					<div class="single-place mb-30 wow fadeInUp" data-wow-delay="0.10s">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services2.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>8.0 Superb</span>
+								</span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									$1870 <span>/ Per Person</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li><i class="far fa-clock"></i>3 Days</li>
+									<li><i class="fas fa-map-marker-alt"></i>Los Angeles</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="testimonial-item text-center">
-					<img class="img-fluid bg-light p-2 mx-auto mb-3"
-						src="<%=request.getContextPath()%>/resources/img/testimonial-3.jpg"
-						style="width: 90px; height: 90px;">
-					<div class="testimonial-text text-center p-4">
-						<p>Clita clita tempor justo dolor ipsum amet kasd amet duo
-							justo duo duo labore sed sed. Magna ut diam sit et amet stet eos
-							sed clita erat magna elitr erat sit sit erat at rebum justo sea
-							clita.</p>
-						<h5 class="mb-1">Client Name</h5>
-						<span class="fst-italic">Profession</span>
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="0.8s">
+					<div class="single-place mb-30">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services3.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>8.0 Superb</span>
+								</span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									$1870 <span>/ Per Person</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li><i class="far fa-clock"></i>3 Days</li>
+									<li><i class="fas fa-map-marker-alt"></i>Los Angeles</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="0.9s">
+					<div class="single-place mb-30">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services4.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>8.0 Superb</span>
+								</span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									$1870 <span>/ Per Person</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li><i class="far fa-clock"></i>3 Days</li>
+									<li><i class="fas fa-map-marker-alt"></i>Los Angeles</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="1.0s">
+					<div class="single-place mb-30">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services5.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>8.0 Superb</span>
+								</span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									$1870 <span>/ Per Person</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li><i class="far fa-clock"></i>3 Days</li>
+									<li><i class="fas fa-map-marker-alt"></i>Los Angeles</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+					data-wow-delay="1.1s">
+					<div class="single-place mb-30">
+						<div class="place-img">
+							<img
+								src="<%=request.getContextPath()%>/resources/assets/img/service/services6.jpg"
+								alt="">
+						</div>
+						<div class="place-cap">
+							<div class="place-cap-top">
+								<span><i class="fas fa-star"></i><span>8.0 Superb</span>
+								</span>
+								<h3>
+									<a href="#">The Dark Forest Adventure</a>
+								</h3>
+								<p class="dolor">
+									$1870 <span>/ Per Person</span>
+								</p>
+							</div>
+							<div class="place-cap-bottom">
+								<ul>
+									<li><i class="far fa-clock"></i>3 Days</li>
+									<li><i class="fas fa-map-marker-alt"></i>Los Angeles</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Testimonial End -->
+	<!-- Favourite Places End -->
+	<!-- Go Trip end -->
+
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+
+
+	<!-- 검색 확장 -->
+	<div class="offcanvas offcanvas-top" tabindex="-1" id="searchcanvasTop"
+		aria-labelledby="offcanvasTopLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasTopLabel">카페를 검색하세요</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+				aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+
+			<!-- 내용 -->
+			<form action="">
+				<div class="row mb-3">
+					<div class="col"></div>
+
+					<div class="col-md-6 ">
+						<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+
+							<div class="input-group">
+								<input type="search" placeholder="여기에 카페를 검색하세요"
+									aria-describedby="button-addon1"
+									class="form-control border-0 bg-light">
+								<div class="input-group-append">
+									<button id="button-addon1" type="submit"
+										class="btn btn-link text-primary">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="col"></div>
+				</div>
+
+				<!-- 항목선택 -->
+				<div class="container text-center">
+					<div class="row">
+
+						<div class="col-md-4 mb-3">
+							<h5>테마검색</h5>
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">전통</button>
+								<button class="btn btn-outline-warning">레트로</button>
+								<button class="btn btn-outline-warning">모던</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">네추럴</button>
+								<button class="btn btn-outline-warning">개성</button>
+								<button class="btn btn-outline-warning">창고형</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">이국적</button>
+								<button class="btn btn-outline-warning">캐주얼</button>
+								<button class="btn btn-outline-warning">아기자기</button>
+							</ul>
+							
+						</div>
+						<div class="col-md-4">
+							<h5>키워드검색</h5>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">디저트</button>
+								<button class="btn btn-outline-warning">브런치</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">이색적인음료</button>
+								<button class="btn btn-outline-warning">핸드드립 전무</button>
+								
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">베이커리</button>
+								<button class="btn btn-outline-warning">단체석</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">반려동물 가능</button>
+								<button class="btn btn-outline-warning">야외 공간</button>
+								
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">독립 공간</button>
+								<button class="btn btn-outline-warning">노키즈존</button>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<h5>구독권 해택이 있는 가맹점을 많이 이용해주세요</h5>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</form>
+
+		</div>
+	</div>
 
 </body>
 

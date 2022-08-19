@@ -44,7 +44,7 @@
 									<div class="card-action-element ms-auto py-0"></div>
 								</div>
 								<div class="card-body">
-									<form id="formAccountSettings" method="POST" onsubmit="return false">
+								
 										<!-- 왼편 -->
 										<div class="mb-3 row">
 											<div class="col-md-6">
@@ -55,8 +55,8 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">회원가입시</label>
 													<div class="col-md-8">
-														<input class="form-control" type="text" value=""
-															id="html5-text-input">
+														<input name="register" class="form-control" type="text" value=""
+															id="html5-text-input" placeholder="">
 													</div>
 												</div>
 												
@@ -64,8 +64,8 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">추천인가입시</label>
 													<div class="col-md-8">
-														<input class="form-control" type="text" value=""
-															id="html5-text-input">
+														<input name="recommand" class="form-control" type="text" value=""
+															id="html5-text-input" placeholder="">
 													</div>
 												</div>
 												
@@ -80,8 +80,8 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">리뷰작성시</label>
 													<div class="col-md-8">
-														<input class="form-control" type="text" value=""
-															id="html5-text-input">
+														<input name="review" class="form-control" type="text" value=""
+															id="html5-text-input" placeholder="">
 													</div>
 												</div>
 												
@@ -89,7 +89,7 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">리뷰삭제시(-로 입력)</label>
 													<div class="col-md-8">
-														<input class="form-control" type="text" value=""
+														<input placeholder="" name="deletereview" class="form-control" type="text" value=""
 															id="html5-text-input">
 													</div>
 												</div>
@@ -98,12 +98,12 @@
 											</div>
 											
 											<div class="mt-2">
-					                          <button type="submit" class="btn btn-primary me-2">저장</button>
+					                          <button type="button" class="btn btn-primary me-2" onclick="updatePointRule();">저장</button>
 					                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
 					                        </div>
 											
 										</div>
-									</form>
+									
 
 								</div>
 							</div>
@@ -134,9 +134,64 @@
 	<!-- 여기에 새로운 js파일있으면 넣기 -->
 
 	<script type="text/javascript">
+		var reg = document.getElementsByName("register")[0];
+		var recommand = document.getElementsByName("recommand")[0];
+		var review = document.getElementsByName("review")[0];
+		var deletereview = document.getElementsByName("deletereview")[0];
+		var values = [reg,recommand,review,deletereview];
+
+		function updatePointRule(){
+			$.ajax({
+				url:'../../admin/point/updatePointRule.do',
+				data:{"register" : reg.value ,
+					  "recommand" : recommand.value ,
+					  "review"	: review.value ,
+					  "deletereview" : deletereview.value
+					},
+				success:function(){
+					alert("포인트룰 저장성공");
+					for(var i = 0; i<values.length; i++){
+						values[i].value = "";
+					}
+					getPointRuleList();
+				},
+				error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+		function getPointRuleList(){
+			$.ajax({
+				url:'../../admin/point/getPointRule.do',
+				dataType:'json',
+				success:function(data){
+					console.log(data[0].rule_name);
+					for(var i = 0; i<data.length; i++){
+						
+						if(data[i].rule_name == "회원가입"){
+							reg.placeholder = data[i].rule_name+":"+data[i].rule_point;
+						}
+						else if(data[i].rule_name == "추천인"){
+							recommand.placeholder = data[i].rule_name+":"+data[i].rule_point;
+						}							
+						else if(data[i].rule_name == "리뷰작성"){
+							review.placeholder = data[i].rule_name+":"+data[i].rule_point;
+						}						
+						else if(data[i].rule_name == "리뷰삭제"){
+							deletereview.placeholder = data[i].rule_name+":"+data[i].rule_point;
+						}
+					}
+				},
+				error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
 			$(function() {
-				
-			})
+			getPointRuleList();
+
+
+			});
 		</script>
 </body>
 

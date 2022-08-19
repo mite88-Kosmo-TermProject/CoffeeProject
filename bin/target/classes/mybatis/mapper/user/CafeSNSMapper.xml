@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.coffice.user.service.CafeSNSImpl">
+	<resultMap type="com.coffice.dto.storeDTO" id="StoreMap">
+		<id property="store_idx" column="store_idx"/>	
+		<id property="store_name" column="store_name"/>	
+		<id property="store_latitude" column="store_latitude"/>	
+		<id property="store_longitude" column="store_longitude"/>	
+	</resultMap>
+	
+	<resultMap type="com.coffice.dto.memberDTO" id="UserMap">
+		<id property="mem_id" column="mem_id"/>
+		<id property="mem_name" column="mem_name"/>
+		<id property="mem_nickname" column="mem_nickname"/>
+		<id property="mem_email" column="mem_email"/>
+		<id property="mem_phone" column="mem_phone"/>
+	</resultMap>
+	
+	<resultMap type="com.coffice.dto.reviewDTO" id="SNSMap">
+		<result property="review_idx" column="review_idx"/>
+		<result property="review_content" column="review_content"/>
+		<result property="reiview_star" column="reiview_star"/>
+		<result property="review_img" column="review_img"/>
+		<collection property="storeDTO" resultMap="StoreMap"/>
+		<collection property="memberDTO" resultMap="UserMap"/>
+	</resultMap>
+	<select id="list" resultMap="SNSMap">
+		select * from review LEFT join stores on review.store_idx = stores.store_idx
+	</select>
+	
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.coffice.dto.ParameterDTO">
+		select count(*) from review LEFT join stores on review.store_idx = stores.store_idx
+			<if test="review_idx !=null">
+				where
+				<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">
+					review_idx = #{idx}
+				</foreach>
+			</if>
+	</select>
+	
+	<select id="getnewList" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM(
+				SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
+				<if test="review_idx!=null">
+					where
+					<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">
+						review_idx = #{idx}
+					</foreach>
+				</if>
+				ORDER BY review_idx DESC
+			)Tb
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="writeReview">
+	
+	</insert>
+	
+	
+	
+	
+	
+	
+</mapper>

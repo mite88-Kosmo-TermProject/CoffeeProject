@@ -34,7 +34,6 @@
     <!-- Template Stylesheet -->
     <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
     
-    
   
 </head>
 
@@ -78,6 +77,8 @@
                </span>
            		</c:if>
 				
+				
+				<a href="<%=request.getContextPath() %>/order/subPay.do" class="nav-item nav-link">패스구매</a>
 				
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.coffice.service.AdminPointImpl">
+  
+  <select id="getRuleList" resultType="com.coffice.dto.PointRuleDTO">
+  select * from point_rule
+  </select>
+  
+  <update id="setPointRule" parameterType="hashMap">
+  	begin<foreach collection="paramMap" item="data" index="key" >
+  		 update point_rule set rule_point = #{data} where rule_name like '%'||#{key}||'%';
+  		</foreach>
+  	end;
+  </update>
+  
+  <select id="getPointListToSearchFiled" parameterType="int" resultType="com.coffice.dto.PointDTO">
+  	select 
+  		POINT_IDX,
+		POINT_ENTRY_EXIT,
+		MEM_ID,
+		to_char(POINT_POSTDATE,'YYYY-MM-DD HH24:MI:SS') as POINT_POSTDATE,
+		RULE_IDX
+		from point
+		<if test='search != null'>
+		where rule_idx like '%'||#{search}||'%'
+		</if>
+  		order by point_idx desc
+  </select>
+  
+  <select id="getPointList" parameterType="int" resultType="com.coffice.dto.PointDTO">
+  	select 
+  		POINT_IDX,
+		POINT_ENTRY_EXIT,
+		MEM_ID,
+		to_char(POINT_POSTDATE,'YYYY-MM-DD HH24:MI:SS') as POINT_POSTDATE,
+		RULE_IDX
+		from point
+		<if test='search != null'>
+		where rule_idx like '%'||#{search}||'%'
+		</if>
+  		order by point_idx desc
+  </select>
+  
+  <delete id="deletePoint" parameterType="ArrayList">
+  	delete from point where point_idx in
+  	<foreach collection="numList" item="list" open="(" separator="," close=")">
+	#{list}
+</foreach>
+ 
+  </delete>
+  
+  <insert id="insertPoint" parameterType="Object">
+  	insert into point values(POINT_SEQUENCE.nextval,#{param2},#{param1},sysdate,#{param3})
+  </insert>
+  
+  <update id="setEventSetting" parameterType="Object">
+  update event set 
+  	event_name = #{param1},
+  	event_img = trim(concat('이벤트이미지',#{param2})),
+  	event_explanation = #{param3}
+  	where event_idx = 1
+  </update>
+  
+  <select id="loadEventSetting" resultType="com.coffice.dto.EventDTO">
+  	select * from event where event_idx = 1
+  </select>
+  
+  <select id="loadEventItems" resultType="com.coffice.dto.Event_ItemDTO">
+  	select * from event_items
+  </select>
+  
+  </mapper>

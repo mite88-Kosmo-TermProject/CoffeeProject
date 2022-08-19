@@ -181,7 +181,7 @@ pageEncoding="UTF-8"%>
           <div class="section-title text-center" id="cafe_snsList">
             <h1 class="display-6 mb-5">리뷰</h1>
           </div>
-          <div class="row g-4">
+          <div class="row g-4" id="show_data">
             <!-- sns -->
             <div class="col-md-6 col-lg-4 mb-5">
               <div id="snsList">
@@ -268,7 +268,7 @@ pageEncoding="UTF-8"%>
           <!-- 더보기버튼 -->
           <div class="row g-4">
             <div class="col-12">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" id="testbtn" class="btn btn-primary w-100">
                 더보기
               </button>
             </div>
@@ -277,6 +277,12 @@ pageEncoding="UTF-8"%>
       </div>
     </div>
 
+    <!-- footer -->
+  	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+    <script
+      type="text/javascript"
+      src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
+    ></script>
 
     <script>
       //찜
@@ -332,18 +338,7 @@ pageEncoding="UTF-8"%>
         });
       });
     </script>
-    <ul>
-      <li>커밋</li>
-    </ul>
-    <!-- content -->
-    <table id="show_data" style="border: 1px solid black"></table>
-    <button type="button" id="testbtn">더보기</button>
-
     <!-- footer -->
-    <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-    <script
-      type="text/javascript"
-      src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
-    ></script>
+   
   </body>
 </html>

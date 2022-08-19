@@ -1,6 +1,7 @@
 package util;
 
 public class PagingUtil {
+
 	public static String pagingImg(
 			int totalRecordCount,
 			int pageSize,
@@ -25,13 +26,17 @@ public class PagingUtil {
 				//첫번째 페이지 블럭에서는 출력되지 않음
 				//두번째 페이지 블럭부터 출력됨.
 				pagingStr += ""
-					+ "<a href='"+page+"nowPage=1'>"
-					+ "<img src='../images/paging1.gif'></a>";
+
+					+ "<a href='"+page +"nowPage=1'>"
+					+ "<i class=\"bi bi-chevron-double-left\"></i>";
+
 				pagingStr += "&nbsp;";
 				pagingStr += ""
 					+ "<a href='"+page+"nowPage="+
 									(intTemp-blockPage)+"'>"
-					+ "<img src='../images/paging2.gif'></a>";
+
+					+ "<i class=\"bi bi-chevron-left\"></i></a>";
+
 			}
 			
 			//페이지표시 제어를 위한 변수
@@ -58,14 +63,16 @@ public class PagingUtil {
 			if(intTemp <= totalPage) {
 				pagingStr += "<a href='"+page+"nowPage="+
 												intTemp+"'>"
-					+ "<img src='../images/paging3.gif'></a>";
+
+					+ "<i class=\"bi bi-chevron-right\"></i></a>";
 				pagingStr += "&nbsp;";
 				pagingStr += "<a href='"+page+"nowPage="+
 												totalPage+"'>"
-					+ "<img src='../images/paging4.gif'></a>";
+					+ "<i class=\"bi bi-chevron-double-right\"></i></a>";
+
 			}		
 					
 			return pagingStr;
 		}
-
 }
+
