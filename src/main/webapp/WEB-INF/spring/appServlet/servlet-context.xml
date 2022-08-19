@@ -13,6 +13,7 @@
 
 	<!-- 정적파일 경로 세팅 -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources location="/image" mapping="/resources/img/**"></mvc:resources>
 	
 	<!-- ViewResolver를 통한 JSP 경로 세팅 -->
 	<bean
@@ -30,15 +31,7 @@
 	
 	<context:component-scan base-package="com.coffice.admin.service" />
 	
-	<!-- 파일업로드 빈 생성 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.common.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="1000000"/>
-	</bean>
-	<!-- 파일다운로드 빈 생성 -->
-	<bean id="fileDownloadView" class="common.FileDownLoadView"/>
-	<bean id="fileViewResolver" class="org.springframwork.web.servlet.view.BeanNameViewResolver">
-		<property name="order" value="0" />
-	</bean>
+
 	
 	<!-- 데이터 근원지에대한 설정으로 오라클 DB연결정보를 가진다. -->
 	<bean name="dataSource"
