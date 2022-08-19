@@ -182,7 +182,7 @@ pageEncoding="UTF-8"%>
             <h1 class="display-6 mb-5">리뷰</h1>
           </div>
           <div class="row g-4" id="show_data">
-            <!-- sns -->
+            <!-- snsㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
             
             <!-- // -->
           </div>
