@@ -41,6 +41,7 @@ public interface UserMemberImpl {
 	public int join(MemberDTO memberDTO);
 	
 	public MemberDTO view(ParameterDTO parameterDTO);
+	//public MemberDTO view(String mem_id);
 	public int modify(MemberDTO memberDTO);
 	
 	public int delete(String idx);

@@ -78,7 +78,7 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-	<script src="<%request.getContextPath()%>/resources/admin/js/pointList.js"></script>
+	<script src="<%= request.getContextPath() %>/resources/admin/js/pointList.js"></script>
 </body>
 
 </html>

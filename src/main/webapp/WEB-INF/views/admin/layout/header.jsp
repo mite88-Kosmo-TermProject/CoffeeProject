@@ -125,6 +125,17 @@
 						</a>
 					</li>
 					
+					<li class="menu-header small text-uppercase">
+					<span class="menu-header-text">구독권 관리</span></li>
+					
+					<li class="menu-item">
+						<a href="<%= request.getContextPath() %>/admin/storeOwnerSub/subList.do" class="menu-link"> 
+							<i class="menu-icon tf-icons bx bx-layout"></i>
+							구독권 관리
+						</a>
+					</li>
+					
+					
 					
 					<li class="menu-header small text-uppercase">
 					<span class="menu-header-text">점주관리</span></li>

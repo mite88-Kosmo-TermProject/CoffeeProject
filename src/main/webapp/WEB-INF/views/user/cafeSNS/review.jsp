@@ -182,86 +182,8 @@ pageEncoding="UTF-8"%>
             <h1 class="display-6 mb-5">리뷰</h1>
           </div>
           <div class="row g-4" id="show_data">
-            <!-- sns -->
-            <!-- <div class="col-md-6 col-lg-4 mb-5">
-              <div id="snsList">
-                <div class="username">
-                  <img
-                    src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
-                  />
-                  <span id="grade">
-                    <div class="common-grade-badge d small has-text mb-2">
-                      <i class="fas fa-coffee"></i>
-                      <p>다이아</p>
-                    </div>
-                  </span>
-                  <span id="name">
-                    <b>Username</b>
-                  </span>
-                  <i class="fas fa-ellipsis-v"></i>
-                </div>
-                <div style="position: relative">
-                  사진
-                  <figure class="photoSet" data-count="2">
-                    <a
-                      href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"
-                      class="img-fluid"
-                      data-title="열심히 한 작업!!"
-                      data-lightbox="example-set"
-                    >
-                      <img
-                        src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"
-                        class="img-fluid image"
-                        id="post"
-                        alt=""
-                      />
-                    </a>
-                    <a
-                      style="display: none"
-                      href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"
-                      class="img-fluid"
-                      data-title="열심히 한 작업!!22"
-                      data-lightbox="example-set"
-                    >
-                      <img
-                        src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"
-                        class="img-fluid image"
-                        id="post"
-                        alt=""
-                      />
-                    </a>
-                  </figure>
-                </div>
-                <div class="options">
-                  <div class="username">
-                    업체정보
-                    <img
-                      src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
-                    />
-                    <span id="cafename"> <b>cafename</b> </span>
-                    <span id="cafeaddr"> 서울시 00구 00동 0000</span>
-
-                    <i
-                      class="far fa-heart fa-lg"
-                      id="heart"
-                      onclick="heart()"
-                    ></i>
-                    <span id="like"
-                      ><i class="far fa-thumbs-up fa-lg" onclick="like()"></i>
-                      <small>100</small></span
-                    >
-                  </div>
-                </div>
-                <div class="info">
-                  <div class="txt">
-                    진짜 맛있고 친절하고 이뻐요 또가고 싶어요~~~~~~~~
-                  </div>
-
-                  <span style="color: grey; font-size: 14px">5 September</span>
-                </div>
-                <br />
-              </div>
-            </div> -->
+            <!-- snsㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
+            
             <!-- // -->
           </div>
 
