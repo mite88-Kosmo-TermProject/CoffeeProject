@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.coffice.dto.SearchDTO;
+import com.coffice.dto.StoresDTO;
 
 
 //사용자 카페관련 인터페이스

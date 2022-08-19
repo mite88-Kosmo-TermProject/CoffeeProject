@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class StoresDTO {
 	
-private Date postdate;
+	private Date postdate;
 	
 	private int store_idx;
 	private String mem_id;

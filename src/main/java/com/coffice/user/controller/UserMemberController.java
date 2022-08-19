@@ -1,6 +1,5 @@
 package com.coffice.user.controller;
 
-<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.lang.reflect.Member;
 
@@ -14,23 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-=======
-import org.springframework.stereotype.Controller;
->>>>>>> JooNi
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
 import com.coffice.user.service.UserMemberImpl;
 
-
-=======
->>>>>>> JooNi
 @Controller
 public class UserMemberController {
 	
