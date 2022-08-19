@@ -90,7 +90,7 @@ function getCafeList(list){
 			            +      '<i class="fas fa-ellipsis-v"></i>'
 			            +    '</div>'
 			            +    '<div style="position: relative">'
-			                  <!-- 사진 -->
+			                   //사진
 			            +      '<figure class="photoSet" data-count="2">'
 			            +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
 			            +          'class="img-fluid"'
@@ -111,7 +111,7 @@ function getCafeList(list){
 			            +    '</div>'
 			            +    '<div class="options">'
 			            +      '<div class="username">'
-			                    <!-- 업체정보 -->
+			                    //업체정보
 			            +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
 			            +        '<span id="cafename">'
 			            + 		 '<b>'+data.storesDTO.store_name+'</b> </span>'
@@ -170,7 +170,7 @@ function getCafeList(list){
 			            +      '<i class="fas fa-ellipsis-v"></i>'
 			            +    '</div>'
 			            +    '<div style="position: relative">'
-			                  <!-- 사진 -->
+			                  //사진
 			            +      '<figure class="photoSet" data-count="2">'
 			            +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
 			            +          'class="img-fluid"'
@@ -191,7 +191,7 @@ function getCafeList(list){
 			            +    '</div>'
 			            +    '<div class="options">'
 			            +      '<div class="username">'
-			                    <!-- 업체정보 -->
+			                      //업체정보
 			            +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
 			            +        '<span id="cafename">'
 			            + 		 '<b>'+data.storesDTO.store_name+'</b> </span>'

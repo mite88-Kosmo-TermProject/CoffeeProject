@@ -146,7 +146,7 @@ public class CafeSNSController {
 		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-			/* System.out.println(dto); */
+			System.out.println(dto); 
 		}
 		
 		return lists;
