@@ -183,7 +183,7 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="row g-4" id="show_data">
             <!-- sns -->
-            <div class="col-md-6 col-lg-4 mb-5">
+            <!-- <div class="col-md-6 col-lg-4 mb-5">
               <div id="snsList">
                 <div class="username">
                   <img
@@ -201,7 +201,7 @@ pageEncoding="UTF-8"%>
                   <i class="fas fa-ellipsis-v"></i>
                 </div>
                 <div style="position: relative">
-                  <!-- 사진 -->
+                  사진
                   <figure class="photoSet" data-count="2">
                     <a
                       href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"
@@ -234,7 +234,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="options">
                   <div class="username">
-                    <!-- 업체정보 -->
+                    업체정보
                     <img
                       src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
                     />
@@ -261,7 +261,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <br />
               </div>
-            </div>
+            </div> -->
             <!-- // -->
           </div>
 

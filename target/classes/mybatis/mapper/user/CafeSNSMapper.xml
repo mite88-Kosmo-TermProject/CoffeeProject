@@ -4,26 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.coffice.user.service.CafeSNSImpl">
-	<!-- <resultMap type="com.coffice.dto.StoresDTO" id="StoreMap">
+	<resultMap type="com.coffice.dto.StoresDTO" id="StoreMap">
 		<id property="store_idx" column="store_idx"/>	
-		<id property="mem_id" column="mem_id"/>	
 		<id property="store_name" column="store_name"/>	
-		<id property="store_owner" column="store_owner"/>	
-		<id property="store_phone" column="store_phone"/>	
-		<id property="store_item" column="store_item"/>	
-		<id property="store_sigungu" column="store_sigungu"/>	
-		<id property="store_dong" column="store_dong"/>	
-		<id property="store_localaddr" column="store_localaddr"/>	
-		<id property="store_roadaddr" column="store_roadaddr"/>	
-		<id property="store_floor" column="store_floor"/>	
-		<id property="store_longitude" column="store_longitude"/>	
 		<id property="store_latitude" column="store_latitude"/>	
-		<id property="store_notice" column="store_notice"/>	
-		<id property="store_menu" column="store_menu"/>	
-		<id property="store_star" column="store_star"/>	
-		<id property="store_afltd" column="store_afltd"/>	
-		<id property="store_menu_img" column="store_menu_img"/>	
-		<id property="store_time" column="store_time"/>	
+		<id property="store_longitude" column="store_longitude"/>	
 	</resultMap>
 	
 	<resultMap type="com.coffice.dto.MemberDTO" id="UserMap">
@@ -37,19 +22,13 @@
 	<resultMap type="com.coffice.dto.ReviewDTO" id="SNSMap">
 		<result property="review_idx" column="review_idx"/>
 		<result property="review_content" column="review_content"/>
-		<result property="review_postdate" column="review_postdate"/>
 		<result property="review_star" column="review_star"/>
 		<result property="review_img" column="review_img"/>
 		<collection property="storesDTO" resultMap="StoreMap"/>
 		<collection property="memberDTO" resultMap="UserMap"/>
-	</resultMap> -->
-	<select id="list" resultMap="com.coffice.dto.ReviewDTO">
-		select s.store_afltd, s.store_dong, s.store_floor, s.store_idx, s.store_item,
-		s.store_latitude, s.store_localaddr, s.store_longitude, s.store_menu, s.store_menu_img,
-		s.store_name, s.store_notice, s.store_owner, s.store_phone, s.store_roadaddr, 
-		s.store_sigungu, s.store_star, s.store_time,
-		r.mem_id, r.review_content, r.review_idx, r.review_img, r.review_postdate, r.review_star
-		from review r LEFT join stores s on r.store_idx = s.store_idx
+	</resultMap>
+	<select id="list" resultMap="SNSMap">
+		select * from review LEFT join stores on review.store_idx = stores.store_idx
 	</select>
 	
 	<select id="getTotalCount" resultType="int"
@@ -63,15 +42,10 @@
 			</if>
 	</select>
 	
-	<select id="getnewList" resultMap="com.coffice.dto.ReviewDTO" parameterType="com.coffice.dto.ParameterDTO">
+	<select id="getnewList" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM (
 			SELECT Tb.*, rownum rNum FROM(
-					select s.store_afltd, s.store_dong, s.store_floor, s.store_idx, s.store_item,
-					s.store_latitude, s.store_localaddr, s.store_longitude, s.store_menu, s.store_menu_img,
-					s.store_name, s.store_notice, s.store_owner, s.store_phone, s.store_roadaddr, 
-					s.store_sigungu, s.store_star, s.store_time,
-					r.mem_id, r.review_content, r.review_idx, r.review_img, r.review_postdate, r.review_star
-					from review r LEFT join stores s on r.store_idx = s.store_idx
+				SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
 				<if test="review_idx!=null">
 					where
 					<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">

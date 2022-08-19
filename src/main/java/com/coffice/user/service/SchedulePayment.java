@@ -83,7 +83,7 @@ public class SchedulePayment {
 		 reqJson.addProperty("customer_uid", customer_uid); 
 		 reqJson.add("schedules",jsonArr);
 		 String json = str.toJson(reqJson); 
-		 System.out.println(json);
+		 System.out.println("json"+json);
 		 HttpEntity<String> entity = new HttpEntity<>(json, headers);
 		 return restTemplate.postForObject("https://api.iamport.kr/subscribe/payments/schedule", entity, String.class);
 		 

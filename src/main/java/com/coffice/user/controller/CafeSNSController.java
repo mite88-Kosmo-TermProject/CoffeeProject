@@ -113,7 +113,7 @@ public class CafeSNSController {
 		for(ReviewDTO dto : getCafeList) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-			System.out.println(dto);
+			System.out.println("ArrayList:"+dto.getReview_star());
 		}
 		
 		return getCafeList;
@@ -124,20 +124,20 @@ public class CafeSNSController {
 			,@RequestParam(value = "list[]")ArrayList<String> review_idx
 			,Model model) {
 		
-		System.out.println(review_idx);
+		System.out.println("review_idx:"+review_idx);
 		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setReview_idx(review_idx);
 		int totalRecordCount =
 				sqlSession.getMapper(CafeSNSImpl.class).getTotalCount(parameterDTO);
 		
-		System.out.println(totalRecordCount);
-		int pageSize = 10;
+		System.out.println("totalRecordCount:"+totalRecordCount);
+		int pageSize = 3;
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		int nowPage = req.getParameter("nowPage")==null ? 1 : Integer.parseInt(req.getParameter("nowPage"));
 		int start = (nowPage -1) * pageSize +1;
 		int end = nowPage * pageSize;
-		System.out.println(nowPage);
+		System.out.println("nowPage:"+nowPage);
 		parameterDTO.setStart(start);
 		parameterDTO.setEnd(end);
 		
@@ -146,7 +146,8 @@ public class CafeSNSController {
 		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-			System.out.println(dto); 
+			
+			System.out.println("dto.getReview_star():"+dto.getReview_star()); 
 		}
 		
 		return lists;
