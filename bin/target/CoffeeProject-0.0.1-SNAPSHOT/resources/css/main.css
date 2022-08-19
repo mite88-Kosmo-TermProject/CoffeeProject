@@ -1,0 +1,101 @@
+.favourite-place .single-place .place-img {
+    overflow: hidden;
+    border-radius: 6px 6px 0 0
+}
+
+.favourite-place .single-place .place-img img {
+    width: 100%;
+    -webkit-transform: scale 1;
+    -moz-transform: scale 1;
+    -ms-transform: scale 1;
+    -o-transform: scale 1;
+    transform: scale 1;
+    transition: all 0.5s ease-out 0s
+}
+
+.favourite-place .single-place .place-cap {
+    padding: 28px 40px;
+    border: 1px solid #f0f1f2;
+    border-top: 0
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .favourite-place .single-place .place-cap {
+        padding: 28px 18px
+    }
+}
+
+@media (max-width: 767px) {
+    .favourite-place .single-place .place-cap {
+        padding: 28px 18px
+    }
+}
+
+.favourite-place .single-place .place-cap .place-cap-top {
+    border-bottom: 1px solid #f6f7f7;
+    margin-bottom: 24px
+}
+
+.favourite-place .single-place .place-cap .place-cap-top span {
+    margin-bottom: 5px;
+    display: inline-block
+}
+
+.favourite-place .single-place .place-cap .place-cap-top span i {
+    color: #AB7442;
+    font-size: 18px;
+    margin-right: 10px
+}
+
+.favourite-place .single-place .place-cap .place-cap-top span span {
+    font-family: "Barlow Condensed";
+    color: #939ca3;
+    font-size: 16px
+}
+
+.favourite-place .single-place .place-cap .place-cap-top h3 a {
+    font-weight: 600;
+    font-size: 24px;
+    color: #072740;
+    line-height: 1.2;
+    margin-bottom: 20px
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .favourite-place .single-place .place-cap .place-cap-top h3 a {
+        font-size: 23px
+    }
+}
+
+.favourite-place .single-place .place-cap .place-cap-top h3 a:hover {
+    color: #7a522e 
+}
+
+.favourite-place .single-place .place-cap .place-cap-top p.dolor {
+    color: #AB7442;
+    font-weight: 600;
+    font-family: "Barlow Condensed";
+    font-size: 20px
+}
+
+.favourite-place .single-place .place-cap .place-cap-top p.dolor span {
+    color: #99a1a7;
+    font-size: 16px
+}
+
+.favourite-place .single-place .place-cap .place-cap-bottom ul li {
+    display: inline-block;
+    margin-right: 18px;
+    color: #9da5ab
+}
+
+.favourite-place .single-place .place-cap .place-cap-bottom ul li i {
+    padding-right: 8px
+}
+
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}

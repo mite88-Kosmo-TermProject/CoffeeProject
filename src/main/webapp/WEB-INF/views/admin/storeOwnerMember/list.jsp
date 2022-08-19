@@ -45,7 +45,7 @@
 								</div>
 								<div class="card-body">
 									<!-- table 샘플입니다 ㅇㅊㅇ -->
-									<%@ include file="/WEB-INF/views/admin/table_sample.jsp"%>
+									<%@ include file="/WEB-INF/views/admin/table_point.jsp"%>
 
 								</div>
 							</div>
@@ -78,27 +78,7 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-	<script type="text/javascript">
-			$(function() {
-				$('#example').DataTable({
-					dom : 'Bfrtip',
-					buttons : [ {
-						extend : 'excel',
-						text : '엑셀출력',
-						filename : '엑셀파일명',
-						title : '엑셀파일 안에 쓰일 제목'
-					}, {
-						extend : 'copy',
-						text : '클립보드 복사',
-						title : '클립보드 복사 내용'
-					}, {
-						extend : 'csv',
-						text : 'csv출력',
-						filename : 'utf-8이라서 ms엑셀로 바로 열면 글자 깨짐'
-					}, ]
-				});
-			})
-		</script>
+	<script src="<%= request.getContextPath() %>/resources/admin/js/pointList.js"></script>
 </body>
 
 </html>

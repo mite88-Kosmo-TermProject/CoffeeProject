@@ -13,6 +13,7 @@ public class AdminMemberController {
 
 		return "/admin/member/list";
 	}
+	
 
 	// 어드민 회원보기
 	@RequestMapping(value = "/admin/member/view.do", method = RequestMethod.GET)
@@ -34,5 +35,7 @@ public class AdminMemberController {
 
 		return "/admin/member/delete.do";
 	}
+	
+	
 
 }
