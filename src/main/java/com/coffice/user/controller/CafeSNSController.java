@@ -172,7 +172,7 @@ public class CafeSNSController {
 			dto.setReview_content(temp);
 			/* System.out.println(dto); */
 		}
-		
+		System.out.println(lists);
 		return lists;
 	}
 }

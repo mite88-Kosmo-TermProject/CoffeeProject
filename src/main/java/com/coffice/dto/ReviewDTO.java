@@ -17,6 +17,8 @@ public class ReviewDTO {
 	
 	private MemberDTO memberDTO;
 	
+	private ImageDTO imageDTO;
+	
 	private String review_star;
 	
 	private String review_img;
