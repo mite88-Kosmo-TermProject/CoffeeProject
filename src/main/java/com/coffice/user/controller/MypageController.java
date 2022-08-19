@@ -22,12 +22,12 @@ public class MypageController {
 	private SqlSession sqlSession;
 	// 마이페이지 메인
 	@RequestMapping(value = "/mypage/main.do", method = RequestMethod.GET)
-	public String main(Model model, HttpServletRequest req, HttpSession session, MemberDTO memberDTO) {
+	public String main(Model model, HttpServletRequest req, HttpSession session) {
 		
 		session.getAttribute("siteUserInfo.mem_id");
-		System.out.println(memberDTO.getMem_id());
+		System.out.println(session.getAttribute("siteUserInfo"));
 		ParameterDTO parameterDTO = new ParameterDTO();
-		parameterDTO.setMem_id(memberDTO.getMem_id());
+		parameterDTO.setMem_id(req.getParameter("mem_id"));
 		
 	
 		MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
