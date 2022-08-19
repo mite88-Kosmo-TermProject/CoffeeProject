@@ -30,7 +30,6 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee; http://xmlns.jcp.org/xml
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-
 	<!-- 한글깨짐에 대한 설정 추가 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

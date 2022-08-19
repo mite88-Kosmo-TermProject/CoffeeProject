@@ -97,17 +97,10 @@ public class CafeSNSController {
 	}
 	
 	/*카페SNS페이지 연결*/
-	@RequestMapping("/cafeSNS/review2.do")
+	@RequestMapping("/cafeSNS/review.do")
 	public String goCafeSNS() {
 		
 		return "/user/cafeSNS/review";
-	}
-
-	/*카페SNS페이지 연결2*/
-	@RequestMapping("/cafeSNS/review.do")
-	public String goCafeSNS3() {
-		
-		return "/user/cafeSNS/snspage/home";
 	}
 	
 	
