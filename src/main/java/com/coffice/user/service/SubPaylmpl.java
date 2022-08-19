@@ -6,6 +6,7 @@ import com.coffice.dto.SubPayDTO;
 
 @Service
 public interface SubPaylmpl {
-
-	public int insert(SubPayDTO subPayDTO);
+	
+	//결제정보 입력
+	public int Payment_info(SubPayDTO subPayDTO);
 }

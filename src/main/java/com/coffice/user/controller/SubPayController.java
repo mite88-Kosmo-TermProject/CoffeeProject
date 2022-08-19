@@ -54,7 +54,7 @@ public class SubPayController {
 	public String modifyAction(HttpSession session, SubPayDTO subPayDTO) {
 		
 		
-		int applyRow = sqlSession.getMapper(SubPaylmpl.class).insert(subPayDTO);
+		int applyRow = sqlSession.getMapper(SubPaylmpl.class).Payment_info(subPayDTO);
 		System.out.println("수정처리된 레코드수 :" + applyRow);
 		
 		return "redirect:subPayResult.do";

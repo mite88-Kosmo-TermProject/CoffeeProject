@@ -11,8 +11,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+//아임포트 토큰발급
 @Service
-public class ImportPay {
+public class ImportToken {
 	
 	public String getToken() {
 			
