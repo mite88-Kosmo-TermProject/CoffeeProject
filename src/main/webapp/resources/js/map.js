@@ -5,7 +5,7 @@ let presentPosition;
 /////////////////지도의 중심을 현재 위치로 변경///////////////////////
 var mapContainer = document.getElementById('mapArea'), // 지도를 표시할 div 
 	mapOption = {
-		center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		center: new kakao.maps.LatLng(37.4811, 126.8832), // 지도의 중심좌표
 		level: 5 // 지도의 확대 레벨 
 	};
 
@@ -202,8 +202,6 @@ function getListItem(index, places) {
 
 			'<p class="tagWrap">' +
 			'<span class="tag">#제주시청카페</span>' +
-			'<span class="tag">#제주보드게임카페</span>' +
-			'<span class="tag">#제주보드게임</span>' +
 			'</p>' +
 
 			'<div class="conUtil">' +

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -33,7 +33,6 @@
 
     <!-- Template Stylesheet -->
     <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
-    
     
   
 </head>
@@ -72,7 +71,14 @@
 				<a href="<%=request.getContextPath() %>/cafe/map.do" class="nav-item nav-link active">검색</a> 
 				<a href="<%=request.getContextPath() %>/cafeSNS/review.do" class="nav-item nav-link">카페SNS</a> 
 				<a href="<%=request.getContextPath() %>/community/boardList.do" class="nav-item nav-link">게시판</a>
-				<a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
+				<c:if test="${sessionScope.siteUserInfo!=null}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
+               </span>
+           		</c:if>
+				
+				
+				<a href="<%=request.getContextPath() %>/order/subPay.do" class="nav-item nav-link">패스구매</a>
 				
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle"
@@ -85,10 +91,18 @@
 							href="404.html" class="dropdown-item">404 Page</a>
 					</div>
 				</div>
-				
+
 			</div>
-			<a href="<%= request.getContextPath() %>/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
+			<c:if test="${sessionScope.siteUserInfo!=null}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/member/logout.do">로그아웃</a>
+                  
+               </span>
+            </c:if>
+            <c:if test="${sessionScope.siteUserInfo==null}">
+               <a href="<%= request.getContextPath() %>/member/login.do" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">로그인<i class="fa fa-arrow-right ms-3"></i>
 			</a>
+            </c:if>
 		</div>
 	</nav>
 	<!-- Navbar End -->

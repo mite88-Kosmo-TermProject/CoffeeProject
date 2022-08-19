@@ -1,12 +1,7 @@
 <%--
 /**
- * <pre>
- * 1. 프로젝트명 : /member/delete.jsp
- * 2. 작성일 : 2022. 8. 1. 오전 9:47:31
- * 3. 작성자 : 전옥주
- * 4. 설명 : 회원삭제
- * </pre>
- */
+
+약괸 동의 페이지
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -21,249 +16,131 @@
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-
-
-
-
-
-
-
-
-<!-- 회원가입 테그 start -->
-
-
-@charset "utf-8";
-* {margin:0;padding:0;}
-html {height:100%;}
-body {height:100%; font-family: 'Noto Sans KR';}
-table, tr, td, th, div, p, em, ol, ul, li, dl, dt, dd, a, address, img, h1, h2, h3, h4, h5, h6 {font-size:11pt; color:#666;text-decoration: none;}
-img {border:0; }
-h1 { float:left; padding:0 0 0 0px;}
-h2 {padding:0 0 0 0px;}
-ul, li { list-style:none;}
-ul{list-style:none; }
-.red_txt{color:#ee7272;}
-.blind {display:block;overflow:hidden;position:absolute;left:0;top:-5000px}
-.wrap{max-width:960px; margin: 0 auto;}
-.wrap.wd668{max-width:628px;}
-.wrap.wd668.line{border:1px solid #ececec;padding:30px 20px;}
-.container{width:100%;}
-.sub_tit_txt{margin:80px 0 20px 20px; color: #2f2f2f; font-size: 25px;}
-.wrap.wd668.line .sub_tit_txt{margin:0px 0 20px 20px; }
-.con_term .term_txt{border:1px solid #ececec;padding:30px; height:210px; overflow-y: auto; margin:0 0 15px;}
-.con_term .term_txt ul li,.con_term .term_txt p ,.con_term .term_txt div{color:#818181;font-size:12px; line-height:17px;margin: 0 0 15px;}
-.left_margin{margin:0 0 0 20px;}
-.con_term .term_txt div.txt_bold{font-weight: bold; margin:0 0 25px;}
-.btn_wrap{text-align:center; margin:40px 0 30px;}
-.btn_wrap a{color: #fff; background-color: #4380ce; font-weight: bold; padding: 10px;  height: 30px; line-height: 30px; width: 168px; display: block; text-align: center; margin: 0 auto;}
-.btn_wrap a.wide{width:587px;margin: 0 0 0 20px;}
-.find_txt ul li{color:#9a9a9a;font-size:13px;text-align:center; line-height:17px; margin:0 0 20px;}
-.form_txtInput .checkbox_wrap {position: relative;padding: 5px;text-align: right;}
-.form_txtInput .checkbox_wrap input[type="checkbox"] {position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;}
-.form_txtInput .checkbox_wrap input[type="checkbox"] + label {display: inline-block; line-height:14px;position: relative;padding-left: 20px;font-size: 13px;color: #818181;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;}
-.form_txtInput .checkbox_wrap input[type="checkbox"] + label:before {content: '';position: absolute;top: 0px;left: 0;width: 12px;height: 12px;text-align: center;background: #fff;border: 1px solid #c2c2c2;}
-.form_txtInput .checkbox_wrap input[type="checkbox"] + label:active:before, .checkbox_wrap input[type="checkbox"]:checked + label:active:before {box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);}
-.form_txtInput .checkbox_wrap input[type="checkbox"]:checked + label:before {background: #fff;border-color: #ddd;}
-.form_txtInput .checkbox_wrap input[type="checkbox"]:checked + label:after {content: '✓';color: #0094ff;position: absolute;top:0px;left:2px;width: 7px;height: 7px;font-size: 13px;font-weight: bold;}
-.exTxt{font-size:14px;color:#9a9a9a;display: block;margin:0 0 45px 20px;}
-.join_form{width:100%;max-width:668px;}
-.join_form table {border-spacing: 0;margin:0;padding:0; border:0;width:100%;}
-.join_form table input{ border:1px solid #ececec;font-size:14px;color:#4c4c4c; height:35px; padding:10px; width:100%; float:left;}
-.join_form table input.email{width:162px; display: inline-block;}
-.join_form table input.email2{width:192px;}
-.join_form.idpwFind table input{width:519px;}
-.join_form.idpwFind table input.email{width:223px;}
-.join_form.idpwFind table input.email2{width:263px}
-.join_form.idpwFind table input.phone{width:182px;margin: 0 12px 0 11px;}
-.join_form.idpwFind table input.phone2{width:182px;}
-.join_form table input.send_number{width:383px;}
-.join_form table th span{color:#404040;font-size:14px; display:inline-block; position:relative;padding:0 10px 0 0; text-indent:20px;}
-.join_form table th{text-align:left;}
-.join_form table td{padding:6px 0;position: relative;}
-.join_form table th span:after{content:'*';font-size:13px;color:#f95427;position:absolute;top:0;right:0px;}
-.join_form.idpwFind table th span:after{content:none;}
-.join_form table td a.btn_confirm{display: inline-block; float:left;width:115px; height:48px;margin:5px 0 0 0px;border:1px solid #cfcfcf;background:#dedede;color:#626262;text-align:center; vertical-align: top;line-height: 50px;}
-.join_form.idpwFind table td select { -webkit-appearance: none; -moz-appearance: none;  appearance: none; background: url(https://secsales.interparkb2b.co.kr/data/G94/main/sele_arr.gif) no-repeat 95% 50%;text-indent:20px; width:124px; height:50px;border:1px solid #ececec; font-size:14px; color:#ccc; float:left;}
-.join_form.idpwFind table td select::-ms-expand { display: none;}
-.join_form.idpwFind table td  tr.phone td select {text-align: center; text-indent: 10px;}
-.join_form.idpwFind table tr.email input:after,.mar10:after,  .join_form.idpwFind table td select:after,.join_form table td a.btn_confirm:after{content:'';display: block;clear:both;}
-.agree_wrap{margin:36px 0 0;}
-.agree_wrap .checkbox_wrap{text-align:left;}
-::placeholder {color: #c4c4c4;opacity: 1;}
-:-ms-input-placeholder {color: #c4c4c4!important;}
-::-ms-input-placeholder {color: #c4c4c4!important;}
-.mar27{margin:27px 0 0;}
-.mar10{margin:14px 5px 0 10px; display: inline-block;padding:0; float:left;}
-.exform_txt{padding:12px 0 19px 0; text-align:right;color:#9a9a9a;font-size:13px;border-bottom:1px solid #ececec;}
-.exform_txt span{display: inline-block;position:relative;  padding-left:10px}
-.exform_txt span:after{content:'*';position:absolute;left:0;top:0; color:#f95427; font-size: 13px; font-weight: bold;}
-.explan_txt {margin:3px 0 0 22px;}
-.explan_txt li{color:#b2b2b2;font-size:13px; line-height:17px;}
-.popWrap{border:1px solid #ececec;padding:30px; max-width:400px;width:100%;margin:30px auto 0;display: none;position: absolute;top:0;left:50%;transform: translateX(-50%);background: #fff;z-index:5;}
-.popWrap.is-open{display: block;}
-.popWrap .pop_txt_con .pop_exTxt{font-size:14px;color:#9a9a9a;line-height:20px;}
-.popWrap .pop_txt_con .pop_exTxt span{color:#254ee9}
-.popWrap .pop_btnWrap{margin:30px 0 0;}
-.popWrap .pop_btnWrap a{color: #fff; background-color: #4380ce; font-weight: bold; padding: 10px;  height: 22px; line-height: 22px; width: 103px; display: block; text-align: center;}
-.join_form table input.send_number::placeholder{text-align:right;}
-.join_form table input.send_number:-ms-input-placeholder {text-align:right;}
-.join_form table input.send_number::-ms-input-placeholder {text-align:right;}
-.overlayer {  position: fixed;display: none;width: 100%;  height: 100%;  top: 0;  left: 0;  right: 0;  bottom: 0;  background-color: rgba(0,0,0,0.5);  z-index: 2;  cursor: pointer;}
-.overlayer.is-open{  display: block;}
-@media ( max-width: 1023px ) {
-  .wrap{margin: 30px auto;}
-  .wrap,.wrap.wd668.line{max-width:80vw;}
-  .wrap.wd668{width:90vw;}
-  .join_form{max-width:90vw;}
-  .join_form table th span{text-indent: 0;font-size:13px;}
-  .join_form table{width:100%;}
-  .join_form table input{ border:1px solid #ececec;font-size:14px;color:#4c4c4c; height:37px; padding:10px; width:100%;}
-  .join_form table input.email{width:30%; display: inline-block;}
-  .join_form table input.email2{width:60%;}
-  .join_form.idpwFind table input{width:100%;}
-  .join_form.idpwFind table tr.email input{float:left;}
-  .mar10{margin:5px 2% 0 2%; float:left;}
-  .join_form.idpwFind table input.email{width:36%;}
-  .join_form.idpwFind table input.email2{width:53%}
-  .join_form.idpwFind table input.phone{width:30%;margin:0 4% 0 4%;}
-  .join_form.idpwFind table input.phone2{width:31%;}
-  .join_form table input.send_number{width: 53%; }
-  .exTxt{margin:0 0 25px 0px}
-  .wrap.wd668.line .sub_tit_txt,.wrap .sub_tit_txt{margin:0 0 10px 0;}
-  .btn_wrap a,.btn_wrap a.wide{width:auto;margin:0;}
-  .btn_wrap{overflow: hidden;}
-  .join_form.idpwFind table td select{width:30%;height:37px; float:left;}
-  .join_form.idpwFind table tr.email input:after,.mar10:after,  .join_form.idpwFind table td select:after{content:'';display: block;clear:both;}
-  .popWrap{right: auto; max-width: 80vw; margin: 30px auto 0; left: 50%; transform: translateX(-50%);}
-  .join_form table td a.btn_confirm{width: 100px; height: 35px;line-height: 35px; font-size: 12px;margin:5px 0 0 ;}
-  .join_form table input.send_number + a{margin:0 0 0 5px;}
-}
-
-<!-- 회원가입테그? END -->
-
-</script>
-
-
-
-
-
-
-
+<link
+	href="<%=request.getContextPath()%>/resources/assets/css/joining.css"
+	rel="stylesheet">
 </head>
 
 
+<body style="background-color: #F7F7F7;">
+	<!-- Section 01 -->
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-4">
+				<div class="col-12">
+					<form action="<%= request.getContextPath() %>/member/join.do" id="terms_form">
+						<section id="join-wrapper"
+							class="wrapper Latest_data more-services top_100">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div id="join_header">
+											<br>
+											<h3>수집동의서 및 회원이용약관</h3>
+										</div>
+										<hr style="opacity: 0.5;">
+										<br> <br>
 
-<body>
-	
-	<!-- content -->
-	
-	
-	<div class="wrap wd668">
-      <div class="container">
-        <div class="form_txtInput">
-          <h2 class="sub_tit_txt">회원가입</h2>
-          <p class="exTxt">회원가입시 이메일 인증을 반드시 진행하셔야 합니다.</p>
-          <div class="join_form">
-            <table>
-              <colgroup>
-                <col width="30%"/>
-                <col width="auto"/>
-              </colgroup>
-              <tbody>
-                <tr>
-                  <th><span>아이디</span></th>
-                  <td><input type="text" placeholder="ID 를 입력하세요."></td>
-                </tr>
-                <tr>
-                  <th><span>이름</span></th>
-                  <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                  <th><span>비밀번호</span></th>
-                  <td><input type="text" placeholder="비밀번호를 입력해주세요."></td>
-                </tr>
-                <tr>
-                  <th><span>비밀번호 확인</span></th>
-                  <td><input type="text" placeholder="비밀번호를 확인하세요"></td>
-                </tr>
-                <tr class="email">
-                  <th><span>이메일</span></th>
-                  <td>
-                    <input type="text"  class="email" placeholder=""><span class="mar10">@</span>
-                    <input type="text"  class="email email2" placeholder="">
-                    <a href="javascript:;" class="btn_confirm">인증번호 발송</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th><span>인증번호 확인</span></th>
-                  <td><input type="text" class="send_number" placeholder="10:00">
-                  </td>
-                </tr>
-                <tr>
-                  <th><span>휴대폰 번호</span></th>
-                  <td><input type="text" placeholder="ID 를 입력하세요."></td>
-                </tr>
-              </tbody>
-            </table>
-            <br>
-            
-            <div class="exform_txt"><span>표시는 필수적으로 입력해주셔야 가입이 가능합니다.</span></div>
-          </div><!-- join_form E  -->
-          <div class="agree_wrap">
-            <div class="checkbox_wrap">
-              <input type="checkbox" id="news_letter" name="news_letter" class="agree_chk">
-              <label for="news_letter">[선택]뉴스레터 수신동의</label>
-            </div>
-            <div class="checkbox_wrap mar27">
-              <input type="checkbox" id="marketing" name="marketing" class="agree_chk">
-              <label for="marketing">[선택]마케팅 목적 개인정보 수집 및 이용에 대한 동의</label>
-              <ul class="explan_txt">
-                <li><span class="red_txt">항목 : 성별, 생년월일</span></li>
-                <li>고객님께서는 위의 개인정보 및 회원정보 수정 등을 통해 추가로 수집하는 개인정보에<br/>
-                  대해 동의하지 않거나 개인정보를 기재하지 않음으로써 거부하실 수 있습니다.<br/>
-                  다만 이때 회원 대상 서비스가 제한될 수 있습니다.
-                </li>
-              </ul>
-              <h2>2222222222</h2> 
-            </div>
-          </div>
-          <div class="btn_wrap">
-            <a href="javascript:;">다음</a>
-          </div>
-        </div> <!-- form_txtInput E -->
-      </div><!-- content E-->
-    </div> <!-- container E -->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+										<div class="join_con mb-5">
+											<h4>개인정보 수집•이용 동의서</h4>
+											<header>
+												<input type="checkbox" id="check01"> <label
+													for="check01" style="font-size: 18px;">개인정보수집
+													동의(필수)</label>
+											</header>
+											<p>
+												★☆★☆★☆와타시는!!!★☆★☆★☆「개인정보보호법」에 의거하여, 아래와 같은 내용으로 개인정보를 수집하고
+												있습니다. 귀하께서는 아래 내용을 자세히 읽어 보시고, 모든 내용을 이해하신 후에 동의 여부를 결정해 주시기
+												바랍니다. Ⅰ. 개인정보의 수집 및 이용 동의서<br> - 이용자가 제공한 모든 정보는 다음의
+												목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.<br> ① 개인정보 수집 항목
+												및 수집·이용 목적<br> 가) 수집 항목 (필수항목)<br> - 성명(국문),
+												주민등록번호, 주소, 전화번호(자택, 휴대전화), 사진, 이메일, 나이, 재학정보, 병역사항, 외국어 점수,
+												가족관계, 재산정도, 수상내역, 사회활동, 타 장학금 수혜현황, 요식업 종사 현황 등 지원 신청서에 기재된
+												정보 또는 신청자가 제공한 정보<br> 나) 수집 및 이용 목적 - 하이트진로 장학생 선발 전형
+												진행 - 하이트진로 장학생과의 연락 및 자격확인 - 하이트진로 장학생 자원관리<br> ② 개인정보
+												보유 및 이용기간<br> - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지<br>
+												③ 동의거부관리<br> - 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부하실
+												권리가 있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 장학생 선발 과정에 있어
+												불이익이 발생할 수 있음을 알려드립니다.<br> <br> Ⅱ. 고유식별정보 처리 동의서<br>
+												① 고유식별정보 수집 항목 및 수집·이용 목적<br> 가) 수집 항목 (필수항목)<br>
+												- 주민등록번호<br> 나) 수집 및 이용 목적<br> - 하이트진로 장학생 선발 전형
+												진행<br> - 하이트진로 장학생과의 연락 및 자격확인<br> - 하이트진로 장학생
+												자원관리<br> ② 개인정보 보유 및 이용기간<br> - 수집·이용 동의일로부터 개인정보의
+												수집·이용목적을 달성할 때까지<br> ③ 동의거부관리<br> - 귀하께서는 본 안내에 따른
+												개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를
+												거부하시는 경우에 장학생 선발 과정에 있어 불이익이 발생할 수 있음을 알려드립니다.
 
-	<!-- footer -->
+											</p>
+										</div>
+
+										<div class="join_con mb-5">
+											<h4>개인정보 수집•이용 동의서</h4>
+											<header>
+												<input type="checkbox" id="check02" style="padding: 10px;">
+												<label for="check02" style="font-size: 18px;">
+													회원이용약관 동의(필수)</label>
+											</header>
+											<p>
+												★☆★☆★☆와타시는!!!★☆★☆★☆「개인정보보호법」에 의거하여, 아래와 같은 내용으로 개인정보를 수집하고
+												있습니다. 귀하께서는 아래 내용을 자세히 읽어 보시고, 모든 내용을 이해하신 후에 동의 여부를 결정해 주시기
+												바랍니다. Ⅰ. 개인정보의 수집 및 이용 동의서<br> - 이용자가 제공한 모든 정보는 다음의
+												목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.<br> ① 개인정보 수집 항목
+												및 수집·이용 목적<br> 가) 수집 항목 (필수항목)<br> - 성명(국문),
+												주민등록번호, 주소, 전화번호(자택, 휴대전화), 사진, 이메일, 나이, 재학정보, 병역사항, 외국어 점수,
+												가족관계, 재산정도, 수상내역, 사회활동, 타 장학금 수혜현황, 요식업 종사 현황 등 지원 신청서에 기재된
+												정보 또는 신청자가 제공한 정보<br> 나) 수집 및 이용 목적 - 하이트진로 장학생 선발 전형
+												진행 - 하이트진로 장학생과의 연락 및 자격확인 - 하이트진로 장학생 자원관리<br> ② 개인정보
+												보유 및 이용기간<br> - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지<br>
+												③ 동의거부관리<br> - 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부하실
+												권리가 있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 장학생 선발 과정에 있어
+												불이익이 발생할 수 있음을 알려드립니다.<br> <br> Ⅱ. 고유식별정보 처리 동의서<br>
+												① 고유식별정보 수집 항목 및 수집·이용 목적<br> 가) 수집 항목 (필수항목)<br>
+												- 주민등록번호<br> 나) 수집 및 이용 목적<br> - 하이트진로 장학생 선발 전형
+												진행<br> - 하이트진로 장학생과의 연락 및 자격확인<br> - 하이트진로 장학생
+												자원관리<br> ② 개인정보 보유 및 이용기간<br> - 수집·이용 동의일로부터 개인정보의
+												수집·이용목적을 달성할 때까지<br> ③ 동의거부관리<br> - 귀하께서는 본 안내에 따른
+												개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를
+												거부하시는 경우에 장학생 선발 과정에 있어 불이익이 발생할 수 있음을 알려드립니다.
+											</p>
+											<br>
+										</div>
+										<!--join_con mb-5 end-->
+										<div class="join_btn">
+											<button type="reset" class="btn btn-danger">취소</button>
+											<button type="button" id="nextBtn" class="btn btn-primary">다음</button>
+										</div>
+									</div>
+									<!--col end-->
+								</div>
+								<!--row end-->
+							</div>
+							<!--container end-->
+						</section>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 
+	<script type="text/javascript">
+        $(document).ready(function(){
+    
+            $("#nextBtn").click(function(){    
+                if($("#check01").is(":checked") == false){
+                    alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                    return;
+                }else if($("#check02").is(":checked") == false){
+                    alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
+                    return;
+                }else{
+                    $("#terms_form").submit();
+                }
+            });    
+        });
+    </script>
 </body>
 
 </html>
