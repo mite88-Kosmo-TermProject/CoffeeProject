@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ReviewDTO {
 
-	private String review_idx;
+	private int review_idx;
 	
 	private String review_content;
 	
@@ -17,6 +17,8 @@ public class ReviewDTO {
 	
 	private MemberDTO memberDTO;
 	
+	private ImageDTO imageDTO;
+	
 	private String review_star;
 	
 	private String review_img;
@@ -24,4 +26,5 @@ public class ReviewDTO {
 	private String store_idx;
 	
 	private String mem_id;
+
 }

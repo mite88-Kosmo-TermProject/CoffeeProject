@@ -14,10 +14,4 @@ public class StoreOwnerSubController {
 		return "/storeowner/storeOwnerSub/list";
 	}
 	
-	//구독추가
-	@RequestMapping(value = "/storeowner/storeOwnerSub/add.do", method = RequestMethod.GET)
-	public String add() {
-
-		return "/storeowner/storeOwnerSub/add";
-	}
 }

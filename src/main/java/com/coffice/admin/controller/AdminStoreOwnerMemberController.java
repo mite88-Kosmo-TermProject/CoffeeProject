@@ -71,18 +71,33 @@ public class AdminStoreOwnerMemberController {
 	//-----------------------------------------------------------
 	
 	// 관리자 구독관리 리스트
-		@RequestMapping(value = "/admin/storeOwnerSub/list.do", method = RequestMethod.GET)
-		public String storeOwnerSub_list() {
+	@RequestMapping(value = "/admin/storeOwnerSub/list.do", method = RequestMethod.GET)
+	public String storeOwnerSub_list() {
 
-			return "/admin/storeOwnerSub/list";
-		}
+		return "/admin/storeOwnerSub/list";
+	}
 
-		// 관리자 구독관리 승인여부
-		@RequestMapping(value = "/admin/storeOwnerMemberSub/ajax_Check.do", method = RequestMethod.POST)
-		@ResponseBody
-		public void storeOwnerSub_ajax_check() {
+	// 관리자 구독관리 승인여부
+	@RequestMapping(value = "/admin/storeOwnerMemberSub/ajax_Check.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void storeOwnerSub_ajax_check() {
 
-			//return "/admin/storeOwnerMember/ajax_check.do";
-		}
+		//return "/admin/storeOwnerMember/ajax_check.do";
+	}
+	
+	
+	//구독권 리스트
+	@RequestMapping(value = "/admin/storeOwnerSub/subList.do", method = RequestMethod.GET)
+	public String subList() {
+		
+		return "/admin/storeOwnerSub/subList";
+	}
+	
+	//구독권추가
+	@RequestMapping(value = "/admin/storeOwnerSub/subAdd.do", method = RequestMethod.GET)
+	public String subAdd() {
+
+		return "/admin/storeOwnerSub/subAdd";
+	}
 
 }
