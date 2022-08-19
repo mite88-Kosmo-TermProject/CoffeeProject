@@ -13,6 +13,7 @@
 
 	<!-- 정적파일 경로 세팅 -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources mapping="/static/**" location="/resources/react/static/" />
 	
 	<!-- ViewResolver를 통한 JSP 경로 세팅 -->
 	<bean
