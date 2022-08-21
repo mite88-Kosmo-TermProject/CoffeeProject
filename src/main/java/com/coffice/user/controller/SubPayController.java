@@ -1,13 +1,12 @@
 package com.coffice.user.controller;
 
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coffice.dto.SubPayDTO;
+import com.coffice.dto.SubscriptionDTO;
 import com.coffice.user.service.SubPaylmpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -44,6 +44,15 @@ public class SubPayController {
 //			//로그인 페이지로 이동한다. 
 //			return "redirect:/member/login.do";
 //		}
+//		
+//		회원정보 결제창에 가져오기
+//		MemberDTO dto = sqlSession.getMapper(SubPaylmpl.class)
+//			.user(((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id());
+		
+		ArrayList<SubscriptionDTO> lists = sqlSession.getMapper(SubPaylmpl.class).subList();
+		
+		model.addAttribute("lists", lists);
+//		model.addAttribute("dto", dto);
 		
 		//로그인상태라면 패스구매페이지 진입
 		return "/user/order/subPay";
@@ -54,7 +63,7 @@ public class SubPayController {
 	public String modifyAction(HttpSession session, SubPayDTO subPayDTO) {
 		
 		
-		int applyRow = sqlSession.getMapper(SubPaylmpl.class).Payment_info(subPayDTO);
+		int applyRow = sqlSession.getMapper(SubPaylmpl.class).payment_info(subPayDTO);
 		System.out.println("수정처리된 레코드수 :" + applyRow);
 		
 		return "redirect:subPayResult.do";

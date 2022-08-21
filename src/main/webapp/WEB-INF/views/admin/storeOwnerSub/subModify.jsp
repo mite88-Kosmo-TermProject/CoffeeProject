@@ -41,11 +41,14 @@
 			                <div class="col-xl">
 			                  <div class="card mb-4">
 			                    <div class="card-header d-flex justify-content-between align-items-center">
-			                      <h5 class="mb-0">구독권 추가</h5>
+			                      <h5 class="mb-0">구독권</h5>
 			                      <small class="text-muted float-end">Default label</small>
 			                    </div>
 			                    <div class="card-body">
-			                      <form action="../../admin/storeOwnerSub/subAddAction.do" name="addSubForm" method="post">
+			                      <form action="../../admin/storeOwnerSub/modifySub.do" name="addSubForm">
+			                      
+			                      <input type="hidden" name="subIdx" value="${dto.sub_idx }">
+			                      
 			                        <div class="mb-3">
 			                          <label class="form-label" for="basic-default-fullname">구독권 이름</label>
 			                          <input 
@@ -53,7 +56,8 @@
 				                          class="form-control" 
 				                          id="basic-default-fullname" 
 				                          name="subName"
-				                          placeholder="Coffee Pass 30잔" />
+				                          value="${dto.sub_name }"
+				                       />
 			                        </div>
                                     <div class="mb-3">
 			                          <label class="form-label" for="basic-icon-default-company">구독권 가격</label>
@@ -62,11 +66,11 @@
 			                              ><i class='bx bx-won'></i
 			                            ></span>
 			                            <input
-			                              type="text"
+			                              type="number"
 			                              id="basic-icon-default-company"
 			                              class="form-control"
 			                              name="subPrice"
-			                              placeholder="30000"
+			                              value="${dto.sub_price }"
 			                              aria-label="ACME Inc."
 			                              aria-describedby="basic-icon-default-company2"
 			                            />
@@ -80,7 +84,7 @@
 			                              id="basic-default-email"
 			                              class="form-control"
 			                              name="subCoffeeNum"
-			                              placeholder="30"
+			                              value="${dto.sub_coffee_num }"
 			                              aria-label="john.doe"
 			                              aria-describedby="basic-default-email2"
 			                            />
@@ -105,7 +109,7 @@
 			                            placeholder="Hi, Do you have a moment to talk Joe?"
 			                          ></textarea>
 			                        </div> -->
-			                        <button type="submit" class="btn btn-primary">구독권 추가</button>
+			                        <button type="submit" class="btn btn-primary">구독권 수정</button>
 			                      </form>
 			                    </div>
 			                  </div>

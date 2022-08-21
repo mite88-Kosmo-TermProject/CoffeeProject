@@ -10,6 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,15 +31,37 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 <script>
+	//가격 천의 자리마다 콤마 붙이기 위해 넣음
+	//그외 잔당 가격 계산등 기능구현
+	window.onload = function () {
+	    let prices = document.getElementsByName("price");
+	    let cups = document.getElementsByName("cup");
+	    let oneCups = document.getElementsByName("oneCup");
+	    
+	    for(let i=0; i<prices.length; i++) {
+	    	oneCups[i].innerHTML = Number( prices[i].innerHTML / cups[i].innerHTML ).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
+	    	prices[i].innerHTML = Number(prices[i].innerHTML).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
+	    	cups[i].innerHTML = cups[i].innerHTML+"잔";
+	    }
+	    
+	};
+
+	function fnProductSelect01(name, price, cup) {
+		document.getElementById("selectName").innerHTML = name;
+		document.getElementById("selectPrice").innerHTML = price;
+		document.getElementById("selectCup").innerHTML = cup;
+	}
+	
+	//회원정보 dto 로 가져옴 (결제 안내창에 뿌려주고 사용)
 	function kakaopay(){
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp56165372'); 
 		IMP.request_pay({
 			pg: "kakaopay", // 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 누락되거나 매칭되지 않는 경우 관리자 콘솔에서 설정한 기본PG가 호출됨 값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
-			merchant_uid : new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
-			name : 'CoffeePass 30잔', //주문명 (구독권 이름)
-			amount : 1, // 포인트등을 사용한 첫 결제금액
+			merchant_uid : 'merchant_' + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
+			name : $('#selectName').html(), //주문명 (구독권 이름)
+			amount : $('#selectPrice').html(), // 포인트등을 사용한 첫 결제금액
 			customer_uid : $('#customer_id').val(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
 			buyer_email : 'madcatz92@naver.com', // 주문자 이메일[페이먼트월 필수]
 			buyer_name : '이준희', //주문자명
@@ -222,15 +245,37 @@
 	<h5>이용권</h5>		
 		<table class = pay border="1">
 			<tr>
-				<td rowspan="2" class="pay_detail">이용권</td>
-				<td>월 기본 제공 </td>
-				<td>30</td>
-			</tr>
-			<tr>
-				<td>남은 커피패스 이용횟수</td>
-				<td id="pay_coupon">3</td>
+				<td>구독권 이름</td>
+				<td>가격</td> 
+				<td>커피잔 수</td>  
+				<td>한잔당 가격</td> 
 			</tr>
 		</table>
+			<!-- loop.index 사용을 고려해보자 -->
+			<c:forEach items="${lists }" var="dto" varStatus="loop">
+				<span onclick="fnProductSelect01('${dto.sub_name}','${dto.sub_price }','${dto.sub_coffee_num }');">
+					<div>${dto.sub_name }</div>
+					<div name="price">${dto.sub_price }</div> 
+					<%-- <td name="price${loop.index }">${dto.sub_price }</td>  --%>
+					<div name="cup">${dto.sub_coffee_num }</div>  
+					<div name="oneCup"></div> 
+				</span>
+			</c:forEach>
+<!-- 			<tr>
+				<td>남은 커피패스 이용횟수</td>
+				<td id="pay_coupon">3</td>
+			</tr> -->
+
+		<div id="selectName">
+			
+		</div>
+		<div id="selectPrice">
+		
+		</div>
+		<div id="selectCup">
+		
+		</div>
+		
 		<div>
 			<input type="text" id="customer_id" value="madcatz92">
 		</div>	
@@ -242,5 +287,4 @@
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 
 </body>
-
 </html>
