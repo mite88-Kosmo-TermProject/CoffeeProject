@@ -87,6 +87,7 @@ public class UserMemberController {
 		}
 		else {
 			session.setAttribute("siteUserInfo", memberDTO);
+			session.setAttribute("user_id", memberDTO.getMem_id());
 		}
 		return "home";
 	}

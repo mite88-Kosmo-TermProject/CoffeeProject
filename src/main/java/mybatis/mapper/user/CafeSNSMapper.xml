@@ -28,15 +28,23 @@
 		<id property="mem_email" column="mem_email"/>
 		<id property="mem_phone" column="mem_phone"/>
 	</resultMap>
+	<resultMap type="com.coffice.dto.HeartDTO" id="HeartMap">
+		<id property="review_idx" column="review_idx"/>
+		<id property="like_flag" column="like_flag"/>
+		<id property="like_postdate" column="like_postdate"/>
+		<id property="mem_id" column="mem_id"/>
+	</resultMap>
 	
 	<resultMap type="com.coffice.dto.ReviewDTO" id="SNSMap">
 		<result property="review_idx" column="review_idx"/>
 		<result property="review_content" column="review_content"/>
 		<result property="review_star" column="review_star"/>
 		<result property="review_img" column="review_img"/>
+		<result property="like_hit" column="like_hit"/>
 		<collection property="storesDTO" resultMap="StoreMap"/>
 		<collection property="memberDTO" resultMap="UserMap"/>
 		<collection property="imageDTO" resultMap="ImageMap"/>
+		<collection property="hearts" resultMap="HeartMap"></collection>
 	</resultMap>
 	<select id="list" resultMap="SNSMap">
 		select * from review LEFT join stores on review.store_idx = stores.store_idx
@@ -72,7 +80,7 @@
 	
 	<insert id="insert" parameterType="com.coffice.dto.ReviewDTO">
 		insert into review (review_idx, review_content, store_idx, mem_id, review_star)
-		values(review_seq.nextval, #{review_content},#{store_idx}, 'mangoman',#{review_star} )
+		values(review_seq.nextval, #{review_content},#{store_idx}, #{mem_id},#{review_star} )
 	</insert>
 	
 	<select id="getIdx" parameterType="com.coffice.dto.ReviewDTO" resultType="int">
@@ -83,4 +91,38 @@
 		insert into image (image_idx,review_idx,store_idx,image_origin,image_save)
 		values(image_seq.nextval,#{review_idx},#{store_idx},'origin',#{image_save})
 	</insert>
+	
+	
+	
+   <select id="findLike" parameterType="com.coffice.dto.HeartDTO" resultType="int">
+      select count(like_flag) from heart where mem_id = #{mem_id} and review_idx = #{review_idx}
+   </select>
+		
+
+	
+   <insert id="insertlike" parameterType="com.coffice.dto.HeartDTO">
+       INSERT INTO heart (MEM_ID, review_idx, like_flag, like_postdate)
+       VALUES
+       (#{mem_id}, #{review_idx}, 1, sysdate)
+   </insert>
+   
+   <delete id="likedelete" parameterType="com.coffice.dto.HeartDTO">
+	  DELETE from heart where mem_id=#{mem_id} and review_idx=#{review_idx}   
+   </delete>
+   
+   <update id="like_up">
+   	  update review set like_hit = like_hit + 1 where review_idx=#{_idx}
+   </update>
+   
+   <update id="like_down" >
+   	  update review set like_hit = like_hit - 1 where review_idx=#{_idx}
+   </update>
+	
+	<select id="like_hit" resultType="int">
+		select like_hit from review where review_idx = #{_idx}
+	</select>
+	
+	<select id="check_like" resultMap="HeartMap">
+		select * from heart where mem_id = #{user_id}
+	</select>
 </mapper>

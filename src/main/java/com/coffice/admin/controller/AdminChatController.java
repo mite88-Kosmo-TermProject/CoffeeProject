@@ -1,10 +1,8 @@
 package com.coffice.admin.controller;
 
 import java.io.FileInputStream;
-import java.net.http.HttpRequest;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coffice.admin.service.*;
-import com.coffice.dto.*;
+import com.coffice.admin.service.ChatDAO;
+import com.coffice.dto.ChatDTO;
 
 
 @RestController

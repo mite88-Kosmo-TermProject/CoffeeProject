@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
-	<x>887</x>
-	<y>244</y>
+	<x>0</x>
+	<y>418</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2022-07-29 09:51:31</creation_date>
-			<updated_date>2022-08-19 16:05:47</updated_date>
+			<updated_date>2022-08-20 22:29:36</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -4442,7 +4442,7 @@
 				</relation>
 				<relation>
 					<id>9</id>
-					<source>17</source>
+					<source>18</source>
 					<target>11</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4464,7 +4464,7 @@
 				</relation>
 				<relation>
 					<id>10</id>
-					<source>18</source>
+					<source>17</source>
 					<target>11</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4495,7 +4495,7 @@
 				<normal_column>
 					<id>59</id>
 					<referenced_column>117</referenced_column>
-					<relation>10</relation>
+					<relation>9</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4563,7 +4563,7 @@
 				<normal_column>
 					<id>61</id>
 					<referenced_column>114</referenced_column>
-					<relation>9</relation>
+					<relation>10</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4784,7 +4784,7 @@
 			<connections>
 				<relation>
 					<id>11</id>
-					<source>14</source>
+					<source>15</source>
 					<target>12</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4806,7 +4806,7 @@
 				</relation>
 				<relation>
 					<id>12</id>
-					<source>15</source>
+					<source>14</source>
 					<target>12</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4870,7 +4870,7 @@
 				<normal_column>
 					<id>68</id>
 					<referenced_column>98</referenced_column>
-					<relation>12</relation>
+					<relation>11</relation>
 					<description>구독권사용아이디</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>구독권사용아이디</logical_name>
@@ -4904,7 +4904,7 @@
 				<normal_column>
 					<id>69</id>
 					<referenced_column>80</referenced_column>
-					<relation>11</relation>
+					<relation>12</relation>
 					<description>커피를 판 매장일련번호</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>커피를 판 매장일련번호</logical_name>
@@ -6712,7 +6712,7 @@
 			<connections>
 				<relation>
 					<id>15</id>
-					<source>17</source>
+					<source>15</source>
 					<target>18</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -6734,7 +6734,7 @@
 				</relation>
 				<relation>
 					<id>16</id>
-					<source>15</source>
+					<source>17</source>
 					<target>18</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -6798,7 +6798,7 @@
 				<normal_column>
 					<id>118</id>
 					<referenced_column>114</referenced_column>
-					<relation>15</relation>
+					<relation>16</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -6832,7 +6832,7 @@
 				<normal_column>
 					<id>119</id>
 					<referenced_column>98</referenced_column>
-					<relation>16</relation>
+					<relation>15</relation>
 					<description>구매한멤버아이디</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>구매한멤버아이디</logical_name>
