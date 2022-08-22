@@ -7,10 +7,18 @@
   
 <mapper namespace="com.coffice.user.service.SubPaylmpl">
 
-	<insert id="insert" parameterType="com.coffice.dto.SubPayDTO">
+	<insert id="payment_info" parameterType="com.coffice.dto.SubPayDTO">
 		INSERT INTO tests VALUES 
 		(#{customer_id}, #{pay_import_key}, #{pay_idx}, #{pay_price}, #{pay_result_status}, #{sub_idx}, #{pay_successed_at})
 	</insert>
+	
+	<select id="subList" resultType="com.coffice.dto.SubscriptionDTO">
+		SELECT * FROM subscription ORDER BY sub_price ASC
+	</select>
+	
+	<select id="user" resultType="com.coffice.dto.MemberDTO">
+		SELECT * FROM member where mem_id = #{param1}
+	</select>
 
 <!--
 	이용권 결제내역 추가

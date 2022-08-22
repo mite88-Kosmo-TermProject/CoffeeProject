@@ -62,3 +62,4 @@ public class StoreownerChatController {
 		return image;
 	}
 }
+
