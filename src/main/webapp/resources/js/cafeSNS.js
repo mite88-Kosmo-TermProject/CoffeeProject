@@ -230,9 +230,20 @@ function getCafeList(list){
                  let tableData="";
                //console.log("콜백성공"+data);
                //console.log(data[0].review_idx);
+               
+               var check_like = data.check_like;
                /*append 부분*/
-               $(data).each(function (index, data) {
-                  if(data.imageDTO.image_save!=null){
+               $(data.lists).each(function (index, data) {
+                  var color = "black";
+               for(var i =0; i<check_like.length; i++){
+               		if(check_like[i].review_idx == data.review_idx){
+               			console.log(check_like[i].review_idx+"==="+ data.review_idx);
+               			color = "red";
+               			break;
+               		}
+               }
+               
+               if(data.imageDTO.image_save!=null){
                   var files = data.imageDTO.image_save.split("/");
                   console.log(files[0]);
                    tableData +=""
@@ -282,7 +293,7 @@ function getCafeList(list){
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
                      +        '<span name="like" id="like">'
-                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" ></i>'
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
@@ -343,7 +354,7 @@ function getCafeList(list){
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
                      +        '<span id="like">'
-                     +'<i class="far fa-thumbs-up fa-lg" ></i>'
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
