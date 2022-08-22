@@ -18,6 +18,8 @@ import com.coffice.dto.MemberDTO;
 import com.coffice.user.service.UserMemberImpl;
 
 
+import common.TESTImpl;
+
 @Controller
 public class AdminHomeController {
 	@Autowired
