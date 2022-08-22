@@ -7,8 +7,8 @@
  * </pre
 >
 */ --%> <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+pageEncoding="UTF-8"%> <%@taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -183,7 +183,7 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="row g-4" id="show_data">
             <!-- snsㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
-            
+
             <!-- // -->
           </div>
 
@@ -200,12 +200,17 @@ pageEncoding="UTF-8"%>
     </div>
 
     <!-- footer -->
-  	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-      <!-- 좋아요 JS(정순만) -->
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
+
+    <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+    <!-- 좋아요 JS(정순만) -->
     <script
-      type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
-    
+      type="text/javascript"
+      src="<%=request.getContextPath()%>/resources/js/like.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
+    ></script>
 
     <script>
       //찜(하트)
@@ -218,7 +223,6 @@ pageEncoding="UTF-8"%>
           x.style.color = "black";
         }
       }
-      
     </script>
 
     <!-- 사진 -->
@@ -238,6 +242,5 @@ pageEncoding="UTF-8"%>
       });
     </script>
     <!-- footer -->
-   
   </body>
 </html>

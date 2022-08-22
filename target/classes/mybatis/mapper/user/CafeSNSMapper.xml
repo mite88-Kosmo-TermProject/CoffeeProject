@@ -11,6 +11,7 @@
 		<id property="store_longitude" column="store_longitude"/>	
 	</resultMap>
 	
+
 	<resultMap type="com.coffice.dto.ImageDTO" id="ImageMap">
 		<id property="image_idx" column="image_idx"/>
 		<id property="review_idx" column="review_idx"/>
@@ -91,7 +92,7 @@
 		insert into image (image_idx,review_idx,store_idx,image_origin,image_save)
 		values(image_seq.nextval,#{review_idx},#{store_idx},'origin',#{image_save})
 	</insert>
-	
+
 	
    <select id="findLike" parameterType="com.coffice.dto.HeartDTO" resultType="int">
       select count(like_flag) from heart where mem_id = #{mem_id} and review_idx = #{review_idx}
