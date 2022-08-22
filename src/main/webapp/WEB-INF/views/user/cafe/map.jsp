@@ -415,8 +415,7 @@
 						<div class="row">
 				<c:forEach items="${lists }" var="item">
 							<div class="col-4">
-<%-- 				동적으로 이미지 처리할 때 쓰세요 <img src="${item.store_img }" alt="카페이미지 오류" /> --%>
-								<img style="max-width: 200px;" src="https://www.park-roche.com/resources/images/contents/dining/img_dining02_02.png" alt="카페이미지 더미" />
+								<img style="max-width: 200px;" s src="<%= request.getContextPath() %>/resources/img/stores/${item.store_img }.jpg" alt="카페이미지 더미" />
 							</div>
 							<div class="col-8"" style="text-align: left;">
 								<div id="store_name"><a href="../cafe/info.do?store_idx=${item.store_idx }">가게명:${item.store_name }</a></div>
