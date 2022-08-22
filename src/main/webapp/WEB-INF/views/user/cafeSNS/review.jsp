@@ -8,7 +8,7 @@
 >
 */ --%> <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -202,12 +202,13 @@ pageEncoding="UTF-8"%>
     <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
     <script
-      type="text/javascript"
-      src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
-    ></script>
+      type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
+      <!-- 좋아요 JS(정순만) -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
+    
 
     <script>
-      //찜
+      //찜(하트)
       function heart() {
         var x = document.getElementById("heart");
         if (x.className === "far fa-heart fa-lg") {
@@ -218,28 +219,6 @@ pageEncoding="UTF-8"%>
           x.style.color = "black";
         }
       }
-
-      //좋아요
-      function like() {
-        var x = document.querySelector("#like i");
-        if (x.className === "far fa-thumbs-up fa-lg") {
-          x.className = "fas fa-thumbs-up fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-thumbs-up fa-lg";
-          x.style.color = "black";
-        }
-      }
-
-      const img = document.getElementById("post");
-      img.addEventListener("dblclick", () => {
-        like();
-        var heart = document.getElementById("heart");
-        heart.style.animation = "likeheart .6s";
-        setTimeout(function () {
-          heart.style.animation = "none";
-        }, 600);
-      });
     </script>
 
     <!-- 사진 -->
@@ -247,8 +226,6 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-
     <script>
       $(function () {
         //사진보기
