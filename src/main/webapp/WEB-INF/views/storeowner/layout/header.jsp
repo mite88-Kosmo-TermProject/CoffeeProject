@@ -28,7 +28,8 @@
 <meta name="description" content="" />
 
 <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
+<link rel="icon" type="image/x-icon"
+	href="<%= request.getContextPath() %>/resources/admin/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,7 +78,7 @@
 </head>
 
 <body>
-	<c:if test="${empty UserID}">  <script>location.href = "/CoffeeProject/admin/main.do"; </script></c:if>
+	<c:if test="${empty UserID}"> <jsp:forward page="/admin/main.do"/></c:if>
 	<c:if test="${! empty UserID}">
 		<!-- Menu -->
 
@@ -106,14 +107,14 @@
 
 				<!-- Layouts -->
 
-				<%-- <li class="menu-header small text-uppercase"><span
+				<li class="menu-header small text-uppercase"><span
 					class="menu-header-text">회원관리</span></li>
 
 				<li class="menu-item"><a
 					href="<%= request.getContextPath() %>/storeowner/member/list.do"
 					class="menu-link"> <i class="menu-icon tf-icons bx bx-layout"></i>
 						회원관리
-				</a></li> --%>
+				</a></li>
 
 
 
@@ -185,11 +186,11 @@
 
 					<ul class="navbar-nav flex-row align-items-center ms-auto">
 						<!-- Place this tag where you want the button to render. -->
-						<!-- <li class="nav-item lh-1 me-3"><a class="github-button"
+						<li class="nav-item lh-1 me-3"><a class="github-button"
 							href="https://github.com/themeselection/sneat-html-admin-template-free"
 							data-icon="octicon-star" data-size="large" data-show-count="true"
 							aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-						</li> -->
+						</li>
 
 						<!-- User -->
 						<li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -226,11 +227,12 @@
 											Profile</span>
 								</a></li>
 
-								<li><a class="dropdown-item"  href="#">
-										<span class="d-flex align-items-center align-middle" id="CHAT_BTN"> 
-										<i class='bx bxs-conversation me-2'></i> 
-										<span class="flex-grow-1 align-middle">문의</span> <!-- <span
-											class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span> -->
+								<li><a class="dropdown-item"
+									href="<%= request.getContextPath() %>/storeowner/chtt/list.do">
+										<span class="d-flex align-items-center align-middle"> <i
+											class='bx bxs-conversation me-2'></i> <span
+											class="flex-grow-1 align-middle">문의</span> <span
+											class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
 									</span>
 								</a></li>
 								<li>

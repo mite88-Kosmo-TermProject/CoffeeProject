@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coffice.admin.service.MemberDAOImpl;
 import com.coffice.dto.MemberDTO;
-import com.coffice.user.service.UserMemberImpl;
-
-import common.TESTImpl;
 
 @Controller
 public class AdminHomeController {
@@ -27,6 +24,7 @@ public class AdminHomeController {
 	// 어드민 로그인페이지
 	@RequestMapping(value = "/admin/index.do", method = RequestMethod.GET)
 	public String index() {
+
 		return "/admin/index";
 	}
 
@@ -133,12 +131,8 @@ public class AdminHomeController {
 
 	// 어드민 메인페이지
 	@RequestMapping(value = "/admin/main.do", method = RequestMethod.GET)
-	public String main(HttpSession session, Model model) {
-		//유저 통계용
-		MemberDTO memberDTO = sqlSession.getMapper(UserMemberImpl.class).Alliancelist();
-		
-		model.addAttribute("memberDTO", memberDTO);
-		
+	public String main() {
+
 		return "/admin/main";
 	}
 

@@ -99,9 +99,7 @@
 }
 
 /*설명*/
-.txt_content{margin-top: 25px;}
-
-p.txt:before{
+p.txt:before {
 	background-image:
 		url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
 	background-position: -974px -775px;

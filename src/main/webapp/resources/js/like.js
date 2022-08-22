@@ -1,21 +1,21 @@
-function like(x, idx){
-var i = jQuery("i",x);
-var t = jQuery("small", x);
-console.log(x.style.color);
-console.log(x.text);
+$(function(){
+	$(document).on("click","span[name='like']",()=>{
 		$.ajax({
 		 url : "../like.do",
          type : "POST",
-         data : { "review_idx" : idx
+         data : { "review_idx" : $('#review_idx').val()
          },
 	    success : (data)=> {
 	       console.log(data);
+           var x = $('#thumb');
 	        if (data.likecheck==0) {
-	           i.css("color","red");
-	           t.text(data.like_hit);
+	          x.className = "fas fa-thumbs-up fa-lg";
+	           $('#thumb').css("color","red");
+	           $("#hit").text(data.like_hit);
 	        } else {
-	          i.css("color","black");
-	          t.text(data.like_hit);
+	          x.className = "far fa-thumbs-up fa-lg";
+	          $('#thumb').css("color","black");
+	          $("#hit").text(data.like_hit);
 	        }
          },
          error : function () {
@@ -23,4 +23,5 @@ console.log(x.text);
          },
 
 		});
-}
+	});
+});

@@ -29,7 +29,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="<%=request.getContextPath()%>/resources/img/icon.ico" />
+	href="<%=request.getContextPath()%>/resources/admin/assets/img/favicon/favicon.ico" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

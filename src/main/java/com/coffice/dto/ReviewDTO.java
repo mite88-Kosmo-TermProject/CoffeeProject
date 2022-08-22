@@ -31,4 +31,5 @@ public class ReviewDTO {
 	private String mem_id;
 	
 	private int like_hit;
+
 }

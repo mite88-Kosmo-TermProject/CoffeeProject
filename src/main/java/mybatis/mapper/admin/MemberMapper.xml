@@ -11,10 +11,7 @@
 	</select>
 	
 	<select id="Alliancelist" resultType="com.coffice.dto.MemberDTO">
-		select 
-		MEM_ID ,MEM_CASE ,MEM_PW ,MEM_NAME ,MEM_NICKNAME ,MEM_PHONE ,MEM_EMAIL ,MEM_GENDER ,
- 		TO_TIMESTAMP(MEM_REGIDATE, 'YY-MM-DD HH24:MI:SS') as mem_regidate ,MEM_POINT ,MEM_SUB ,MEM_IMG ,MEM_LEVEL
- 		from member where MEM_CASE=3 order by MEM_REGIDATE DESC 
+		select * from member where MEM_CASE=3 order by MEM_REGIDATE DESC 
 	</select>
 
 

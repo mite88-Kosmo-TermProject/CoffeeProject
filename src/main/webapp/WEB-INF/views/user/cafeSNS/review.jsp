@@ -201,15 +201,16 @@ pageEncoding="UTF-8"%>
 
     <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-      <!-- 좋아요 JS(정순만) -->
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
     <script
       type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
+      <!-- 좋아요 JS(정순만) -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
     
 
     <script>
       //찜(하트)
-      function heart(x) {
+      function heart() {
+        var x = document.getElementById("heart");
         if (x.className === "far fa-heart fa-lg") {
           x.className = "fas fa-heart fa-lg";
           x.style.color = "red";
@@ -218,7 +219,6 @@ pageEncoding="UTF-8"%>
           x.style.color = "black";
         }
       }
-      
     </script>
 
     <!-- 사진 -->
