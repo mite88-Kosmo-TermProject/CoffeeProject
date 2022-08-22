@@ -2,10 +2,10 @@
 /**
  * <pre>
  * 1. 프로젝트명 : /cafe/map.jsp
- * 2. 작성일 : 2022. 8. 1. 오전 9:38:29
- * 3. 작성자 : 전옥주
+ * 2. 작성일 : 2022. 8. 21
+ * 3. 작성자 : 이호영
  * 4. 설명 : 지도검색
- * 작업:8월4일 ~ 
+ * 작업:8월21일
  * </pre>
  */
 --%>
@@ -109,11 +109,29 @@
 <!-- 	</div> -->
 	
 <div class="container-fruid">
+<!-- 일반적인 지도검색창 -->
 <h1>지도 검색</h1>
-	<form action="../cafe/map.do" method="post">
+	<form action="../cafe/search.do" method="post">
 		<input type="text" value="${searchTxt }" id="searchTxt" name="searchTxt"/>
 		<button type="submit">검색하기</button>
+		<c:if test="${AFLTD eq 0 }">
+			<label><input type="checkbox" value="1" name="구독여부" id="check" />구독권 사용가게만 검색하기</label>
+		</c:if>
+		<c:if test="${AFLTD eq 1 }">
+			<label><input type="checkbox" value="1" name="구독여부" id="check" checked/>구독권 사용가게만 검색하기</label>
+		</c:if>
 	</form>
+	
+<!-- 검색결과가 없을시 나오는 문구 -->
+<!-- 일반적인 검색결과 리스트들 -->
+				<!-- 맵이 생성될 div 태그 -->
+<!-- 카카오맵 API 실행을 위한 앱키 -->
+	<!-- 맵 노출을 위한 자바스크립트 -->
+		<!-- 문서가 로드시 url의 파라미터를 잡아 변수로 할당한다. -->
+		<!-- 현재 페이지 파라미터가 없을 경우 1로 초기화 -->
+		<!-- 검색단어 변수할당 -->
+		<!-- 검색값이 없으면 나오게하는 알림창 (실행안됌 ㅋ) -->
+			<!-- 검색결과가 있다면 실행되는 ajax -->
 <c:choose>
 <c:when test="${totalRecordCount eq 0 }">
 	<div style="text-align;"><h1>검색결과가 없습니다 .. 다시 검색해주세요</h1></div>
@@ -127,10 +145,8 @@
 		<tr>
 			<td>
 				<div id="map" style="width:750px;height:550px;"></div>
-
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51170cde81df349ec4e9653882b01d01&libraries=services"></script>
 	<script>
-
 
 	$(function(){
 		
@@ -141,20 +157,38 @@
 		if(nowPage === null){
 			nowPage = 1;
 		}
-		
 		var searchTxt = document.getElementById('searchTxt').value;
+		
+		
+		var checkbox = document.getElementById('check');
+		
+		var AFLTD = 0;
+		if(checkbox.checked){
+			var AFLTD = 1;
+		}
+		
+		
+
+		
 		if(searchTxt == null){
 			alert("검색어를 입력해주세요!");
+			document.getElementById('searchTxt').focus();
 		}
 		else{
 			$.ajax({
-				url: '../cafe/marker.do?&searchTxt='+searchTxt+"&nowPage="+nowPage ,
+				//요청할 url
+				url: '../cafe/marker.do?&searchTxt='+searchTxt+"&&nowPage="+nowPage+"&&구독여부="+AFLTD ,
+				//전송방식
 				type: 'post',
+				//보내는 데이터 형식
 				contentType : "text/html;charset:utf-8",
+				//성공시 호출할 함수
 				success : sucCallBack,
+				//에러시 에러 상태 출력
 				error : errCallBack
 				});
 			function sucCallBack(resdata){
+
 				//위도 변수화
 				var latitude0 = resdata.store_latitude0;
 				var latitude1 = resdata.store_latitude1;
@@ -245,7 +279,7 @@
 			    var positions = [
 			        {
 			        	store_idx : store_idx0, 
-			        	content: '<div class="row"><div>가게명:'+store_name0+'</div><hr><br><div>'+store_star0+'</div></div>', 
+			        	content: '<div class="row"><div>가게명:'+store_name0+'</div><hr><br><div>가게평점:'+store_star0+'</div></div>', 
 			            latlng: new kakao.maps.LatLng( latitude0, longitude0)
 			        },
 			        {
@@ -331,7 +365,7 @@
 			    //마커를 클릭시 발생하는 함수입니다.
 			    function makeClickListener(positions) {
 			        return function() {
-			        	location.href="/cafe/info.do?&store_index="+positions.store_idx;
+			        	location.href="../cafe/info.do?store_idx="+positions.store_idx;
 			        };
 			    }
 			};
@@ -353,7 +387,7 @@
 								<img style="max-width: 200px;" src="https://www.park-roche.com/resources/images/contents/dining/img_dining02_02.png" alt="카페이미지 더미" />
 							</div>
 							<div class="col-8"" style="text-align: left;">
-								<div id="store_name"><a href="./cafe/info.do?&store_idx='${item.store_idx }'">가게명:${item.store_name }</a></div>
+								<div id="store_name"><a href="../cafe/info.do?store_idx=${item.store_idx }">가게명:${item.store_name }</a></div>
 								<div id="store_tag">#${item.store_tag }</div>
 								<div id="store_star">별점:${item.store_star }</div>
 								<div id="store_roadaddr">주소:${item.store_roadaddr }</div>
@@ -368,6 +402,10 @@
 	</table>
 </c:otherwise>
 </c:choose>
+			<!-- 가게 리스트 출력될 부분 -->
+					<!-- 페이지 버튼 출력 -->
+			<!-- 스크롤창 처리 -->
+				<!-- 받은 리스트수에 맞게 가게가 출력 페이징 처리됨 -->		
 </div>
 
 	<!-- footer -->
