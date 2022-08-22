@@ -33,7 +33,7 @@
 		</div>
 		
 		<!-- 리뷰내용 -->
-		<div class="txt">진짜 맛있고 친절하고 이뻐요 또가고 싶어요~~~~~~~~</div> 
+		<div class="txt_content">진짜 맛있고 친절하고 이뻐요 또가고 싶어요~~~~~~~~</div> 
 		
 		<!-- 좋아요 -->
 		<a class="frmLike">

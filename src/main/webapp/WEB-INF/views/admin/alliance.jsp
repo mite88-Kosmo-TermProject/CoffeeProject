@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/img/icon.ico" />
 
 <!DOCTYPE html>
 
@@ -29,7 +29,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="<%=request.getContextPath()%>/resources/admin/assets/img/favicon/favicon.ico" />
+	href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coffice.admin.service.ShopMemberImpl">
+
+
+	<select id="getshopLists" resultType="com.coffice.dto.StoresDTO">
+		SELECT * FROM stores ORDER BY STORE_AFLTD DESC, store_idx DESC
+	</select>
+	
+	<!-- 가게검색 -->
+<!-- 	<select id="check_name" parameterType="String"  resultType="com.coffice.dto.StoresDTO">
+		select * from stores where store_name = #{param1}
+	</select> -->
+	
+
+	<!-- 제휴승인 -->
+	 <update id="update_Agree" parameterType="Object" >
+	  	update stores set STORE_AFLTD = 1, mem_id=#{param1}, store_name=#{param2} where store_idx = #{param3}
+  	</update>
+  	
+  	<!-- 제휴 회원레벨변경 -->
+  	<update id="update_User" parameterType="String" >
+	  	update member set MEM_CASE = 2 where mem_id = #{param1}
+  	</update>
+	
+</mapper>
