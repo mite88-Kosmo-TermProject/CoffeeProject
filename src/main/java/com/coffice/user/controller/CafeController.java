@@ -142,7 +142,7 @@ public class CafeController {
 
 		//페이지 버튼 누를시 이동할 경로 선택
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() + "/cafe/search.do?searchTxt=" + searchDTO.getSearchTxt() + "&&구독여부="+AFLTD);
+				req.getContextPath() + "/cafe/search.do?searchTxt=" + searchDTO.getSearchTxt() + "&&구독여부="+AFLTD+"&&");
 		
 		//추출한 정보 model 객체에 저장
 		model.addAttribute("pagingImg", pagingImg);
