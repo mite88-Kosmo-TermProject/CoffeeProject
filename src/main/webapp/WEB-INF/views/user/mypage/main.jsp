@@ -10,7 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +65,7 @@
 			</div>
 			<div class="profile-info">
 				<div class="profile-title mb-1rem">
-					<h2>name</h2>
+					<h2>${memberDTO.mem_name}<small>님</small></h2>
 					<button class="btn btn-primary">회원수정</button>
 				</div>
 				<!-- Profile Stats pc-->

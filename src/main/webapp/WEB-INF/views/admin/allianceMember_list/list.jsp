@@ -8,8 +8,8 @@
  * </pre>
  */
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,6 +68,7 @@
 										<div class="input-group mb-3">
 											<input type="text" class="form-control" placeholder="가게명"
 												id="store_name" name="store_name">
+											<button type="button" id="aliance_btn_empty"  class="btn btn-secondary">승인하기</button>
 
 										</div>
 									</div>
@@ -150,8 +151,8 @@
 
 	<!-- 여기에 새로운 js파일있으면 넣기 -->
 	<!-- https://hankong.tistory.com/19 -->
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 	<script>
 		$(function() {
@@ -218,7 +219,7 @@
 			    table.search($(this).val()).draw();
 			});
 			
-			//최종승인하기
+			//최종승인하기 1 - 가게 존재시
 			$('#store_example tbody').on('click', '#aliance_btn', function () {
 				var result = confirm('승인하시겠습니까?');
 				 
@@ -237,7 +238,41 @@
 			          $.ajax({
 						anyne : true,
 						type : 'POST',
-						url : "../../admin/storeOwnerMember/ajax_check.do?mem_id=" + mem_id+"&store_owner="+store_owner+"&store_idx="+store_idx,
+						url : "../../admin/storeOwnerMember/ajax_check.do?case=1&mem_id=" + mem_id+"&store_owner="+store_owner+"&store_idx="+store_idx,
+						success : function(data) {
+							alert("완료되었습니다.");
+							location.reload(); //새로고침
+							
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							alert("ERROR : " + textStatus + " : " + errorThrown);
+						}
+					})
+					
+		        } 
+			});
+			
+			//최종승인하기 2- 가게 비존재시 가게만 추가함
+			//aliance_btn_empty
+			$('#aliance_btn_empty').on('click', function () {
+				var result = confirm('가게가 존재하지 않을때 누르는 창입니다. 정말 승인하시겠습니까?');
+				 
+				var tr = $(this).closest('tr');
+				var row = $('#store_example').DataTable().row(tr);
+
+				var mem_id = $("#agree_form #mem_id").val();;
+				var store_owner =$("#agree_form #mem_name").val();
+				var store_name =$("#agree_form #store_name").val();
+
+				//mem_id, store_owner, store_idx
+				//alert(store_owner);
+					
+		        if(result) {
+		           //yes
+			          $.ajax({
+						anyne : true,
+						type : 'POST',
+						url : "../../admin/storeOwnerMember/ajax_check.do?case=2&mem_id=" + mem_id+"&store_owner="+store_owner+"&store_name="+store_name,
 						success : function(data) {
 							alert("완료되었습니다.");
 							location.reload(); //새로고침
@@ -278,16 +313,24 @@
 						}, {
 							"data" : "mem_gender"
 						}, {
-							"data" : "mem_redidate"
+							"data" : "mem_redidate",
+							render : function (data, type, full, meta) {
+								//날짜 시간변환
+								//alert(data);
+								var datatime = moment(data).format('YYYY-MM-DD');
+								req = datatime;
+
+								return req;
+							}
 						}, {
 							"data" : "mem_id",
 							orderable : false,
 							className : 'table-active dt-body-center',
-							render : function (data, type, full, meta) {
+							render : function (data2, type, full, meta) {
 
-								req = '<a href="#" class="btn btn-danger" id="agree_btn" num="'+data+'" style="padding: 0 !important;width: 100%;">승인하기</a>';
+								req2 = '<a href="#" class="btn btn-danger" id="agree_btn" num="'+data2+'" style="padding: 0 !important;width: 100%;">승인하기</a>';
 
-								return req;
+								return req2;
 							}
 						}, ]
 			});

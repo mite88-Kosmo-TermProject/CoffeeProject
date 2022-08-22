@@ -89,7 +89,7 @@ public class UserMemberController {
 			session.setAttribute("siteUserInfo", memberDTO);
 			session.setAttribute("user_id", memberDTO.getMem_id());
 		}
-		return "home";
+		return "redirect:/";
 	}
 
 	//로그아웃
@@ -99,7 +99,7 @@ public class UserMemberController {
 		//세션 영역 정보 지움 ㅎㅎ
 		session.invalidate();
 		
-		return "home";
+		return "redirect:/";
 	}
 
 	//아이디 찾기 페이지
@@ -348,7 +348,7 @@ public class UserMemberController {
 	    		session.setAttribute("siteUserInfo", dto);
 	    	}
 	    	//메인 페이지 redirect로 설정 해야함
-	    	return "home";
+	    	return "redirect:/";
 	    	
 	    }
 }

@@ -1,12 +1,17 @@
 package com.coffice.admin.controller;
 
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Case;
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +27,8 @@ import com.coffice.admin.service.ShopMemberImpl;
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.StoresDTO;
 import com.coffice.user.service.UserMemberImpl;
+
+import common.TESTImpl;
 
 @Controller
 public class AdminStoreOwnerMemberController {
@@ -76,12 +83,36 @@ public class AdminStoreOwnerMemberController {
 	@RequestMapping(value = "/admin/storeOwnerMember/ajax_check.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void storeOwnerMember_ajax_check(HttpServletRequest req, Model model) {
-		int store_idx = Integer.valueOf(req.getParameter("store_idx"));
+		int data_case = Integer.valueOf(req.getParameter("case"));//가게 존재여부 유형
+		
+		
+		String store_name = String.valueOf(req.getParameter("store_name"));
 		String mem_id = String.valueOf(req.getParameter("mem_id"));
 		String store_owner = String.valueOf(req.getParameter("store_owner"));
+		
 		// 제휴 승인 및 회원레벨 변경
-		sqlSession.getMapper(ShopMemberImpl.class).update_Agree(mem_id, store_owner, store_idx);
-		sqlSession.getMapper(ShopMemberImpl.class).update_User(mem_id);
+		if(data_case ==1) {
+			//가게 비존재시 추가
+			int store_idx = Integer.valueOf(req.getParameter("store_idx"));
+			sqlSession.getMapper(ShopMemberImpl.class).update_Agree(mem_id, store_owner, store_idx);
+			sqlSession.getMapper(ShopMemberImpl.class).update_User(mem_id);
+			
+		}
+		else if(data_case ==2) {
+			//가게 비존재시 추가
+			System.out.println("data2:"+store_name+"/"+mem_id+"/"+store_owner);
+			
+			sqlSession.getMapper(ShopMemberImpl.class).Insert_Stores(store_name, mem_id, store_owner);
+			
+			//가게 검색
+			StoresDTO dto = sqlSession.getMapper(ShopMemberImpl.class).check_Storename(store_name, mem_id);
+			
+			//추가
+			sqlSession.getMapper(ShopMemberImpl.class).update_Agree(mem_id, store_owner, dto.getStore_idx());
+			sqlSession.getMapper(ShopMemberImpl.class).update_User(mem_id);
+			
+		}
+
 
 		// return "/admin/storeOwnerMember/ajax_check.do";
 	}
@@ -103,6 +134,8 @@ public class AdminStoreOwnerMemberController {
 		JSONArray JsonLists = new JSONArray();
 		JSONObject data = new JSONObject();
 		ArrayList<MemberDTO> MemberList = sqlSession.getMapper(MemberDAOImpl.class).Alliancelist();
+		
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		for (MemberDTO member : MemberList) {
 			JSONObject storeObj = new JSONObject();
@@ -112,7 +145,7 @@ public class AdminStoreOwnerMemberController {
 			storeObj.put("mem_name", member.getMem_name());
 			storeObj.put("mem_email", member.getMem_email());
 			storeObj.put("mem_gender", member.getMem_gender());
-			storeObj.put("mem_redidate", member.getMem_regidate());
+			storeObj.put("mem_redidate", dateFormat.format(member.getMem_regidate()));
 			JsonLists.add(storeObj);
 
 		}
