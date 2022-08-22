@@ -65,7 +65,7 @@
 			</div>
 			<div class="profile-info">
 				<div class="profile-title mb-1rem">
-					<h2>${dto.mem_name }</h2>
+					<h2>name</h2>
 					<button class="btn btn-primary">회원수정</button>
 				</div>
 				<!-- Profile Stats pc-->
