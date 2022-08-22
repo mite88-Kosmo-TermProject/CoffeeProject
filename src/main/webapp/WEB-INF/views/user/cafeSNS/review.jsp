@@ -200,6 +200,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
 
     <!-- footer -->
+
     <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
     <!-- 좋아요 JS(정순만) -->
     <script
