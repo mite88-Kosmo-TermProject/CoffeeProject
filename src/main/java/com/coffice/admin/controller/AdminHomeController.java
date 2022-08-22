@@ -133,11 +133,11 @@ public class AdminHomeController {
 	// 어드민 메인페이지
 	@RequestMapping(value = "/admin/main.do", method = RequestMethod.GET)
 	public String main(HttpSession session, Model model) {
-		//유저 통계용
+		//유저 통계용--
 		//MemberDTO memberDTO = sqlSession.getMapper(UserMemberImpl.class).Alliancelist();
 		
 		//model.addAttribute("memberDTO", memberDTO);
-		
+		 
 		return "/admin/main";
 	}
 
