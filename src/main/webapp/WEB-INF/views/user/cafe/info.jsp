@@ -391,7 +391,7 @@ p.txt:before {
 								<div class="btn-group" role="group"">
 									<button type="button" class="btn btn-primary" id="map_url">길찾기</button>
 									<button type="button" class="btn btn-primary" id="send_url">즐겨찾기</button>
-									<button type="button" class="btn btn-primary" id="review_coffee" onclick="location.href='<%=request.getContextPath()%>/cafeSNS/writePage.do?store_idx=${resultList.store_idx }' " >리뷰쓰기</button>
+									<button type="button" class="btn btn-primary" id="review_coffee">리뷰쓰기</button>
 								</div>
 							</div>
 

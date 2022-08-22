@@ -62,8 +62,8 @@ public class SubPayController {
 	@RequestMapping(value = "/order/insertSubscribe.do", method = RequestMethod.POST)
 	public String modifyAction(HttpSession session, SubPayDTO subPayDTO) {
 		
-		
 		int applyRow = sqlSession.getMapper(SubPaylmpl.class).payment_info(subPayDTO);
+
 		System.out.println("수정처리된 레코드수 :" + applyRow);
 		
 		return "redirect:subPayResult.do";

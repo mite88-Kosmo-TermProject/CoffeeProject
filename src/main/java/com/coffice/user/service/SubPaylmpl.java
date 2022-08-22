@@ -17,4 +17,5 @@ public interface SubPaylmpl {
 	public ArrayList<SubscriptionDTO> subList();
 	//회원정보 가져오기
 	public MemberDTO user(String mem_id);
+
 }

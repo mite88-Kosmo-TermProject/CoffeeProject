@@ -21,91 +21,6 @@
 .table > :not(caption) > * > * {
     padding: 0.5rem !important;
     }
-#roulette-outer{
-	position: relative;
-	left:80px;
-	bottom:50px;
-	overflow: hidden;
-	width: 350px;
-	height: 350px;
-	background: yellow;
-	z-index: 1;
-	}
-#roulette{
-position: absolute;
-border:0px;
-padding:0px;
-top: 5%;
-left: 5%;
-right:5%;
-bottom:5% ;
-width:313px;
-border-radius: 50%;
-background: #D1B6E1;
-border: 2px solid black;
-z-index: 2;
-}
-#roulette > #item-wrapper > .item {
-	position: absolute;
-	font:25px bold;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	
-	padding-top: 10%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	
-}
-#roulette > #item-wrapper > .item:nth-child(1) {
-	transform: rotate(0deg);
-}
-#roulette > #item-wrapper > .item:nth-child(2) {
-	transform: rotate(90deg);
-}
-#roulette > #item-wrapper > .item:nth-child(3) {
-	transform: rotate(180deg);
-}
-#roulette > #item-wrapper > .item:nth-child(4) {
-	transform: rotate(270deg);
-}	
-#roulette > #line-wrapper > .line {
-	position: absolute;
-	top: 0;
-	bottom: 50%;
-	left: 50%;
-	width: 2px;
-	background: black;
-	transform-origin: bottom;
-	z-index: 3;
-}
-#roulette > #line-wrapper > .line:nth-child(1) {
-	transform: rotate(45deg);
-}
-#roulette > #line-wrapper > .line:nth-child(2) {
-	transform: rotate(135deg);
-}
-#roulette > #line-wrapper > .line:nth-child(3) {
-	transform: rotate(225deg);
-}
-#roulette > #line-wrapper > .line:nth-child(4) {
-	transform: rotate(315deg);
-}
-#roulette-pin{
-position: absolute;
-top:5%;
-left:173px;
-width:4px;
-padding-left:0px;
-padding-right:0px;
-margin-right:10px;
-height:20px;
-background:red;
-z-index: 4;
-}
-
 
 </style>
 
@@ -178,28 +93,6 @@ z-index: 4;
 												</div>
 											</form>
 											</div>
-											<div class="mb-3 row" id="roulette-outer" style="display: flex;">
-											
-											
-											<div id="roulette-pin"></div>
-												<div id="roulette">
-												<!--값영역 -->
-												<div id="item-wrapper">
-													<div class="item">100점</div>
-													<div class="item">200점</div>
-													<div class="item">300점</div>
-													<div class="item">-50점</div>
-												</div>
-												<!--선영역-->
-												<div id="line-wrapper">
-													<div class="line"></div>
-													<div class="line"></div>
-													<div class="line"></div>
-													<div class="line"></div>
-												</div>
-											</div>
-											</div>
-												<button type="button" onclick="testRotate();">돌리기</button>
 
 											<!-- 오른편 -->
 											<div class="col-md-12">
@@ -208,9 +101,10 @@ z-index: 4;
 														<thead>
 															<tr data-tabullet-map="id">
 																<th data-tabullet-map="0">항목번호</th>
-																<th data-tabullet-map="1">항목명</th>												
-																<th data-tabullet-map="2">확률</th>
-																<th data-tabullet-map="3">항목상품</th>
+																<th data-tabullet-map="1">항목명</th>
+																<th data-tabullet-map="2">비율</th>
+																<th data-tabullet-map="3">확률</th>
+																<th data-tabullet-map="4">항목상품</th>
 																<th width="50" data-tabullet-type="edit"></th>
 																<th width="50" data-tabullet-type="delete"></th>
 															</tr>
@@ -261,8 +155,6 @@ z-index: 4;
 		var eventname = document.getElementsByName("eventname")[0];
 		var file = document.getElementsByName("file")[0];
 		var desc = document.getElementsByName("desc")[0];
-		var roulette = document.getElementById("roulette");
-		var percentage = [];
 		
 		function setSource(){
 			$.ajax({
@@ -315,61 +207,10 @@ z-index: 4;
                              }
                          }
                      }
-					if(1 <= 2)
                      resetTabullet();
                  }
              });
          }
-		 function resoretdarray(){
-			if(percentage.length <= 0){
-			for(let i =0; i<source.length; i++){
-				percentage.push(source[i][2]) ;
-				percentage.sort();
-				}
-				
-			}
-			else{
-				return;
-			}
-		 }
-		 
-		 function testRotate(){
-			roulette.style.transform = "rotate(45deg)";
-			MakeSetRouletteStr();
-		 }
-		 function MakeSetRouletteStr(){
-			 	resoretdarray();
-				Str = "";
-				Str +="var ranNum = Math.floor(Math.random()*100);"
-				Str +="var maxNum =0 ;"
-				Str +="var minNum =0 ;"
-				Str += "console.log(percentage);"
-				Str +="if(ranNum <= percentage[0]) {\n"
-				Str +="maxNum = Math.floor(percentage[0]/100*360);\n"
-				Str +="minNum = 0 ;\n"
-				Str +="console.log('이발:'+minNum);\n"
-				Str +="}\n"	
-				for(let j = 1 ; j<source.length; j++){
-				Str +="else if((percentage["+j+"-1])+1 <= ranNum && ranNum <= percentage["+j+"]) {\n"
-				Str +="console.log('percentage:'+percentage["+j+"]);\n"
-				Str +="console.log('percentage-1:'+percentage["+j+"-1]);\n"
-				Str +="maxNum = Math.floor(percentage["+j+"]/100*360);\n"
-				Str +="minNum = (Math.floor(percentage["+j+"-1]/100*360))+1;\n"
-				Str +="}\n"
-				if(j == source.length-1 ){
-				Str +="else {\n"
-				Str +="maxNum = Math.floor(percentage["+j+"]/100*360);\n"
-				Str +="minNum = (Math.floor(percentage["+j+"-1]/100*360))+1;\n"
-				Str +="}\n"
-				}
-				}
-			eval(Str);
-			console.log(ranNum);
-			console.log(maxNum);
-			console.log(minNum);
-			
-			
-		 }
 	 $(function () {
 		 //동적테이블 
 		 setSource();

@@ -14,12 +14,6 @@ public interface CafeSNSImpl {
 	/*리뷰 작성*/
 	public int insert(ReviewDTO reviewDTO);
 	
-	/*리뷰idx 얻기*/
-	public int getIdx(ReviewDTO reviewDTO);
-	
-	/*이미지 삽입*/
-	public int imgInsert(ImageDTO imageDTO);
-	
 	/*카페들의 정보를 가져온다.*/
 	public ArrayList<StoresDTO> getcafeList();
 	
