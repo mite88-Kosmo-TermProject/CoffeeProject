@@ -27,7 +27,9 @@
 			<%@ include file="/WEB-INF/views/admin/layout/header.jsp"%>
 
 			<!-- 여기에 새로운 css파일있으면 넣기 -->
-			<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+			<link
+				href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+				rel="stylesheet" />
 
 			<!-- Content wrapper -->
 			<div class="content-wrapper">
@@ -45,7 +47,24 @@
 								</div>
 								<div class="card-body">
 									<!-- table 샘플입니다 ㅇㅊㅇ -->
-									<%@ include file="/WEB-INF/views/admin/table_point.jsp"%>
+									
+						
+									<table id="example" class="display" style="width: 100%">
+										<thead>
+											<tr>
+												<th></th>
+												<th style="width: 15%;">카페명</th>
+												<th style="width: 25%;">주소</th>
+												<th>회원아이디</th>
+												<th>점주명</th>
+												<th>승인여부</th>
+
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
 
 								</div>
 							</div>
@@ -78,7 +97,71 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-	<script src="<%= request.getContextPath() %>/resources/admin/js/pointList.js"></script>
+	<script>
+		$(function() {
+			makeJqueryTable(null);
+			
+			$('#example tbody').on('click', '#agree_btn', function () {
+				/* var table = $('#example').DataTable();
+				
+				//첫번째 값 가져옵니다(수정용)
+			
+				var tr = $(this).closest('tr');
+				var row = table.row(tr);
+				var idx = row.data().storeNum;
+				var ownerId = row.data().ownerId;
+
+				$.ajax({
+					anyne : true,
+					type : 'POST',
+					url : "../../admin/storeOwnerMember/ajax_check.do?idx=" + idx+"&ownerId="+ownerId,
+					success : function(data) {
+						$('#example').DataTable().ajax.reload();
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						alert("ERROR : " + textStatus + " : " + errorThrown);
+					}
+				})
+			 */
+			})
+		})
+		function makeJqueryTable(searchField) {
+			var table = $('#example').DataTable(
+			{
+				lengthChange : true,
+				searching : true,
+				ordering : true,
+				info : true,
+				paging : true,
+				ajax : {
+					url : "../../admin/getshoplist.do",
+					type : 'GET',
+				},
+				"columns" : [
+						{
+							"data" : "storeNum"
+						}, {
+							"data" : "storeName"
+						}, {
+							"data" : "adress"
+						}, {
+							"data" : "ownerId"
+						}, {
+							"data" : "ownerName"
+						}, {
+							"data" : "agree",
+							orderable : false,
+							className : 'table-active dt-body-center',
+							render : function (data2, type, full, meta) {
+								
+								req2 = data2;
+								
+								return req2;
+							}
+						}, ]
+			});
+		}
+	</script>
 </body>
 
 </html>
