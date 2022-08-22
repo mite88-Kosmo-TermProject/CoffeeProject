@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.coffice.admin.service.MemberDAOImpl;
 import com.coffice.dto.MemberDTO;
 
+import common.TESTImpl;
+
 @Controller
 public class AdminHomeController {
 	@Autowired
@@ -24,7 +26,6 @@ public class AdminHomeController {
 	// 어드민 로그인페이지
 	@RequestMapping(value = "/admin/index.do", method = RequestMethod.GET)
 	public String index() {
-
 		return "/admin/index";
 	}
 

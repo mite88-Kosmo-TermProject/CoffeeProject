@@ -8,10 +8,15 @@
 	</select>
 	
 	<!-- 가게검색 -->
-<!-- 	<select id="check_name" parameterType="String"  resultType="com.coffice.dto.StoresDTO">
-		select * from stores where store_name = #{param1}
-	</select> -->
+	<select id="check_Storename" parameterType="String"  resultType="com.coffice.dto.StoresDTO">
+		select * from stores where store_name = #{param1} and mem_id = #{param2}
+	</select> 
 	
+	<!-- 가게 추가 -->
+	<insert id="Insert_Stores" parameterType="Object" >
+		INSERT INTO stores (store_idx, store_name, mem_id, store_owner)
+		VALUES (STORES_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3} )
+	</insert>
 
 	<!-- 제휴승인 -->
 	 <update id="update_Agree" parameterType="Object" >

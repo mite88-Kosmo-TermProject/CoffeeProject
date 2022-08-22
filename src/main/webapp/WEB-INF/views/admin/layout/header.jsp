@@ -78,7 +78,7 @@
 </head>
 
 <body>
-	<c:if test="${empty UserID}"> <jsp:forward page="/admin/main.do"/></c:if>
+	<c:if test="${empty UserID}">  <script>location.href = "/CoffeeProject/admin/main.do"; </script></c:if>
 	<c:if test="${! empty UserID}">
 		<!-- Menu -->
 
