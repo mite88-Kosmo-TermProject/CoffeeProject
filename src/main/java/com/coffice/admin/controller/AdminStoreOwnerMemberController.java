@@ -1,27 +1,26 @@
 package com.coffice.admin.controller;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.coffice.admin.service.SubDAOlmpl;
-import com.coffice.dto.SubscriptionDTO;
 import com.coffice.admin.service.MemberDAOImpl;
 import com.coffice.admin.service.ShopMemberImpl;
+import com.coffice.admin.service.SubDAOlmpl;
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.StoresDTO;
-import com.coffice.user.service.UserMemberImpl;
+import com.coffice.dto.SubscriptionDTO;
 
 @Controller
 public class AdminStoreOwnerMemberController {

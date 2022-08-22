@@ -1,21 +1,18 @@
-$(function(){
-	$(document).on("click","span[name='like']",()=>{
+function like(x, idx){
+var i = jQuery("i",x);
+var t = jQuery("small", x);
 		$.ajax({
 		 url : "../like.do",
          type : "POST",
-         data : { "review_idx" : $('#review_idx').val()
+         data : { "review_idx" : idx
          },
 	    success : (data)=> {
-	       console.log(data);
-           var x = $('#thumb');
 	        if (data.likecheck==0) {
-	          x.className = "fas fa-thumbs-up fa-lg";
-	           $('#thumb').css("color","red");
-	           $("#hit").text(data.like_hit);
+	           i.css("color","red");
+	           t.text(data.like_hit);
 	        } else {
-	          x.className = "far fa-thumbs-up fa-lg";
-	          $('#thumb').css("color","black");
-	          $("#hit").text(data.like_hit);
+	          i.css("color","black");
+	          t.text(data.like_hit);
 	        }
          },
          error : function () {
@@ -23,5 +20,4 @@ $(function(){
          },
 
 		});
-	});
-});
+}
