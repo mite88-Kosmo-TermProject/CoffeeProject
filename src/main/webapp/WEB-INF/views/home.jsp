@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
@@ -178,7 +177,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-1.jpg"
+								src="<%=request.getContextPath()%>/resources/img/owner/${eidt.store_menu_img }"
 								alt="">
 						</div>
 						<div

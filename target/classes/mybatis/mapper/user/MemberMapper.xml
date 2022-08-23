@@ -93,6 +93,10 @@ namespace의 속성
   		SELECT * FROM member WHERE mem_id=#{mem_id}
   	</select>
   	
+  	<select id="view2" resultType="com.coffice.dto.StoresDTO" parameterType="com.coffice.dto.StoresDTO">
+  		SELECT * FROM stores WHERE mem_id=#{mem_id}
+  	</select>
+  	
   	<!-- 
   	수정처리. 전송된 폼값은 커맨드객체를 통해 한번에 전달받으므로 parameterType을 
   	해당 DTO로 설정한 후 멤버 변수명으로 값을 가져와서 쿼리문을 구성한다.

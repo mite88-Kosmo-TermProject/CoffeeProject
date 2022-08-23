@@ -10,7 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +33,7 @@
 
 
 <body>
-
+	
 	<!-- content -->
 
 	<div class="page">
@@ -65,9 +65,34 @@
 			</div>
 			<div class="profile-info">
 				<div class="profile-title mb-1rem">
-					<h2>${dto.mem_name }</h2>
+					<h2>${siteUserInfo.mem_id }</h2>
 					<button class="btn btn-primary">회원수정</button>
 				</div>
+				<c:if test="${siteUserInfo.mem_case eq 1}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/mypage/main.do?mem_id=${siteUserInfo.mem_id}" class="nav-item nav-link">점주 신청하기</a>
+               </span>
+           		</c:if>
+           		<c:if test="${siteUserInfo.mem_case eq 5}">
+               <span style="float:right;">
+                  <h6>승인 대기중</h6>
+               </span>
+           		</c:if>
+           		<c:if test="${siteUserInfo.mem_case eq 2}">
+               <span style="float:right;">
+               <form action="<%=request.getContextPath() %>/storeowner/index.do" method="POST" class="nav-item nav-link">
+               <button type="submit">
+               	카페 관리하기
+               </button>
+               	<input type="hidden" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
+               	</form>
+               <%--    <a href="<%=request.getContextPath() %>/storeowner/index.do?mem_id=${siteUserInfo.mem_id}" class="nav-item nav-link">카페 관리하기</a> --%>
+               </span>
+               
+           		</c:if>
+           		<div>
+           			${siteUserInfo.mem_case}
+           		</div>
 				<!-- Profile Stats pc-->
 				<ul class="profile-numbers mb-1rem">
 					<li><a href="#"> <span class="profile-posts">6</span> 후기

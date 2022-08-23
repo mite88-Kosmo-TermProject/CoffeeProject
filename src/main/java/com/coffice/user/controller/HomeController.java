@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coffice.dto.*;
 import com.coffice.user.service.HomeImpl;
+import com.coffice.user.service.UserMemberImpl;
 
 
 @Controller
@@ -20,12 +21,13 @@ public class HomeController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, StoresDTO storesDTO) {
 		System.out.println("호출");
 		ArrayList<StoresDTO>mainCafeList = new ArrayList<StoresDTO>();
 		mainCafeList = sqlSession.getMapper(HomeImpl.class).getList();
 		System.out.println(mainCafeList);
 		model.addAttribute("mainCafeList",mainCafeList);
+		
 		return "home";
 	}
 

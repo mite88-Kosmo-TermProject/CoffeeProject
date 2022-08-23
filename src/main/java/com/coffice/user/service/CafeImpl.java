@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.coffice.dto.MemberDTO;
 import com.coffice.dto.SearchDTO;
 import com.coffice.dto.StoresDTO;
 
@@ -19,6 +20,15 @@ public interface CafeImpl {
 	public int getTotalCountSearch(SearchDTO searchDTO);
 	public ArrayList<SearchDTO> listPageSearch(SearchDTO searchDTO);
 	
+	
+	public int edit(StoresDTO storesDTO);
+	public int cafemodify(StoresDTO storesDTO);
+	
+	public int menuimgED(StoresDTO storesDTO);
+	public int menuimgMD(StoresDTO storesDTO);
+	
+	public int tagMD(StoresDTO storesDTO);
+	public int tagED(StoresDTO storesDTO);
 
 }
 
