@@ -88,7 +88,7 @@ public class UserMemberController {
 		else {
 			session.setAttribute("siteUserInfo", memberDTO);
 		}
-		return "home";
+		return "redirect:/";
 	}
 
 	//로그아웃
@@ -347,7 +347,8 @@ public class UserMemberController {
 	    		session.setAttribute("siteUserInfo", dto);
 	    	}
 	    	//메인 페이지 redirect로 설정 해야함
-	    	return "home";
+	    	return "redirect:/";
+	    	//return "home";
 	    	
 	    }
 }

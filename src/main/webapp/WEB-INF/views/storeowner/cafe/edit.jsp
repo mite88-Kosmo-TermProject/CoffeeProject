@@ -23,6 +23,7 @@ input[type=checkbox] {
 }
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ae0ab443d0a9774378e3781de244bd95&libraries=services"></script>
 </head>
 <body>
 
@@ -45,7 +46,12 @@ input[type=checkbox] {
 							<form id="formAccountSettings" method="POST" enctype="multipart/form-data">
 								<input type="hid den" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
 								<input type="hid den" id="store_idx" name="store_idx" value="${edit.store_idx }" />
-								<input type="hid den" id="arrayParam" name="arrayParam" />
+								<input type="hid den" id="arrayParam" name="arrayParam" value="${edit.store_tag }"/>
+								<input type="hid den" id="store_latitude" name="store_latitude" value="${edit.store_latitude }"/>
+								<input type="hid den" id="store_longitude" name="store_longitude" value="${edit.store_longitude }"/>
+								<input type="hid den" id="store_sigungu" name="store_sigungu" value="${edit.store_sigungu }"/>
+								<input type="hid den" id="store_dong" name="store_dong"  value="${edit.store_dong }"/>
+								
 								<div class="card">
 									<div class="card-header header-elements p-3 my-n1">
 										<h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">카페정보 입력</h5>
@@ -139,7 +145,7 @@ input[type=checkbox] {
 													<label for="html5-text-input"
 														class="col-md-2 col-form-label">메뉴이미지</label>
 													<div class="col-md-10">
-														<input class="form-control" type="file" id="store_menu_img" name="file" >
+														<input class="form-control" type="file" id="store_menu" name="file" >
 													</div>
 												</div>
 
@@ -317,7 +323,8 @@ input[type=checkbox] {
                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
+				
+               console.log(data);
                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -340,9 +347,33 @@ input[type=checkbox] {
                console.log(data.zonecode);
                console.log(fullRoadAddr);
                
+               Promise.resolve(data).then(o => {
+                   const { address } = data;
+
+                   return new Promise((resolve, reject) => {
+                	   const geocoder = new kakao.maps.services.Geocoder()
+                       geocoder.addressSearch(address, (result, status) =>{
+                           if(status === daum.maps.services.Status.OK){
+                               const { x, y } = result[0];
+                               
+                               resolve({ lat: y, lon: x })
+                           }else{
+                               reject();
+                           }
+                       });
+                   })
+               }).then(result => {
+                   console.log(result);
+                   
+                   $("[name=store_latitude]").val(result.lat);
+                   $("[name=store_longitude]").val(result.lon);
+            	   
+               });
                
                $("[name=addr1]").val(data.zonecode);
                $("[name=addr2]").val(fullRoadAddr);
+               $("[name=store_sigungu]").val(data.sigungu);
+               $("[name=store_dong]").val(data.bname);
                
                /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
                document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
@@ -352,6 +383,39 @@ input[type=checkbox] {
     }
 	
 	</script>
+	
+	<!-- <script>
+	function execPostCode() {
+	new daum.Postcode({
+        oncomplete: function(data) {
+            Promise.resolve(data).then(o => {
+                const { address } = data;
+
+                return new Promise((resolve, reject) => {
+                    const geocoder = new daum.maps.services.Geocoder();
+
+                    geocoder.addressSearch(address, (result, status) =>{
+                        if(status === daum.maps.services.Status.OK){
+                            const { x, y } = result[0];
+							
+                            console.log(result[0]);
+                            
+                            resolve({ lat: y, lon: x })
+                        }else{
+                            reject();
+                        }
+                    });
+                })
+            }).then(result => {
+                
+            });
+        }
+    }).open();
+	}
+	
+	</script> -->
+	
+	
 	
 </body>
 

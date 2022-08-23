@@ -20,7 +20,7 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
 	public String home(Model model, StoresDTO storesDTO) {
 		System.out.println("호출");
 		ArrayList<StoresDTO>mainCafeList = new ArrayList<StoresDTO>();

@@ -94,7 +94,11 @@ namespace의 속성
   	</select>
   	
   	<select id="view2" resultType="com.coffice.dto.StoresDTO" parameterType="com.coffice.dto.StoresDTO">
-  		SELECT * FROM stores WHERE mem_id=#{mem_id}
+  		
+  		SELECT * FROM (select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+) )WHERE mem_id=
+  		#{mem_id}
+  		
+  		<!-- SELECT * FROM stores WHERE mem_id=#{mem_id} -->
   	</select>
   	
   	<!-- 

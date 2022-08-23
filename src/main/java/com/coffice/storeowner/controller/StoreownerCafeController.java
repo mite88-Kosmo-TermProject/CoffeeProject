@@ -103,7 +103,7 @@ public class StoreownerCafeController {
 				// UUID를 통해 생성된 문자열과 확장자를 결합해서 저장할 파일명을 생성한다.
 				String saveFileName = getUuid() + ext;
 
-				storesDTO.setStore_menu_img(saveFileName);
+				storesDTO.setStore_menu(saveFileName);
 				// 물리적경로에 새롭게 생성된 파일명으로 저장한다.
 				mfile.transferTo(new File(path + File.separator + saveFileName));
 				if (imgfiles.equals("")) {
@@ -174,7 +174,7 @@ public class StoreownerCafeController {
 				// UUID를 통해 생성된 문자열과 확장자를 결합해서 저장할 파일명을 생성한다.
 				String saveFileName = getUuid() + ext;
 
-				storesDTO.setStore_menu_img(saveFileName);
+				storesDTO.setStore_menu(saveFileName);
 				// 물리적경로에 새롭게 생성된 파일명으로 저장한다.
 				mfile.transferTo(new File(path + File.separator + saveFileName));
 				if (imgfiles.equals("")) {

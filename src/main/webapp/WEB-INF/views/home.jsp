@@ -177,7 +177,7 @@
 					<div class="service-item">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/owner/${eidt.store_menu_img }"
+								src="<%=request.getContextPath()%>/resources/img/owner/"
 								alt="">
 						</div>
 						<div
