@@ -1,4 +1,4 @@
-package com.coffice.user.service;
+package com.coffice.user.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,21 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.coffice.dto.GetTokenVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@Service
+@Component
 public class SchedulePayment {
 
 	@Autowired
 	private ImportPay pay;
 	
-	public String schedulePay(String customer_uid, String price, String merchant_uid) {
+	//스케줄 설정해서 API에 쏴줌
+	public String schedulePay(String customer_uid, String price, String merchant_uid, String sub_name) {
 		String token = pay.getToken();
 		String access_token = "";
 		System.out.println("tokenReq======="+token);
@@ -70,10 +70,11 @@ public class SchedulePayment {
 		 headers.setBearerAuth(access_token);
 		 
 		 JsonObject jsonObject = new JsonObject();
-		 jsonObject.addProperty("merchant_uid", merchant_uid);
+		 jsonObject.addProperty("merchant_uid", "merchant_"+timestamp);
 		 jsonObject.addProperty("schedule_at", timestamp);
 		 jsonObject.addProperty("currency ", "KRW");
 		 jsonObject.addProperty("amount", price);
+		 jsonObject.addProperty("name", sub_name);
 		 
 		 JsonArray jsonArr = new JsonArray();
 		 

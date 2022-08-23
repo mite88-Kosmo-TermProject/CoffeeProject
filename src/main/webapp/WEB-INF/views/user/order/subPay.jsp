@@ -32,7 +32,8 @@
 <script>
 	//가격 천의 자리마다 콤마 붙이기 위해 넣음
 	//그외 잔당 가격 계산등 기능구현
-	let paymentPrice = 0;	
+	let paymentPrice = 0;
+	let subPaymentPrice = 0;
 	let subName = '';
 	
 	window.onload = function () {
@@ -56,6 +57,7 @@
 		document.getElementById("selectPrice").innerHTML = Number(price).toLocaleString("ko-KR", { style : 'currency', currency: 'KRW' });
 		document.getElementById("selectCup").innerHTML = cup+'잔'
 		
+		subPaymentPrice = price;
 		paymentPrice = (Number(price) - document.getElementById("pointInput").value);
 		console.log(paymentPrice);
 		
@@ -84,7 +86,7 @@
 		IMP.request_pay({
 			pg : "kakaopay", // 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 누락되거나 매칭되지 않는 경우 관리자 콘솔에서 설정한 기본PG가 호출됨 값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
-			merchant_uid : 'merchant_' + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
+			merchant_uid : 'merchant_'+ new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
 			name : subName, //주문명 (구독권 이름)
 			amount : paymentPrice, // 포인트등을 사용한 첫 결제금액
 			customer_uid : '${dto.mem_id }', //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
@@ -99,15 +101,15 @@
 					url : '../order/insertSubscribe.do', //DB에 구독정보 등록하는 부분..
 					type : 'post',
 					data : {
-						customer_id : '${dto.mem_id }',
+						mem_id : '${dto.mem_id }', //고객 아이디 (빌링키)
 						pay_import_key : rsp.imp_uid, // 아임포트 고유 결제번호
 						pay_idx : rsp.merchant_uid, // 가맹점에서 생성/관리하는 고유 주문번호
 						pay_price : rsp.paid_amount, // (number) 결제금액 결제승인된 또는 가상계좌 입금예정 금액
 						pay_result_status : rsp.status, // 결제상태 옵션 값(클릭하여 자세히보기)
-						sub_idx : rsp.name, // 주문명
+						sub_name : rsp.name, // 주문명
 						pay_successed_at : rsp.paid_at, //(number) 결제승인시각(UNIX timestamp)
 						pay_case : rsp.pg_provider, //결제한 pg사
-						buyer_email : rsp.buyer_email, //
+						buyer_email : rsp.buyer_email, 
 						buyer_name : rsp.buyer_name,
 						buyer_tel : rsp.buyer_tel,
 						
@@ -144,17 +146,18 @@
 						alert('정기결제 등록' + result);
 					}
 				});
-				alert("잡다한 결과값"+rsp.paid_at + rsp.paid_amount + rsp.status
+				alert("잡다한 결과값 ="+rsp.paid_at + rsp.paid_amount + rsp.status
 						+ rsp.merchant_uid + rsp.name);
-				alert("결제한 아이디"+${dto.mem_id });
+				alert("결제한 아이디 ="+ '${dto.mem_id }');
 
 				$.ajax({
 					url : '../order/payment.do', //결제 상태를 확인하고 스케줄러를 호출하는 부분
 					type : 'post',
 					data : {
 						customer_uid : '${dto.mem_id }',
-						price : 2, // 첫결제는 포인트사용한 금액이고 여기는 원래구독권가격 넣기
-						merchant_uid : rsp.merchant_uid + 1
+						price : subPaymentPrice, // 첫결제는 포인트사용한 금액이고 여기는 원래구독권가격 넣기
+						merchant_uid : rsp.merchant_uid + 1,
+						sub_name : rsp.name,
 					},
 					success : function(result) {
 						alert('정기결제 예약성공');
@@ -253,8 +256,8 @@
 												<!--   상세정보 -->
 												<div class="col-12">
 
-													<p class="event">아직 카페패스가 없네요!</p>
 													<h2 class="title">카페패스</h2>
+													<p class="event">아직 카페패스가 없네요!</p>
 
 													<!-- <div class="sce">
 														<div class="icon">
@@ -299,7 +302,8 @@
 									<c:forEach items="${lists }" var="list" varStatus="loop">
 										<div class="col-lg-6 col-md-6 col-12" onclick="fnProductSelect('${list.sub_name }', '${list.sub_price }','${list.sub_coffee_num }');">
 											<div class="inputGroup">
-												<%-- <input type="hidden" id="subName" value=${dto.sub_name }> --%>
+												<%-- <div name="subIdx" style="display:none">${list.sub_idx }</div> --%>
+												<%-- <input type="hidden" name="subIdx" value=${list.sub_idx }> --%>
 												<input id="radio${loop.index }" name="radio" type="radio" /> 
 												<label for="radio${loop.index }"><strong name="cup">${list.sub_coffee_num }</strong>&nbsp;&nbsp;&nbsp;
 												<span name="price">${list.sub_price }</span>

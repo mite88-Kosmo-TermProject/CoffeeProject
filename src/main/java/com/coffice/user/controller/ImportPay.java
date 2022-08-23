@@ -1,4 +1,4 @@
-package com.coffice.user.service;
+package com.coffice.user.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,12 +6,12 @@ import java.util.Map;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-@Service
+@Component
 public class ImportPay {
 	
 	public String getToken() {
