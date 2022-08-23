@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -30,6 +31,10 @@ import com.coffice.dto.PointDTO;
 import com.coffice.dto.PointRuleDTO;
 import com.coffice.service.AdminPointImpl;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 
 import netscape.javascript.JSObject;
 
@@ -250,6 +255,35 @@ public class AdminPointController {
 			
 		}
 		return topArray;	
+	}
+	@RequestMapping("/admin/point/insertevent.do")
+	public String insertEventItem (HttpServletRequest req) throws ParseException, JsonMappingException, JsonProcessingException {
+		String data = req.getParameter("source");
+		JSONParser dataparse = new JSONParser();
+		JSONArray dataArr = (JSONArray)dataparse.parse(data);
+		ArrayList<Map<String, Object>> objArray = new ArrayList<Map<String,Object>>();
+		for(int i =0; i<dataArr.size(); i++) {
+			System.out.println(dataArr.size());
+			JSONArray eventItemArr = new JSONArray();
+			eventItemArr = (JSONArray) dataArr.get(i);
+			for(int j =0; j<1; j++) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				JSONObject eventItemObj = new JSONObject();
+				eventItemObj.put("event_items_num", eventItemArr.get(0));
+				eventItemObj.put("event_items_name", eventItemArr.get(1));
+				eventItemObj.put("event_items_prbbl", eventItemArr.get(2));
+				eventItemObj.put("event_items_result", eventItemArr.get(3));
+				System.out.println("eventItemArr[0]"+eventItemArr.get(0));
+				System.out.println("eventItemObj"+j+":"+eventItemObj);
+				map = new ObjectMapper().readValue(eventItemObj.toString(), Map.class);
+				objArray.add(map);
+			}
+		}
+		System.out.println(objArray);
+		sqlsession.getMapper(AdminPointImpl.class).insertEventItems(objArray);
+		
+		return "redirect:/admin/point/index2";
+		
 	}
 	
 

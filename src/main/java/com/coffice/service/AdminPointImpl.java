@@ -24,5 +24,6 @@ public interface AdminPointImpl {
 	public void setEventSetting(Object obj1,Object obj2, Object obj3);
 	public ArrayList<EventDTO> loadEventSetting ();
 	public ArrayList<Event_ItemDTO> loadEventItems();
+	public void insertEventItems(@Param("arraylist") ArrayList<Map<String, Object>> objArray);
 	
 }

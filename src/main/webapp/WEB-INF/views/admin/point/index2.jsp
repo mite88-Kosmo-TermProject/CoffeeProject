@@ -59,18 +59,21 @@ z-index: 2;
 	justify-content: center;
 	
 }
-#roulette > #item-wrapper > .item:nth-child(1) {
+/*#roulette > #item-wrapper > .item:nth-child(1) {
 	transform: rotate(0deg);
 }
 #roulette > #item-wrapper > .item:nth-child(2) {
-	transform: rotate(90deg);
+	transform: rotate(72deg);
 }
 #roulette > #item-wrapper > .item:nth-child(3) {
-	transform: rotate(180deg);
+	transform: rotate(144deg);
 }
 #roulette > #item-wrapper > .item:nth-child(4) {
-	transform: rotate(270deg);
+	transform: rotate(216deg);
 }	
+#roulette > #item-wrapper > .item:nth-child(5) {
+	transform: rotate(288deg);
+}*/	
 #roulette > #line-wrapper > .line {
 	position: absolute;
 	top: 0;
@@ -81,18 +84,21 @@ z-index: 2;
 	transform-origin: bottom;
 	z-index: 3;
 }
-#roulette > #line-wrapper > .line:nth-child(1) {
-	transform: rotate(45deg);
+/*#roulette > #line-wrapper > .line:nth-child(1) {
+	transform: rotate(36deg);
 }
 #roulette > #line-wrapper > .line:nth-child(2) {
-	transform: rotate(135deg);
+	transform: rotate(108deg);
 }
 #roulette > #line-wrapper > .line:nth-child(3) {
-	transform: rotate(225deg);
+	transform: rotate(180deg);
 }
 #roulette > #line-wrapper > .line:nth-child(4) {
-	transform: rotate(315deg);
+	transform: rotate(252deg);
 }
+#roulette > #line-wrapper > .line:nth-child(5) {
+	transform: rotate(324deg);
+}*/
 #roulette-pin{
 position: absolute;
 top:5%;
@@ -179,27 +185,31 @@ z-index: 4;
 											</form>
 											</div>
 											<div class="mb-3 row" id="roulette-outer" style="display: flex;">
-											
-											
+												
 											<div id="roulette-pin"></div>
 												<div id="roulette">
 												<!--값영역 -->
 												<div id="item-wrapper">
-													<div class="item">100점</div>
+													<!-- <div class="item">100점</div>
 													<div class="item">200점</div>
 													<div class="item">300점</div>
 													<div class="item">-50점</div>
+													<div class="item">-20점</div> -->
 												</div>
 												<!--선영역-->
 												<div id="line-wrapper">
+													<!-- <div class="line"></div>
 													<div class="line"></div>
 													<div class="line"></div>
 													<div class="line"></div>
-													<div class="line"></div>
+													<div class="line"></div> -->
 												</div>
 											</div>
 											</div>
-												<button type="button" onclick="testRotate();">돌리기</button>
+											<div>
+												<button type="button" onclick="calculateItemAndRatio();">룰렛만들기</button>
+												<button type="button" onclick="MakeSetRouletteStr();">룰렛돌려보기</button>
+											</div>
 
 											<!-- 오른편 -->
 											<div class="col-md-12">
@@ -211,8 +221,7 @@ z-index: 4;
 																<th data-tabullet-map="1">항목명</th>												
 																<th data-tabullet-map="2">확률</th>
 																<th data-tabullet-map="3">항목상품</th>
-																<th width="50" data-tabullet-type="edit"></th>
-																<th width="50" data-tabullet-type="delete"></th>
+																<th width="50" data-tabullet-type="edit"></th>	
 															</tr>
 														</thead>
 													</table>
@@ -220,8 +229,8 @@ z-index: 4;
 
 											</div>
 											<div class="mt-2">
-												<button type="button" class="btn btn-primary me-2">저장</button>
-												<button type="reset" class="btn btn-outline-secondary">Cancel</button>
+												<button type="button" onclick="insertEventItem();" class="btn btn-primary me-2">저장</button>
+												<button type="reset" onclick="resetItem();" class="btn btn-outline-secondary">룰렛판&항목초기화</button>
 											</div>
 
 										</div>
@@ -255,127 +264,7 @@ z-index: 4;
 
 	<!-- 여기에 새로운 js파일있으면 넣기 -->
 	<script src="<%= request.getContextPath() %>/resources/lib/Dynamic-Table/Tabullet.js"></script>
-
-	<script type="text/javascript">
-		var source = [];
-		var eventname = document.getElementsByName("eventname")[0];
-		var file = document.getElementsByName("file")[0];
-		var desc = document.getElementsByName("desc")[0];
-		var roulette = document.getElementById("roulette");
-		var percentage = [];
-		
-		function setSource(){
-			$.ajax({
-				url:'../../admin/point/loadevent_item.do',
-				dataType:'json',
-				success:function(data){
-					source = data;
-					resetTabullet();
-					
-				},
-				error:function(msg){
-					console.log(msg);
-				}
-			});
-		 }
-		function loadEventSetting(){
-			$.ajax({
-				url:'../../admin/point/loadeventsetting.do',
-				dataType:'json',
-				success:function(data){					
-					eventname.placeholder = data.name;
-					desc.placeholder = data.desc;
-				},
-				error:function(msg){
-					console.log(msg);
-				}
-			});
-		}
-		 function resetTabullet() {
-             $("#table").tabullet({
-                 data: source,
-                 action: function (mode, data) {
-                     console.dir(mode);
-                     if (mode === 'save') {
-                         source.push(data);
-                     }
-                     if (mode === 'edit') {
-                         for (var i = 0; i < source.length; i++) {
-                             if (source[i][0] == data[0]) {
-                            	 console.log(data);
-                                 source[i] = data;
-                             }
-                         }
-                     }
-                     if(mode == 'delete'){
-                         for (var i = 0; i < source.length; i++) {
-                             if (source[i][0] == data[0]) {
-                                 source.splice(i,1);
-                                 break;
-                             }
-                         }
-                     }
-					if(1 <= 2)
-                     resetTabullet();
-                 }
-             });
-         }
-		 function resoretdarray(){
-			if(percentage.length <= 0){
-			for(let i =0; i<source.length; i++){
-				percentage.push(source[i][2]) ;
-				percentage.sort();
-				}
-				
-			}
-			else{
-				return;
-			}
-		 }
-		 
-		 function testRotate(){
-			roulette.style.transform = "rotate(45deg)";
-			MakeSetRouletteStr();
-		 }
-		 function MakeSetRouletteStr(){
-			 	resoretdarray();
-				Str = "";
-				Str +="var ranNum = Math.floor(Math.random()*100);"
-				Str +="var maxNum =0 ;"
-				Str +="var minNum =0 ;"
-				Str += "console.log(percentage);"
-				Str +="if(ranNum <= percentage[0]) {\n"
-				Str +="maxNum = Math.floor(percentage[0]/100*360);\n"
-				Str +="minNum = 0 ;\n"
-				Str +="console.log('이발:'+minNum);\n"
-				Str +="}\n"	
-				for(let j = 1 ; j<source.length; j++){
-				Str +="else if((percentage["+j+"-1])+1 <= ranNum && ranNum <= percentage["+j+"]) {\n"
-				Str +="console.log('percentage:'+percentage["+j+"]);\n"
-				Str +="console.log('percentage-1:'+percentage["+j+"-1]);\n"
-				Str +="maxNum = Math.floor(percentage["+j+"]/100*360);\n"
-				Str +="minNum = (Math.floor(percentage["+j+"-1]/100*360))+1;\n"
-				Str +="}\n"
-				if(j == source.length-1 ){
-				Str +="else {\n"
-				Str +="maxNum = Math.floor(percentage["+j+"]/100*360);\n"
-				Str +="minNum = (Math.floor(percentage["+j+"-1]/100*360))+1;\n"
-				Str +="}\n"
-				}
-				}
-			eval(Str);
-			console.log(ranNum);
-			console.log(maxNum);
-			console.log(minNum);
-			
-			
-		 }
-	 $(function () {
-		 //동적테이블 
-		 setSource();
-		 loadEventSetting();
-     });
- </script>
+	<script src="<%= request.getContextPath() %>/resources/admin/js/admin_test_roulette.js"></script>
 </body>
 
 </html>

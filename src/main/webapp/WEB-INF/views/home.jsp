@@ -162,7 +162,41 @@
 		</div>
 	</div>
 	<!-- 검색 end -->
-
+	<button class="btn-modal" data-toggle="modal" data-target="#myModal">Open Modal</button>
+	<div class="modal hide" id="myModal">
+		<div class"modal-header">
+			<button class="close" data-dismiss="modal">x</button>
+			<h3>Modal header</h3>
+		</div>
+		<div class="modal-body">
+			<div class="mb-3 row" id="roulette-outer" style="display: flex;">
+												
+				<div id="roulette-pin"></div>
+					<div id="roulette">
+					<!--값영역 -->
+					<div id="item-wrapper">
+						<!-- <div class="item">100점</div>
+						<div class="item">200점</div>
+						<div class="item">300점</div>
+						<div class="item">-50점</div>
+						<div class="item">-20점</div> -->
+					</div>
+					<!--선영역-->
+					<div id="line-wrapper">
+						<!-- <div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div> -->
+					</div>
+				</div>
+				</div>
+				<div>
+					<button type="button" onclick="calculateItemAndRatio();">룰렛만들기</button>
+					<button type="button" onclick="MakeSetRouletteStr();">룰렛돌려보기</button>
+				</div>
+		</div>
+	</div>
 
 	<!-- 이달의 카페 -->
 	<div class="container-xxl py-5">

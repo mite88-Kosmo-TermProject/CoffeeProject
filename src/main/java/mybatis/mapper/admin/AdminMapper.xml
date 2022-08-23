@@ -73,4 +73,19 @@
   	select * from event_items
   </select>
   
+  <insert id="insertEventItems" parameterType="ArrayList">
+  	{
+  	call
+  	declare
+  	begin
+  	delete from event_items ;
+  		<foreach collection="arraylist" item="item" index="arNum" >
+  			insert into event_items 
+  			values (#{item.event_items_num},1,
+  			#{item.event_items_name},#{item.event_items_prbbl},#{item.event_items_result});
+  		</foreach>
+  	end
+  	}
+  </insert> 
+  
   </mapper>
