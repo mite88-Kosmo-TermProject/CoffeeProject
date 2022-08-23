@@ -24,5 +24,6 @@ public interface CafeImpl {
 	
 	public ArrayList<ReviewDTO> review_list(@Param("_idx") int store_idx);
 
+	
 }
 

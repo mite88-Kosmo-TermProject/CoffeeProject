@@ -670,7 +670,7 @@ p.txt:before {
 					tableData +='<li class="photoY">'
 							+'<div class="reviewSet">'
 							+	'<span class="thum">'
-							+	'<img src="https://static-www.jejupass.com/resource/PC/images/mypage/@default_img.png" alt=""></span>'
+							+	'<img src="../resources/img/KakaoTalk_20220822_214450862.jpg" alt=""></span>'
 							+	'<div class="tit">'
 							+		'<div class="common-grade-badge d small has-text mb-2" >'
 							+			'<i class="fas fa-coffee"></i>'
