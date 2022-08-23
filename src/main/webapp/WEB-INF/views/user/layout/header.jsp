@@ -39,6 +39,53 @@
 
 <body>
 
+
+	<!-- 상원 ->
+
+	<!-- <li>
+		<a href="edit.do" target="_blank">
+			회원수정
+		</a>
+	</li>
+	<li>
+		<a href="ip.do" target="_blank">
+			아이디 비밀번호 찾기
+		</a>
+	</li>
+	<li>
+		<a href="ns.do" target="_blank">
+		회원가입
+		</a>
+	</li>
+	<li>
+		<a href="id.do" target="_blank">
+			아이디  찾기
+		</a>
+	</li>
+	<li>
+		<a href="pw.do" target="_blank">
+			비밀번호 찾기
+		</a>
+	</li>
+	<li>
+		<a href="id2.do" target="_blank">
+			아이디  찾기2
+		</a>
+	</li>
+	<li>
+		<a href="pw2.do" target="_blank">
+			비밀번호 찾기2
+		</a>
+	</li>
+	<li>
+		<a href="naverid.do" target="_blank">
+			네이버아이디
+		</a>
+	</li> -->
+
+
+
+
 <!-- Spinner Start -->
 	<div id="spinner"
 		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">

@@ -209,6 +209,7 @@ input[type="date"] {
 				<div class="col-2"></div>
 					<div class="col-8">
 						<div id="join_step01_header" class="text-center">
+						<br>
 							<h2>회원가입</h2>
 							<p>
 								<span class="essential" style="font-weight: 900;">*</span> 는

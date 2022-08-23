@@ -29,4 +29,57 @@ public class HomeController {
 		return "home";
 	}
 
-}
+	
+	/*
+	 * 상원
+	 * 
+	 * @RequestMapping("/edit.do") public String signup() {
+	 * 
+	 * return "/user/member/edit"; }
+	 * 
+	 * @RequestMapping("/ip.do") public String ip() {
+	 * 
+	 * return "/user/member/idpass"; }
+	 * 
+	 * @RequestMapping("/ns.do") public String ns() {
+	 * 
+	 * return "/user/member/nextsignup"; }
+	 * 
+	 * @RequestMapping("/id.do") public String id() {
+	 * 
+	 * return "/user/member/id"; }
+	 * 
+	 * @RequestMapping("/pw.do") public String pass() {
+	 * 
+	 * return "/user/member/pw"; }
+	 * 
+	 * @RequestMapping("/id2.do") public String id2() {
+	 * 
+	 * return "/user/member/id2"; }
+	 * 
+	 * @RequestMapping("/pw2.do") public String pass2() {
+	 * 
+	 * return "/user/member/pw2"; }
+	 * 
+	 * @RequestMapping("/naverid.do") public String naver() {
+	 * 
+	 * return "/user/member/naverid"; }
+	 */
+
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
