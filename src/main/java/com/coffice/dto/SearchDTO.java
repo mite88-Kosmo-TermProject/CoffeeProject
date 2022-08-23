@@ -22,7 +22,7 @@ public class SearchDTO {
 	private String store_notice;
 	private String store_menu;
 	private String store_star;
-	private String store_afltd;
+	private int store_afltd;
 	private String store_img;
 	private String store_time;
 	
