@@ -148,18 +148,17 @@
 			<c:forEach items="${mainCafeList }" var="cafe" varStatus="loop">
 			
 				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item">
+					<div class="service-item h-100  border border-5 border-light border-top-0">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-1.jpg"
+								src="<%=request.getContextPath()%>/resources/img/stores/${cafe.store_img }.jpg"
 								alt="">
 						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">${cafe.store_name }</h4>
+						<div class="p-4">
+							<h4 class="mb-3 text-center">${cafe.store_name }</h4>
 							<p>카페전화번호 : ${cafe.store_phone } </p>
 							<p> 카페주소: ${cafe.store_localaddr }</p>
-							<a class="fw-medium" href="<%=request.getContextPath()%>/cafe/info.do?store_idx=${cafe.store_idx}">Read More<i
+							<a class="fw-medium text-center" href="<%=request.getContextPath()%>/cafe/info.do?store_idx=${cafe.store_idx}">Read More<i
 								class="fa fa-arrow-right ms-2"></i></a>
 						</div>
 					</div>

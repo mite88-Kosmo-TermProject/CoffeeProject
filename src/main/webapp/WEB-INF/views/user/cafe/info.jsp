@@ -12,6 +12,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -361,17 +362,16 @@ p.txt:before {
 						<!-- 할인항목 -->
 						<ul class="list-group list-group-horizontal mb-3">
 							<li><span class="badge bg-secondary list-group-item me-3">아메리카노
-									무료1</span></li>
-							<li><span class="badge bg-secondary list-group-item">아메리카노
-									무료2</span></li>
+									무료</span></li>
+							<!-- <li><span class="badge bg-secondary list-group-item">아메리카노
+									무료2</span></li> -->
 						</ul>
 						<!-- 카페명 -->
 						<h2 class="titDep1 mb-3" cafename="">${resultList.store_name}</h2>
 
 						<!-- 해시태그 -->
 						<p class="tagWrap mb-3" displaykeyworlds="">
-							<span class="tag">#디저트카페</span> <span class="tag">#애월카페</span> <span
-								class="tag">#에그타르트맛집</span>
+							<span class="tag">#${check_tag[0].store_tag}</span>
 						</p>
 
 						<!-- 업체정보 -->
@@ -384,7 +384,7 @@ p.txt:before {
 							<div class="d-flex p-2 justify-content-between border-bottom">
 								<div class="">
 									<ul>
-										<li><i class="fa fa-solid fa-pen mt-2"></i> 3</li>
+										<li><i class="fa fa-solid fa-pen mt-2"></i> ${check_review}</li>
 										<li><i class="fa fa-solid fa-star mt-2"></i> ${resultList.store_star}</li>
 									</ul>
 								</div>
@@ -434,7 +434,7 @@ p.txt:before {
 				<ul class="tabs clearfix" data-tabgroup="first-tab-group">
 					<li><a href="#tab1" class="active">업체정보</a></li>
 					<li><a href="#tab2">메뉴</a></li>
-					<li><a href="#tab3" onclick="review()">리뷰(50)</a></li>
+					<li><a href="#tab3" onclick="review(1)">리뷰(50)</a></li>
 				</ul>
 				<section id="first-tab-group" class="tabgroup">
 					<!-- 업체정보 -->
@@ -493,87 +493,7 @@ p.txt:before {
 					</div>
 					<div id="tab3">
 						<!-- 별점정보 -->
-						<div class="start_info mb-4">
-							<div class="row justify-content-left d-flex ">
-								<div
-									class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-3">
-									<div class="rating-box">
-										<h1 class="pt-4">${resultList.store_star}</h1>
-									</div>
-									<div class="rating-box">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="far fa-star"></i>
-									</div>
-								</div>
-								<div class="col-md-8">
-									<div class="rating-bar0 justify-content-center">
-										<table class="text-left mx-auto">
-											<tbody>
-												<!-- 5점 -->
-												<tr>
-													<td class="rating-label">5</td>
-													<td class="rating-bar">
-														<div class="bar-container">
-															<div class="bar-5"></div>
-														</div>
-													</td>
-													<td class="text-right">123</td>
-												</tr>
-
-												<!-- 4점 -->
-												<tr>
-													<td class="rating-label">4</td>
-													<td class="rating-bar">
-														<div class="bar-container">
-															<div class="bar-4"></div>
-														</div>
-													</td>
-													<td class="text-right">23</td>
-												</tr>
-
-												<!-- 3점 -->
-												<tr>
-													<td class="rating-label">3</td>
-													<td class="rating-bar">
-														<div class="bar-container">
-															<div class="bar-3"></div>
-														</div>
-													</td>
-													<td class="text-right">10</td>
-												</tr>
-
-												<!-- 2점 -->
-												<tr>
-													<td class="rating-label">2</td>
-													<td class="rating-bar">
-														<div class="bar-container">
-															<div class="bar-2"></div>
-														</div>
-													</td>
-													<td class="text-right">3</td>
-												</tr>
-
-												<!-- 1점 -->
-												<tr>
-													<td class="rating-label">1</td>
-													<td class="rating-bar">
-														<div class="bar-container">
-															<div class="bar-1"></div>
-														</div>
-													</td>
-													<td class="text-right">0</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<!-- //row -->
-
-
-						</div>
-
+						
 
 						<!-- 리뷰 -->
 						<!-- 필터 -->
@@ -581,20 +501,37 @@ p.txt:before {
 							<div class="flex-shrink-0">
 								<select id="sendNotification" class="form-select"
 									name="sendNotification">
-									<option selected="">최신순</option>
-									<option>좋아요순</option>
-									<option>별점높은순</option>
-									<option>별점낮은순</option>
+									<option value="1" selected="">최신순</option>
+									<option value="2">좋아요순</option>
+									<option value="3">별점높은순</option>
+									<option value="4">별점낮은순</option>
 								</select>
 							</div>
 							<div class="flex-grow-1 row">
-								<div class="col text-end">
+								<!-- <div class="col text-end">
 									<div class="form-check form-switch">
 										<label style="margin-right: 45px;">포토리뷰만</label> <input
 											class="form-check-input float-end" type="checkbox"
 											role="switch" checked="">
 									</div>
+								</div> -->
+
+								<div class="start_info ">
+									<div class="row justify-content-left d-flex ">
+										<div
+											class="d-flex flex-column justify-content-center align-items-end">
+											<div class="rating-box">
+												<h1 class="pt-4">${resultList.store_star}</h1>
+											</div>
+											<div class="rating-box">
+												<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+													class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+													class="far fa-star"></i>
+											</div>
+										</div>
+									</div>
 								</div>
+
 							</div>
 						</div>
 
@@ -627,8 +564,15 @@ p.txt:before {
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<%=request.getParameter("store_idx") %>
 	<script>
+	//정렬
+	$("#sendNotification").on( "change", function() {
+		
+		//alert($(this).val());
+		review($(this).val());
+	});
+
 	
-	function review() {
+	function review(type) {
 		const url = new URL($(location).attr('href'));
 		console.log(url);
 		const urlParam = url.searchParams;
@@ -636,9 +580,11 @@ p.txt:before {
 		
 		$.ajax({
 			type : 'POST',
-			url : '../cafe/review.do?store_idx='+param,
+			url : '../cafe/review.do?store_idx='+param+'&type='+type,
 			dataType : 'json',
 			success : function (data) {
+				$(".reviewList #show_data").empty();//새로고침용
+				
 				var user = data.user;
 	               console.log(user);
 				let tableData = "";
@@ -674,7 +620,7 @@ p.txt:before {
 							+	'<div class="tit">'
 							+		'<div class="common-grade-badge d small has-text mb-2" >'
 							+			'<i class="fas fa-coffee"></i>'
-							+			'<p>다이아</p></div>'
+							+			'<p>리뷰</p></div>'
 							+		'<strong class="name">'+data.memberDTO.mem_id+'</strong></div></div>'
 							+'<div class="reviewSet">'
 							+	'<div class="rating-box" style="text-align: left;">'
@@ -690,9 +636,9 @@ p.txt:before {
 							+'</a>'
 							
 							+'<figure class="photoSet" data-count="2">'
-							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="열심히 한 작업!!" data-lightbox="example-set">'
+							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
 							+		'<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" alt=""></a>'
-							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="열심히 한 작업!!22" data-lightbox="example-set">'
+							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
 							+		'<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473" alt="" class="img-fluid"></a></figure>'
 							
 							
@@ -725,18 +671,7 @@ p.txt:before {
 		});
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	$(function() {
 		//alert("!!");
 		
@@ -806,7 +741,8 @@ p.txt:before {
 	    resizeDuration: 200,
 	    wrapAround: true,
 	    disableScrolling: false,
-	    fitImagesInViewport:false
+	    fitImagesInViewport:false,
+	    maxWidth : 800
 	})
 	
 	//모바일분류
@@ -903,7 +839,7 @@ p.txt:before {
 				//alert(result[0].y+"/"+result[0].x);
 
 				// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-				var imageSrc = '/CoffeeProject/resources/img/stores/기본_coffee1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+				var imageSrc = '/CoffeeProject/resources/img/기본_coffee1.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 				imageSize = new kakao.maps.Size(35, 40), // 마커 이미지의 크기
 				
 				imgOptions = {

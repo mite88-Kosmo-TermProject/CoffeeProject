@@ -26,10 +26,12 @@ import com.coffice.dto.SearchDTO;
 import com.coffice.user.service.CafeImpl;
 import com.coffice.user.service.CafeSNSImpl;
 import com.coffice.user.service.CafeSearchImpl;
+import com.coffice.user.service.TagImpl;
 
 import util.PagingUtil;
 
 import com.coffice.dto.StoresDTO;
+import com.coffice.dto.TagDTO;
 import com.coffice.user.service.CafeImpl;
 
 @Controller
@@ -288,27 +290,33 @@ public class CafeController {
 	//카페상세
 	@RequestMapping(value = "/cafe/info.do", method = RequestMethod.GET)
 	public  String cafeinfo(HttpServletRequest req, HttpServletResponse resp, Model model) throws Exception {
-		
-		
-		
+
 		int store_idx = Integer.parseInt(req.getParameter("store_idx"));
 		cafeImpl = sqlSession.getMapper(CafeImpl.class);
-		List<StoresDTO> resultList = cafeImpl.getCafeData(store_idx);
+		List<StoresDTO> resultList = cafeImpl.getCafeData(store_idx); 
+		
+		//태그
+		ArrayList<TagDTO> check_tag = sqlSession.getMapper(TagImpl.class).check_tag(store_idx);
+		System.out.println("check_tag:"+check_tag);
+		
+		//리뷰수
+		int check_review = sqlSession.getMapper(CafeSNSImpl.class).getStoresReviewCount(store_idx);
+		
 		 
 //		 System.out.println("!!"+resultList);
 		 
 //		System.out.println("!!"+store_idx);
 
-		
-		
-		
+		model.addAttribute("check_tag", check_tag);
+		model.addAttribute("check_review", check_review);
 		model.addAttribute("resultList", resultList);
 		
 		return "/user/cafe/info";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/cafe/review.do" , method = RequestMethod.POST)
-	public Map<String, Object> review_info(HttpServletRequest req, @RequestParam(value = "store_idx")int store_idx) {
+	public Map<String, Object> review_info(HttpServletRequest req, @RequestParam(value = "store_idx")int store_idx,
+			 @RequestParam(value = "type", defaultValue = "1")int type) {
 		
 		System.out.println(store_idx);
 		HttpSession session = req.getSession();
@@ -317,7 +325,21 @@ public class CafeController {
 		ArrayList<HeartDTO> check_like = sqlSession.getMapper(CafeSNSImpl.class).check_like(user);
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setStore_idx(store_idx);
-		ArrayList<ReviewDTO> lists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+
+		ArrayList<ReviewDTO> lists;
+		
+		if(type == 1) {
+			lists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+		}else if(type == 2) {
+			lists = sqlSession.getMapper(CafeSNSImpl.class).review_list_type2(parameterDTO);
+		}else if(type == 3) {
+			lists = sqlSession.getMapper(CafeSNSImpl.class).review_list_type3(parameterDTO);
+		}else if(type == 4) {
+			lists = sqlSession.getMapper(CafeSNSImpl.class).review_list_type4(parameterDTO);
+		}else {
+			lists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+		}
+		
 		
 //		System.out.println(review_list);
 		
