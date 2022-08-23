@@ -17,31 +17,14 @@
   	end;
   </update>
   
-  <select id="getPointListToSearchFiled" parameterType="int" resultType="com.coffice.dto.PointDTO">
-  	select 
-  		POINT_IDX,
-		POINT_ENTRY_EXIT,
-		MEM_ID,
-		to_char(POINT_POSTDATE,'YYYY-MM-DD HH24:MI:SS') as POINT_POSTDATE,
-		RULE_IDX
-		from point
-		<if test='search != null'>
-		where rule_idx like '%'||#{search}||'%'
-		</if>
-  		order by point_idx desc
-  </select>
-  
   <select id="getPointList" parameterType="int" resultType="com.coffice.dto.PointDTO">
   	select 
   		POINT_IDX,
-		POINT_ENTRY_EXIT,
 		MEM_ID,
+		POINT_ENTRY_EXIT,
 		to_char(POINT_POSTDATE,'YYYY-MM-DD HH24:MI:SS') as POINT_POSTDATE,
-		RULE_IDX
-		from point
-		<if test='search != null'>
-		where rule_idx like '%'||#{search}||'%'
-		</if>
+		POINT_SOURCES
+		from point_log
   		order by point_idx desc
   </select>
   

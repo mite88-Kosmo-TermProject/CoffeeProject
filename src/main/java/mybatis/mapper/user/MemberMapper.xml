@@ -156,6 +156,28 @@ namespace의 속성
   		#{mem_email}, #{mem_gender})
   	</insert>
   	
+  	<select id="checkpassoneday" parameterType="String" resultType="String">
+  		select to_char (point_postdate,'YYYY-MM-DD')
+		from 
+		(
+			select point_postdate
+			from point_log 
+			where mem_id like #{userName} and point_sources = 2 order by rownum desc
+		)
+		where rownum = 1
+  	</select>
+  	
+  	<!--이벤트 룰렛 포인트 지급  -->
+  	<insert id="inserteventpoint" parameterType="Object">
+  	{
+  	call
+  	declare
+  	begin
+  	update member set mem_point = mem_point +#{param2} where mem_id like #{param1} ;
+  	insert into point_log values(POINT_SEQUENCE.nextval,#{param1},#{param2},sysdate,5);
+  	end
+  	}
+  	</insert>
   </mapper>
   
   

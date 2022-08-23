@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.PointDTO;
 
 
 @Service
@@ -65,6 +66,10 @@ public interface UserMemberImpl {
 	
 	public int kakaojoin(MemberDTO memberDTO);
 	public String pw(String mem_id, String mem_eamil);
+	
+	//로그인시 하루지났는지 확인후 포인트적립
+	public String checkpassoneday (@Param("userName") String name);
+	public void inserteventpoint(String name , int point);
 	
 	
 	

@@ -1,30 +1,30 @@
 #roulette-outer{
-	position: relative;
-	left:80px;
 	bottom:50px;
 	overflow: hidden;
-	width: 350px;
-	height: 350px;
-	background: yellow;
+	width:400px;
+	height:400px;
 	z-index: 1;
+	display: flex;
+	justify-content: center;
 	}
 #roulette{
-position: absolute;
+position: relative;
 border:0px;
+top:0px;
 padding:0px;
-top: 5%;
-left: 5%;
-right:5%;
-bottom:5% ;
-width:313px;
+left: 0%;
+right:0%;
+bottom:0% ;
+width:400px;
 border-radius: 50%;
-background: #D1B6E1;
+background: #90B494;
 border: 2px solid black;
 z-index: 2;
 }
 #roulette > #item-wrapper > .item {
 	position: absolute;
 	font:25px bold;
+	color:white;
 	top:0;
 	left:0;
 	right:0;
@@ -36,21 +36,8 @@ z-index: 2;
 	justify-content: center;
 	
 }
-#roulette > #item-wrapper > .item:nth-child(1) {
-	transform: rotate(0deg);
-}
-#roulette > #item-wrapper > .item:nth-child(2) {
-	transform: rotate(72deg);
-}
-#roulette > #item-wrapper > .item:nth-child(3) {
-	transform: rotate(144deg);
-}
-#roulette > #item-wrapper > .item:nth-child(4) {
-	transform: rotate(216deg);
-}	
-#roulette > #item-wrapper > .item:nth-child(5) {
-	transform: rotate(288deg);
-}	
+
+
 #roulette > #line-wrapper > .line {
 	position: absolute;
 	top: 0;
@@ -61,25 +48,11 @@ z-index: 2;
 	transform-origin: bottom;
 	z-index: 3;
 }
-#roulette > #line-wrapper > .line:nth-child(1) {
-	transform: rotate(36deg);
-}
-#roulette > #line-wrapper > .line:nth-child(2) {
-	transform: rotate(108deg);
-}
-#roulette > #line-wrapper > .line:nth-child(3) {
-	transform: rotate(180deg);
-}
-#roulette > #line-wrapper > .line:nth-child(4) {
-	transform: rotate(252deg);
-}
-#roulette > #line-wrapper > .line:nth-child(5) {
-	transform: rotate(324deg);
-}
+
 #roulette-pin{
 position: absolute;
-top:5%;
-left:173px;
+top:16px;
+left:400px;
 width:4px;
 padding-left:0px;
 padding-right:0px;

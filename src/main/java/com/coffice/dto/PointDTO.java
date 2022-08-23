@@ -6,8 +6,8 @@ import lombok.Data;
 public class PointDTO {
 	
 	private int point_idx;
-	private int point_entry_exit;
 	private String mem_id;
+	private int point_entry_exit;
 	private String point_postdate;
-	private int rule_idx;
+	private int point_sources;
 }

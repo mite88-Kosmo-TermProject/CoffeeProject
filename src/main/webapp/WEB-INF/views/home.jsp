@@ -20,12 +20,15 @@
 
 <!-- Go Trip CSS -->
 
+<link rel="stylesheet"
+	href="<%= request.getContextPath() %>/resources/css/adminpoint/event_roullet.css">
+
 <meta charset="utf-8">
 
 </head>
 
 <body>
-
+	
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
@@ -161,42 +164,48 @@
 			</div>
 		</div>
 	</div>
-	<!-- 검색 end -->
-	<button class="btn-modal" data-toggle="modal" data-target="#myModal">Open Modal</button>
-	<div class="modal hide" id="myModal">
-		<div class"modal-header">
-			<button class="close" data-dismiss="modal">x</button>
-			<h3>Modal header</h3>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+Open modal
+</button>
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">돌려라 돌림판!</h4>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 		</div>
-		<div class="modal-body">
-			<div class="mb-3 row" id="roulette-outer" style="display: flex;">
+		<div class="modal-body" style="
+		display: flex; 
+		flex-flow: column; 
+		align-items: center;
+		background: url('<%= request.getContextPath() %>/resources/img/event/이벤트이미지.jpg');
+		background-size: 90%;">
+		  <div class="mb-3 row" id="roulette-outer">
 												
-				<div id="roulette-pin"></div>
+					<div id="roulette-pin"></div>
 					<div id="roulette">
-					<!--값영역 -->
-					<div id="item-wrapper">
-						<!-- <div class="item">100점</div>
-						<div class="item">200점</div>
-						<div class="item">300점</div>
-						<div class="item">-50점</div>
-						<div class="item">-20점</div> -->
+						<!--값영역 -->
+						<div id="item-wrapper">
+						
+ -->					</div>
+						<!--선영역-->
+						<div id="line-wrapper">
+					
+						</div>
 					</div>
-					<!--선영역-->
-					<div id="line-wrapper">
-						<!-- <div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div> -->
-					</div>
-				</div>
-				</div>
-				<div>
-					<button type="button" onclick="calculateItemAndRatio();">룰렛만들기</button>
-					<button type="button" onclick="MakeSetRouletteStr();">룰렛돌려보기</button>
-				</div>
+			</div>
+			<div>
+				<button class="btn btn-success" type="button" onclick="MakeSetRouletteStr();">룰렛돌리기</button>
+			</div>
 		</div>
+	  </div>
 	</div>
+  </div>
+<!-- Modal -->
+ 
+	
 
 	<!-- 이달의 카페 -->
 	<div class="container-xxl py-5">
@@ -653,5 +662,5 @@
 	</div>
 
 </body>
-
+<script src="<%= request.getContextPath() %>/resources/js/user_roulette.js"></script>
 </html>

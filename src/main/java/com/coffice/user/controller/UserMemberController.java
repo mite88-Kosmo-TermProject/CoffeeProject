@@ -2,6 +2,7 @@ package com.coffice.user.controller;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Member;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.tomcat.jni.Local;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.PointDTO;
 import com.coffice.user.service.UserMemberImpl;
 
 @Controller
@@ -73,7 +77,7 @@ public class UserMemberController {
 //	}
 	//로그인
 	@RequestMapping(value="/member/loginAction.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO) throws Exception{
+	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO, Model model) throws Exception{
 		
 		if(sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"))==null) {
 			 resp.setCharacterEncoding("utf-8");
@@ -86,6 +90,11 @@ public class UserMemberController {
 		     
 		}
 		else {
+			String passdate = sqlSession.getMapper(UserMemberImpl.class).checkpassoneday(req.getParameter("mem_id"));
+			String now = LocalDate.now().toString();
+			if(passdate.equals(now)) {
+				model.addAttribute("passoneday","true");
+			}
 			session.setAttribute("siteUserInfo", memberDTO);
 		}
 		return "home";
@@ -350,4 +359,13 @@ public class UserMemberController {
 	    	return "home";
 	    	
 	    }
+	 //룰렛이벤트 포인트 지급
+	 @RequestMapping("/member/inserteventpoint.do")
+	 @ResponseBody
+	 public void insertEventPoint (HttpServletRequest req , HttpSession session) {
+		MemberDTO userdto =  (MemberDTO) session.getAttribute("siteUserInfo");
+		int point = Integer.parseInt(req.getParameter("point"));
+		String mem_id = userdto.getMem_id();
+		sqlSession.getMapper(UserMemberImpl.class).inserteventpoint(mem_id, point);
+	 }
 }

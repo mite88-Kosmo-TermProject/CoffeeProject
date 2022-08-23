@@ -102,7 +102,7 @@ public class AdminPointController {
 			data2.put("point_entry_exit", dto.getPoint_entry_exit());
 			data2.put("mem_id", dto.getMem_id());
 			data2.put("point_postdate", dto.getPoint_postdate());
-			int rule = dto.getRule_idx();
+			int rule = dto.getPoint_sources();
 			String rulestr = null;
 			switch (rule) {
 				case 1:
@@ -133,16 +133,15 @@ public class AdminPointController {
 		public JSONObject getPointlistToSearchFiled(HttpServletRequest req) {
 			JSONObject data = new JSONObject();
 			JSONArray arr = new JSONArray();
-			int search = (req.getParameter("searchField")== "") ? 1 : Integer.parseInt(req.getParameter("searchField")); 
 					
-			ArrayList<PointDTO> pointlist = sqlsession.getMapper(AdminPointImpl.class).getPointListToSearchFiled(search);
+			ArrayList<PointDTO> pointlist = sqlsession.getMapper(AdminPointImpl.class).getPointList();
 			for(PointDTO dto : pointlist) {
 				JSONObject data2 = new JSONObject();
 				data2.put("point_idx", dto.getPoint_idx());
 				data2.put("point_entry_exit", dto.getPoint_entry_exit());
 				data2.put("mem_id", dto.getMem_id());
 				data2.put("point_postdate", dto.getPoint_postdate());
-				int rule = dto.getRule_idx();
+				int rule = dto.getPoint_sources();
 				String rulestr = null;
 				switch (rule) {
 					case 1:
@@ -159,6 +158,10 @@ public class AdminPointController {
 					
 					case 4:
 						rulestr = "리뷰삭제";
+						break;
+						
+					case 5:
+						rulestr = "출석체크";
 						break;
 				}
 				data2.put("rule_idx", rulestr);
