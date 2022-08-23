@@ -358,39 +358,39 @@
 								<span style="text-align: left;">
 								<c:choose>
 									<c:when test="${lists.star eq 1 }">
-										<i class="fas fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
 									</c:when>
 									<c:when test="${lists.star eq 2 }">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
 									</c:when>
 										<c:when test="${lists.star eq 3 }">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="far fa-star"></i>
-										<i class="far fa-star"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
 									</c:when>
 									<c:when test="${lists.star eq 4 }">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="far fa-star"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
 									</c:when>
 									<c:when test="${lists.star eq 5 }">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
 									</c:when>
 								</c:choose>
 								</span>
