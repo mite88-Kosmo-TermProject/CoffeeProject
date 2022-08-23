@@ -22,6 +22,8 @@ public class ParameterDTO {
 	private String num;
 	
 	private ArrayList<String> review_idx;
+	
+	private int store_idx;
 
 }
 

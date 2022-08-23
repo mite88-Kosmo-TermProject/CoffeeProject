@@ -32,6 +32,8 @@ public interface CafeSNSImpl {
 	/*새로운 리뷰 리스트*/
 	public ArrayList<ReviewDTO> getnewList(ParameterDTO parameterDTO);
 	
+	public ArrayList<ReviewDTO> review_list(ParameterDTO parameterDTO);
+	
 	public int findLike(HeartDTO heartDTO);
 	
 	public void insertlike(HeartDTO heartDTO);

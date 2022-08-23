@@ -202,9 +202,8 @@ pageEncoding="UTF-8"%>
     <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
       <!-- 좋아요 JS(정순만) -->
+    <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
-    <script
-      type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
     
 
     <script>
