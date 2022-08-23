@@ -11,12 +11,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- header -->
 <%@ include file="/WEB-INF/views/user/layout/header.jsp"%>
 
 <meta charset="utf-8">
@@ -38,7 +32,11 @@
 <script>
 	//가격 천의 자리마다 콤마 붙이기 위해 넣음
 	//그외 잔당 가격 계산등 기능구현
+	let paymentPrice = 0;	
+	let subName = '';
+	
 	window.onload = function () {
+		
 	    let prices = document.getElementsByName("price");
 	    let cups = document.getElementsByName("cup");
 	    let oneCups = document.getElementsByName("oneCup");
@@ -51,10 +49,15 @@
 	    }
 	    
 	};
-
-	function fnProductSelect01(price, cup) {
+	//구독권 클릭시 
+	function fnProductSelect(name, price, cup) {
+		subName = name;
+		
 		document.getElementById("selectPrice").innerHTML = Number(price).toLocaleString("ko-KR", { style : 'currency', currency: 'KRW' });
 		document.getElementById("selectCup").innerHTML = cup+'잔'
+		
+		paymentPrice = (Number(price) - document.getElementById("pointInput").value);
+		console.log(paymentPrice);
 		
 		document.getElementById("payment").innerHTML 
 			= (Number(price) - document.getElementById("pointInput").value).toLocaleString("ko-KR", { style : 'currency', currency: 'KRW' });
@@ -82,39 +85,74 @@
 			pg : "kakaopay", // 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 누락되거나 매칭되지 않는 경우 관리자 콘솔에서 설정한 기본PG가 호출됨 값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
 			merchant_uid : 'merchant_' + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
-			name : $('#selectName').html(), //주문명 (구독권 이름)
-			amount : $('#selectPrice').html(), // 포인트등을 사용한 첫 결제금액
-			customer_uid : $('#customer_id').val(), //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
-			buyer_email : 'madcatz92@naver.com', // 주문자 이메일[페이먼트월 필수]
-			buyer_name : '이준희', //주문자명
-			buyer_tel : '02-4316-8802' // 주문자 연락처(누락되거나 공백일때 일부 PG사[엑심베이]에서 오류 발생)
+			name : subName, //주문명 (구독권 이름)
+			amount : paymentPrice, // 포인트등을 사용한 첫 결제금액
+			customer_uid : '${dto.mem_id }', //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
+			buyer_email : '${dto.mem_email }', // 주문자 이메일[페이먼트월 필수]
+			buyer_name : '${dto.mem_name }', //주문자명
+			buyer_tel : '${dto.mem_phone }' // 주문자 연락처(누락되거나 공백일때 일부 PG사[엑심베이]에서 오류 발생)
 		}, function(rsp) {
 			if (rsp.success) {
+				console.log(rsp);
+				
 				$.ajax({
 					url : '../order/insertSubscribe.do', //DB에 구독정보 등록하는 부분..
 					type : 'post',
 					data : {
-						customer_id : $('#customer_id').val(),
+						customer_id : '${dto.mem_id }',
 						pay_import_key : rsp.imp_uid, // 아임포트 고유 결제번호
 						pay_idx : rsp.merchant_uid, // 가맹점에서 생성/관리하는 고유 주문번호
 						pay_price : rsp.paid_amount, // (number) 결제금액 결제승인된 또는 가상계좌 입금예정 금액
 						pay_result_status : rsp.status, // 결제상태 옵션 값(클릭하여 자세히보기)
 						sub_idx : rsp.name, // 주문명
 						pay_successed_at : rsp.paid_at, //(number) 결제승인시각(UNIX timestamp)
+						pay_case : rsp.pg_provider, //결제한 pg사
+						buyer_email : rsp.buyer_email, //
+						buyer_name : rsp.buyer_name,
+						buyer_tel : rsp.buyer_tel,
+						
+						/* 응답값들
+						apply_num: ""
+						bank_name: null
+						buyer_addr: ""
+						buyer_email: "madcats92@gmail.com"
+						buyer_name: "이준희"
+						buyer_postcode: ""
+						buyer_tel: "01043168802"
+						card_name: null
+						card_number: ""
+						card_quota: 0
+						currency: "KRW"
+						custom_data: null
+						customer_uid: "madcatz"
+						imp_uid: "imp_416388481383"
+						merchant_uid: "merchant_1661228384531"
+						name: "CoffeePass5잔"
+						paid_amount: 12000
+						paid_at: 1661228412
+						pay_method: "point"
+						pg_provider: "kakaopay"
+						pg_tid: "T30455640f56191586d2"
+						pg_type: "payment"
+						receipt_url: "https://mockup-pg-web.kakao.com/v1/confirmation/p/T30455640f56191586d2/435a11771e7dacb842767a9650e0e63f495ceafa97d595fccaef4c4699711769"
+						status: "paid"
+						success: true 
+						*/
+						
 					},
 					success : function(result) {
 						alert('정기결제 등록' + result);
 					}
 				});
-				alert(rsp.paid_at + rsp.paid_amount + rsp.status
+				alert("잡다한 결과값"+rsp.paid_at + rsp.paid_amount + rsp.status
 						+ rsp.merchant_uid + rsp.name);
-				alert($('#customer_id').val());
+				alert("결제한 아이디"+${dto.mem_id });
 
 				$.ajax({
 					url : '../order/payment.do', //결제 상태를 확인하고 스케줄러를 호출하는 부분
 					type : 'post',
 					data : {
-						customer_uid : $('#customer_id').val(),
+						customer_uid : '${dto.mem_id }',
 						price : 2, // 첫결제는 포인트사용한 금액이고 여기는 원래구독권가격 넣기
 						merchant_uid : rsp.merchant_uid + 1
 					},
@@ -154,10 +192,10 @@
 				<div name="oneCup"></div> 
 			</span>
 		</c:forEach>
-<!-- 			<tr>
+		<tr>
 			<td>남은 커피패스 이용횟수</td>
 			<td id="pay_coupon">3</td>
-		</tr> -->
+		</tr>
 
 	<div id="selectName">
 		
@@ -173,9 +211,14 @@
 	</div>	
 	
 	<input type="button" id="check1" value="구매" onclick="kakaopay();">
-	<input type="hid den" value="${dto.mem_id }">
-	<input type="hid den" value="${dto.mem_id }">
-
+	<div>
+		${dto.mem_id }, 
+		 ${dto.mem_case }, ${dto.mem_pw }, ${dto.mem_name }, ${dto.mem_nickname }, 
+		 ${dto.mem_phone },
+		${dto.mem_email }, ${dto.mem_gender },  ${dto.mem_regidate }, ${dto.mem_point }
+		
+	
+	</div>
 	<!-- checkout -->
 	<section class="shop checkout section py-5">
 		<div class="container">
@@ -199,7 +242,7 @@
 												<img src="https://static-file.jejupass.com/download/816775"
 													alt="">
 											</h2>
-											<p class="name">전옥주 님</p>
+											<p class="name">${dto.mem_name } 님</p>
 											<span class="up-border"></span> <span class="down-border"></span>
 										</div>
 										<!-- end item-right -->
@@ -248,17 +291,18 @@
 								<!-- 패스권선택 -->
 								<div class="col-12">
 									<div class="form-group">
-										<label>패스권선택</label><br /> <small>아메리카노 선택권(일부가게
+										<label>&nbsp;&nbsp;&nbsp;&nbsp;패스권선택</label><br /> <small>&nbsp;&nbsp;&nbsp;&nbsp;아메리카노 선택권(일부가게
 											할인권으로도 가능)</small>
 									</div>
 								</div>
 								
-									<c:forEach items="${lists }" var="dto" varStatus="loop">
-										<div class="col-lg-6 col-md-6 col-12" onclick="fnProductSelect01('${dto.sub_price }','${dto.sub_coffee_num }');">
+									<c:forEach items="${lists }" var="list" varStatus="loop">
+										<div class="col-lg-6 col-md-6 col-12" onclick="fnProductSelect('${list.sub_name }', '${list.sub_price }','${list.sub_coffee_num }');">
 											<div class="inputGroup">
+												<%-- <input type="hidden" id="subName" value=${dto.sub_name }> --%>
 												<input id="radio${loop.index }" name="radio" type="radio" /> 
-												<label for="radio${loop.index }"><strong name="cup"> ${dto.sub_coffee_num }</strong>&nbsp;&nbsp;&nbsp;
-												<span name="price">${dto.sub_price }</span>
+												<label for="radio${loop.index }"><strong name="cup">${list.sub_coffee_num }</strong>&nbsp;&nbsp;&nbsp;
+												<span name="price">${list.sub_price }</span>
 												<div><small>한 잔당 가격&nbsp;&nbsp;&nbsp;</small><small name="oneCup"></small></div></label>
 											</div>
 										</div>
@@ -292,8 +336,8 @@
 								
 								<div class="col-12">
 									<div class="form-group">
-										<label>사용할포인트</label><br /> 
-										<small>사용가능포인트<span id="remitPoint" >1500</span></small>
+										<label>&nbsp;&nbsp;&nbsp;&nbsp;사용할포인트</label><br /> 
+										<span>&nbsp;&nbsp;&nbsp;&nbsp;사용가능포인트&nbsp;:&nbsp;&nbsp;<b id="remitPoint" >${dto.mem_point }</b><small>Point</small></span>
 									</div>
 								</div>
 								
@@ -350,13 +394,13 @@
 							<h2>선택한 이용권 정보</h2>
 							<div class="content">
 								<ul>
-									<li>결제금액<span><b id="selectPrice">￦30,000</b></span></li>
-									<li>구매일로부터 30일<span><b id="selectCup">30잔</b></span></li>
+									<li>결제금액<span><b id="selectPrice">￦0</b></span></li>
+									<li>구매일로부터 30일<span><b id="selectCup">0잔</b></span></li>
 									
 									<li>(-)포인트 & 쿠폰 적용<span id="usePoint">0</span></li>
 									
 									<!-- ------------------------------------------------- -->
-									<li class="last">최종 결제금액<span><b id="payment">￦30,000</b></span></li>
+									<li class="last">최종 결제금액<span><b id="payment">￦0</b></span></li>
 								</ul>
 							</div>
 						</div>

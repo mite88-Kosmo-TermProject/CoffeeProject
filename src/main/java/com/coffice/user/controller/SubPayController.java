@@ -35,7 +35,7 @@ public class SubPayController {
 	
 	// 패스구매(로그인 상태에서만 이용가능)
 	@RequestMapping(value = "/order/subPay.do", method = RequestMethod.GET)
-	public String subPay(Model model, HttpSession session, HttpServletRequest req) {
+	public String subPay(Model model, HttpSession session, HttpServletRequest req, MemberDTO memberDTO) {
 
 		//만약 세션영역에 siteUserInfo속성이 없다면 로그아웃 상태이므로...
 		if(session.getAttribute("siteUserInfo")==null) {
@@ -47,30 +47,18 @@ public class SubPayController {
 		}
 		
 		//회원정보 결제창에 가져오기
-		MemberDTO dto = sqlSession.getMapper(SubPaylmpl.class)
+		memberDTO = sqlSession.getMapper(SubPaylmpl.class)
 			.user(((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id());
 		
 		ArrayList<SubscriptionDTO> lists = sqlSession.getMapper(SubPaylmpl.class).subList();
 		
 		model.addAttribute("lists", lists);
-		model.addAttribute("dto", dto);
+		model.addAttribute("dto", memberDTO);
 		
 		//로그인상태라면 패스구매페이지 진입
 		return "/user/order/subPay";
 	}
 
-
-	@RequestMapping(value = "/order/insertSubscribe.do", method = RequestMethod.POST)
-	public String modifyAction(HttpSession session, SubPayDTO subPayDTO) {
-		
-		int applyRow = sqlSession.getMapper(SubPaylmpl.class).payment_info(subPayDTO);
-
-		System.out.println("수정처리된 레코드수 :" + applyRow);
-		
-		return "redirect:subPayResult.do";
-	}
-	
-	
 	
 	@RequestMapping(value = "/order/payment.do", method = RequestMethod.POST)
 	@ResponseBody

@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class SubPayDTO {
 	
+		//결제일련번호
+		private String pay_idx;
 		//구매한멤버아이디
 		private String customer_id;
 		//아임포트 결제 일련번호
 		private String pay_import_key;		
-		//결제일련번호
-		private String pay_idx;
 		//결제금액
 		private String pay_price;	
 		//결제상태
