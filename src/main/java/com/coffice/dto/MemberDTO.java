@@ -7,7 +7,7 @@ import lombok.Data;
 public class MemberDTO {
 
 	private String mem_id;
-	//멤버분류 - 1,고객, 2.제휴점주, 3.일반점주, 4.관리자
+	//멤버분류 - 1,고객, 2.점주, 3.관리자 5.점주승인대기중
 	private String mem_case;
 	private String mem_pw;
 	private String mem_name;

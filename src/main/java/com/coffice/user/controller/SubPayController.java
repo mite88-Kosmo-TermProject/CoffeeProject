@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coffice.dto.MemberDTO;
 import com.coffice.dto.SubPayDTO;
 import com.coffice.dto.SubscriptionDTO;
 import com.coffice.user.service.SubPaylmpl;
@@ -37,22 +38,22 @@ public class SubPayController {
 	public String subPay(Model model, HttpSession session, HttpServletRequest req) {
 
 		//만약 세션영역에 siteUserInfo속성이 없다면 로그아웃 상태이므로...
-//		if(session.getAttribute("siteUserInfo")==null) {
-//			
-//			//로그인 완료후 진입을 위한 backUrl
-//			model.addAttribute("backUrl", "/user/order/subPay");
-//			//로그인 페이지로 이동한다. 
-//			return "redirect:/member/login.do";
-//		}
-//		
-//		회원정보 결제창에 가져오기
-//		MemberDTO dto = sqlSession.getMapper(SubPaylmpl.class)
-//			.user(((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id());
+		if(session.getAttribute("siteUserInfo")==null) {
+			
+			//로그인 완료후 진입을 위한 backUrl
+			model.addAttribute("backUrl", "/user/order/subPay");
+			//로그인 페이지로 이동한다. 
+			return "redirect:/member/login.do";
+		}
+		
+		//회원정보 결제창에 가져오기
+		MemberDTO dto = sqlSession.getMapper(SubPaylmpl.class)
+			.user(((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id());
 		
 		ArrayList<SubscriptionDTO> lists = sqlSession.getMapper(SubPaylmpl.class).subList();
 		
 		model.addAttribute("lists", lists);
-//		model.addAttribute("dto", dto);
+		model.addAttribute("dto", dto);
 		
 		//로그인상태라면 패스구매페이지 진입
 		return "/user/order/subPay";

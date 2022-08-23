@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+해당 XML파일이 Mapper 역할이라는것을 명시하기 위해 필요한 Doctype이다.
+공식문서 URL : https://mybatis.org/mybatis-3/ko/getting-started.html
+버전확인 : 
+ -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+Mybatis의 쿼리실행을 위한 엘리먼트 별 반환값
+<select>
+	: select한 결과 레코드를 반환한다. count(*)의 경우 int형의 반환값을
+	가지고, 일반적인 경우는 DTO객체를 List컬렉션에 저장한 후 반환한다.
+<insert>
+	: 입력 성공시 1, 실패시 0 을 반환한다. 만약 insert가 여러번 되더라도
+	성공시에는 1을 반환한다.
+<update>, <delete>
+	:수정, 삭제에 성공한 행의 갯수가 반환된다. 조건에 따라 여러개의 레코드가
+	한꺼번에 적용될 수 있으므로 0과 1이 아닌 더 큰값이 반화될 수 있다.
+ -->
+
+
+
+<!-- 
+Mapper파일의 최상위 엘리먼트는 <mapper>이다.
+namespace의 속성
+	: 해당 매퍼파일을 호출하기 위해 정의한 인터페이스의 패키지를 포함한
+	풀 경로를 기술한다. 해당 인터페이스는 컨트롤러와 Mapper(DAO) 사이를
+	연결해주는 역할을 하는 서비스객체로 사용된다.
+	 -->
+  <mapper namespace="com.coffice.user.service.UserMemberImpl">
+  
+  	<!-- 방명록 게시판의 게시물 갯수를 카운트하여 정수로 반환한다. -->
+  	<!-- 
+  	속성 설명
+  		id : 실제 호출되는 매서드명과 동일한 이름으로 기술한다.
+  			컨트롤러에서는 해당 Mapper를 호출하기 위해 interface에 정의된
+  			추상메서드를 호출하게 된다.
+  		resultType : 쿼리 실행후 반환되는 값의 타입을 명시한다. 이때는
+  			패키지명을 포함한 풀 경로를 기술해야 한다.
+  	 -->
+  	 <!-- 아이디 중복 검사 -->
+	<select id="check_id" resultType="int">
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="check_email" resultType="int">
+		select count(*) from member where mem_email = #{mem_email}
+	</select>
+	
+	
+	
+	<select id="check1" resultType="int">
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="check2" resultType="int">
+		select count(*) from member where mem_email = #{mem_email}
+	</select>
+  	 
+  	 
+  	<select id="getTotalCount" resultType="int">
+  		SELECT COUNT(*) from member
+  	</select>
+  	<!-- 목록에 출력할 게시물을 select한 후 결과는 ArrayList<MyBoardDTO>타입으로
+  	반환한다. Mybatis는 레코드 연출을 위한 <select> 엘리먼트로 실행할 경우 반환값은
+  	List컬렉션으로 생성해준다. -->
+  	<!-- 인터페이스에 정의된 lisPage(int s, int e) 메서드 호출시 전달된 파라미터
+  	 s, e는 아래와 같이 param1, param2로 전달되어 사용된다. 즉, 인파라미터 설정시
+  	 별도의 메서드 없이 즉시 사용할 수 있다. -->
+  	<select id="listPage" resultType="com.coffice.dto.MemberDTO">
+  		SELECT * FROM (
+  			SELECT Tb.*, rownum rNum FROM (
+  				SELECT * FROM member ORDER BY mem_id DESC
+  			) Tb
+  		)
+  		WHERE rNum BETWEEN #{param1} AND #{param2}
+  	</select>
+  	
+  	
+  	<!-- 
+  	파라미터를 DTO객체에 저장한 후 Mapper로 전달하므로 parameterType 속성에
+  	해당 DTO객체의 타입을 패키지명과 함께 명시한다. EL에서 멤버변수명 만으로 값에
+  	접근할 수 있듯이 Mapper에서도 동일하게 접근할 수 있다. 즉, getter()를 사용한다.
+  	게시물을 조회(SELECT)한 결과는 MyBoardDTO객체에 저장한 후 반환한다.
+  	
+  	 -->
+  	<select id="view" resultType="com.coffice.dto.MemberDTO" parameterType="com.coffice.dto.ParameterDTO">
+  		SELECT * FROM member WHERE mem_id=#{mem_id}
+  	</select>
+  	
+  	<select id="view_one" resultType="com.coffice.dto.MemberDTO" parameterType="String">
+  		SELECT * FROM member WHERE mem_id=#{param1}
+  	</select>
+  	
+  	<!-- 
+  	수정처리. 전송된 폼값은 커맨드객체를 통해 한번에 전달받으므로 parameterType을 
+  	해당 DTO로 설정한 후 멤버 변수명으로 값을 가져와서 쿼리문을 구성한다.
+  	EL과 동일하게 멤버변수명으로 getter()를 호출하게 된다.
+  	 -->
+  	<update id="modify" parameterType="com.coffice.dto.MemberDTO">
+  		UPDATE member
+  			SET mem_name=#{mem_name}, mem_phone=#{mem_phone}
+  			WHERE mem_id=#{mem_id}
+  	</update>
+  	
+  	<!-- 삭제처리. 전달되는 파라미터 순서대로 param1, 2와 같이 기술한다. -->
+  	<delete id="delete">
+  		DELETE FROM member WHERE mem_id=#{param1}
+  	</delete>
+  	
+  	<select id="getTotalCountSearch" resultType="int" parameterType="com.coffice.dto.ParameterDTO">
+  	SELECT COUNT(*) from member
+  	<if test="searchTxt!=null and !searchTxt.equals('')">
+  		WHERE ${searchField} like '%'||#{searchTxt}||'%'
+  	</if>
+  	</select>
+  	<select id="listPageSearch" resultType="com.coffice.dto.MemberDTO" parameterType="com.coffice.dto.ParameterDTO">
+  		SELECT * FROM (
+  			SELECT Tb.*, rownum rNum FROM (
+  				SELECT * FROM member
+  				<if test="searchTxt!=null and !searchTxt.equals('')">
+  					WHERE ${searchField} like '%'||#{searchTxt}||'%'
+  				</if>
+  				ORDER BY mem_id DESC
+  			) Tb
+  		)
+  		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+  	</select>
+  	
+  	<select id="login" resultType="com.coffice.dto.MemberDTO">
+  		SELECT*FROM member WHERE mem_id=#{0} and mem_pw=#{1}
+  	</select>
+  	
+  	<insert id="join" parameterType="com.coffice.dto.MemberDTO">
+  		INSERT INTO member (MEM_ID, MEM_CASE, MEM_NAME, MEM_NICKNAME, MEM_PHONE,
+  		MEM_EMAIL, MEM_GENDER, MEM_PW)
+  		VALUES
+  		(#{mem_id}, 1, #{mem_name}, #{mem_nickname}, #{mem_phone}, 
+  		#{mem_email}, #{mem_gender}, #{mem_pw})
+  	</insert>
+  	
+  	<select id="findId" resultType="String">
+  		select mem_id from member where mem_email = #{mem_email}
+  	</select>
+  	
+  	<update id="updatepw" parameterType="com.coffice.dto.MemberDTO">
+		update member set mem_pw = #{mem_pw} where mem_id = #{mem_id}
+	</update>
+	<!-- 카카오 로그인 -->
+  	<insert id="kakaojoin" parameterType="com.coffice.dto.MemberDTO">
+  		INSERT INTO member (MEM_ID, MEM_CASE, MEM_NAME,
+  		MEM_EMAIL, MEM_GENDER)
+  		VALUES
+  		(#{mem_id}, 1, #{mem_name}, 
+  		#{mem_email}, #{mem_gender})
+  	</insert>
+  	
+  </mapper>
+  
+  

@@ -98,7 +98,7 @@ function getCafeList(list){
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
                      +          '<p>다이아</p>'
-                     +		  '<input type="hid den" id="review_idx" value="'+data.review_idx+'"/>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
@@ -189,7 +189,7 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
-                     +		  '<input type="hid den" id="review_idx" value="'+data.review_idx+'"/>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
@@ -234,7 +234,7 @@ function getCafeList(list){
                var check_like = data.check_like;
                /*append 부분*/
                $(data.lists).each(function (index, data) {
-                  var color = "black";
+               var color = "black";
                for(var i =0; i<check_like.length; i++){
                		if(check_like[i].review_idx == data.review_idx){
                			console.log(check_like[i].review_idx+"==="+ data.review_idx);
@@ -255,7 +255,7 @@ function getCafeList(list){
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
                      +          '<p>다이아</p>'
-                     +		  '<input type="hid den" id="review_idx" value="'+data.review_idx+'"/>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
@@ -291,8 +291,8 @@ function getCafeList(list){
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
-                     +         'onclick="heart()"></i>'
-                     +        '<span name="like" id="like">'
+                     +         'onclick="heart(this)"></i>'
+                     +        '<span name="like" id="like" onclick="like(this,'+ data.review_idx+')">'
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
@@ -346,7 +346,8 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
-                     +		  '<input type="hid den" id="review_idx" value="'+data.review_idx+'"/>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
+
                      +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
@@ -369,7 +370,6 @@ function getCafeList(list){
                   }
                });
                $('#show_data').append(tableData);
-               
             },
               error : function (err) {
                console.log("에러발생" + err.status);

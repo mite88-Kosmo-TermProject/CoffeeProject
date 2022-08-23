@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.admin.ChatMapper">
+ 	<select id="listUser" resultType="com.coffice.dto.ChatDTO">
+ 		select sender from tbl_chat WHERE NOT sender IN ('admin') GROUP BY sender
+ 	</select>
+ 	
+ 	<select id="list" parameterType="String" resultType="com.coffice.dto.ChatDTO">
+		select DISTINCT c.*, mem_img from tbl_chat c, member
+		where (c.sender=#{sender} and  c.chat_id='admin')
+        or (c.sender='admin' and  c.chat_id=#{sender}) order by c.regdate asc
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="com.coffice.dto.ChatDTO">
+ 		insert into tbl_chat(id, sender, message, chat_id) 
+ 		values(tbl_chat_seq.NEXTVAL, #{sender}, #{message}, #{chat_id})
+ 	</insert>
+ 	<delete id="delete">
+ 		delete from tbl_chat where id=#{id}
+ 	</delete>
+ 	<select id="last" resultType="int">
+ 		select max(id) from tbl_chat where chat_id =#{chat_id}
+ 	</select>
+</mapper>
