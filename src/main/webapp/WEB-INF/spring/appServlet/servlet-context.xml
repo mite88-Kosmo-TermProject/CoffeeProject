@@ -84,6 +84,6 @@
 		<websocket:mapping handler="echoHandler" path="/echo"/>
 		<websocket:sockjs/>
 	</websocket:handlers>
-
+	
 	
 </beans>

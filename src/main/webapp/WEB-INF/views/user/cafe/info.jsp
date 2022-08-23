@@ -99,9 +99,7 @@
 }
 
 /*설명*/
-.txt_content{margin-top: 25px;}
-
-p.txt:before{
+p.txt:before {
 	background-image:
 		url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png);
 	background-position: -974px -775px;
@@ -393,7 +391,7 @@ p.txt:before{
 								<div class="btn-group" role="group"">
 									<button type="button" class="btn btn-primary" id="map_url">길찾기</button>
 									<button type="button" class="btn btn-primary" id="send_url">즐겨찾기</button>
-									<button type="button" class="btn btn-primary" id="review_coffee">리뷰쓰기</button>
+									<button type="button" class="btn btn-primary" id="review_coffee" onclick="location.href='<%=request.getContextPath()%>/cafeSNS/writePage.do?store_idx=${resultList.store_idx }' " >리뷰쓰기</button>
 								</div>
 							</div>
 
@@ -436,7 +434,7 @@ p.txt:before{
 				<ul class="tabs clearfix" data-tabgroup="first-tab-group">
 					<li><a href="#tab1" class="active">업체정보</a></li>
 					<li><a href="#tab2">메뉴</a></li>
-					<li><a href="#tab3">리뷰(50)</a></li>
+					<li><a href="#tab3" onclick="review()">리뷰(50)</a></li>
 				</ul>
 				<section id="first-tab-group" class="tabgroup">
 					<!-- 업체정보 -->
@@ -619,7 +617,7 @@ p.txt:before{
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 	<script
@@ -627,8 +625,118 @@ p.txt:before{
 
 	<!--kakaotalk link share api-->
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-	
+	<%=request.getParameter("store_idx") %>
 	<script>
+	
+	function review() {
+		const url = new URL($(location).attr('href'));
+		console.log(url);
+		const urlParam = url.searchParams;
+		const param = urlParam.get('store_idx');
+		
+		$.ajax({
+			type : 'POST',
+			url : '../cafe/review.do?store_idx='+param,
+			dataType : 'json',
+			success : function (data) {
+				var user = data.user;
+	               console.log(user);
+				let tableData = "";
+				const check_like = data.check_like;
+				const lists = data.review_list;
+				console.log(lists);
+				for (var i = 0; i < check_like.length; i++) {
+					console.log(check_like[i].review_idx);
+				}
+				$(lists).each(function (index, data) {
+					var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star"></i>';
+						}
+					}
+					var color = "black";
+					for(var i=0; i<check_like.length; i++){
+						if(check_like[i].review_idx == data.review_idx){
+							color = "red";
+							break;
+						}
+					}
+					var files = data.imageDTO.image_save.split("/");
+					tableData +='<li class="photoY">'
+							+'<div class="reviewSet">'
+							+	'<span class="thum">'
+							+	'<img src="https://static-www.jejupass.com/resource/PC/images/mypage/@default_img.png" alt=""></span>'
+							+	'<div class="tit">'
+							+		'<div class="common-grade-badge d small has-text mb-2" >'
+							+			'<i class="fas fa-coffee"></i>'
+							+			'<p>다이아</p></div>'
+							+		'<strong class="name">'+data.memberDTO.mem_id+'</strong></div></div>'
+							+'<div class="reviewSet">'
+							+	'<div class="rating-box" style="text-align: left;">'
+							+ star_txt
+							+		'</div></div>'
+							+ '<br>'
+							+'<div class="txt_content">'+data.review_content+'</div>' 
+							+ '<br>'
+							+`<a class="frmLike" onclick="like(this,`+data.review_idx+`,'`+user+`');">`
+							+'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+							+'<small name="hit" id="hit">'+data.like_hit+'</small>'
+							/* +	'<input type="checkbox" id="chkLike0" title="좋아요" onclick="fnAddReviewLike();"	 href="javascript:;" style="display: none;"><label for="chkLike0">0</label>' */
+							+'</a>'
+							
+							+'<figure class="photoSet" data-count="2">'
+							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="열심히 한 작업!!" data-lightbox="example-set">'
+							+		'<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" alt=""></a>'
+							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="열심히 한 작업!!22" data-lightbox="example-set">'
+							+		'<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473" alt="" class="img-fluid"></a></figure>'
+							
+							
+							<!-- 사장님댓글 -->
+							<%-- <div class="comment mt-5" style="">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">
+											<i class="fas fa-level-up" style="transform: rotate(90deg);"></i>
+											<img src="<%= request.getContextPath() %>/resources/img/커피점원아이콘.png" alt="" class="img-fluid">
+											사장님
+										</h5>
+										<p class="card-text">This is another card with title and
+											supporting text below. This card has some additional content to
+											make it slightly taller overall.</p>
+										<p class="card-text">
+											<small class="text-muted">10분전</small>
+										</p>
+									</div>
+								</div>
+							</div> --%>
+
+						+'</li>'
+				});
+				$('#show_data').append(tableData);
+			},
+				error : function (err) {
+					console.log("에러발생"+ err.status);
+				}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$(function() {
 		//alert("!!");
 		

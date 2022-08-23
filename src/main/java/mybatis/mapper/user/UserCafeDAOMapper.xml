@@ -10,5 +10,50 @@
 		Select * from stores where store_idx=#{store_idx}
 
 	</select>
+	
+<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) from stores
+	</select>
+	
+	<select id="listPage" resultType="com.coffice.dto.SearchDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM(
+				SELECT * FROM stores ORDER BY store_idx DESC
+			) Tb
+		)
+		WHERE rNum BETWEEN #{param1} AND #{param2}
+	</select>
 
+	<select id="getTotalCountSearch" resultType="int">
+	SELECT COUNT(*) from(
+		select * from(select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 		
+		<if test="searchTxt!=null and !searchTxt.equals('')">
+		where store_localAddr LIKE '%'||#{searchTxt}||'%' 
+						or store_tag LIKE '%'||#{searchTxt}||'%'
+						or store_name LIKE '%'||#{searchTxt}||'%'
+						or store_item LIKE '%'||#{searchTxt}||'%'
+		</if>
+        ) where STORE_AFLTD = #{store_afltd}
+	</select>
+	
+	<select id="listPageSearch" resultType="com.coffice.dto.SearchDTO"
+		parameterType="com.coffice.dto.SearchDTO">
+		select * from (
+			select Tb.*, rownum rNum FROM(
+				select * from (
+					select * from (select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+))
+					where store_afltd = ${store_afltd}
+				) 
+				<if test="searchTxt!=null and !searchTxt.equals('')">
+								where store_localAddr LIKE '%'||#{searchTxt}||'%' 
+								or store_tag LIKE '%'||#{searchTxt}||'%' 
+								or store_item LIKE '%'||#{searchTxt}||'%' 
+								or store_name LIKE '%'||#{searchTxt}||'%'
+				</if>
+				order by STORE_IDX desc
+				
+			)Tb 
+		)
+		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	</select>
 </mapper>

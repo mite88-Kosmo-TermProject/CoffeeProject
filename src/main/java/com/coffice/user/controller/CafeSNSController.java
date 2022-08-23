@@ -158,7 +158,7 @@ public class CafeSNSController {
 		//유저값을 넘겨받아 좋아요 체크한 게시물 확인 기능
 		HttpSession session = req.getSession();
 		String user = String.valueOf(session.getAttribute("user_id"));
-		System.out.println(user);
+//		System.out.println(user);
 		ArrayList<HeartDTO> check_like = sqlSession.getMapper(CafeSNSImpl.class).check_like(user);
 //		System.out.println("check_like : "+check_like);
 		
@@ -191,6 +191,7 @@ public class CafeSNSController {
 		Map<String, Object> map = new HashMap<>();
 //		System.out.println(lists);
 		
+		map.put("user", user);
 		map.put("check_like", check_like);
 		map.put("lists",lists);
 		

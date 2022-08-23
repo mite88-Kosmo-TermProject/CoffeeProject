@@ -71,12 +71,23 @@ function getCafeList(list){
                  let tableData="";
                //console.log("콜백성공"+data);
                //console.log(data[0].review_idx);
-               
+               var user = data.user;
+               console.log(user);
                var check_like = data.check_like;
                console.log(check_like);
                
                /*append 부분*/
                $(data.lists).each(function (index, data) {
+               var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
                var color = "black";
                for(var i =0; i<check_like.length; i++){
                		if(check_like[i].review_idx == data.review_idx){
@@ -107,7 +118,7 @@ function getCafeList(list){
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                          //사진
+                           <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
@@ -128,14 +139,14 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                            //업체정보
+                             <!-- 업체정보 -->
                      +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart(this)"></i>'
-                     +        '<span name="like" id="like" onclick="like(this,'+ data.review_idx+')">'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
@@ -143,7 +154,9 @@ function getCafeList(list){
                              +data.review_content+
                            '</div>'
          
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -167,7 +180,7 @@ function getCafeList(list){
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                          //사진
+                           <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
@@ -196,15 +209,16 @@ function getCafeList(list){
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -230,10 +244,20 @@ function getCafeList(list){
                  let tableData="";
                //console.log("콜백성공"+data);
                //console.log(data[0].review_idx);
-               
+               var user = data.user;
                var check_like = data.check_like;
                /*append 부분*/
                $(data.lists).each(function (index, data) {
+                var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
                var color = "black";
                for(var i =0; i<check_like.length; i++){
                		if(check_like[i].review_idx == data.review_idx){
@@ -264,7 +288,7 @@ function getCafeList(list){
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                          //사진
+                           <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
@@ -285,22 +309,23 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                            //업체정보
+                             <!-- 업체정보 -->
                      +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart(this)"></i>'
-                     +        '<span name="like" id="like" onclick="like(this,'+ data.review_idx+')">'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -324,7 +349,7 @@ function getCafeList(list){
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                          //사진
+                           <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
@@ -347,22 +372,22 @@ function getCafeList(list){
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-
                      +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
                      +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'

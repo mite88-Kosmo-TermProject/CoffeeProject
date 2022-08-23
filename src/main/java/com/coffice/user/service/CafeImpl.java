@@ -3,8 +3,10 @@ package com.coffice.user.service;
 import java.util.*;
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.coffice.dto.ReviewDTO;
 import com.coffice.dto.SearchDTO;
 import com.coffice.dto.StoresDTO;
 
@@ -16,8 +18,9 @@ public interface CafeImpl {
 	//카페정보
 	public List<StoresDTO> getCafeData(int store_idx) throws Exception;
 	
-
-	
+	public int getTotalCountSearch(SearchDTO searchDTO);
+	public ArrayList<SearchDTO> listPageSearch(SearchDTO searchDTO);
+	public ArrayList<ReviewDTO> review_list(@Param("_idx") int store_idx);
 
 }
 
