@@ -11,7 +11,6 @@
 		<id property="store_longitude" column="store_longitude"/>	
 	</resultMap>
 	
-
 	<resultMap type="com.coffice.dto.ImageDTO" id="ImageMap">
 		<id property="image_idx" column="image_idx"/>
 		<id property="review_idx" column="review_idx"/>
@@ -84,6 +83,7 @@
 		values(review_seq.nextval, #{review_content},#{store_idx}, #{mem_id},#{review_star} )
 	</insert>
 	
+
 	<select id="getIdx" parameterType="com.coffice.dto.ReviewDTO" resultType="int">
 		select (review_idx) from review where review_content=#{review_content}
 	</select>
@@ -93,6 +93,7 @@
 		values(image_seq.nextval,#{review_idx},#{store_idx},'origin',#{image_save})
 	</insert>
 
+	
 	
    <select id="findLike" parameterType="com.coffice.dto.HeartDTO" resultType="int">
       select count(like_flag) from heart where mem_id = #{mem_id} and review_idx = #{review_idx}

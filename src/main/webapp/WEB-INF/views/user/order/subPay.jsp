@@ -24,6 +24,8 @@
 
 <link href="<%=request.getContextPath()%>/resources/assets/css/pay.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/css/payment.css"
+	rel="stylesheet">
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -41,6 +43,7 @@
 	    let cups = document.getElementsByName("cup");
 	    let oneCups = document.getElementsByName("oneCup");
 	    
+	    
 	    for(let i=0; i<prices.length; i++) {
 	    	oneCups[i].innerHTML = Number( prices[i].innerHTML / cups[i].innerHTML ).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
 	    	prices[i].innerHTML = Number(prices[i].innerHTML).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
@@ -49,10 +52,26 @@
 	    
 	};
 
-	function fnProductSelect01(name, price, cup) {
-		document.getElementById("selectName").innerHTML = name;
-		document.getElementById("selectPrice").innerHTML = price;
-		document.getElementById("selectCup").innerHTML = cup;
+	function fnProductSelect01(price, cup) {
+		document.getElementById("selectPrice").innerHTML = Number(price).toLocaleString("ko-KR", { style : 'currency', currency: 'KRW' });
+		document.getElementById("selectCup").innerHTML = cup+'잔'
+		
+		document.getElementById("payment").innerHTML 
+			= (Number(price) - document.getElementById("pointInput").value).toLocaleString("ko-KR", { style : 'currency', currency: 'KRW' });
+	}
+	
+	function usingPoint(val) {
+		let point = Number(document.getElementById("remitPoint").innerHTML);
+		let value = val.replace(/,/g, "");
+		if(value<=point) {
+			document.getElementById("usePoint").innerHTML = Number(val).toLocaleString("ko-KR");
+		}
+		else {
+			document.getElementById("usePoint").innerHTML = Number(point).toLocaleString("ko-KR");
+			document.getElementById("pointInput").value = point;
+		}
+		/* document.getElementById("payment").innerHTML 
+			=  - document.getElementById("pointInput").value; */
 	}
 	
 	//회원정보 dto 로 가져옴 (결제 안내창에 뿌려주고 사용)
@@ -113,619 +132,10 @@
 	}
 </script>
 
-<style>
-/*ticket*/
-.ticket .item {
-	width: 100%;
-	padding: 0 20px;
-	height: 100%;
-	overflow: hidden;
-}
-
-.ticket .item-right, .ticket .item-left {
-	float: left;
-	padding: 20px;
-}
-
-.ticket .item-right {
-	width: 25%;
-	position: relative;
-	height: 100%;
-	display: inline-grid;
-	align-content: stretch;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	background: #cde0ff;
-}
-
-.ticket .item-right .up-border, .container .item-right .down-border {
-	padding: 14px 15px;
-	background-color: #fff;
-	border-radius: 50%;
-	position: absolute;
-}
-
-.ticket .item-right .up-border {
-	top: -7px;
-	right: -16px;
-}
-
-.ticket .item-right .down-border {
-	bottom: -12px;
-	right: -16px;
-}
-
-.ticket .item-right .img {
-	font-size: 60px;
-	text-align: center;
-	color: #111;
-}
-
-.ticket .item-right .img img {
-	width: 56px;
-	height: 56px;
-	border-radius: 50%;
-}
-
-.ticket .item-right .name, .ticket .item-left .event {
-	color: #555;
-	font-size: 1rem;
-	margin-bottom: 9px;
-}
-
-.ticket .item-left .event {
-	color: #1d68dc;
-}
-
-.ticket .item-right .name {
-	text-align: center;
-	font-size: 1.725rem;
-}
-
-.ticket .item-left {
-	width: 71%;
-	padding: 34px 0px 19px 46px;
-	border-left: 3px dotted #999;
-	background: #f4f9ff;
-	height: 100%;
-}
-
-.ticket .item-left .title {
-	color: #63a1ff;
-	font-size: 34px;
-	margin-bottom: 12px;
-}
-
-.ticket .item-left .sce {
-	margin-top: 5px;
-	display: block;
-}
-
-.ticket .item-left .sce .icon, .ticket .item-left .sce p, .ticket .item-left .loc .icon,
-	.ticket .item-left .loc p {
-	float: left;
-	word-spacing: 5px;
-	letter-spacing: 1px;
-	color: #888;
-	margin-bottom: 10px;
-}
-
-.ticket .item-left .sce .icon, .ticket .item-left .loc .icon {
-	margin-right: 10px;
-	font-size: 20px;
-	color: #666;
-}
-
-.ticket .item-left .loc {
-	display: block
-}
-
-.fix {
-	clear: both
-}
-
-.ticket .item .tickets, .booked, .cancel {
-	color: #fff;
-	padding: 6px 14px;
-	float: right;
-	margin-top: 10px;
-	font-size: 18px;
-	border: none;
-	cursor: pointer;
-}
-
-.ticket .item .tickets {
-	background: #777;
-}
-
-.ticket .item .booked {
-	background: #3D71E9;
-}
-
-.ticket .item .cancel {
-	background: #DF5454;
-}
-
-.linethrough {
-	text-decoration: line-through;
-}
-
-@media only screen and (max-width: 768px) {
-	.ticket .item {
-		width: 100%;
-		margin-right: 20px;
-		display: inline-flex;
-		justify-content: center;
-		flex-direction: column;
-		align-content: center;
-		align-items: center;
-	}
-	div.ticket {
-		margin: 0 20px auto;
-	}
-	.ticket .item-left, .ticket .item-right {
-		width: 100%;
-		text-align: center;
-		margin: 0;
-		padding: 20px;
-	}
-	.ticket .item-left {
-		border-left: none;
-		border-top: 3px dotted #999;
-	}
-	.ticket .item-right .up-border {
-		bottom: -11px;
-		left: -16px;
-		top: inherit;
-		right: inherit;
-	}
-}
-
-/*======================================
-   Start Checkout Form CSS
-========================================*/
-.shop.checkout {
-	padding: 0;
-	background: #fff;
-	padding-top: 20px;
-	padding-bottom: 50px;
-}
-
-
-.shop.checkout .checkout-form h2 {
-	font-size: 25px;
-	color: #333;
-	font-weight: 700;
-	line-height: 27px;
-}
-
-.shop.checkout .checkout-form p {
-	font-size: 16px;
-	color: #333;
-	font-weight: 400;
-	margin-top: 12px;
-	margin-bottom: 30px;
-}
-
-.shop.checkout .form {
-	
-}
-
-.shop.checkout .form .form-group {
-	margin-bottom: 25px;
-}
-
-.shop.checkout .form .form-group label {
-	color: #333;
-	position: relative;
-}
-
-.shop.checkout .form .form-group label span {
-	color: #ff2c18;
-	display: inline-block;
-	position: absolute;
-	right: -12px;
-	top: 4px;
-	font-size: 16px;
-}
-
-.shop.checkout .form .form-group input {
-	    width: 100%;
-    height: 45px;
-    line-height: 50px;
-    padding: 0 20px;
-    border-radius: 8px;
-    color: #333 !important;
-    border: none;
-    background: #ffffff;
-    border: 1px solid #c9c9c9;
-}
-
-.shop.checkout .form .form-group input:hover {
-	
-}
-
-.shop.checkout .nice-select {
-	width: 100%;
-	height: 45px;
-	line-height: 50px;
-	margin-bottom: 25px;
-	background: #F6F7FB;
-	border-radius: 0px;
-	border: none;
-}
-
-.shop.checkout .nice-select .list {
-	width: 100%;
-	height: 110px;
-	overflow: scroll;
-}
-
-.shop.checkout .nice-select .list li {
-	
-}
-
-.shop.checkout .nice-select .list li.option {
-	color: #333;
-}
-
-.shop.checkout .nice-select .list li.option:hover {
-	background: #F6F7FB;
-	color: #333;
-}
-
-.shop.checkout .form .address input {
-	margin-bottom: 15px;
-}
-
-.shop.checkout .form .address input:last-child {
-	margin: 0;
-}
-
-.shop.checkout .form .create-account {
-	margin: 0;
-}
-
-.shop.checkout .form .create-account input {
-	width: auto;
-	display: inline-block;
-	height: auto;
-	border-radius: 100%;
-	margin-right: 3px;
-}
-
-.shop.checkout .form .create-account label {
-	display: inline-block;
-	margin: 0;
-}
-
-.shop.checkout .order-details {
-	position: sticky;
-  	top: 90px;
-	background: #fff;
-	padding: 15px 0 30px 0;
-	border: 1px solid #eee;
-	border-radius: 8px;
-}
-
-.shop.checkout .single-widget {
-	margin-bottom: 30px;
-}
-
-.shop.checkout .single-widget:last-child {
-	margin: 0;
-}
-
-.shop.checkout .single-widget h2 {
-	position: relative;
-	font-size: 15px;
-	font-weight: 600;
-	padding: 10px 30px;
-	line-height: 24px;
-	text-transform: uppercase;
-	color: #333;
-	padding-bottom: 5px;
-}
-
-.shop.checkout .single-widget h2:before {
-	position: absolute;
-	content: "";
-	left: 30px;
-	bottom: 0;
-	height: 2px;
-	width: 50px;
-	background: #F7941D;
-}
-
-.shop.checkout .single-widget .content ul {
-	margin-top: 30px;
-}
-
-.shop.checkout .single-widget .content ul li {
-	display: block;
-	padding: 0px 30px;
-	font-size: 15px;
-	font-weight: 400;
-	color: #333;
-	margin-bottom: 12px;
-}
-
-.shop.checkout .single-widget .content ul li span {
-	display: inline-block;
-	float: right;
-}
-
-.shop.checkout .single-widget .content ul li.last {
-	padding-top: 12px;
-	border-top: 1px solid #ebebeb;
-	display: block;
-	font-size: 15px;
-	font-weight: 400;
-	color: #333;
-}
-
-.shop.checkout .single-widget .checkbox {
-	text-align: left;
-	margin: 0;
-	padding: 0px 30px;
-	margin-top: 30px;
-}
-
-.shop.checkout .single-widget .checkbox label {
-	color: #555555;
-	position: relative;
-	font-size: 14px;
-	padding-left: 20px;
-	margin-top: -5px;
-	font-weight: 400;
-	display: block;
-	margin-bottom: 15px;
-}
-
-.shop.checkout .single-widget .checkbox label:last-child {
-	margin-bottom: 0;
-}
-
-.shop.checkout .single-widget .checkbox label:hover {
-	cursor: pointer;
-}
-
-.shop.checkout .single-widget .checkbox label input {
-	display: none;
-}
-
-.shop.checkout .single-widget .checkbox label::before {
-	position: absolute;
-	content: "";
-	left: 0;
-	top: 7px;
-	width: 12px;
-	height: 12px;
-	line-height: 16px;
-	border: 1px solid #666;
-	border-radius: 100%;
-}
-
-.shop.checkout .single-widget .checkbox label::after {
-	position: absolute;
-	content: "";
-	left: 0;
-	top: 7px;
-	width: 12px;
-	height: 12px;
-	line-height: 16px;
-	border-radius: 100%;
-	display: block;
-	background: #666;
-	transform: scale(0);
-	-webkit-transition: all 0.4s ease;
-	-moz-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-}
-
-.shop.checkout .single-widget .checkbox label.checked::after {
-	opacity: 1;
-	visibility: visible;
-	transform: scale(1);
-}
-
-.shop.checkout .single-widget.payement {
-	padding: 0px 38px;
-	text-align: center;
-	margin-top: 30px;
-}
-
-.shop.checkout .single-widget.get-button {
-	text-align: center;
-	padding: 0px 35px;
-}
-
-.shop.checkout .single-widget.get-button .btn {
-	height: 46px;
-    width: 100%;
-    line-height: 19px;
-    text-align: center;
-    position: relative;
-    font-weight: 500;
-    font-size: 14px;
-    color: #fff;
-    background: #333;
-    display: inline-block;
-    -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    z-index: 5;
-    padding: 13px 32px;
-    border-radius: 0px;
-    text-transform: uppercase;
-}
-
-/*form*/
-.page_card {
-	position: relative;
-	border: 1px solid #eaeaea;
-	border-radius: 8px;
-	color: gray;
-	background: #fff;
-	/* width: 100%; */
-	text-align: left;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	margin: 0px 15px;
-}
-
-/*구독권선택*/
-.inputGroup {
-	background-color: #fff;
-	display: block;
-	margin: 10px 0;
-	position: relative;
-	border: 1px solid #eee;
-	border-radius: 0.4rem;
-}
-
-.inputGroup label {
-	padding: 12px 30px;
-	width: 100%;
-	display: block;
-	text-align: left;
-	color: #3C454C;
-	cursor: pointer;
-	position: relative;
-	z-index: 2;
-	transition: color 200ms ease-in;
-	overflow: hidden;
-}
-
-.inputGroup label:before {
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	content: "";
-	background-color: #ab7442;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%) scale3d(1, 1, 1);
-	transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-	opacity: 0;
-	z-index: -1;
-}
-
-.inputGroup label:after {
-	width: 32px;
-	height: 32px;
-	content: "";
-	border: 2px solid #D1D7DC;
-	background-color: #fff;
-	background-image:
-		url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
-	background-repeat: no-repeat;
-	background-position: 2px 3px;
-	border-radius: 50%;
-	z-index: 2;
-	position: absolute;
-	right: 30px;
-	top: 50%;
-	transform: translateY(-50%);
-	cursor: pointer;
-	transition: all 200ms ease-in;
-}
-
-.inputGroup input:checked ~ label {
-	color: #fff;
-	border-radius: 0.4rem;
-}
-
-.inputGroup input:checked ~ label:before {
-	transform: translate(-50%, -50%) scale3d(56, 56, 1);
-	opacity: 1;
-}
-
-.inputGroup input:checked ~ label:after {
-	background-color: #8b470a;
-	border-color: #8b470a;
-}
-
-.inputGroup input {
-	width: 32px;
-	height: 32px;
-	order: 1;
-	z-index: 2;
-	position: absolute;
-	right: 30px;
-	top: 50%;
-	transform: translateY(-50%);
-	cursor: pointer;
-	visibility: hidden;
-}
-
-/* 이용안내 - 그대로 가져옴*/
-.cafePay.viewContents .boxWhite>.guideInfo {
-    margin: 2px 0 -3px;
-    padding-top: 0;
-    border: 0;
-    background: none;
-    padding: 30px 0 0 0;
-}
-.guideInfo .titGuide {
-    position: relative;
-    padding: 0 0 15px 26px;
-    color: #202020;
-    font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 20px;
-    border-bottom: 1px solid #EAEAEA;
-}
-.cafePay.viewContents .boxWhite>.guideInfo .tit {
-    display: block;
-    margin-top: 22px;
-    color: #202020;
-}
-
-.cafePay.viewContents .boxWhite>.guideInfo .listType01 {
-    margin-top: 13px;
-}
-
-.cafePay.viewContents .boxWhite>.guideInfo .listType01>li {
-    margin-top: 6px;
-}
-.listType01>li {
-    position: relative;
-    margin-top: 12px;
-    padding-left: 6px;
-    line-height: 1.5;
-}
-.listType01>li:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 11px;
-    left: 0;
-    width: 2px;
-    height: 2px;
-    background: gray;
-}
-
-.guideInfo .listType01+.tit {
-    margin-top: 43px;
-}
-.guideInfo .tit {
-    display: block;
-    margin-top: 22px;
-    color: #202020;
-}
-/*======================================
-   End Checkout Form CSS
-========================================*/
-
-</style>
 </head>
 <body style="background: #f8f8f8;">
 
-	<h5>이용권</h5>		
+<%-- 	<h5>이용권</h5>		
 	<table class = pay border="1">
 		<tr>
 			<td>구독권 이름</td>
@@ -739,7 +149,7 @@
 			<span onclick="fnProductSelect01('${dto.sub_name}','${dto.sub_price }','${dto.sub_coffee_num }');">
 				<div>${dto.sub_name }</div>
 				<div name="price">${dto.sub_price }</div> 
-				<%-- <td name="price${loop.index }">${dto.sub_price }</td>  --%>
+				<td name="price${loop.index }">${dto.sub_price }</td> 
 				<div name="cup">${dto.sub_coffee_num }</div>  
 				<div name="oneCup"></div> 
 			</span>
@@ -757,14 +167,14 @@
 	</div>
 	<div id="selectCup">
 	
-	</div>
-	
+	</div>  --%>
 	<div>
 		<input type="text" id="customer_id" value="madcatz92">
 	</div>	
-	<div class ="btns">
-		<input type="button" id="check1" value="구매" onclick="kakaopay();">
-
+	
+	<input type="button" id="check1" value="구매" onclick="kakaopay();">
+	<input type="hid den" value="${dto.mem_id }">
+	<input type="hid den" value="${dto.mem_id }">
 
 	<!-- checkout -->
 	<section class="shop checkout section py-5">
@@ -842,7 +252,20 @@
 											할인권으로도 가능)</small>
 									</div>
 								</div>
-								<div class="col-lg-6 col-md-6 col-12">
+								
+									<c:forEach items="${lists }" var="dto" varStatus="loop">
+										<div class="col-lg-6 col-md-6 col-12" onclick="fnProductSelect01('${dto.sub_price }','${dto.sub_coffee_num }');">
+											<div class="inputGroup">
+												<input id="radio${loop.index }" name="radio" type="radio" /> 
+												<label for="radio${loop.index }"><strong name="cup"> ${dto.sub_coffee_num }</strong>&nbsp;&nbsp;&nbsp;
+												<span name="price">${dto.sub_price }</span>
+												<div><small>한 잔당 가격&nbsp;&nbsp;&nbsp;</small><small name="oneCup"></small></div></label>
+											</div>
+										</div>
+									</c:forEach>
+							
+								
+								<!-- <div class="col-lg-6 col-md-6 col-12">
 									<div class="inputGroup">
 										<input id="radio1" name="radio" type="radio" /> 
 										<label for="radio1">10잔&nbsp;&nbsp;&nbsp;<small>22,000원</small></label>
@@ -865,18 +288,18 @@
 											for="radio3">30장&nbsp;&nbsp;&nbsp;<small>59,000원</small></label>
 
 									</div>
-								</div>
+								</div> -->
 								
 								<div class="col-12">
 									<div class="form-group">
 										<label>사용할포인트</label><br /> 
-										<small>사용가능포인트<span>1500point</span></small>
+										<small>사용가능포인트<span id="remitPoint" >1500</span></small>
 									</div>
 								</div>
 								
 								<div class="col-12">
 									<div class="form-group">
-										<input type="number" name="address" placeholder="" required="포인트입력">
+										<input placeholder=0 type="number" id="pointInput" required="포인트입력" onkeyup="usingPoint(this.value);">
 									</div>
 								</div>
 
@@ -919,7 +342,6 @@
 					</div>
 				</div>
 				<!-- // -->
-
 				<!-- 결제 정보창 -->
 				<div class="col-lg-4 col-12">
 					<div class="order-details">
@@ -928,13 +350,13 @@
 							<h2>선택한 이용권 정보</h2>
 							<div class="content">
 								<ul>
-									<li>결제금액<span>59,000원</span></li>
-									<li>30잔<span>구매일로부터 30일</span></li>
+									<li>결제금액<span><b id="selectPrice">￦30,000</b></span></li>
+									<li>구매일로부터 30일<span><b id="selectCup">30잔</b></span></li>
 									
-									<li>(+)포인트 & 쿠폰 적용<span>1,200원</span></li>
+									<li>(-)포인트 & 쿠폰 적용<span id="usePoint">0</span></li>
 									
 									<!-- ------------------------------------------------- -->
-									<li class="last">최종 결제금액<span>57,800원</span></li>
+									<li class="last">최종 결제금액<span><b id="payment">￦30,000</b></span></li>
 								</ul>
 							</div>
 						</div>
@@ -952,6 +374,17 @@
 								</ul>
 							</div>
 						</div>
+						<!--/ End Payment Method Widget -->
+						<!-- Button Widget -->
+						<div class="single-widget get-button">
+							<div class="content">
+								<div class="button">
+									<input class="btn" type="button" id="check1" value="구독권구매" onclick="kakaopay();">
+									<!-- <a href="#" class="btn">구독권구매</a> -->
+								</div>
+							</div>
+						</div>
+						<!--/ End Button Widget -->
 						<!--/ End Order Widget -->
 						<!-- Payment Method Widget -->
 						<div class="single-widget payement">
@@ -959,25 +392,17 @@
 								<img src="<%=request.getContextPath() %>/resources/img/패스가입베너.png" alt="#" class="img-fluid">
 							</div>
 						</div>
-						<!--/ End Payment Method Widget -->
-						<!-- Button Widget -->
-						<div class="single-widget get-button">
-							<div class="content">
-								<div class="button">
-									<a href="#" class="btn">구독권구매</a>
-								</div>
-							</div>
-						</div>
-						<!--/ End Button Widget -->
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- //checkout -->
+	
 
 
-	<h5>이용권</h5>
+<!-- 	<h5>이용권</h5>
 	<table class=pay border="1">
 		<tr>
 			<td rowspan="2" class="pay_detail">이용권</td>
@@ -990,28 +415,14 @@
 		</tr>
 	</table>
 	<div>
-		<input type="text" id="customer_id" value="madcatz92">
+		
 	</div>
 	<div class="btns">
 		<input type="button" id="check1" value="구매" onclick="kakaopay();">
-	</div>
+	</div> -->
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-	<script>
-	//플로팅메뉴
-
-		$(document).ready(function() {
-			var currentPosition = parseInt($(".shop.checkout .order-detail").css("top"));
-			$(window).scroll(function() {
-				var position = $(window).scrollTop();
-				console.log(position);
-				$(".shop.checkout .order-detail").stop().animate({
-					"top" : position + currentPosition +"px"
-				}, 1000);
-			});
-		});
-	</script>
 
 </body>
 </html>
