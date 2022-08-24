@@ -27,6 +27,8 @@ var source = [];
 				success:function(data){					
 					eventname.placeholder = data.name;
 					desc.placeholder = data.desc;
+					document.getElementById("roulette-outer").style.background ="url('/CoffeeProject/resources/img/event/"+data.img+"')";
+					document.getElementById("roulette-outer").style.backgroundSize = "90%";
 				},
 				error:function(msg){
 					console.log(msg);

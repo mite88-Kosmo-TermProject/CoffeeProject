@@ -4,6 +4,9 @@
 		var JSONList = [];
 		var rouletteitemsRatio = document.querySelectorAll("#item-wrapper > .item");
 		var rouletteitemsLineRatio = document.querySelectorAll("#line-wrapper > .line");
+		var pass = document.getElementById("pass").value;
+		var modalTitle = document.getElementById("modal-title"); 
+		var modalBody = document.getElementById("modal-body");
 		var point = 0;
 		
 		function setSource(){
@@ -20,18 +23,21 @@
 				}
 			});
 		 }
-		/*function loadEventSetting(){
+		function loadEventSetting(){
 			$.ajax({
 				url:'../admin/point/loadeventsetting.do',
 				dataType:'json',
-				success:function(data){					
-					
+				success:function(data){		
+					console.log(data.name);			
+					modalTitle.innerText = data.name;
+					modalBody.style.background = "url('/CoffeeProject/resources/img/event/"+data.img+"')"
+					modalBody.style.backgroundSize = "90%";
 				},
 				error:function(msg){
 					console.log(msg);
 				}
 			});
-		}*/
+		}
 		 
 		 function resoretdarray(){
 			if(percentage.length <= 0){
@@ -151,6 +157,7 @@
 					data:{"point":point},
 					success:function(data){
 						alert(point+"포인트적립!");
+						$('#myModal').modal('hide');
 					}
 				});
 				
@@ -159,6 +166,13 @@
 
 	 $(function () {
 		setSource();
+		loadEventSetting();
+		if(pass === "false"){
+			$('#myModal').modal('show',{backdrop: 'static', keyboard: false})
+		}
+		else{
+			return;
+		}
+		});
 		
-    });
     

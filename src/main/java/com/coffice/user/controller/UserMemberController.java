@@ -93,7 +93,14 @@ public class UserMemberController {
 			String passdate = sqlSession.getMapper(UserMemberImpl.class).checkpassoneday(req.getParameter("mem_id"));
 			String now = LocalDate.now().toString();
 			if(passdate.equals(now)) {
+				System.out.println(passdate);
+				System.out.println(now);
 				model.addAttribute("passoneday","true");
+			}
+			else {
+				System.out.println(passdate);
+				System.out.println(now);
+				model.addAttribute("passoneday","false");
 			}
 			session.setAttribute("siteUserInfo", memberDTO);
 		}

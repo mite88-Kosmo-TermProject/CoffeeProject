@@ -162,7 +162,7 @@ namespace의 속성
 		(
 			select point_postdate
 			from point_log 
-			where mem_id like #{userName} and point_sources = 2 order by rownum desc
+			where mem_id like 'babana' and point_sources = 5 order by point_postdate desc
 		)
 		where rownum = 1
   	</select>

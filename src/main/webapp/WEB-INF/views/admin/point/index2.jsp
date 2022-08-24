@@ -28,7 +28,6 @@
 	overflow: hidden;
 	width: 350px;
 	height: 350px;
-	background: yellow;
 	z-index: 1;
 	}
 #roulette{

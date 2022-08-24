@@ -28,7 +28,7 @@
 </head>
 
 <body>
-	
+	<input id="pass" type="hidden" value="${passoneday}" readonly>
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
@@ -166,17 +166,17 @@
 	</div>
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-backdrop="static" data-keyboard="false">
 Open modal
 </button>
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="myModal" >
 	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h4 class="modal-title">돌려라 돌림판!</h4>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		  <h4 id="modal-title" class="modal-title"></h4>
+		  <button type="button" class="btn-close" disabled aria-label="Close"></button>
 		</div>
-		<div class="modal-body" style="
+		<div id="modal-body" class="modal-body" style="
 		display: flex; 
 		flex-flow: column; 
 		align-items: center;

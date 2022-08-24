@@ -235,6 +235,7 @@ public class AdminPointController {
 		JSONObject eventobj = new JSONObject();
 		for(EventDTO dto : evedto) {
 			eventobj.put("name", dto.getEvent_name());
+			eventobj.put("img", dto.getEvent_img());
 			eventobj.put("desc", dto.getEvent_explanation());
 		}
 		return eventobj;
