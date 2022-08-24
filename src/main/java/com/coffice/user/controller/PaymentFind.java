@@ -44,32 +44,5 @@ public class PaymentFind {
 		 
 		return json;
 		 
-//		 {"code":0,"message":null,"response":
-//		 {"amount":22000,
-//		"customer_uid":"admin",
-//		"customer_uid_usage":"payment.scheduled",
-//		"imp_uid":"imps_426515090382",
-//			 "merchant_uid":"merchant_1661284500",
-//		"name":"admin \uace0\uac1d\uc5d0 \ub300\ud55c 2022-08-24 04:55:00 \uc608\uc57d \uacb0\uc81c",
-//			 "paid_at":1661284515,
-//		"pay_method":"point",
-//		"pg_id":"TCSUBSCRIP",
-//		"pg_provider":"kakaopay",
-//		"pg_tid":"T30530a30f5619158d9f"
-//			 "started_at":1661284515,
-//		
-//		
-//		"apply_num":null,"bank_code":null,"bank_name":null,"buyer_addr":null,"buyer_email":null,
-//			 "buyer_name":null,"buyer_postcode":null,"buyer_tel":null,"cancel_amount":0,"cancel_history":[],
-//			 "cancel_reason":null,"cancel_receipt_urls":[],"cancelled_at":0,"card_code":null,"card_name":null,
-//			 "card_number":null,"card_quota":0,"card_type":null,"cash_receipt_issued":false,"channel":"api",
-//			 "currency":"KRW","custom_data":null,
-//			 "emb_pg_provider":null,"escrow":false,"fail_reason":null,"failed_at":0,
-//			 ,"receipt_url":"https:\/\/mockup-pg-web.kakao.com\/v1\/confirmation\/p\/T30530a30f5619158d9f\/0654076a9607ac61b55de2e6ba8a5f54eff3779b09b1d9a854e2f930a412c59c",
-//			"status":"paid",
-//			"user_agent":null,"vbank_code":null,"vbank_date":0,"vbank_holder":null,
-//			 "vbank_issued_at":0,"vbank_name":null,"vbank_num":null}}
-		 
-
 	}
 }

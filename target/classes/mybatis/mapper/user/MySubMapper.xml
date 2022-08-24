@@ -7,9 +7,13 @@
   
 <mapper namespace="com.coffice.user.service.SubPaylmpl">
 
-	<insert id="paymentInfo" parameterType="com.coffice.dto.SubPayDTO">
-		INSERT INTO payment (pay_idx, mem_id, pay_import_key, sub_name, pay_price, pay_result_status, pay_successed_at, pay_case) VALUES 
-			(#{pay_idx}, #{mem_id}, #{pay_import_key}, #{sub_name}, #{pay_price}, #{pay_result_status}, #{pay_successed_at}, #{pay_case})
+	<insert id="paymentInfo" parameterType="com.coffice.dto.SubParameterDTO">
+		insert all 
+			into payment (pay_idx, mem_id, pay_import_key, sub_name, pay_price, pay_result_status, pay_successed_at, pay_case, pay_next_order_date) 
+				values (#{pay_idx}, #{mem_id}, #{pay_import_key}, #{sub_name}, #{pay_price}, #{pay_result_status}, #{pay_successed_at}, #{pay_case}, #{pay_next_order_date})
+			into member_sub_info (sub_info_idx, mem_id, pay_idx, sub_name, sub_coffee_num_left, sub_qr_code) 
+				values (seq_sub_info_idx.nextval, #{mem_id}, #{pay_idx}, #{sub_name}, #{sub_coffee_num_left}, #{sub_qr_code})
+		select * from dual
 	</insert>
 	
 	<select id="subList" resultType="com.coffice.dto.SubscriptionDTO">
@@ -20,7 +24,13 @@
 		SELECT * FROM member where mem_id = #{param1}
 	</select>
 
+
+
 <!--
+INSERT INTO payment (pay_idx, mem_id, pay_import_key, sub_name, pay_price, pay_result_status, pay_successed_at, pay_case, pay_next_order_date) VALUES 
+			(#{pay_idx}, #{mem_id}, #{pay_import_key}, #{sub_name}, #{pay_price}, #{pay_result_status}, #{pay_successed_at}, #{pay_case}, #{pay_next_order_date})
+
+
 	이용권 결제내역 추가
 	<insert id ="insert_pay" parameterType="Payed_listVO">
 	 	insert into payed_list

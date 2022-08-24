@@ -42,7 +42,6 @@
 	    let cups = document.getElementsByName("cup");
 	    let oneCups = document.getElementsByName("oneCup");
 	    
-	    
 	    for(let i=0; i<prices.length; i++) {
 	    	oneCups[i].innerHTML = Number( prices[i].innerHTML / cups[i].innerHTML ).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
 	    	prices[i].innerHTML = Number(prices[i].innerHTML).toLocaleString("ko-KR", { style: 'currency', currency: 'KRW' });
@@ -109,38 +108,6 @@
 						sub_name : rsp.name, // 주문명
 						pay_successed_at : rsp.paid_at, //(number) 결제승인시각(UNIX timestamp)
 						pay_case : rsp.pg_provider, //결제한 pg사
-						buyer_email : rsp.buyer_email, 
-						buyer_name : rsp.buyer_name,
-						buyer_tel : rsp.buyer_tel,
-						
-						/* 응답값들
-						apply_num: ""
-						bank_name: null
-						buyer_addr: ""
-						buyer_email: "madcats92@gmail.com"
-						buyer_name: "이준희"
-						buyer_postcode: ""
-						buyer_tel: "01043168802"
-						card_name: null
-						card_number: ""
-						card_quota: 0
-						currency: "KRW"
-						custom_data: null
-						customer_uid: "madcatz"
-						imp_uid: "imp_416388481383"
-						merchant_uid: "merchant_1661228384531"
-						name: "CoffeePass5잔"
-						paid_amount: 12000
-						paid_at: 1661228412
-						pay_method: "point"
-						pg_provider: "kakaopay"
-						pg_tid: "T30455640f56191586d2"
-						pg_type: "payment"
-						receipt_url: "https://mockup-pg-web.kakao.com/v1/confirmation/p/T30455640f56191586d2/435a11771e7dacb842767a9650e0e63f495ceafa97d595fccaef4c4699711769"
-						status: "paid"
-						success: true 
-						*/
-						
 					},
 					success : function() {
 						alert('정기결제 등록');
@@ -161,6 +128,8 @@
 					},
 					success : function() {
 						alert('정기결제 예약성공');
+						//결과페이지 가기 (값을 가지고 가야될듯)
+						location.href = "../order/subPayResult.do";
 					},
 					error : function(errData) {
 						alert('정기결제 예약실패')
@@ -177,49 +146,39 @@
 			location.href = "../order/subStop.do";
 		}
 	}
+	function callContent(){
+		
+		$.ajax({
+				// URL은 필수 요소이므로 반드시 구현해야 하는 Property입니다.
+				url : '../order/makeQRajax.do',
+				type : 'GET',
+				data : {
+					url : 'http://localhost:8082/CoffeeProject/order/subUsing.do',
+					storeName : 'name'
+				},
+				dataType : 'text',
+				success : function(data, status, xhr) {
+					alert(data);
+				},
+				error : function(xhr, status, error) {
+
+				},
+				complete : function(xhr, status) {
+
+				}
+			});
+		}
 </script>
 
 </head>
 <body style="background: #f8f8f8;">
 
-<%-- 	<h5>이용권</h5>		
-	<table class = pay border="1">
-		<tr>
-			<td>구독권 이름</td>
-			<td>가격</td> 
-			<td>커피잔 수</td>  
-			<td>한잔당 가격</td> 
-		</tr>
-	</table>
-		<!-- loop.index 사용을 고려해보자 -->
-		<c:forEach items="${lists }" var="dto" varStatus="loop">
-			<span onclick="fnProductSelect01('${dto.sub_name}','${dto.sub_price }','${dto.sub_coffee_num }');">
-				<div>${dto.sub_name }</div>
-				<div name="price">${dto.sub_price }</div> 
-				<td name="price${loop.index }">${dto.sub_price }</td> 
-				<div name="cup">${dto.sub_coffee_num }</div>  
-				<div name="oneCup"></div> 
-			</span>
-		</c:forEach>
-		<tr>
-			<td>남은 커피패스 이용횟수</td>
-			<td id="pay_coupon">3</td>
-		</tr>
-
-	<div id="selectName">
-		
-	</div>
-	<div id="selectPrice">
-	
-	</div>
-	<div id="selectCup">
-	
-	</div>  --%>
 	<div>
 		<input type="text" id="customer_id" value="madcatz92">
 	</div>	
 	
 	<input type="button" id="check1" value="구독정지" onclick="subStop();">
+	<input type="button" id="check2" value="QR코드생성" onclick="callContent();">
 	<div>
 		${dto.mem_id }, 
 		 ${dto.mem_case }, ${dto.mem_pw }, ${dto.mem_name }, ${dto.mem_nickname }, 
@@ -260,38 +219,18 @@
 												style="display: inline-grid; align-items: center; align-content: center; height: 100%;">
 												<!--   상세정보 -->
 												<div class="col-12">
-
 													<h2 class="title">카페패스</h2>
+													
+													
+													<!-- 패스있는 사람은 다르게 뜰 것 -->
 													<p class="event">아직 카페패스가 없네요!</p>
-
-													<!-- <div class="sce">
-														<div class="icon">
-															<i class="fa fa-table"></i>
-														</div>
-														<p>
-															Monday 15th 2016 <br> 15:20Pm &amp; 11:00Am
-														</p>
-													</div> -->
 												</div>
-
-												<!-- 티켓qr -->
-												<!-- <div class="col-md-6 col-12">
-					
-													<button class="tickets">Tickets</button>
-												</div> -->
-
-												<!-- end item-right -->
 											</div>
-
-
 										</div>
-										<!-- col -->
-
 									</div>
 								</div>
 						</section>
 						<!-- ticket -->
-
 
 						<!-- Form -->
 						<form class="form" method="post" action="#">
@@ -303,7 +242,6 @@
 											할인권으로도 가능)</small>
 									</div>
 								</div>
-								
 									<c:forEach items="${lists }" var="list" varStatus="loop">
 										<div class="col-lg-6 col-md-6 col-12" onclick="fnProductSelect('${list.sub_name }', '${list.sub_price }','${list.sub_coffee_num }');">
 											<div class="inputGroup">
@@ -316,33 +254,6 @@
 											</div>
 										</div>
 									</c:forEach>
-							
-								
-								<!-- <div class="col-lg-6 col-md-6 col-12">
-									<div class="inputGroup">
-										<input id="radio1" name="radio" type="radio" /> 
-										<label for="radio1">10잔&nbsp;&nbsp;&nbsp;<small>22,000원</small></label>
-
-									</div>
-								</div>
-
-								<div class="col-lg-6 col-md-6 col-12">
-									<div class="inputGroup">
-										<input id="radio2" name="radio" type="radio" /> <label
-											for="radio2">20장&nbsp;&nbsp;&nbsp;<small>42,000원</small>
-										</label>
-
-									</div>
-								</div>
-
-								<div class="col-lg-6 col-md-6 col-12">
-									<div class="inputGroup">
-										<input id="radio3" name="radio" type="radio" /> <label
-											for="radio3">30장&nbsp;&nbsp;&nbsp;<small>59,000원</small></label>
-
-									</div>
-								</div> -->
-								
 								<div class="col-12">
 									<div class="form-group">
 										<label>&nbsp;&nbsp;&nbsp;&nbsp;사용할포인트</label><br /> 
@@ -452,27 +363,6 @@
 		</div>
 	</section>
 	<!-- //checkout -->
-	
-
-
-<!-- 	<h5>이용권</h5>
-	<table class=pay border="1">
-		<tr>
-			<td rowspan="2" class="pay_detail">이용권</td>
-			<td>월 기본 제공</td>
-			<td>30</td>
-		</tr>
-		<tr>
-			<td>남은 커피패스 이용횟수</td>
-			<td id="pay_coupon">3</td>
-		</tr>
-	</table>
-	<div>
-		
-	</div>
-	<div class="btns">
-		<input type="button" id="check1" value="구매" onclick="kakaopay();">
-	</div> -->
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
