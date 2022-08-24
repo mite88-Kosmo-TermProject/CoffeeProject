@@ -15,16 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coffice.dto.SearchDTO;
+import com.coffice.dto.StoresDTO;
 import com.coffice.user.service.CafeImpl;
 import com.coffice.user.service.CafeSearchImpl;
 
 import util.PagingUtil;
-
-import com.coffice.dto.StoresDTO;
-import com.coffice.user.service.CafeImpl;
 
 @Controller
 public class CafeController {
@@ -294,6 +293,28 @@ public class CafeController {
 
 		model.addAttribute("resultList", resultList);
 		return "/user/cafe/info";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/jjim.do" , method = RequestMethod.POST)
+	public Map<String, Object> jjim(@RequestParam("review_idx") int idx, @RequestParam("user_id") String id) {
+		
+		int check_jjim = sqlSession.getMapper(CafeImpl.class).check_jjim(id, idx);
+		if(check_jjim==1) {
+			System.out.println("찜 취소");
+			sqlSession.getMapper(CafeImpl.class).delete_jjim(idx, id);
+			sqlSession.getMapper(CafeImpl.class).storeDelete_jjim(idx);
+			
+		}
+		else {
+			System.out.println("찜 하기");
+			sqlSession.getMapper(CafeImpl.class).insert_jjim(idx, id);
+			sqlSession.getMapper(CafeImpl.class).storeInsert_jjim(idx);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("check", check_jjim);
+		System.out.println(map);
+		return map;
 	}
 
 }

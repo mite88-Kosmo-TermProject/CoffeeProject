@@ -87,6 +87,8 @@ public class UserMemberController {
 		}
 		else {
 			session.setAttribute("siteUserInfo", memberDTO);
+			session.setAttribute("user_id", memberDTO.getMem_id());
+			System.out.println(memberDTO.getMem_id());
 		}
 		return "redirect:/";
 	}

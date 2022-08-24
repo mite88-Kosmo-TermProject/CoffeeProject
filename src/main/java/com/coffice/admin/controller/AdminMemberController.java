@@ -2,7 +2,6 @@ package com.coffice.admin.controller;
 
 import java.util.ArrayList;
 
-import org.apache.catalina.tribes.membership.MemberImpl;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +22,6 @@ public class AdminMemberController {
 	public String list(Model model) {
 		
 		
-		ArrayList<MemberDTO> member_list = new ArrayList<>();
-		member_list = sqlSession.getMapper(MemberDAOImpl.class).getMemberList();
-		System.out.println(member_list);
-		model.addAttribute("member_list",member_list);
 		return "/admin/member/list";
 	}
 	

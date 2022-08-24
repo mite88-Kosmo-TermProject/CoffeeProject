@@ -316,6 +316,40 @@ p.txt:before {
 }
 </style>
 
+<script>
+
+      //찜(하트)
+      function heart(x,idx,id) {
+	     	if(id==="null" || id===""){
+	    		alert("로그인 후 이용해주세요");
+	    		return false;
+	    	} 
+	    	console.log(idx);
+	    	console.log(id);
+	    	$.ajax({
+	    		url : "../jjim.do",
+	    		type : "POST",
+	    		data : {"review_idx" : idx,
+	    				"user_id" : id	
+	    		},
+	    		dataType : "json",
+	    		success : (data) =>{
+	    			console.log(data.check);
+	    			if (data.check === 0) {
+	    		          x.className = "fas fa-heart fa-lg";
+	    		          x.style.color = "red";
+	    		        } else {
+	    		          x.className = "far fa-heart fa-lg";
+	    		          x.style.color = "black";
+	    		        }
+	    		},
+	    		error : (err) =>{
+	    			console.log("에러");
+	    		},
+	    	});
+      }
+      
+</script>
 <link href="<%=request.getContextPath()%>/resources/css/review.css"
 	rel="stylesheet">
 
@@ -327,7 +361,7 @@ p.txt:before {
 
 
 <body>
-
+	
 	<%-- ${resultList }  --%>
 	<!-- content -->
 	<!-- 상단 간단내용 -->
@@ -386,6 +420,7 @@ p.txt:before {
 									<ul>
 										<li><i class="fa fa-solid fa-pen mt-2"></i> 3</li>
 										<li><i class="fa fa-solid fa-star mt-2"></i> ${resultList.store_star}</li>
+										<li><i class="far fa-heart fa-lg" id="heart" onclick="heart(this,'${resultList.store_idx}','${sessionScope.user_id }')"></i></li>
 									</ul>
 								</div>
 								<div class="btn-group" role="group"">

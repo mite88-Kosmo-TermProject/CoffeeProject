@@ -11,5 +11,22 @@
 
 	</select>
 	
+	<select id="check_jjim" resultType="int">
+		SELECT count(*) FROM jjim where mem_id=#{_id} and store_idx=#{_idx}
+	</select>
+	
+	<delete id="delete_jjim">
+	  DELETE from jjim where mem_id=#{_id} and store_idx=#{_idx}   
+   </delete>
+   <insert id="insert_jjim">
+	  insert into jjim(jjim_idx , store_idx , mem_id , jjim_flag , jjim_postdate) values(jjim_seq.nextval, #{_idx}, #{_id}, 1, sysdate)   
+   </insert>
+     <update id="storeInsert_jjim">
+   	  update stores set JJIM_HIT = JJIM_HIT + 1 where STORE_IDX=#{_idx}
+   </update>
+   
+   <update id="storeDelete_jjim" >
+   	  update stores set JJIM_HIT = JJIM_HIT - 1 where STORE_IDX=#{_idx}
+   </update>
 
 </mapper>

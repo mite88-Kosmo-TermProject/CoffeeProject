@@ -205,21 +205,6 @@ pageEncoding="UTF-8"%>
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
     
-
-    <script>
-      //찜(하트)
-      function heart(x) {
-        if (x.className === "far fa-heart fa-lg") {
-          x.className = "fas fa-heart fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-heart fa-lg";
-          x.style.color = "black";
-        }
-      }
-      
-    </script>
-
     <!-- 사진 -->
     <link
       rel="stylesheet"

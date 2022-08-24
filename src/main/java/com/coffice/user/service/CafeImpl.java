@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.coffice.user.service;
 
 import java.util.*;
@@ -7,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.coffice.dto.ImageDTO;
 import com.coffice.dto.ReviewDTO;
 import com.coffice.dto.SearchDTO;
 import com.coffice.dto.StoresDTO;
@@ -36,5 +36,12 @@ public interface CafeImpl {
 	
 	public int imgMD(ImageDTO imageDTO);
 	public int imgED(ImageDTO imageDTO);
+	
+	public int check_jjim(@Param("_id") String id, @Param("_idx")int idx);
+	public int delete_jjim(@Param("_idx")int idx, @Param("_id")String id);
+	public int insert_jjim(@Param("_idx")int idx, @Param("_id")String id);
+	
+	public int storeInsert_jjim(@Param("_idx")int idx);
+	public int storeDelete_jjim(@Param("_idx")int idx);
 
 }
