@@ -42,6 +42,14 @@
     opacity: 1;
 }
 
+/*row col*/
+.row {
+display: flex; /* 하위 요소(child)의 높이를 동일하게 조정 */
+}
+
+.col {
+flex: 1; /* 이 코드를 가하면 폭도 동일하게 조정됩니다 */
+}
 
 /*** Button ***/
 .btn {
@@ -331,6 +339,8 @@
 /*** Service ***/
 .service-item img {
     transition: .5s;
+    height: 200px;
+    width: 100%;
 }
 
 .service-item:hover img {
@@ -781,6 +791,7 @@ ul, ol {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom: 20px;
 }
 #caffee_map .mapSearchList > li a .inner .tagWrap .tag {
     display: inline-block;
@@ -820,6 +831,7 @@ ul, ol {
     position: absolute;
     bottom: 0;
     left: 18px;
+    display: inline-flex;
 }
 #caffee_map .mapSearchList > li a .inner .conUtil span {
     font-size: .875rem;

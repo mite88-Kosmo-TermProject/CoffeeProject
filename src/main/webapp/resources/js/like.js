@@ -1,6 +1,6 @@
 function like(x, idx , id){
-var i = jQuery("i",x);
-var t = jQuery("small", x);
+var i = $("i",x);
+var t = $("small", x);
 console.log(id);
 if(id==="null" || id===""){
 	alert("로그인 후 이용해주세요");

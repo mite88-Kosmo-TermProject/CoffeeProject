@@ -10,7 +10,7 @@ public class BoardController {
 	// 공지, 이벤트게시판 리스트
 	@RequestMapping(value = "/community/boardList.do", method = RequestMethod.GET)
 	public String boardList() {
-
+		
 		return "/user/community/boardList";
 	}
 

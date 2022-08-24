@@ -11,6 +11,8 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="icon" type="image/x-icon"
+	href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,30 +20,38 @@
 <head>
 <!-- header -->
 <%@ include file="/WEB-INF/views/user/layout/header.jsp"%>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><title>틀 다 우리꺼에 좌표만 카카오 맵</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
 <meta charset="utf-8">
 <!-- 여기에 새로운 css파일있으면 넣기 -->
 
 <style type="text/css">
 #pagination {
-  margin: 10px auto;
-  text-align: center;
-}
-#pagination a {
-  display: inline-block;
-  margin-right: 10px;
-}
-#pagination .on {
-  font-weight: bold;
-  cursor: default;
-  color: #777;
+	margin: 10px auto;
+	text-align: center;
 }
 
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+
+span {
+	display: block;
+	margin-bottom: .6rem;
+	font-size: 1rem;
+	line-height: 1.4;
+}
 </style>
 
 </head>
@@ -51,101 +61,177 @@
 <body>
 
 
-<!-- 	<!-- content --> -->
-<!-- 	<div class="container-fluid bg-light overflow-hidden px-lg-0" id="caffee_map"> -->
-<!-- 		<div class="container contact px-lg-0"> -->
-		
-<!-- 			<!-- 시작 --> -->
-<!-- 			<div class="row g-0 mx-lg-0"> -->
-			
-<!-- 				<div class="col-lg-6 col-xl-4 contact-text py-2  resultArea scriptScroll"> -->
-<!-- 					리스트 -->
-<!-- 					<div class="p-lg-2 ps-lg-0"> -->
-<!-- 						<div class="section-title text-start"> -->
-<!-- 							<h1 class="display-5 mb-4">검색결과</h1> -->
-<!-- 						</div> -->
-<!-- 						<p class="mb-4">당신의 취향에 맞춰 검색해드릴게요</p> -->
+	<!-- content -->
+	<div class="container-fluid bg-light overflow-hidden px-lg-0"
+		id="caffee_map">
+		<div class="container contact px-lg-0">
 
-<!-- 						<form onsubmit="searchPlaces(); return false;" class="mapform"> -->
+			<!-- 시작  -->
+			<div class="row g-0 mx-lg-0">
 
-<!-- 							<div class="input-group"> -->
-<!-- 							  <input type="text" class="form-control" placeholder="검색" id="keyword" size="15"> -->
-<!-- 							  <button type="submit" class="btn btn-outline-secondary" type="button"> -->
-<!-- 							  		<i class="fa fa-search"></i> -->
-<!-- 							  </button> -->
-							  
-<!-- 							</div> -->
+				<div
+					class="col-lg-6 col-xl-4 contact-text py-2  resultArea scriptScroll">
+					<!-- 리스트 -->
+					<div class="p-lg-2 ps-lg-0">
+						<div class="section-title text-start">
+							<h1 class="display-5 mb-4">카페찾기</h1>
+						</div>
+						<p class="mb-4">당신의 취향에 맞춰 검색해드릴게요</p>
+
+						<form action="../cafe/search.do" method="post" class="mapform">
+
+						<div class="input-group">
+								<input type="text" class="form-control" placeholder="검색"
+									id="searchTxt" name="searchTxt" value="${searchTxt }" size="15">
+								<button type="submit" class="btn btn-outline-secondary"
+									type="button">
+									<i class="fa fa-search"></i>
+								</button>
+
+							</div>
+
+							<div style="display: none;">
+								<c:if test="${AFLTD eq 0 }">
+									<label><input type="checkbox" value="1" name="구독여부"
+										id="check" />구독권 사용가게만 검색하기</label>
+								</c:if>
+								<c:if test="${AFLTD eq 1 }">
+									<label><input type="checkbox" value="1" name="구독여부"
+										id="check" checked />구독권 사용가게만 검색하기</label>
+
+								</c:if>
+							</div>
 							
-<!-- 						</form> -->
+						</form>
 						
-						
-<!-- 						<ul class="mapSearchList"> </ul> -->
-<!-- 						<div id="pagination"></div> -->
 
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-lg-6 col-xl-8 pe-lg-0" style="min-height: 400px;"> -->
-<!-- 					<div class="position-relative h-100 mapCont"> -->
-<!-- 						지도 -->
-						
-<!-- 						지도 필터 -->
-<!-- 						<div class="cateWrap"> -->
-<!--                              <span class="frmInp cate restaurant" data-order="0"><input type="checkbox" id="restaurantPopCate" checked=""><label for="restaurantPopCate">카페</label></span> -->
-<!--                              <span class="frmInp cate cafe" data-order="1"><input type="checkbox" id="cafePopCate"><label for="cafePopCate">카페패스</label></span> -->
-<!--                              <span class="frmInp cate stay" data-order="2"><input type="checkbox" id="stayPopCate"><label for="stayPopCate">숙소</label></span> -->
-<!--                          </div> -->
-                         
-<!--                          지도 -->
-<!--                          <div class="mapArea" id="mapArea" style="width: 100%; height: 100%;"> -->
-<!--                          </div> -->
-                         
-						
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
-<!-- 			<!-- 끝 --> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-	
-<div class="container-fruid">
-<!-- 일반적인 지도검색창 -->
-<h1>지도 검색</h1>
-	<form action="../cafe/search.do" method="post">
-		<input type="text" value="${searchTxt }" id="searchTxt" name="searchTxt"/>
-		<button type="submit">검색하기</button>
-		<c:if test="${AFLTD eq 0 }">
-			<label><input type="checkbox" value="1" name="구독여부" id="check" />구독권 사용가게만 검색하기</label>
-		</c:if>
-		<c:if test="${AFLTD eq 1 }">
-			<label><input type="checkbox" value="1" name="구독여부" id="check" checked/>구독권 사용가게만 검색하기</label>
-		</c:if>
-	</form>
-	
-<!-- 검색결과가 없을시 나오는 문구 -->
-<!-- 일반적인 검색결과 리스트들 -->
-				<!-- 맵이 생성될 div 태그 -->
-<!-- 카카오맵 API 실행을 위한 앱키 -->
-	<!-- 맵 노출을 위한 자바스크립트 -->
-		<!-- 문서가 로드시 url의 파라미터를 잡아 변수로 할당한다. -->
-		<!-- 현재 페이지 파라미터가 없을 경우 1로 초기화 -->
-		<!-- 검색단어 변수할당 -->
-		<!-- 검색값이 없으면 나오게하는 알림창 (실행안됌 ㅋ) -->
-			<!-- 검색결과가 있다면 실행되는 ajax -->
-<c:choose>
-<c:when test="${totalRecordCount eq 0 }">
-	<div style="text-align;"><h1>검색결과가 없습니다 .. 다시 검색해주세요</h1></div>
-</c:when>
-<c:otherwise>
-	<table class="table table-bordered">
-		<tr>
-			<th>가게위치</th>
-			<th>검색된 가게들</th>
-		</tr>
-		<tr>
-			<td>
-				<div id="map" style="width:750px;height:550px;"></div>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51170cde81df349ec4e9653882b01d01&libraries=services"></script>
+
+						<!-- 검색결과가 없을시 나오는 문구 -->
+						<!-- 일반적인 검색결과 리스트들 -->
+						<!-- 맵이 생성될 div 태그 -->
+						<!-- 카카오맵 API 실행을 위한 앱키 -->
+						<!-- 맵 노출을 위한 자바스크립트 -->
+						<!-- 문서가 로드시 url의 파라미터를 잡아 변수로 할당한다. -->
+						<!-- 현재 페이지 파라미터가 없을 경우 1로 초기화 -->
+						<!-- 검색단어 변수할당 -->
+						<!-- 검색값이 없으면 나오게하는 알림창 (실행안됌 ㅋ) -->
+						<!-- 검색결과가 있다면 실행되는 ajax -->
+						<c:choose>
+							<c:when test="${totalRecordCount eq 0 }">
+								<div style="">
+									<h1>검색결과가 없습니다 .. 다시 검색해주세요</h1>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<ul class="mapSearchList ">
+									<c:forEach items="${lists }" var="item">
+
+										<li class="item"><a
+											href="<%= request.getContextPath() %>/cafe/info.do?store_idx=${item.store_idx }" role="button">
+												<figure>
+													<img
+														src="<%= request.getContextPath() %>/resources/img/stores/${item.store_img }.jpg"
+														alt="카페이미지 더미" />
+												</figure>
+												<div class="inner">
+													<strong class="titDep3" style="margin-right: 10px;"> ${item.store_name} </strong> <span
+														class="" locationinfo="" title="위치 정보"> <span>
+															${item.store_roadaddr} </span>
+													</span>
+													<!-- 태그는 컴마 구분자 필요 -->
+													<c:choose>
+														<c:when test="${fn:contains(item.store_tag, ' ,')}">
+															<c:forEach var="tag_name"
+																items="${fn:split(item.store_tag,',') }"
+																varStatus="status">
+
+																<p class="tagWrap">
+																	<span class="tag">#${item.store_tag}&nbsp;&nbsp;</span>
+																</p>
+															</c:forEach>
+														</c:when>
+														<c:otherwise>
+															<p class="tagWrap">
+																<span class="tag">#${item.store_tag}</span>
+															</p>
+														</c:otherwise>
+													</c:choose>
+
+													<div class="conUtil">
+														<!-- <span class="likeNum" title="좋아요 갯수">1</span>  -->
+										
+														<span class="icoScore" title="평균 평점"> 
+														
+															 <c:set var = "balance" value = "${item.store_star }" />
+	 														 <fmt:parseNumber var = "number_star" type = "number" value = "${balance}" />
+															
+														<c:forEach begin="0" end="4" var="i">
+																<c:choose>
+																	<c:when test="${number_star > i }">
+																		<i class="far fas fa-star"></i>
+																	</c:when>
+																	<c:otherwise>
+																		<i class="far fa-star"></i>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+
+
+														</span>
+														<!-- <i title="리뷰 갯수">(5)</i></span> -->
+													</div>
+													
+
+													<div class="kind cafe"></div>
+												</div>
+										</a></li>
+									</c:forEach>
+								</ul>
+
+
+								<div id="pagination">${pagingImg}</div>
+
+							</c:otherwise>
+						</c:choose>
+
+
+					</div>
+				</div>
+				<div class="col-lg-6 col-xl-8 pe-lg-0" style="min-height: 400px;">
+					<div class="position-relative h-100 mapCont">
+						<!-- 지도 -->
+
+						<!-- 지도 필터 -->
+						<div class="cateWrap">
+							<span class="frmInp cate restaurant" data-order="0">
+							<input type="checkbox" id="restaurantPopCate" checked="">
+							<label for="restaurantPopCate">카페</label></span> 
+							
+							<span class="frmInp cate cafe" data-order="1">
+							<input type="checkbox" id="cafePopCate" <c:if test="${AFLTD eq 1 }" > checked</c:if>>
+							<label for="cafePopCate">카페패스</label></span> 
+
+						</div>
+
+						<!-- 지도 -->
+						<div class="map" id="map" style="width: 100%; height: 100%;">
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+			<!-- 끝 -->
+		</div>
+	</div>
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+
+	<!-- <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51170cde81df349ec4e9653882b01d01&libraries=services"></script> -->
+	<script
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1719acb269a938b6750fa57d8a6c11cb&libraries=services"></script>
 	<script>
 
 	$(function(){
@@ -167,7 +253,16 @@
 			var AFLTD = 1;
 		}
 		
-		
+		//태그체크여부에 따라 ajax실행함  - 카페패스버튼
+		$("#cafePopCate").change(function(){
+	        if($("#cafePopCate").is(":checked")){
+	          //  alert("체크박스 체크했음!");
+	        	checkbox.click(); 
+	        }else{
+	           // alert("체크박스 체크 해제!");
+	           checkbox.click(); 
+	        }
+	    });
 
 		
 		if(searchTxt == null){
@@ -407,45 +502,6 @@
 		}
 	});
 	</script>
-				
-			</td>
-			<td id="placeList">
-			<div style="overflow:auto; width:650px; height:550px;">
-
-						<div class="row">
-				<c:forEach items="${lists }" var="item">
-							<div class="col-4">
-								<img style="max-width: 200px;" s src="<%= request.getContextPath() %>/resources/img/stores/${item.store_img }.jpg" alt="카페이미지 더미" />
-							</div>
-							<div class="col-8"" style="text-align: left;">
-								<div id="store_name"><a href="../cafe/info.do?store_idx=${item.store_idx }">가게명:${item.store_name }</a></div>
-								<div id="store_tag">#${item.store_tag }</div>
-								<div id="store_star">별점:${item.store_star }</div>
-								<div id="store_roadaddr">주소:${item.store_roadaddr }</div>
-							</div>
-						<hr />
-					</c:forEach>
-						</div>
-			</div>
-					<div>${pagingImg}</div>
-			</td>
-		</tr>
-	</table>
-</c:otherwise>
-</c:choose>
-			<!-- 가게 리스트 출력될 부분 -->
-					<!-- 페이지 버튼 출력 -->
-			<!-- 스크롤창 처리 -->
-				<!-- 받은 리스트수에 맞게 가게가 출력 페이징 처리됨 -->		
-</div>
-
-	<!-- footer -->
-	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-	
-<!-- 	<!-- 지도 --> -->
-<!-- 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1719acb269a938b6750fa57d8a6c11cb&libraries=services"></script> -->
-	
-<%-- 	<script src="<%= request.getContextPath() %>/resources/js/map.js"></script> --%>
 
 </body>
 

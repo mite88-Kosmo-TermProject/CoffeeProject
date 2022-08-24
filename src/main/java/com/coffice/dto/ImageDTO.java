@@ -13,4 +13,5 @@ public class ImageDTO {
 	private String image_save;
 	private Date image_postdate;
 	private String image_rprsn;
+
 }

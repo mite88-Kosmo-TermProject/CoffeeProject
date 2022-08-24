@@ -4,7 +4,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.coffice.user.service.CafeImpl">
+<mapper namespace="com.coffice.user.service.CafeSearchImpl">
 
 	<select id="getTotalCountSearch" resultType="int">
 		SELECT COUNT(*) from (select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 

@@ -255,17 +255,18 @@
 											class="d-flex align-items-center align-middle"> 
 											<i class='bx bxs-conversation me-2'></i>
 											<span class="flex-grow-1 align-middle">문의</span> 
-											<span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+											
 										</span>
 									</a></li>
 									<li>
 										<div class="dropdown-divider"></div>
 									</li>
 									
-									<li><a class="dropdown-item" href="auth-login-basic.html">
-											<i class="bx bx-power-off me-2"></i> <span
-											class="align-middle">Log Out</span>
-									</a></li>
+										<li><a class="dropdown-item"
+									href="<%= request.getContextPath() %>/admin/logout.do"> <i
+										class="bx bx-power-off me-2"></i> <span class="align-middle">Log
+											Out</span>
+								</a></li>
 								</ul>
 							</li>
 							<!--/ User -->

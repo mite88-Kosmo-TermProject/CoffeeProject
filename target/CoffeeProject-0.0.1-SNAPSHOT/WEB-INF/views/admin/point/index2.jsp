@@ -10,6 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,8 +54,8 @@
 									<div class="card-action-element ms-auto py-0"></div>
 								</div>
 								<div class="card-body">
-									<form id="formAccountSettings" method="POST"
-										onsubmit="return false">
+									<form id="formAccountSettings" method="POST" enctype="multipart/form-data"
+										action="../../admin/point/eventSetting.do">
 										<!-- 왼편 -->
 										<div class="mb-3 row">
 											<div class="col-md-6">
@@ -63,7 +64,7 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">이벤트명</label>
 													<div class="col-md-8">
-														<input class="form-control" type="text" value=""
+														<input  name="eventname" class="form-control" type="text" value=""
 															id="html5-text-input">
 													</div>
 												</div>
@@ -73,7 +74,7 @@
 												<label for="html5-text-input"
 														class="col-md-4 col-form-label">배경이미지</label>
 													<div class="col-md-8">									
-														<input class="form-control" type="file"
+														<input  name="file" class="form-control" type="file"
 															id="formFileMultiple" multiple>													
 													</div>
 												
@@ -84,11 +85,14 @@
 													<label for="html5-text-input"
 														class="col-md-4 col-form-label">이벤트설명</label>
 													<div class="col-md-8">
-														<textarea class="form-control"
+														<textarea placeholder="" name="desc" class="form-control"
 															id="exampleFormControlTextarea1" rows="3"></textarea>
 													</div>
 												</div>
-
+												<div class="mt-2">
+													<button type="submit" class="btn btn-primary me-2">저장</button>
+												</div>
+											</form>
 											</div>
 
 											<!-- 오른편 -->
@@ -97,8 +101,7 @@
 													<table class="table" id="table">
 														<thead>
 															<tr data-tabullet-map="id">
-																<th width="50" data-tabullet-map="_index"
-																	data-tabullet-readonly="true" class="visually-hidden">NO</th>
+																<th data-tabullet-map="0">항목번호</th>
 																<th data-tabullet-map="1">항목명</th>
 																<th data-tabullet-map="2">비율</th>
 																<th data-tabullet-map="3">확률</th>
@@ -112,12 +115,12 @@
 
 											</div>
 											<div class="mt-2">
-												<button type="submit" class="btn btn-primary me-2">저장</button>
+												<button type="button" class="btn btn-primary me-2">저장</button>
 												<button type="reset" class="btn btn-outline-secondary">Cancel</button>
 											</div>
 
 										</div>
-									</form>
+									
 
 								</div>
 							</div>
@@ -149,11 +152,39 @@
 	<script src="<%= request.getContextPath() %>/resources/lib/Dynamic-Table/Tabullet.js"></script>
 
 	<script type="text/javascript">
-	 $(function () {
-		 //동적테이블 
-         var source = [];
-
-         function resetTabullet() {
+		var source = [];
+		var eventname = document.getElementsByName("eventname")[0];
+		var file = document.getElementsByName("file")[0];
+		var desc = document.getElementsByName("desc")[0];
+		
+		function setSource(){
+			$.ajax({
+				url:'../../admin/point/loadevent_item.do',
+				dataType:'json',
+				success:function(data){
+					source = data;
+					resetTabullet();
+					
+				},
+				error:function(msg){
+					console.log(msg);
+				}
+			});
+		 }
+		function loadEventSetting(){
+			$.ajax({
+				url:'../../admin/point/loadeventsetting.do',
+				dataType:'json',
+				success:function(data){					
+					eventname.placeholder = data.name;
+					desc.placeholder = data.desc;
+				},
+				error:function(msg){
+					console.log(msg);
+				}
+			});
+		}
+		 function resetTabullet() {
              $("#table").tabullet({
                  data: source,
                  action: function (mode, data) {
@@ -163,14 +194,15 @@
                      }
                      if (mode === 'edit') {
                          for (var i = 0; i < source.length; i++) {
-                             if (source[i].id == data.id) {
+                             if (source[i][0] == data[0]) {
+                            	 console.log(data);
                                  source[i] = data;
                              }
                          }
                      }
                      if(mode == 'delete'){
                          for (var i = 0; i < source.length; i++) {
-                             if (source[i].id == data) {
+                             if (source[i][0] == data[0]) {
                                  source.splice(i,1);
                                  break;
                              }
@@ -180,8 +212,10 @@
                  }
              });
          }
-
-         resetTabullet();
+	 $(function () {
+		 //동적테이블 
+		 setSource();
+		 loadEventSetting();
      });
  </script>
 </body>

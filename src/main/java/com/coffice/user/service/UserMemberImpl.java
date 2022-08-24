@@ -68,7 +68,6 @@ public interface UserMemberImpl {
 	
 	public int kakaojoin(MemberDTO memberDTO);
 	public String pw(String mem_id, String mem_eamil);
-	
-	
-	
+	public MemberDTO view_one(String mem_id);
+
 }

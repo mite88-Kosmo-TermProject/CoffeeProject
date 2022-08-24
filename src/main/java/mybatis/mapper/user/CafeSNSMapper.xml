@@ -27,6 +27,7 @@
 		<id property="mem_nickname" column="mem_nickname"/>
 		<id property="mem_email" column="mem_email"/>
 		<id property="mem_phone" column="mem_phone"/>
+		<id property="mem_img" column="mem_img"/>
 	</resultMap>
 	<resultMap type="com.coffice.dto.HeartDTO" id="HeartMap">
 		<id property="review_idx" column="review_idx"/>
@@ -81,10 +82,39 @@
 	
 	<select id="review_list" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
-		LEFT join image on review.review_idx = image.review_idx
-		LEFT join member on review.mem_id = member.mem_id
-		where review.store_idx = #{store_idx}
+		LEFT join image on review.review_idx = image.review_idx 
+		LEFT join member on review.mem_id = member.mem_id 
+		where review.store_idx = #{store_idx} order by REVIEW_POSTDATE desc
 	</select>
+	
+	<!-- 좋아요순 -->
+	<select id="review_list_type2" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
+		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
+		LEFT join image on review.review_idx = image.review_idx 
+		LEFT join member on review.mem_id = member.mem_id 
+		where review.store_idx = #{store_idx} order by like_hit desc
+	</select>
+	
+	<!-- 별점높은순 -->
+	<select id="review_list_type3" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
+		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
+		LEFT join image on review.review_idx = image.review_idx
+		LEFT join member on review.mem_id = member.mem_id 
+		where review.store_idx = #{store_idx} order by review_star desc
+	</select>
+	
+	<!-- 별점낮은순 -->
+	<select id="review_list_type4" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
+		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
+		LEFT join image on review.review_idx = image.review_idx
+		where review.store_idx = #{store_idx} order by review_star asc
+	</select>
+	
+	<!-- 가게별 리뷰수 -->
+	<select id="getStoresReviewCount" resultType="int">
+		SELECT count(*) FROM review where store_idx = #{store_idx}
+	</select>
+	
 	
 	<insert id="insert" parameterType="com.coffice.dto.ReviewDTO">
 		insert into review (review_idx, review_content, store_idx, mem_id, review_star)
@@ -101,13 +131,10 @@
 	</insert>
 	
 	
-	
    <select id="findLike" parameterType="com.coffice.dto.HeartDTO" resultType="int">
       select count(like_flag) from heart where mem_id = #{mem_id} and review_idx = #{review_idx}
    </select>
 		
-
-	
    <insert id="insertlike" parameterType="com.coffice.dto.HeartDTO">
        INSERT INTO heart (MEM_ID, review_idx, like_flag, like_postdate)
        VALUES
@@ -133,4 +160,5 @@
 	<select id="check_like" resultMap="HeartMap">
 		select * from heart where mem_id = #{user_id}
 	</select>
+
 </mapper>

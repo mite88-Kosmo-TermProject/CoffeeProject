@@ -24,7 +24,7 @@ public interface CafeImpl {
 	public ArrayList<SearchDTO> listPageSearch(SearchDTO searchDTO);
 	
 	public ArrayList<ReviewDTO> review_list(@Param("_idx") int store_idx);
-	
+	public int star_change(int star, int store_idx);
 	public int edit(StoresDTO storesDTO);
 	public int cafemodify(StoresDTO storesDTO);
 	

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coffice.dto.*;
-import com.coffice.user.service.CafeImpl;
 import com.coffice.user.service.HomeImpl;
 
 
@@ -34,7 +33,6 @@ public class HomeController {
 		ArrayList<Object> review_list = new ArrayList<>();
 		for(ReviewDTO dto : mainPageReview) {
 			MainPageReviewDTO mainPageReviewDTO = new MainPageReviewDTO();
-//			System.out.println(dto+"////////////////////////");
 			int index = dto.getImageDTO().getImage_save().lastIndexOf("/");
 			String img = dto.getImageDTO().getImage_save().substring(0,index);
 			mainPageReviewDTO.setContent(dto.getReview_content().replace("\r\n", "<br/>"));
@@ -48,8 +46,7 @@ public class HomeController {
 			review_list.add(mainPageReviewDTO);
 		}
 		model.addAttribute("review_list",review_list);
-//		System.out.println("메인배너 리뷰"+review_list);
-		
 		return "home";
 	}
+
 }
