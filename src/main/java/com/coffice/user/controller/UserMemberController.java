@@ -87,7 +87,6 @@ public class UserMemberController {
 		}
 		else {
 			session.setAttribute("siteUserInfo", memberDTO);
-			session.setAttribute("user_id", memberDTO.getMem_id());
 		}
 		return "redirect:/";
 	}
@@ -99,7 +98,7 @@ public class UserMemberController {
 		//세션 영역 정보 지움 ㅎㅎ
 		session.invalidate();
 		
-		return "redirect:/";
+		return "home";
 	}
 
 	//아이디 찾기 페이지
@@ -251,9 +250,9 @@ public class UserMemberController {
 		System.out.println("!!"+req.getParameter("mem_id"));
 		
 		//Mapper의 view메서드를 호출한다. 이 때 DTO 객체를 인수로 전달한다.
-		MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
+		//MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
 		
-		model.addAttribute("dto", dto);
+		//model.addAttribute("dto", dto);
 		return "/user/member/modify";
 	}
 
@@ -349,6 +348,7 @@ public class UserMemberController {
 	    	}
 	    	//메인 페이지 redirect로 설정 해야함
 	    	return "redirect:/";
+	    	//return "home";
 	    	
 	    }
 }

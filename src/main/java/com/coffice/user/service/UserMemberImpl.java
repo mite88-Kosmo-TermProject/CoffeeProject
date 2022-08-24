@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.StoresDTO;
 
 
 @Service
@@ -41,6 +42,7 @@ public interface UserMemberImpl {
 	public int join(MemberDTO memberDTO);
 	
 	public MemberDTO view(ParameterDTO parameterDTO);
+	public StoresDTO view2(StoresDTO storesDTO);
 	//public MemberDTO view(String mem_id);
 	public int modify(MemberDTO memberDTO);
 	

@@ -32,4 +32,61 @@
 		)
 		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
 	</select>
+	
+	<!-- 이클립스 문제인지 xml 경로를 계속 못 찾아서 일단 이쪽에 등록 해놨습니다. -->
+	<!-- 가게 정보등록 -->
+	<insert id="edit" parameterType="com.coffice.dto.StoresDTO">
+  		INSERT INTO stores (store_idx, MEM_ID, store_name, store_owner, store_notice, store_phone, store_zipcode, store_roadaddr,
+  		store_localaddr, store_latitude, store_longitude, store_sigungu, store_dong)
+  		VALUES
+  		(#{store_idx}, #{mem_id}, #{store_name}, #{store_owner}, #{store_notice}, #{store_phone}, 
+  		#{store_zipcode}, #{store_roadaddr}, #{store_localaddr}, #{store_latitude}, #{store_longitude}, #{store_sigungu}, #{store_dong})
+  	</insert>
+  	<!-- 가게 정보수정 -->
+  	<update id="cafemodify" parameterType="com.coffice.dto.StoresDTO">
+  	<![CDATA[
+  		UPDATE stores
+  			SET store_name=#{store_name}, store_owner=#{store_owner}, store_notice=#{store_notice}, store_phone=#{store_phone}, 
+  			store_localaddr=#{store_localaddr}, store_zipcode=#{store_zipcode}, 
+  			store_roadaddr=#{store_roadaddr}, store_latitude=#{store_latitude}, 
+  			store_longitude=#{store_longitude}, store_sigungu=#{store_sigungu}, store_dong=#{store_dong}
+  			WHERE mem_id=#{mem_id}
+  			]]>
+  	</update>
+  	
+  	<insert id="menuimgED" parameterType="com.coffice.dto.StoresDTO">
+  		INSERT INTO stores (store_menu , mem_id)
+  		VALUES
+  		(#{store_menu} , #{mem_id})
+  	</insert>
+  	
+  	
+  	<update id="menuimgMD" parameterType="com.coffice.dto.StoresDTO">
+  		UPDATE stores
+  			SET store_menu=#{store_menu}
+  			WHERE mem_id=#{mem_id}
+  	</update>
+  	
+  	<insert id="tagED" parameterType="com.coffice.dto.StoresDTO">
+  		INSERT INTO tag (store_tag,store_idx) values (#{store_tag},#{store_idx})
+  	</insert>
+  	
+  	<update id="tagMD" parameterType="com.coffice.dto.StoresDTO">
+  		UPDATE tag
+  			SET store_tag=#{store_tag}
+  			WHERE store_idx=#{store_idx}
+  	</update>
+  	
+  	
+  	<update id="imgMD" parameterType="com.coffice.dto.ImageDTO">
+  		UPDATE image
+  			SET image_save=#{image_save}
+  			WHERE store_idx=#{store_idx}
+  	</update>
+  	
+  	<insert id="imgED" parameterType="com.coffice.dto.ImageDTO">
+  		INSERT INTO image (image_save,store_idx) values (#{image_save},#{store_idx})
+  	</insert>
+  	
+  	
 </mapper>

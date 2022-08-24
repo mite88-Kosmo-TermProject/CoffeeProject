@@ -21,17 +21,17 @@ public class MypageController {
 	@Autowired
 	private SqlSession sqlSession;
 	// 마이페이지 메인
-	@RequestMapping(value = "/mypage/main.do", method = RequestMethod.GET)
-	public String main(Model model, HttpServletRequest req, HttpSession session) {
+	@RequestMapping(value = "/mypage/main.do", method = RequestMethod.POST)
+	public String main(Model model, HttpServletRequest req, HttpSession session, MemberDTO memberDTO ) {
 		
-		session.getAttribute("siteUserInfo.mem_id");
-		System.out.println(session.getAttribute("siteUserInfo"));
+		
+		session.getAttribute("siteUserInfo");
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setMem_id(req.getParameter("mem_id"));
 		
-	
 		MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
-		model.addAttribute("dto", dto);
+		System.out.println(dto);
+		model.addAttribute("siteUserInfo", dto);
 		return "/user/mypage/main";
 	}
 

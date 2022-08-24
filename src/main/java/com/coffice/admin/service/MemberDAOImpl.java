@@ -13,7 +13,5 @@ public interface MemberDAOImpl {
 	public MemberDTO login(String mem_id, String mem_pw, int mem_case);
 	public MemberDTO baselogin(String mem_id, String mem_pw);
 	public ArrayList<MemberDTO> Alliancelist();
-	
-//	회원리스트 가져오기
-	public ArrayList<MemberDTO> getMemberList();
+
 }

@@ -99,12 +99,15 @@
 						<!-- 내용 -->
 						<p class="mb-4">제휴신청 후 계약이 진행됩니다. 완료되면 승인이됩니다 최대7일소요됩니다</p>
 						<form id="join" class="mb-3 alliance-form" action="<%= request.getContextPath() %>/admin/alliance_Result.do" method="POST">
+
+							
 							<div class="mb-3">
 								<div class="form-group relative">
 									<input class="form-control input-lg mb-3" id="mem_id" name="mem_id"
 										placeholder="아이디" required="" type="text">
 									<i class='bx bxs-user'></i>
 								</div>
+								<small id="id_check"></small>
 							</div>
 							
 							<div class="mb-3">
@@ -136,6 +139,7 @@
 									<input class="form-control input-lg mb-3" id="mem_email" name="mem_email"
 										placeholder="이메일" required="" type="email">
 									<i class='bx bx-envelope'></i>
+									<small id="email_check"></small>
 								</div>
 							</div>
 							
@@ -150,11 +154,11 @@
 							<div class="mb-3">
 								<div class="form-group relative">
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="radio" name="mem_render" id="mem_render" value="남">
+									  <input class="form-check-input sr-only" type="radio" name="mem_gender" value="남" required>
 									  <label class="form-check-label" for="inlineRadio1">남</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="radio" name="mem_render" id="mem_render" value="여">
+									  <input class="form-check-input sr-only" type="radio" name="mem_gender" value="여" >
 									  <label class="form-check-label" for="inlineRadio2">여</label>
 									</div>
 
@@ -162,7 +166,8 @@
 								</div>
 							</div>
 							
-							<button type="submit" class="btn btn-primary d-grid w-100">신청하기</button>
+							
+							<button type="button" id="join_btn" class="btn btn-primary d-grid w-100">신청하기</button>
 							
 							
 						</form>
@@ -209,10 +214,38 @@
 
 	<script type="text/javascript">
 	$(function(){
+		var url_origin = $(location).attr('origin');
+		
 		var idResult = "";
 		var emailResult = "";
-		$("#join").submit(function(){
-			if($("#mem_pw").val() !== $("#mem_pw2").val()){
+		$("#join_btn").click(function(){
+			if($("#mem_id").val()==""){
+				alert("아이디를 입력 해주세요.")
+				$("#mem_id").focus();
+				return false;
+			}else if($("#mem_pw").val()=="" || $("#mem_pw2").val()==""){
+				alert("비밀번호를 입력 해주세요.")
+				$("#mem_pw").focus();
+				return false;
+			} else if($("#mem_name").val()==""){
+				alert("이름을 입력 해주세요.")
+				$("#mem_name").focus();
+				return false;
+			} else if($("#mem_email").val()==""){
+				alert("이메일을 입력 해주세요.")
+				$("#mem_email").focus();
+				return false;
+			} else if($("#mem_phone").val()==""){
+				alert("휴대폰번호를 입력 해주세요.")
+				$("#mem_phone").focus();
+				return false;
+			}
+			else if(!$('input:radio[name=mem_gender]').is(':checked')){
+				alert("성별을 선택해주세요");
+				return false;
+			}
+			//비밀번호
+			else if($("#mem_pw").val() !== $("#mem_pw2").val()){
 				alert("비밀번호가 다릅니다.");
 				$("#mem_pw").val("").focus();
 				$("#mem_pw2").val("");
@@ -221,20 +254,19 @@
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#mem_pw").val("").focus();
 				return false;
-			}else if($("#mem_id").val()=="" || $("#mem_email").val()==""){
-				alert("아이디 혹은 이메일을 입력 해주세요.")
-				$("#mem_id").focus();
-				return false;
 			}
-			else if($.trim($("#mem_pw").val()) !== $("#mem_pw").val() || $.trim($("#mem_email").val()) !== $("#mem_email").val() || $.trim($("#mem_id").val()) !== $("#mem_id").val()){
-				alert("공백은 입력이 불가능합니다.");
-				return false;
+			
+			console.log(emailResult);
+			if(idResult=='Y' && emailResult=='Y' ){
+				alert("신청이 완료 되었습니다.");
+				//return false;
+				$('#join').submit();
 			}
 		})
 		
 		$("#mem_id").keyup(function() {
 			$.ajax({
-				url : "./member/idCheck.do",
+				url : url_origin+"/CoffeeProject/member/idCheck.do",
 				type : "POST",
 				data : {
 					mem_id : $("#mem_id").val()

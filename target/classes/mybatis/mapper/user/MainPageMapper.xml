@@ -48,7 +48,7 @@
 	</resultMap>
 
 <select id="getList" resultType="com.coffice.dto.StoresDTO">
-	SELECT store_idx, store_name, store_owner, store_phone,store_localaddr
+	SELECT store_idx, store_name, store_owner, store_phone,store_localaddr, store_menu
 	 FROM (SELECT Tb.*, rownum rNum FROM(SELECT * 
 	FROM stores ORDER BY store_idx DESC
 			)Tb

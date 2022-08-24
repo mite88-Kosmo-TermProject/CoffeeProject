@@ -38,7 +38,6 @@
 </head>
 
 <body>
-
 <!-- Spinner Start -->
 	<div id="spinner"
 		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -73,12 +72,20 @@
 				<a href="<%=request.getContextPath() %>/community/boardList.do" class="nav-item nav-link">게시판</a>
 				<c:if test="${sessionScope.siteUserInfo!=null}">
                <span style="float:right;">
-                  <a href="<%=request.getContextPath() %>/mypage/main.do?" class="nav-item nav-link">마이페이지</a>
+               <form action="<%=request.getContextPath() %>/mypage/main.do" method="POST" class="nav-item nav-link">
+               <button type="submit">
+               	마이페이지
+               </button>
+               	<input type="hidden" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
+               </form>
+                  <%-- <a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a> --%>
                </span>
            		</c:if>
+           		<c:if test="${sessionScope.siteUserInfo!=null}">
                <span style="float:right;">
                   <a href="<%=request.getContextPath() %>/order/subPay.do" class="nav-item nav-link">패스구매</a>
                </span>
+           		</c:if>
 				
 				
 				

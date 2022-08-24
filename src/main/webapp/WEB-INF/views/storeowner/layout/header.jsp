@@ -126,9 +126,19 @@
 						</a>
 						<ul class="menu-sub">
 							<li class="menu-item">
-								<a href="<%= request.getContextPath() %>/storeowner/cafe/edit.do" class="menu-link">
+								<form action="<%=request.getContextPath() %>/storeowner/cafe/edit.do" method="POST" class="menu-link">
+					               <button type="submit" class="menu-link">
+					               	카페정보
+					               </button>
+					               	<input type="hidden" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
+					            </form>
+							
+							
+							
+								<%-- <a href="<%= request.getContextPath() %>/storeowner/cafe/edit.do?=${siteUserInfo.mem_id}" class="menu-link">
 									카페정보
-								</a>
+									<input type="hidden" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
+								</a> --%>
 							</li>
 							
 							<li class="menu-item">
