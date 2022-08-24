@@ -10,5 +10,6 @@
 		Select * from stores where store_idx=#{store_idx}
 
 	</select>
+	
 
 </mapper>

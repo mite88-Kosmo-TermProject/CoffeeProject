@@ -69,10 +69,34 @@ function getCafeList(list){
               dataType : 'json',
               success : function (data) {
                  let tableData="";
-               console.log("콜백성공"+data);
-               console.log(data[0].review_idx);
+               //console.log("콜백성공"+data);
+               //console.log(data[0].review_idx);
+               var user = data.user;
+               console.log(user);
+               var check_like = data.check_like;
+               console.log(check_like);
+               
                /*append 부분*/
-               $(data).each(function (index, data) {
+               $(data.lists).each(function (index, data) {
+               var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
+               var color = "black";
+               for(var i =0; i<check_like.length; i++){
+               		if(check_like[i].review_idx == data.review_idx){
+               			console.log(check_like[i].review_idx+"==="+ data.review_idx);
+               			color = "red";
+               			break;
+               		}
+               }
+               
                if(data.imageDTO.image_save!=null){
                   var files = data.imageDTO.image_save.split("/");
                   console.log(files[0]);
@@ -80,33 +104,34 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +      '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
                      +          '<p>다이아</p>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
                            <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
-                     +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
+                     +        '<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" '
                      +          'class="img-fluid"'
                      +          'data-lightbox="example-set">'
-                     +          '<img src="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473"'
+                     +          '<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
                      +        '</a>'
                      +        '<a style="display: none"'
-                     +         'href="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
+                     +         'href="../resources/img/review/'+files[1]+'?width=592&amp;height=473"'
                      +         'class="img-fluid"'
                      +         'data-lightbox="example-set">'
-                     +          '<img src="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
+                     +          '<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
                      +        '</a>'
@@ -115,21 +140,23 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
                              <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +        '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
-                     +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
-                     +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
-                     +          '<small>100</small></span></div></div>'
+                     +         'onclick="heart(this)"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
          
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -140,7 +167,7 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +      '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -148,25 +175,25 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
                            <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
-                     +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
+                     +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
                      +          'class="img-fluid"'
                      +          'data-lightbox="example-set">'
-                     +          '<img src="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473"'
+                     +          '<img src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
                      +        '</a>'
                      +        '<a style="display: none"'
-                     +         'href="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
+                     +         'href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
                      +         'class="img-fluid"'
                      +         'data-lightbox="example-set">'
-                     +          '<img src="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
+                     +          '<img src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
                      +        '</a>'
@@ -174,22 +201,24 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                             <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+							//like에 보낼 리뷰 idx 값(정순만)
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
+                     +        '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
-                     +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
-                     +          '<small>100</small></span></div></div>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -213,44 +242,66 @@ function getCafeList(list){
               dataType : 'json',
               success : function (data) {
                  let tableData="";
-               console.log("콜백성공"+data);
-               console.log(data[0].review_idx);
+               //console.log("콜백성공"+data);
+               //console.log(data[0].review_idx);
+               var user = data.user;
+               var check_like = data.check_like;
                /*append 부분*/
-               $(data).each(function (index, data) {
-                if(data.imageDTO.image_save!=null){
+               $(data.lists).each(function (index, data) {
+                var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
+               var color = "black";
+               for(var i =0; i<check_like.length; i++){
+               		if(check_like[i].review_idx == data.review_idx){
+               			console.log(check_like[i].review_idx+"==="+ data.review_idx);
+               			color = "red";
+               			break;
+               		}
+               }
+               
+               if(data.imageDTO.image_save!=null){
                   var files = data.imageDTO.image_save.split("/");
                   console.log(files[0]);
                    tableData +=""
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +      '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
                      +          '<p>다이아</p>'
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
                            <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
-                     +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
+                     +        '<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" '
                      +          'class="img-fluid"'
                      +          'data-lightbox="example-set">'
-                     +          '<img src="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473"'
+                     +          '<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
                      +        '</a>'
                      +        '<a style="display: none"'
-                     +         'href="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
+                     +         'href="../resources/img/review/'+files[1]+'?width=592&amp;height=473"'
                      +         'class="img-fluid"'
                      +         'data-lightbox="example-set">'
-                     +          '<img src="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
+                     +          '<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
                      +        '</a>'
@@ -259,21 +310,22 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
                              <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +        '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
-                     +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
-                     +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
-                     +          '<small>100</small></span></div></div>'
+                     +         'onclick="heart(this)"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -284,7 +336,7 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                     +      '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -292,25 +344,25 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
                            <!-- 사진 -->
                      +      '<figure class="photoSet" data-count="2">'
-                     +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
+                     +        '<a href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473" '
                      +          'class="img-fluid"'
                      +          'data-lightbox="example-set">'
-                     +          '<img src="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473"'
+                     +          '<img src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
                      +        '</a>'
                      +        '<a style="display: none"'
-                     +         'href="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
+                     +         'href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
                      +         'class="img-fluid"'
                      +         'data-lightbox="example-set">'
-                     +          '<img src="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
+                     +          '<img src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
                      +        '</a>'
@@ -318,22 +370,24 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                             <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+							//like에 보낼 리뷰 idx 값(정순만)
+                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
+                     +        '<img src="../resources/img/KakaoTalk_20220822_214450862.jpg"/>'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      +        '<i class="far fa-heart fa-lg"'
                      +        'id="heart"'
                      +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
-                     +'<i class="far fa-thumbs-up fa-lg" onclick="like()"></i>'
-                     +          '<small>100</small></span></div></div>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
+                     +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -341,7 +395,6 @@ function getCafeList(list){
                   }
                });
                $('#show_data').append(tableData);
-               
             },
               error : function (err) {
                console.log("에러발생" + err.status);

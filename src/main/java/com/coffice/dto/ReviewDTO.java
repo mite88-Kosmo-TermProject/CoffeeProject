@@ -1,6 +1,7 @@
 package com.coffice.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -19,6 +20,8 @@ public class ReviewDTO {
 	
 	private ImageDTO imageDTO;
 	
+	private ArrayList<HeartDTO> hearts = new ArrayList<>();
+	
 	private String review_star;
 	
 	private String review_img;
@@ -26,5 +29,8 @@ public class ReviewDTO {
 	private String store_idx;
 	
 	private String mem_id;
-
+	
+	private String mem_nickname;
+	
+	private int like_hit;
 }

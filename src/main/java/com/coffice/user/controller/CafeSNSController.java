@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.coffice.dto.HeartDTO;
 import com.coffice.dto.ImageDTO;
 import com.coffice.dto.ParameterDTO;
 import com.coffice.dto.ReviewDTO;
@@ -36,7 +38,7 @@ public class CafeSNSController {
 	public String writePage(HttpServletRequest req ,Model model) {
 		String idx = req.getParameter("store_idx");
 		model.addAttribute("idx",idx);
-		System.out.println(idx);
+//		System.out.println(idx);
 		return "/user/cafeSNS/write";
 	}
 	
@@ -48,13 +50,17 @@ public class CafeSNSController {
 		return uuid;
 	}
 	/*리뷰작성 페이지*/
-	@ResponseBody
-	@PostMapping("/cafeSNS/write.do")
+	@RequestMapping(value = "/cafeSNS/write.do", method = RequestMethod.POST)
 	public String uploadReview(Model model , MultipartHttpServletRequest req) {
 		
 		//다운로드 경로
-//		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
-		String path = "C:/Users/jungs/git/CoffeeProject/src/main/webapp/resources/img/review";
+		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
+		System.out.println("경로"+ path);
+//		세션 값가져오기 위해 넣은것(정순만)
+		HttpSession session = req.getSession();
+		String user = String.valueOf(session.getAttribute("user_id")) ;
+//		System.out.println(user);
+//		String path = "C:/Users/jungs/git/CoffeeProject/src/main/webapp/resources/img/review";
 		MultipartFile mfile = null;
 		List<Object> resultList = new ArrayList<Object>();
 		try {
@@ -71,7 +77,8 @@ public class CafeSNSController {
 			reviewDTO.setReview_content(content);
 			reviewDTO.setStore_idx(idx);
 			reviewDTO.setReview_star(star);
-			System.out.println(reviewDTO);
+			reviewDTO.setMem_id(user);
+//			System.out.println(reviewDTO);
 			int writeReview = sqlSession.getMapper(CafeSNSImpl.class).insert(reviewDTO);
 //			System.out.println("리뷰작성완료 개수"+writeReview);
 			int review_idx = sqlSession.getMapper(CafeSNSImpl.class).getIdx(reviewDTO);
@@ -96,20 +103,20 @@ public class CafeSNSController {
 				//물리적경로에 새롭게 생성된 파일명으로 저장한다. 
 				mfile.transferTo(new File(path + File.separator + saveFileName));
 				if(imgfiles.equals("")) {
-					imgfiles += saveFileName;
+					imgfiles += saveFileName+"/";
 				}
 				else {
-					imgfiles += "/"+saveFileName;
+					imgfiles += saveFileName;
 				}
 			}
-			System.out.println(imgfiles);
+//			System.out.println(imgfiles);
 			ImageDTO imageDTO = new ImageDTO();
 			imageDTO.setReview_idx(review_idx);
 			imageDTO.setStore_idx(idx);
 			imageDTO.setImage_save(imgfiles);
-			System.out.println(imageDTO);
+//			System.out.println(imageDTO);
 			int image_insert = sqlSession.getMapper(CafeSNSImpl.class).imgInsert(imageDTO);
-			System.out.println("이미지삽입완료:"+image_insert);
+//			System.out.println("이미지삽입완료:"+image_insert);
 //			System.out.println(resultList);
 		}		 
 		catch(Exception e) {
@@ -117,7 +124,7 @@ public class CafeSNSController {
 		}
 		//필요한 정보를 Model에 저장한 후 View반환
 		model.addAttribute("resultList", resultList);
-		return "view";
+		return "/user/cafeSNS/review";
 	}
 	
 	/*카페SNS페이지 연결*/
@@ -131,7 +138,7 @@ public class CafeSNSController {
 	@ResponseBody
 	@RequestMapping("/cafeSNS/getList.do")
 	public ArrayList<ReviewDTO> getCafeList() {
-		System.out.println("controller 연결성공");
+//		System.out.println("controller 연결성공");
 		ArrayList<ReviewDTO> getCafeList = sqlSession.getMapper(CafeSNSImpl.class).list();
 		//내용 부분 줄바꿈 처리를 해준다.
 		for(ReviewDTO dto : getCafeList) {
@@ -144,24 +151,33 @@ public class CafeSNSController {
 	}
 	@ResponseBody
 	@RequestMapping(value =  "/cafeSNS/newcafelist" , method = RequestMethod.POST)
-	public ArrayList<ReviewDTO> pagingCafeList(HttpServletRequest req 
+	public Map<String, Object> pagingCafeList(HttpServletRequest req 
 			,@RequestParam(value = "list[]")ArrayList<String> review_idx
 			,Model model) {
 		
-		System.out.println(review_idx);
+		//유저값을 넘겨받아 좋아요 체크한 게시물 확인 기능
+		HttpSession session = req.getSession();
+		String user = String.valueOf(session.getAttribute("user_id"));
+//		System.out.println(user);
+		ArrayList<HeartDTO> check_like = sqlSession.getMapper(CafeSNSImpl.class).check_like(user);
+//		System.out.println("check_like : "+check_like);
+		
+		
+		
+//		System.out.println(review_idx);
 		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		ParameterDTO parameterDTO = new ParameterDTO();
 		parameterDTO.setReview_idx(review_idx);
 		int totalRecordCount =
 				sqlSession.getMapper(CafeSNSImpl.class).getTotalCount(parameterDTO);
 		
-		System.out.println(totalRecordCount);
+//		System.out.println(totalRecordCount);
 		int pageSize = 10;
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);
 		int nowPage = req.getParameter("nowPage")==null ? 1 : Integer.parseInt(req.getParameter("nowPage"));
 		int start = (nowPage -1) * pageSize +1;
 		int end = nowPage * pageSize;
-		System.out.println(nowPage);
+//		System.out.println(nowPage);
 		parameterDTO.setStart(start);
 		parameterDTO.setEnd(end);
 		
@@ -170,9 +186,15 @@ public class CafeSNSController {
 		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-			/* System.out.println(dto); */
+			System.out.println(dto); 
 		}
-		System.out.println(lists);
-		return lists;
+		Map<String, Object> map = new HashMap<>();
+//		System.out.println(lists);
+		
+		map.put("user", user);
+		map.put("check_like", check_like);
+		map.put("lists",lists);
+		
+		return map;
 	}
 }

@@ -13,7 +13,17 @@
 
 <!-- Go Trip -->
 <!-- Go Trip CSS  -->
-
+<style type="text/css">
+#profile {
+        height: 50px;
+        width: 15%;
+        border-radius: 100%;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 1;
+      }
+</style>
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/resources/css/main.css">
 
@@ -171,7 +181,6 @@
 				<h1 class="display-6 mb-5">이달의 카페</h1>
 			</div>
 			<div class="row g-4">
-			
 			<c:forEach items="${mainCafeList }" var="cafe" varStatus="loop">
 			
 				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -329,40 +338,82 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title text-center">
-						<h1 class="display-6 mb-5">인플루언서 STORY</h1>
+						<h1 class="display-6 mb-5">좋아요 많이 받은 리뷰</h1>
 					</div>
 				</div>
 			</div>
 			<div class="row">
+			<c:forEach items='${review_list }' var="lists" >
+				<c:forTokens items="" delims=""></c:forTokens>
 				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
 					data-wow-delay="0.6s">
 					<div class="single-place mb-30">
 						<div class="place-img">
-							<img
-								src="<%=request.getContextPath()%>/resources/assets/img/service/services1.jpg"
-								alt="">
+							 <img
+								src="<%=request.getContextPath()%>/resources/img/review/${lists.img}"
+								alt=""> 
 						</div>
 						<div class="place-cap">
 							<div class="place-cap-top">
-								<span><i class="fas fa-star"></i><span>50</span> </span>
+								<span style="text-align: left;">
+								<c:choose>
+									<c:when test="${lists.star eq 1 }">
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+									</c:when>
+									<c:when test="${lists.star eq 2 }">
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+									</c:when>
+										<c:when test="${lists.star eq 3 }">
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+									</c:when>
+									<c:when test="${lists.star eq 4 }">
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="far fa-star" style="color: orange;"></i>
+									</c:when>
+									<c:when test="${lists.star eq 5 }">
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+										<i class="fas fa-star" style="color: orange;"></i>
+									</c:when>
+								</c:choose>
+								</span>
 								<h3>
-									<a href="#">The Dark Forest Adventure</a>
+									<a href="#"><c:out value="${lists.store_name}"/></a>
 								</h3>
 								<p class="dolor">
 									<!-- $1870 -->
-									<span>#제주공항근처카페 #감성카페 #디저트카페</span>
+									<img id="profile" src="<%=request.getContextPath()%>/resources/img/KakaoTalk_20220822_214450862.jpg"/>
+									<span>${lists.mem_id }</span>
 								</p>
 							</div>
 							<div class="place-cap-bottom">
 								<ul>
-									<li>기본음료_아메리카노음료</li>
-									<li>변경 가능_2천원 할인</li>
+									<li><c:out value="${lists.content }"></c:out></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
+			</c:forEach> 
+				
+				<%-- <div class="col-xl-4 col-lg-4 col-md-6 mb-3 wow fadeInUp"
 					data-wow-delay="0.7s">
 					<div class="single-place mb-30 wow fadeInUp" data-wow-delay="0.10s">
 						<div class="place-img">
@@ -501,7 +552,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coffice.dto.HeartDTO;
+import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.ReviewDTO;
 import com.coffice.dto.SearchDTO;
 import com.coffice.user.service.CafeImpl;
+import com.coffice.user.service.CafeSNSImpl;
 
 import util.PagingUtil;
 
@@ -152,16 +158,45 @@ public Map<String, Object> responseBodyView(HttpServletRequest req){
 	@RequestMapping(value = "/cafe/info.do", method = RequestMethod.GET)
 	public  String cafeinfo(HttpServletRequest req, HttpServletResponse resp, Model model) throws Exception {
 		
+		
+		
 		int store_idx = Integer.parseInt(req.getParameter("store_idx"));
 		cafeImpl = sqlSession.getMapper(CafeImpl.class);
-		 List<StoresDTO> resultList = cafeImpl.getCafeData(store_idx);
+		List<StoresDTO> resultList = cafeImpl.getCafeData(store_idx);
 		 
-		 System.out.println("!!"+resultList);
+//		 System.out.println("!!"+resultList);
 		 
-		System.out.println("!!"+store_idx);
+//		System.out.println("!!"+store_idx);
 
+		
+		
+		
 		model.addAttribute("resultList", resultList);
+		
 		return "/user/cafe/info";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/cafe/view/review.do" , method = RequestMethod.POST)
+	public Map<String, Object> review_info(HttpServletRequest req, @RequestParam(value = "store_idx")int store_idx) {
+		
+		System.out.println(store_idx);
+		HttpSession session = req.getSession();
+		String user = String.valueOf(session.getAttribute("user_id")) ;
+		
+		ArrayList<HeartDTO> check_like = sqlSession.getMapper(CafeSNSImpl.class).check_like(user);
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setStore_idx(store_idx);
+		ArrayList<ReviewDTO> lists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+		
+//		System.out.println(review_list);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("user", user);
+		map.put("check_like", check_like);
+		map.put("review_list",lists);
+		
+		System.out.println(map);
+		return map;
 	}
 
 }

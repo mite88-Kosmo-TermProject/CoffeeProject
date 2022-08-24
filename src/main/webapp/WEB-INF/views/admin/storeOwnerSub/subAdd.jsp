@@ -45,10 +45,15 @@
 			                      <small class="text-muted float-end">Default label</small>
 			                    </div>
 			                    <div class="card-body">
-			                      <form>
+			                      <form action="../../admin/storeOwnerSub/subAddAction.do" name="addSubForm" method="post">
 			                        <div class="mb-3">
 			                          <label class="form-label" for="basic-default-fullname">구독권 이름</label>
-			                          <input type="text" class="form-control" id="basic-default-fullname" placeholder="Coffee Pass 30잔" />
+			                          <input 
+			                          	  type="text" 
+				                          class="form-control" 
+				                          id="basic-default-fullname" 
+				                          name="subName"
+				                          placeholder="Coffee Pass 30잔" />
 			                        </div>
                                     <div class="mb-3">
 			                          <label class="form-label" for="basic-icon-default-company">구독권 가격</label>
@@ -60,32 +65,30 @@
 			                              type="text"
 			                              id="basic-icon-default-company"
 			                              class="form-control"
+			                              name="subPrice"
 			                              placeholder="30000"
 			                              aria-label="ACME Inc."
 			                              aria-describedby="basic-icon-default-company2"
 			                            />
 			                          </div>
 			                        </div>
-			                     <!--    <div class="mb-3">
-			                          <label class="form-label" for="basic-default-company">구독권 가격</label>
-			                          <input type="text" class="form-control" id="basic-default-company" placeholder="30000" />
-			                        </div> -->
 			                        <div class="mb-3">
-			                          <label class="form-label" for="basic-default-email">Email</label>
+			                          <label class="form-label" for="basic-default-email">커피잔</label>
 			                          <div class="input-group input-group-merge">
 			                            <input
-			                              type="text"
+			                              type="number"
 			                              id="basic-default-email"
 			                              class="form-control"
-			                              placeholder="john.doe"
+			                              name="subCoffeeNum"
+			                              placeholder="30"
 			                              aria-label="john.doe"
 			                              aria-describedby="basic-default-email2"
 			                            />
-			                            <span class="input-group-text" id="basic-default-email2">@example.com</span>
-			                          </div>
-			                          <div class="form-text">You can use letters, numbers & periods</div>
+			                            <span class="input-group-text" id="basic-default-email2">30일동안 사용가능한 커피잔 수</span>
+			                        	</div>
+			                          	<div class="form-text">숫자만 입력가능합니다.</div>
 			                        </div>
-			                        <div class="mb-3">
+			                        <!-- <div class="mb-3">
 			                          <label class="form-label" for="basic-default-phone">Phone No</label>
 			                          <input
 			                            type="text"
@@ -101,7 +104,7 @@
 			                            class="form-control"
 			                            placeholder="Hi, Do you have a moment to talk Joe?"
 			                          ></textarea>
-			                        </div>
+			                        </div> -->
 			                        <button type="submit" class="btn btn-primary">구독권 추가</button>
 			                      </form>
 			                    </div>
