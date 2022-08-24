@@ -8,7 +8,7 @@ public class ImageDTO {
 
 	private String image_idx;
 	private String review_idx;
-	private String store_idx;
+	private int store_idx;
 	private String image_origin;
 	private String image_save;
 	private Date image_postdate;

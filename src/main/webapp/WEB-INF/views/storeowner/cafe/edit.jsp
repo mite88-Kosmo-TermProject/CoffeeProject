@@ -147,6 +147,13 @@ input[type=checkbox] {
 													<div class="col-md-10">
 														<input class="form-control" type="file" id="store_menu" name="file" >
 													</div>
+												</div> 
+												<div class="mb-3 row">
+													<label for="html5-text-input"
+														class="col-md-2 col-form-label">가게 이미지</label>
+													<div class="col-md-10">
+														<input class="form-control" type="file" id="store_menu" name="multiFile" multiple="multiple" >
+													</div>
 												</div>
 
 												<h5 class="mb-3">키워드</h5>

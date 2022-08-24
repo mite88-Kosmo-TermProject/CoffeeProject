@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.coffice.dto.ImageDTO;
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.SearchDTO;
 import com.coffice.dto.StoresDTO;
@@ -29,6 +30,9 @@ public interface CafeImpl {
 	
 	public int tagMD(StoresDTO storesDTO);
 	public int tagED(StoresDTO storesDTO);
+	
+	public int imgMD(ImageDTO imageDTO);
+	public int imgED(ImageDTO imageDTO);
 
 }
 

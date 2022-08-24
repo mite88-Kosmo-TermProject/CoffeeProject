@@ -81,5 +81,16 @@
   	</update>
   	
   	
+  	<update id="imgMD" parameterType="com.coffice.dto.ImageDTO">
+  		UPDATE image
+  			SET image_save=#{image_save}
+  			WHERE store_idx=#{store_idx}
+  	</update>
+  	
+  	<insert id="imgED" parameterType="com.coffice.dto.ImageDTO">
+  		INSERT INTO image (image_save,store_idx) values (#{image_save},#{store_idx})
+  	</insert>
+  	
+  	
   	
 </mapper>
