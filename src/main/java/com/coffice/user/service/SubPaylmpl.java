@@ -12,7 +12,7 @@ import com.coffice.dto.SubscriptionDTO;
 public interface SubPaylmpl {
 	
 	//결제정보 입력
-	public int payment_info(SubPayDTO subPayDTO);
+	public int paymentInfo(SubPayDTO subPayDTO);
 	//구독권 리스트 가져오기
 	public ArrayList<SubscriptionDTO> subList();
 	//회원정보 가져오기

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.coffice.user.service.CafeImpl">
+
+	<!-- <insert id="edit" parameterType="com.coffice.dto.StoresDTO">
+  		INSERT INTO member (MEM_ID, store_name, store_owner, store_notice,
+  		store_img, store_localaddr)
+  		VALUES
+  		(#{mem_id}, #{store_name}, #{store_owner}, #{store_notice}, 
+  		#{store_localaddr})
+  	</insert> -->
+
+</mapper>

@@ -341,15 +341,15 @@ p.txt:before {
 
 				<div class="row content">
 					<!-- 이미지 -->
-
+					
 					<div class="col-md-4">
 						<div class="owl-carousel">
-
-							<c:forEach items="${fn:split(resultList.store_menu,',') }"
+							
+							<c:forEach items="${fn:split(resultList.store_img,',') }"
 								var="loopImg" varStatus="loop">
 								<div class="item">
 									<img class="img-fluid" id="code_${loop.index }"
-										src="<%=request.getContextPath()%>/resources/img/stores/${loopImg}"
+										src="<%=request.getContextPath()%>/resources/img/stores/${loopImg}.jpg"
 										alt="">
 								</div>
 							</c:forEach>

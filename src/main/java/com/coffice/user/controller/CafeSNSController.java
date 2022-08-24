@@ -65,7 +65,7 @@ public class CafeSNSController {
 		MultipartFile mfile = null;
 		List<Object> resultList = new ArrayList<Object>();
 		
-		String Store_idx =""; //redirect용
+		int Store_idx =0; //redirect용
 		try {
 			//게시물 idx 얻기
 			String idx = req.getParameter("idx");
@@ -114,8 +114,8 @@ public class CafeSNSController {
 			}
 //			System.out.println(imgfiles);
 			ImageDTO imageDTO = new ImageDTO();
-			imageDTO.setReview_idx(review_idx);
-			imageDTO.setStore_idx(idx);
+			imageDTO.setReview_idx(String.valueOf(review_idx));
+			imageDTO.setStore_idx(Integer.valueOf(idx));
 			imageDTO.setImage_save(imgfiles);
 //			System.out.println(imageDTO);
 			int image_insert = sqlSession.getMapper(CafeSNSImpl.class).imgInsert(imageDTO);
@@ -137,6 +137,7 @@ public class CafeSNSController {
 				//전체를 더해 나눕시다 ㅇㅁㅇ
 				System.out.print(rdto.getReview_star()+"/");
 				star_num += Integer.valueOf(rdto.getReview_star());
+				star_total++;
 			}
 			
 			

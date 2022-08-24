@@ -29,6 +29,8 @@ public class StoresDTO {
 	private int store_afltd;
 	private String store_menu_img;
 	private String store_time;
+	private String store_addr;
 	private String store_img;
-	
+	private String store_tag;
+	private String store_zipcode;
 }

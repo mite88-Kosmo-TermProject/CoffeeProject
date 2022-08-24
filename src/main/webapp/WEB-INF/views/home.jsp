@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
@@ -151,8 +150,7 @@
 					<div class="service-item h-100  border border-5 border-light border-top-0">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/stores/${cafe.store_img }.jpg"
-								alt="">
+								src="<%=request.getContextPath()%>/resources/img/stores/${cafe.store_img }.jpg" alt="">
 						</div>
 						<div class="p-4">
 							<h4 class="mb-3 text-center">${cafe.store_name }</h4>

@@ -11,22 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coffice.dto.MemberDTO;
+import com.coffice.dto.ParameterDTO;
 import com.coffice.user.service.UserMemberImpl;
+
 
 @Controller
 public class MypageController {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
 	// 마이페이지 메인
-	@RequestMapping(value = "/mypage/main.do", method = RequestMethod.GET)
-	public String main(HttpServletRequest req ,Model model, HttpSession session) {
-		String mem_id = (String) session.getAttribute("user_id");
-		MemberDTO memberDTO = sqlSession.getMapper(UserMemberImpl.class).view_one(mem_id);
+	@RequestMapping(value = "/mypage/main.do", method = RequestMethod.POST)
+	public String main(Model model, HttpServletRequest req, HttpSession session, MemberDTO memberDTO ) {
 		
-		model.addAttribute("memberDTO", memberDTO);
-
+		
+		session.getAttribute("siteUserInfo");
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setMem_id(req.getParameter("mem_id"));
+		
+		MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
+		System.out.println(dto);
+		model.addAttribute("siteUserInfo", dto);
 		return "/user/mypage/main";
 	}
 

@@ -17,6 +17,7 @@
 <body>
 	
 	<!-- content -->
+	test
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>

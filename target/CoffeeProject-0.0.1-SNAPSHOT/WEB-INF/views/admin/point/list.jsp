@@ -10,6 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,17 +60,24 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><input type="text" name="1" class="form-control"></td>
-													<td><input type="text" name="2" class="form-control"></td>
-													<td><input type="text" name="3" class="form-control"></td>
-													<td> <button class="btn btn-outline-primary">Save</button></td>
+													<td><input type="text" name="user" class="form-control"></td>
+													<td><input type="text" name="point" class="form-control"></td>
+													<td>
+														<select class="form-select" aria-label="Default select example" id="select" onchange="insertPoint();">
+															<option value="1">회원가입</option>
+															<option value="2">리뷰작성</option>
+															<option value="3">추천인</option>
+															<option value="4">리뷰삭제</option>
+														</select>
+													</td>
+													<td> <button class="btn btn-outline-primary" onclick="insertPoint();">Save</button></td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
-
+	
 									<!-- table 샘플입니다 ㅇㅊㅇ -->
-									<%@ include file="/WEB-INF/views/admin/table_sample.jsp"%>
+									<%@ include file="/WEB-INF/views/admin/table_point.jsp"%>
 
 								</div>
 							</div>
@@ -101,28 +109,60 @@
 	<!-- https://hankong.tistory.com/19 -->
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+		
+		
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/admin/js/pointList.js"></script>
 
-	<script type="text/javascript">
-		$(function() {
-			$('#example').DataTable({
-				dom : 'Bfrtip',
-				buttons : [ {
-					extend : 'excel',
-					text : '엑셀출력',
-					filename : '엑셀파일명',
-					title : '엑셀파일 안에 쓰일 제목'
-				}, {
-					extend : 'copy',
-					text : '클립보드 복사',
-					title : '클립보드 복사 내용'
-				}, {
-					extend : 'csv',
-					text : 'csv출력',
-					filename : 'utf-8이라서 ms엑셀로 바로 열면 글자 깨짐'
-				}, ]
-			});
-		})
-	</script>
+<script type="text/javascript">
+function deletecheckval(){
+	var checkedval= [];
+	var val = document.querySelectorAll('input[name="check"]:checked');
+	for(let i =0; i<val.length; i++){
+		checkedval.push(val[i].value);
+	}
+	JSON.stringify(checkedval);
+	console.log(checkedval);
+	$.ajax({
+		url:'../../admin/point/deletePoint.do',
+		data:{"values":JSON.stringify(checkedval)},
+		success:function(){
+			$('#example').DataTable().destroy();
+			makeJqueryTable(null);
+			alert("삭제완료");
+		},
+		error:function(msg){
+			console.error(msg);
+		}
+	})
+	} 
+function insertPoint() {
+	var user = document.getElementsByName("user")[0];
+	var point = document.getElementsByName("point")[0];
+	var select = document.querySelector("select");
+	var selectedindex = select.selectedIndex;
+	var selectedvalue = select.options[selectedindex].value
+	console.log(selectedvalue);
+
+	$.ajax({
+		url:'../../admin/point/insertPoint.do',
+		data:{"user":user.value, 
+			  "point":point.value,
+			  "select":selectedvalue
+			},
+			success:function(){
+				user.value = "";
+			  	point.value = "";
+			 	selectedvalue = "";
+				$('#example').DataTable().destroy();
+				makeJqueryTable(null);
+			}
+		
+
+	})
+	
+}
+</script>
+
 </body>
 
 </html>
