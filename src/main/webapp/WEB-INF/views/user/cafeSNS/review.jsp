@@ -35,7 +35,8 @@ pageEncoding="UTF-8"%>
 }
 
 .username img {
-	height: 50px;
+	width: 50px;
+    height: auto;
 	border-radius: 100%;
 	grid-row-start: 1;
 	grid-row-end: 3;
@@ -247,6 +248,8 @@ span#like small {
           disableScrolling: false,
           fitImagesInViewport: false,
         });
+        
+
       });
     </script>
     <!-- footer -->

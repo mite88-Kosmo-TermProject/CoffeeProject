@@ -182,14 +182,15 @@ public class CafeSNSController {
 		parameterDTO.setEnd(end);
 		
 		ArrayList<ReviewDTO> lists = sqlSession.getMapper(CafeSNSImpl.class).getnewList(parameterDTO);
-		
+
 		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
+			
 			/* System.out.println(dto); */
 		}
 		Map<String, Object> map = new HashMap<>();
-//		System.out.println(lists);
+		System.out.println(lists);
 		
 		map.put("user", user);
 		map.put("check_like", check_like);

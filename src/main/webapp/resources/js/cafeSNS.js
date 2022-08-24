@@ -1,3 +1,4 @@
+
 var nowPage=1;
 //거리 계산해주는 함수...
 
@@ -98,13 +99,15 @@ function getCafeList(list){
                }
                
                if(data.imageDTO.image_save!=null){
+				console.log(data);
+	
                   var files = data.imageDTO.image_save.split("/");
                   console.log(files[0]);
                    tableData +=""
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -113,7 +116,7 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
@@ -140,7 +143,7 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
                              <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      //+        '<i class="far fa-heart fa-lg"'
@@ -167,7 +170,7 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -175,7 +178,7 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
@@ -203,7 +206,7 @@ function getCafeList(list){
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                     // +        '<i class="far fa-heart fa-lg"'
@@ -274,7 +277,7 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -283,7 +286,7 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
@@ -310,7 +313,7 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
                              <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      //+        '<i class="far fa-heart fa-lg"'
@@ -336,7 +339,7 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
@@ -344,7 +347,7 @@ function getCafeList(list){
                      +        '</div>'
                      +      '</span>'
                      +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
+                     +        '<b>'+data.memberDTO.mem_nickname+'</b>'
                      +           '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
@@ -372,7 +375,7 @@ function getCafeList(list){
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                      +        '<b>'+data.storesDTO.store_name+'</b> </span>'
                      //+        '<i class="far fa-heart fa-lg"'
@@ -400,6 +403,7 @@ function getCafeList(list){
                console.log("에러발생" + err.status);
             }
            })});
+
    };
    // 실패했을때 호출되는 콜백함수
    var showError = function(error){
