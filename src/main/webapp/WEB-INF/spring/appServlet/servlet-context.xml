@@ -13,6 +13,7 @@
 
 	<!-- 정적파일 경로 세팅 -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources mapping="/static/**" location="/resources/react/static/" />
 	
 	<!-- ViewResolver를 통한 JSP 경로 세팅 -->
 	<bean
@@ -41,9 +42,9 @@
 		<property name="order" value="0" />
 	</bean> -->
 	
+	
 	<!-- 데이터 근원지에대한 설정으로 오라클 DB연결정보를 가진다. -->
-	<bean name="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
@@ -67,6 +68,11 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
+	
+	
+	<!-- 오라클 DATE 설정 -->
+	
+
 	<!--파일업로드용 multipartResolver빈 (정다운) -->
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

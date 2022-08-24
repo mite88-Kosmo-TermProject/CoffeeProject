@@ -18,8 +18,7 @@ public interface CafeImpl {
 	//카페정보
 	public List<StoresDTO> getCafeData(int store_idx) throws Exception;
 	
-	public int getTotalCountSearch(SearchDTO searchDTO);
-	public ArrayList<SearchDTO> listPageSearch(SearchDTO searchDTO);
+
 	
 	
 	public int edit(StoresDTO storesDTO);

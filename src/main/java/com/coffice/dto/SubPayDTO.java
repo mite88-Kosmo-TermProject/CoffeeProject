@@ -5,30 +5,30 @@ import lombok.Data;
 @Data
 public class SubPayDTO {
 	
-		//구매한멤버아이디
-		private String customer_id;
-		//아임포트 결제 일련번호
-		private String pay_import_key;		
 		//결제일련번호
 		private String pay_idx;
+		//구매한멤버아이디
+		private String mem_id;
+		//아임포트 결제 일련번호
+		private String pay_import_key;		
 		//결제금액
 		private String pay_price;	
 		//결제상태
 		private String pay_result_status;		
 		//주문명
-		private String sub_idx;		
+		private String sub_name;		
 		//결제성공시간
 		private String pay_successed_at;
+		//결제한 pg사
+		private String pay_case;
 		
-/*		//구독권일련번호
-		private String sub_idx;
-		//결제요청시간
-		private String pay_created_at;
+/*		
+
 		//사용만료일
 		private String pay_expiration_date;
 		//다음결제일
 		private String pay_next_order_day;
-		//빌링키
+		//빌링키 --> 회원 아이디
 		private String pay_billing_key;*/
 
 

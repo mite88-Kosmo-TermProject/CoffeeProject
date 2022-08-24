@@ -7,8 +7,8 @@
  * </pre
 >
 */ --%> <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-
+pageEncoding="UTF-8"%> <%@taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -182,86 +182,8 @@ pageEncoding="UTF-8"%>
             <h1 class="display-6 mb-5">리뷰</h1>
           </div>
           <div class="row g-4" id="show_data">
-            <!-- sns -->
-            <div class="col-md-6 col-lg-4 mb-5">
-              <div id="snsList">
-                <div class="username">
-                  <img
-                    src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
-                  />
-                  <span id="grade">
-                    <div class="common-grade-badge d small has-text mb-2">
-                      <i class="fas fa-coffee"></i>
-                      <p>다이아</p>
-                    </div>
-                  </span>
-                  <span id="name">
-                    <b>Username</b>
-                  </span>
-                  <i class="fas fa-ellipsis-v"></i>
-                </div>
-                <div style="position: relative">
-                  <!-- 사진 -->
-                  <figure class="photoSet" data-count="2">
-                    <a
-                      href="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"
-                      class="img-fluid"
-                      data-title="열심히 한 작업!!"
-                      data-lightbox="example-set"
-                    >
-                      <img
-                        src="https://static-file.jejupass.com/download/781859?width=592&amp;height=473"
-                        class="img-fluid image"
-                        id="post"
-                        alt=""
-                      />
-                    </a>
-                    <a
-                      style="display: none"
-                      href="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"
-                      class="img-fluid"
-                      data-title="열심히 한 작업!!22"
-                      data-lightbox="example-set"
-                    >
-                      <img
-                        src="https://static-file.jejupass.com/download/781860?width=592&amp;height=473"
-                        class="img-fluid image"
-                        id="post"
-                        alt=""
-                      />
-                    </a>
-                  </figure>
-                </div>
-                <div class="options">
-                  <div class="username">
-                    <!-- 업체정보 -->
-                    <img
-                      src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
-                    />
-                    <span id="cafename"> <b>cafename</b> </span>
-                    <span id="cafeaddr"> 서울시 00구 00동 0000</span>
+            <!-- snsㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
 
-                    <i
-                      class="far fa-heart fa-lg"
-                      id="heart"
-                      onclick="heart()"
-                    ></i>
-                    <span id="like"
-                      ><i class="far fa-thumbs-up fa-lg" onclick="like()"></i>
-                      <small>100</small></span
-                    >
-                  </div>
-                </div>
-                <div class="info">
-                  <div class="txt">
-                    진짜 맛있고 친절하고 이뻐요 또가고 싶어요~~~~~~~~
-                  </div>
-
-                  <span style="color: grey; font-size: 14px">5 September</span>
-                </div>
-                <br />
-              </div>
-            </div>
             <!-- // -->
           </div>
 
@@ -278,16 +200,21 @@ pageEncoding="UTF-8"%>
     </div>
 
     <!-- footer -->
-  	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+
+    <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+    <!-- 좋아요 JS(정순만) -->
+    <script
+      type="text/javascript"
+      src="<%=request.getContextPath()%>/resources/js/like.js"
+    ></script>
     <script
       type="text/javascript"
       src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
     ></script>
 
     <script>
-      //찜
-      function heart() {
-        var x = document.getElementById("heart");
+      //찜(하트)
+      function heart(x) {
         if (x.className === "far fa-heart fa-lg") {
           x.className = "fas fa-heart fa-lg";
           x.style.color = "red";
@@ -296,28 +223,6 @@ pageEncoding="UTF-8"%>
           x.style.color = "black";
         }
       }
-
-      //좋아요
-      function like() {
-        var x = document.querySelector("#like i");
-        if (x.className === "far fa-thumbs-up fa-lg") {
-          x.className = "fas fa-thumbs-up fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-thumbs-up fa-lg";
-          x.style.color = "black";
-        }
-      }
-
-      const img = document.getElementById("post");
-      img.addEventListener("dblclick", () => {
-        like();
-        var heart = document.getElementById("heart");
-        heart.style.animation = "likeheart .6s";
-        setTimeout(function () {
-          heart.style.animation = "none";
-        }, 600);
-      });
     </script>
 
     <!-- 사진 -->
@@ -325,8 +230,6 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-
     <script>
       $(function () {
         //사진보기
@@ -339,6 +242,5 @@ pageEncoding="UTF-8"%>
       });
     </script>
     <!-- footer -->
-   
   </body>
 </html>

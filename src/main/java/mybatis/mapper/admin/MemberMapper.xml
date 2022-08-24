@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybatis.mapper.admin.UserMapperMapper">
- 	<select id="login" resultType="com.coffice.dto.MemberDTO">
- 		select * from member where mem_id=#{mem_id}
- 	</select>
+<mapper namespace="com.coffice.admin.service.MemberDAOImpl">
+	
+	<select id="baselogin" resultType="com.coffice.dto.MemberDTO">
+		select * from member where mem_id=#{0} and mem_pw=#{1}
+	</select>
+	
+	<select id="login" resultType="com.coffice.dto.MemberDTO">
+		select * from member where mem_id=#{0} and mem_pw=#{1} and mem_case=#{2}
+	</select>
+	
+	<select id="Alliancelist" resultType="com.coffice.dto.MemberDTO">
+		select 
+		MEM_ID ,MEM_CASE ,MEM_PW ,MEM_NAME ,MEM_NICKNAME ,MEM_PHONE ,MEM_EMAIL ,MEM_GENDER ,
+ 		TO_TIMESTAMP(MEM_REGIDATE, 'YY-MM-DD HH24:MI:SS') as mem_regidate ,MEM_POINT ,MEM_SUB ,MEM_IMG ,MEM_LEVEL
+ 		from member where MEM_CASE=3 order by MEM_REGIDATE DESC 
+	</select>
+
+
+	<insert id="join" parameterType="com.coffice.dto.MemberDTO" >
+		INSERT INTO member (MEM_ID, MEM_PW, MEM_NAME, MEM_EMAIL, MEM_PHONE,
+		MEM_GENDER, MEM_CASE)
+		VALUES
+		(#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_email}, #{mem_phone}, #{mem_gender}, 3 )
+	</insert>
 </mapper>

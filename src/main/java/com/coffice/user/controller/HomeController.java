@@ -25,7 +25,7 @@ public class HomeController {
 		System.out.println("호출");
 		ArrayList<StoresDTO>mainCafeList = new ArrayList<StoresDTO>();
 		mainCafeList = sqlSession.getMapper(HomeImpl.class).getList();
-		System.out.println(mainCafeList);
+		System.out.println("mainCafeList:"+mainCafeList);
 		model.addAttribute("mainCafeList",mainCafeList);
 		
 		return "home";
