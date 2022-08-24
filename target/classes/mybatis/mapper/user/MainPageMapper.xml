@@ -42,6 +42,7 @@
 		<result property="review_img" column="review_img"/>
 		<result property="like_hit" column="like_hit"/>
 		<result property="mem_id" column="mem_id"/>
+		<collection property="memberDTO" resultMap="UserMap"/>
 		<collection property="storesDTO" resultMap="StoreMap"/>
 		<collection property="imageDTO" resultMap="ImageMap"/>
 	</resultMap>
@@ -59,6 +60,7 @@
 		SELECT * FROM(select Tb.*, rownum rNum from(select store_name,review_content,review.store_idx, review.mem_id,review_star,like_hit,image_save
 		FROM review LEFT join image on review.review_idx = image.review_idx
                     LEFT join stores on review.store_idx = stores.store_idx
+                    LEFT join member on review.mem_id = member.mem_id
         order by like_hit desc)Tb)
 		WHERE rNum BETWEEN 1 AND 6
 	</select>

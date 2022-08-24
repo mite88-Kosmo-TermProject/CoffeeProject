@@ -176,7 +176,7 @@ public Map<String, Object> responseBodyView(HttpServletRequest req){
 		return "/user/cafe/info";
 	}
 	@ResponseBody
-	@RequestMapping(value = "/cafe/review.do" , method = RequestMethod.POST)
+	@RequestMapping(value = "/cafe/view/review.do" , method = RequestMethod.POST)
 	public Map<String, Object> review_info(HttpServletRequest req, @RequestParam(value = "store_idx")int store_idx) {
 		
 		System.out.println(store_idx);

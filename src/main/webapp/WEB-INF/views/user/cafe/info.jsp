@@ -636,7 +636,7 @@ p.txt:before {
 		
 		$.ajax({
 			type : 'POST',
-			url : '../cafe/review.do?store_idx='+param,
+			url : '../cafe/view/review.do?store_idx='+param,
 			dataType : 'json',
 			success : function (data) {
 				var user = data.user;
@@ -675,7 +675,7 @@ p.txt:before {
 							+		'<div class="common-grade-badge d small has-text mb-2" >'
 							+			'<i class="fas fa-coffee"></i>'
 							+			'<p>다이아</p></div>'
-							+		'<strong class="name">'+data.memberDTO.mem_id+'</strong></div></div>'
+							+		'<strong class="name">'+data.memberDTO.mem_nickname+'</strong></div></div>'
 							+'<div class="reviewSet">'
 							+	'<div class="rating-box" style="text-align: left;">'
 							+ star_txt

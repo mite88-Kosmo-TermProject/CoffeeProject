@@ -30,5 +30,7 @@ public class ReviewDTO {
 	
 	private String mem_id;
 	
+	private String mem_nickname;
+	
 	private int like_hit;
 }

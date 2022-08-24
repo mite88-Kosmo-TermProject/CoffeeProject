@@ -66,6 +66,7 @@
 			SELECT Tb.*, rownum rNum FROM(
 				SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
 				LEFT join image on review.review_idx = image.review_idx
+				LEFT join member on review.mem_id = member.mem_id
 				<if test="review_idx!=null">
 					where
 					<foreach collection="review_idx" item="idx" open="(" close=")" separator="or">
@@ -81,6 +82,7 @@
 	<select id="review_list" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
 		LEFT join image on review.review_idx = image.review_idx
+		LEFT join member on review.mem_id = member.mem_id
 		where review.store_idx = #{store_idx}
 	</select>
 	

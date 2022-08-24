@@ -37,7 +37,7 @@ public class HomeController {
 //			System.out.println(dto+"////////////////////////");
 			int index = dto.getImageDTO().getImage_save().lastIndexOf("/");
 			String img = dto.getImageDTO().getImage_save().substring(0,index);
-			mainPageReviewDTO.setContent(dto.getReview_content());
+			mainPageReviewDTO.setContent(dto.getReview_content().replace("\r\n", "<br/>"));
 			mainPageReviewDTO.setImg(img);
 			mainPageReviewDTO.setLike_hit(dto.getLike_hit());
 			mainPageReviewDTO.setMem_id(dto.getMem_id());

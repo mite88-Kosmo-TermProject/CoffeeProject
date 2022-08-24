@@ -50,17 +50,17 @@ public class CafeSNSController {
 		return uuid;
 	}
 	/*리뷰작성 페이지*/
-	@ResponseBody
-	@PostMapping("/cafeSNS/write.do")
+	@RequestMapping(value = "/cafeSNS/write.do", method = RequestMethod.POST)
 	public String uploadReview(Model model , MultipartHttpServletRequest req) {
 		
 		//다운로드 경로
-//		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
+		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
+		System.out.println("경로"+ path);
 //		세션 값가져오기 위해 넣은것(정순만)
 		HttpSession session = req.getSession();
 		String user = String.valueOf(session.getAttribute("user_id")) ;
 //		System.out.println(user);
-		String path = "C:/Users/jungs/git/CoffeeProject/src/main/webapp/resources/img/review";
+//		String path = "C:/Users/jungs/git/CoffeeProject/src/main/webapp/resources/img/review";
 		MultipartFile mfile = null;
 		List<Object> resultList = new ArrayList<Object>();
 		try {
@@ -103,10 +103,10 @@ public class CafeSNSController {
 				//물리적경로에 새롭게 생성된 파일명으로 저장한다. 
 				mfile.transferTo(new File(path + File.separator + saveFileName));
 				if(imgfiles.equals("")) {
-					imgfiles += saveFileName;
+					imgfiles += saveFileName+"/";
 				}
 				else {
-					imgfiles += "/"+saveFileName;
+					imgfiles += saveFileName;
 				}
 			}
 //			System.out.println(imgfiles);
@@ -124,7 +124,7 @@ public class CafeSNSController {
 		}
 		//필요한 정보를 Model에 저장한 후 View반환
 		model.addAttribute("resultList", resultList);
-		return "view";
+		return "/user/cafeSNS/review";
 	}
 	
 	/*카페SNS페이지 연결*/
@@ -186,7 +186,7 @@ public class CafeSNSController {
 		for(ReviewDTO dto : lists) {
 			String temp = dto.getReview_content().replace("\r\n", "<br/>");
 			dto.setReview_content(temp);
-			/* System.out.println(dto); */
+			System.out.println(dto); 
 		}
 		Map<String, Object> map = new HashMap<>();
 //		System.out.println(lists);
