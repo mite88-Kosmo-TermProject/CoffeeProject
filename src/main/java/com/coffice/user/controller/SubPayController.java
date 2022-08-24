@@ -63,13 +63,13 @@ public class SubPayController {
 		return "/user/order/subPay";
 	}
 
+	//첫결제
 	@RequestMapping(value = "/order/insertSubscribe.do", method = RequestMethod.POST)
-	public String insertSubscribe(HttpSession session, SubPayDTO subPayDTO) {
+	public void insertSubscribe(HttpSession session, SubPayDTO subPayDTO) {
 		
 		int row = sqlSession.getMapper(SubPaylmpl.class).paymentInfo(subPayDTO);
 		System.out.println("입력된 구독수 = "+ row);
 		
-		return "redirect:/subPayResult.do";
 	}
 	
 //	tokenReq======={"code":0,"message":null,"response":
@@ -79,8 +79,7 @@ public class SubPayController {
 //	json{"customer_uid":"admin","schedules":[{"merchant_uid":"merchant_1661292420","schedule_at":1661292420,
 //		"currency ":"KRW","amount":"92500","name":"CoffeePass50잔"}]}
 	
-	
-	
+	//정기결제 예약
 	@RequestMapping(value = "/order/payment.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void payment(@RequestParam Map<String, Object> map)
@@ -92,6 +91,15 @@ public class SubPayController {
 		scheduler.startScheduler(customer_uid, price, merchant_uid, sub_name);
 	}
 	
+	//예약 중지
+	@RequestMapping(value = "/order/subStop.do", method = RequestMethod.GET)
+	public String subStop() {
+		System.out.println("subStop()들어옴");
+		scheduler.stopScheduler();
+		System.out.println("예약 중지함");
+		return "/user/order/subPayResult";
+	}
+	
 	// 패스구매완료
 	@RequestMapping(value = "/order/subPayResult.do", method = RequestMethod.GET)
 	public String subPayResult() {
@@ -99,6 +107,7 @@ public class SubPayController {
 		return "/user/order/subPayResult";
 	}
 	
+	//WebHook 으로 정기결제 정보받아서 저장
 	@RequestMapping(value = "/order/subResult.do", method = RequestMethod.POST)
 	public void subResult(@RequestBody JSONObject jsonObject, Model model, SubPayDTO subPayDTO) {
 		
@@ -108,18 +117,20 @@ public class SubPayController {
 		String json = find.paymentFind(imp_uid);
 		
 //		 {"code":0,"message":null,
-//		"response": {"amount":22000,
+//		"response": 
+//		{
+//		"amount":22000,
 //		"customer_uid":"admin",
 //		"customer_uid_usage":"payment.scheduled",
 //		"imp_uid":"imps_426515090382",
-//			 "merchant_uid":"merchant_1661284500",
+//		"merchant_uid":"merchant_1661284500",
 //		"name":"admin \uace0\uac1d\uc5d0 \ub300\ud55c 2022-08-24 04:55:00 \uc608\uc57d \uacb0\uc81c",
-//			 "paid_at":1661284515,
+//		"paid_at":1661284515,
 //		"pay_method":"point",
 //		"pg_id":"TCSUBSCRIP",
 //		"pg_provider":"kakaopay",
 //		"pg_tid":"T30530a30f5619158d9f"
-//			 "started_at":1661284515,
+//		"started_at":1661284515,
 		
 		JSONParser jsonParser = new JSONParser();
 		

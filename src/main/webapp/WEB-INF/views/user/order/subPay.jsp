@@ -86,13 +86,13 @@
 		IMP.request_pay({
 			pg : "kakaopay", // 하나의 아임포트계정으로 여러 PG를 사용할 때 구분자 누락되거나 매칭되지 않는 경우 관리자 콘솔에서 설정한 기본PG가 호출됨 값 형식: [PG사 코드값] 또는 [PG사 코드값].[PG사 상점아이디]
 			pay_method : 'card', // 결제창 호출단계에서의 pay_method는 아무런 역할을 하지 못하며, 구매자가 카카오페이 앱 내에서 신용카드 vs 카카오머니 중 실제 선택한 값으로 추후 정정됩니다.
-			merchant_uid : 'merchant_'+ new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
+			merchant_uid : 'merchant_'+new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호. 이미 결제가 승인 된(status: paid) merchant_uid로는 재결제 불가
 			name : subName, //주문명 (구독권 이름)
 			amount : paymentPrice, // 포인트등을 사용한 첫 결제금액
 			customer_uid : '${dto.mem_id }', //customer_uid 파라메터가 있어야 빌링키 발급이 정상적으로 이뤄집니다.
 			buyer_email : '${dto.mem_email }', // 주문자 이메일[페이먼트월 필수]
 			buyer_name : '${dto.mem_name }', //주문자명
-			buyer_tel : '${dto.mem_phone }' // 주문자 연락처(누락되거나 공백일때 일부 PG사[엑심베이]에서 오류 발생)
+			buyer_tel : '${dto.mem_phone }', // 주문자 연락처(누락되거나 공백일때 일부 PG사[엑심베이]에서 오류 발생)
 		}, function(rsp) {
 			if (rsp.success) {
 				console.log(rsp);
@@ -142,13 +142,13 @@
 						*/
 						
 					},
-					success : function(result) {
-						alert('정기결제 등록' + result);
+					success : function() {
+						alert('정기결제 등록');
 					}
 				});
-				alert("잡다한 결과값 ="+rsp.paid_at + rsp.paid_amount + rsp.status
+				/* alert("잡다한 결과값 ="+rsp.paid_at + rsp.paid_amount + rsp.status
 						+ rsp.merchant_uid + rsp.name);
-				alert("결제한 아이디 ="+ '${dto.mem_id }');
+				alert("결제한 아이디 ="+ '${dto.mem_id }'); */
 
 				$.ajax({
 					url : '../order/payment.do', //결제 상태를 확인하고 스케줄러를 호출하는 부분
@@ -156,10 +156,10 @@
 					data : {
 						customer_uid : '${dto.mem_id }',
 						price : subPaymentPrice, // 첫결제는 포인트사용한 금액이고 여기는 원래구독권가격 넣기
-						merchant_uid : rsp.merchant_uid + 1,
+						merchant_uid : rsp.merchant_uid,
 						sub_name : rsp.name,
 					},
-					success : function(result) {
+					success : function() {
 						alert('정기결제 예약성공');
 					},
 					error : function(errData) {
@@ -170,6 +170,12 @@
 				alert('빌링키 발급 실패');
 			}
 		});
+	}
+	function subStop() {
+		let result = confirm("CoffeePass 구독을 취소하시겠습니까??");
+		if(result) {
+			location.href = "../order/subStop.do";
+		}
 	}
 </script>
 
@@ -213,13 +219,12 @@
 		<input type="text" id="customer_id" value="madcatz92">
 	</div>	
 	
-	<input type="button" id="check1" value="구매" onclick="kakaopay();">
+	<input type="button" id="check1" value="구독정지" onclick="subStop();">
 	<div>
 		${dto.mem_id }, 
 		 ${dto.mem_case }, ${dto.mem_pw }, ${dto.mem_name }, ${dto.mem_nickname }, 
 		 ${dto.mem_phone },
 		${dto.mem_email }, ${dto.mem_gender },  ${dto.mem_regidate }, ${dto.mem_point }
-		
 	
 	</div>
 	<!-- checkout -->

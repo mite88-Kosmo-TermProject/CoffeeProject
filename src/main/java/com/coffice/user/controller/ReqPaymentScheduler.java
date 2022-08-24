@@ -54,6 +54,6 @@ public class ReqPaymentScheduler {
     
     private Trigger getTrigger() {
         // 작업 주기 설정 
-        return new PeriodicTrigger(30, TimeUnit.SECONDS);
+        return new PeriodicTrigger(20, TimeUnit.SECONDS);
     }
 }

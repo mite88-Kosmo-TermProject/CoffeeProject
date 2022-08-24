@@ -27,9 +27,9 @@ public class ImportPay {
 	    map.put("imp_secret", "3MK5ZkkAl4POqZUqodVcxB8cskrg2ElwYtyRkjGo0A5EbCL3pRyD1ppXxjkKHNXmbXGrhwPLkQZrOfOM");
 	    
 	    Gson var = new Gson();
-	    String json=var.toJson(map);
+	    String json= var.toJson(map);
+	    
 		//서버로 요청할 Body
-	   
 	    HttpEntity<String> entity = new HttpEntity<>(json,headers);
 	    
 		return restTemplate.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
