@@ -158,7 +158,9 @@ public Map<String, Object> responseBodyView(HttpServletRequest req){
 	@RequestMapping(value = "/cafe/info.do", method = RequestMethod.GET)
 	public  String cafeinfo(HttpServletRequest req, HttpServletResponse resp, Model model) throws Exception {
 		
-		
+		/*세션에서 유저 아이디 얻어오기*/
+		HttpSession session = req.getSession();
+		String user = String.valueOf(session.getAttribute("user_id"));
 		
 		int store_idx = Integer.parseInt(req.getParameter("store_idx"));
 		cafeImpl = sqlSession.getMapper(CafeImpl.class);
@@ -170,7 +172,7 @@ public Map<String, Object> responseBodyView(HttpServletRequest req){
 
 		
 		
-		
+		model.addAttribute("user",user);
 		model.addAttribute("resultList", resultList);
 		
 		return "/user/cafe/info";
