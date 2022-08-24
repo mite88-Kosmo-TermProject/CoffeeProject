@@ -134,7 +134,7 @@ span {
 														alt="카페이미지 더미" />
 												</figure>
 												<div class="inner">
-													<strong class="titDep3"> ${item.store_name} </strong> <span
+													<strong class="titDep3" style="margin-right: 10px;"> ${item.store_name} </strong> <span
 														class="" locationinfo="" title="위치 정보"> <span>
 															${item.store_roadaddr} </span>
 													</span>

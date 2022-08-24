@@ -82,14 +82,16 @@
 	
 	<select id="review_list" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
-		LEFT join image on review.review_idx = image.review_idx
-		where review.store_idx = #{store_idx}
+		LEFT join image on review.review_idx = image.review_idx 
+		LEFT join member on review.mem_id = member.mem_id 
+		where review.store_idx = #{store_idx} order by REVIEW_POSTDATE desc
 	</select>
 	
 	<!-- 좋아요순 -->
 	<select id="review_list_type2" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
 		LEFT join image on review.review_idx = image.review_idx 
+		LEFT join member on review.mem_id = member.mem_id 
 		where review.store_idx = #{store_idx} order by like_hit desc
 	</select>
 	
@@ -97,6 +99,7 @@
 	<select id="review_list_type3" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM review LEFT join stores on review.store_idx = stores.store_idx
 		LEFT join image on review.review_idx = image.review_idx
+		LEFT join member on review.mem_id = member.mem_id 
 		where review.store_idx = #{store_idx} order by review_star desc
 	</select>
 	
@@ -159,4 +162,5 @@
 	<select id="check_like" resultMap="HeartMap">
 		select * from heart where mem_id = #{user_id}
 	</select>
+
 </mapper>

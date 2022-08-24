@@ -495,8 +495,7 @@ p.txt:before {
 					<div id="tab3">
 						<!-- 별점정보 -->
 						
-
-						<!-- 리뷰 -->
+<!-- 리뷰 -->
 						<!-- 필터 -->
 						<div class="d-flex mb-3 review_filter">
 							<div class="flex-shrink-0">
@@ -541,6 +540,7 @@ p.txt:before {
 							<%@ include file="/WEB-INF/views/user/cafe/review.jsp"%>
 						</ul>
 						<!-- //리뷰 -->
+
 
 					</div>
 

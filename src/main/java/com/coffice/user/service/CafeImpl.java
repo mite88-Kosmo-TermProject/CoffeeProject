@@ -21,6 +21,8 @@ public interface CafeImpl {
 	public int getTotalCountSearch(SearchDTO searchDTO);
 	public ArrayList<SearchDTO> listPageSearch(SearchDTO searchDTO);
 	public ArrayList<ReviewDTO> review_list(@Param("_idx") int store_idx);
+	//별점변경용
+	public int star_change(int star, int store_idx);
 
 }
 

@@ -11,7 +11,7 @@
 
 	</select>
 	
-<select id="getTotalCount" resultType="int">
+	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) from stores
 	</select>
 	
@@ -56,4 +56,9 @@
 		)
 		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
 	</select>
+	
+	
+	<update id="star_change" parameterType="int">
+   	  update stores set STORE_STAR = ${param1} where store_idx=${param2}
+   </update>
 </mapper>

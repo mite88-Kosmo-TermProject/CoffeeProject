@@ -16,9 +16,8 @@ pageEncoding="UTF-8"%>
     <link rel="manifest" href="/manifest.json" />
     <title>React App</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
-    <script defer="defer" src="<%= request.getContextPath() %>/resources/react/static/js/main.6c772c8b.js"></script>
-    <link href="<%= request.getContextPath() %>/resources/react/static/css/main.79de05f3.css" rel="stylesheet">
+    <script defer="defer" src="<%= request.getContextPath() %>/resources/react/static/js/main.ead499dd.js"></script>
+<link href="<%= request.getContextPath() %>/resources/react/static/css/main.8bbabe62.css" rel="stylesheet">
     
     
      <!-- 리뷰 css -->
@@ -30,11 +29,15 @@ pageEncoding="UTF-8"%>
     <div id="root"></div>
     
     
- 	<!-- footer -->
+ 	    <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+  <!-- 좋아요 JS(정순만) -->
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
+    
 
     <script>
-      //찜
+      //찜(하트)
       function heart(x) {
         if (x.className === "far fa-heart fa-lg") {
           x.className = "fas fa-heart fa-lg";
@@ -44,33 +47,11 @@ pageEncoding="UTF-8"%>
           x.style.color = "black";
         }
       }
-
-      //좋아요
-      function like(x) {
-        if (x.className === "far fa-thumbs-up fa-lg") {
-          x.className = "fas fa-thumbs-up fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-thumbs-up fa-lg";
-          x.style.color = "black";
-        }
-      }
-
-      const img = document.getElementById("post");
-      img.addEventListener("dblclick", () => {
-        like();
-        var heart = document.getElementById("heart");
-        heart.style.animation = "likeheart .6s";
-        setTimeout(function () {
-          heart.style.animation = "none";
-        }, 600);
-      });
+      
     </script>
 
     <!-- 사진 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-
     <script>
       $(function () {
         //사진보기
@@ -80,6 +61,8 @@ pageEncoding="UTF-8"%>
           disableScrolling: false,
           fitImagesInViewport: false,
         });
+        
+
       });
     </script>
     <!-- footer -->

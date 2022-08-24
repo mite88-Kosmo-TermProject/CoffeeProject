@@ -100,7 +100,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
           <a
-            href="<%=request.getContextPath() %>/cafe/map.do"
+            href="<%=request.getContextPath() %>/cafe/search.do"
             class="nav-item nav-link active"
             >검색</a
           >

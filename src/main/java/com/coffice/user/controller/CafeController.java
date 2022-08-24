@@ -302,10 +302,40 @@ public class CafeController {
 		//리뷰수
 		int check_review = sqlSession.getMapper(CafeSNSImpl.class).getStoresReviewCount(store_idx);
 		
-		 
-//		 System.out.println("!!"+resultList);
-		 
-//		System.out.println("!!"+store_idx);
+		//별갯수 저장용
+		int bar1= 0;
+		int bar2= 0;
+		int bar3= 0;
+		int bar4= 0;
+		int bar5= 0;
+		
+		//해당 가게 sns 별점을 찾습니다.
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setStore_idx(store_idx);
+		ArrayList<ReviewDTO> reviewlists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+		
+		for (ReviewDTO rdto : reviewlists) {
+			//전체를 더해 나눕시다 ㅇㅁㅇ
+			System.out.print(rdto.getReview_star()+"/");
+			//별점갯수저장
+			if(rdto.getReview_star().equals("1")) {
+				bar1++;
+			}if(rdto.getReview_star().equals("2")) {
+				bar2++;
+			}if(rdto.getReview_star().equals("3")) {
+				bar3++;
+			}if(rdto.getReview_star().equals("4")) {
+				bar4++;
+			}if(rdto.getReview_star().equals("5")) {
+				bar5++;
+			}
+		}
+		
+		model.addAttribute("bar1", bar1);
+		model.addAttribute("bar2", bar2);
+		model.addAttribute("bar3", bar3);
+		model.addAttribute("bar4", bar4);
+		model.addAttribute("bar5", bar5);
 
 		model.addAttribute("check_tag", check_tag);
 		model.addAttribute("check_review", check_review);
