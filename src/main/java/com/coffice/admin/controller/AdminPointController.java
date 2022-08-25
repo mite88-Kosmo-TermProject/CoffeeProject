@@ -120,6 +120,10 @@ public class AdminPointController {
 				case 4:
 					rulestr = "리뷰삭제";
 					break;
+					
+				case 5:
+					rulestr = "출석체크";
+					break;
 			}
 			data2.put("rule_idx", rulestr);
 			arr.add(data2);
@@ -255,7 +259,6 @@ public class AdminPointController {
 			JSONArray arr = new JSONArray();
 			arr.add(i++ , dto.getEvent_items_num());
 			arr.add(i++ ,dto.getEvent_items_name());
-			arr.add(i++ , dto.getEvent_item_ratio());
 			arr.add(i++ , dto.getEvent_items_prbbl());
 			arr.add(i++ , dto.getEvent_items_result());
 			topArray.add(arr);

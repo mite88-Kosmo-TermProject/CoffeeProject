@@ -15,6 +15,7 @@
 				dataType:'json',
 				success:function(data){
 					source = data;
+					console.log(source);
 					calculateItemAndRatio(data);
 					setRotate(JSONList);
 				},

@@ -1,7 +1,6 @@
 package com.coffice.user.controller;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Member;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.tomcat.jni.Local;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coffice.dto.MemberDTO;
 import com.coffice.dto.ParameterDTO;
-import com.coffice.dto.PointDTO;
 import com.coffice.user.service.UserMemberImpl;
 
 @Controller
