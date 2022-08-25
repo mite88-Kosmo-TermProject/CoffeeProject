@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
  */
 
 import com.coffice.dto.MemberDTO;
+import com.coffice.dto.MypageDTO;
+import com.coffice.dto.MypagejjimDTO;
 import com.coffice.dto.ParameterDTO;
 import com.coffice.dto.PointDTO;
 
@@ -71,6 +73,9 @@ public interface UserMemberImpl {
 	public String checkpassoneday (@Param("userName") String name);
 	public void inserteventpoint(String name , int point);
 	
+	//마이페이지 기능
+	public ArrayList<MypageDTO> loaduserinfo (@Param("userName") String name);
+	public ArrayList<MypagejjimDTO> loadjjimlist (@Param("userName") String name);
 	
 	
 	

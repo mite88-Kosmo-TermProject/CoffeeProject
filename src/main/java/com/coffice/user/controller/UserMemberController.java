@@ -78,8 +78,8 @@ public class UserMemberController {
 	//로그인
 	@RequestMapping(value="/member/loginAction.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO, Model model) throws Exception{
-		
-		if(sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"))==null) {
+		memberDTO = sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"));
+		if(memberDTO == null) {
 			 resp.setCharacterEncoding("utf-8");
 		     PrintWriter writer = resp.getWriter();
 		     writer.println("<script type='text/javascript'>");
@@ -375,4 +375,5 @@ public class UserMemberController {
 		String mem_id = userdto.getMem_id();
 		sqlSession.getMapper(UserMemberImpl.class).inserteventpoint(mem_id, point);
 	 }
+	 
 }
