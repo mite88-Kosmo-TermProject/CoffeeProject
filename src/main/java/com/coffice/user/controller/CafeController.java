@@ -87,7 +87,7 @@ public class CafeController {
 			//해당되는 게시물의 총 갯수
 			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearchSTORE_AFLTD(searchDTO);
 		}
-
+		
 		System.out.println(totalRecordCount);
 		//페이지 설정
 		int pageSize = 10;
