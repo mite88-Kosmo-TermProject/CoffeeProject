@@ -169,7 +169,7 @@ public class CafeSNSController {
 	//카페 SNS 파일 삭제
 	@RequestMapping(value = "/cafeSNS/delete" , method = RequestMethod.POST)
 	public String remove_review(@RequestParam("review_idx")int idx, @RequestParam("user_id")String user ,
-			HttpServletRequest req) {
+			@RequestParam("store_idx")int store_idx, HttpServletRequest req) {
 		//파일경로
 		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
 		
@@ -191,7 +191,38 @@ public class CafeSNSController {
 		int count2 = sqlSession.getMapper(CafeSNSImpl.class).remove_img(img);
 		System.out.println(count2+"행 이미지테이블삭제");
 		
-		return "user/cafe/info";
+		
+		
+		//별점계산용
+		int star_num =0;
+		int star_total=0;
+
+		//리뷰 별변경
+		//해당 가게 sns 별점을 찾습니다.
+		ParameterDTO parameterDTO = new ParameterDTO();
+		parameterDTO.setStore_idx(store_idx);
+		ArrayList<ReviewDTO> reviewlists = sqlSession.getMapper(CafeSNSImpl.class).review_list(parameterDTO);
+
+		for (ReviewDTO rdto : reviewlists) {
+			//전체를 더해 나눕시다 ㅇㅁㅇ
+			System.out.print(rdto.getReview_star()+"/");
+			star_num += Integer.valueOf(rdto.getReview_star());
+			star_total++;
+		}
+		
+		if(star_total<=1) {
+			star_num=star_num;
+		}else {
+			
+		star_num = star_num/star_total;
+		}
+		
+		
+		
+		int star_change = sqlSession.getMapper(CafeImpl.class).star_change(star_num, store_idx);
+
+		
+		return "redirect:../cafe/info.do?store_idx="+store_idx;
 	}
 	
 	

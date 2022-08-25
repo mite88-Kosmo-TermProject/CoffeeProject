@@ -49,7 +49,7 @@
 			value="oracle.jdbc.OracleDriver" />
 		<property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="kosmo" />
+		<property name="username" value="kosmo_pro" />
 		<property name="password" value="1234" />
 	</bean>
 

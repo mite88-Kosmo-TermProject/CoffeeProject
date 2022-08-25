@@ -35,10 +35,10 @@
 </head>
 
 <body>
-
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
+			<!-- 패스구매 -->
 			<div class="owl-carousel-item position-relative">
 				<img class="img-fluid"
 					src="<%=request.getContextPath()%>/resources/img/main커피1.png"
@@ -49,24 +49,26 @@
 					<div class="container">
 						<div class="row justify-content-center">
 							<div class="col-12 col-lg-8 text-center">
-								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-									To WooDY</h5>
-								<h1 class="display-6 text-white animated slideInDown mb-4">Best
-									Carpenter & Craftsman Services</h1>
-								<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?</p>
-								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
-									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-									More</a> <a href=""
-									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-									Quote</a>
+								<h5 class="text-white text-uppercase mb-3 animated slideInDown">
+								카페를 매일 당신 당신을 위한 새로운 방법</h5>
+								<h1 class="display-6 text-white animated slideInDown mb-4">
+								소상공인 카페를 위한 카패 패스</h1>
+								<p class="fs-5 fw-medium text-white mb-4 pb-2">
+									숨은 카페의 정보와 패스 구매가 가능합니다</p>
+									
+									<!-- 이거 누르면 패스구매로 갑니다 -->
+									<c:if test="${sessionScope.siteUserInfo!=null}">
+										<a href="<%=request.getContextPath() %>/order/subPay.do" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">
+									 카페패스 구매하기</a>
+									 </c:if>
+									 <c:if test="${sessionScope.siteUserInfo==null}"><span style="color: #fff;">로그인후 구매가능</span></c:if>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-
+			<!-- 리뷰이벤트 -->
 			<div class="owl-carousel-item position-relative">
 				<img class="img-fluid"
 					src="<%=request.getContextPath()%>/resources/img/커피2.png" alt="">
@@ -76,53 +78,21 @@
 					<div class="container">
 						<div class="row justify-content-center">
 							<div class="col-12 col-lg-8 text-center">
-								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-									To WooDY</h5>
-								<h1 class="display-6 text-white animated slideInDown mb-4">카페
-									추천1</h1>
-								<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr
-									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
-									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-
-
-								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
-									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-									More</a> <a href=""
-									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-									Quote</a>
+								<h5 class="text-white text-uppercase mb-3 animated slideInDown">
+								리뷰를 쓰면 포인트가 팡팡</h5>
+								<h1 class="display-6 text-white animated slideInDown mb-4">
+								카페 패스 포인트</h1>
+								
+								<!-- 이거 누르면 해당 게시글로 갑니다 -->
+								<a href="<%= request.getContextPath() %>/"
+									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">자세히알아보기</a> 
+									<a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">다른이벤트</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="owl-carousel-item position-relative">
-				<img class="img-fluid"
-					src="<%=request.getContextPath()%>/resources/img/커피3.png" alt="">
-				<div
-					class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-					style="background: rgba(53, 53, 53, .7);">
-					<div class="container">
-						<div class="row justify-content-center">
-							<div class="col-12 col-lg-8 text-center">
-								<h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-									To WooDY</h5>
-								<h1 class="display-6 text-white animated slideInDown mb-4">Best
-									Carpenter & Craftsman Services</h1>
-								<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr
-									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
-									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
-									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-									More</a> <a href=""
-									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-									Quote</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 	<!-- Carousel End -->
@@ -143,12 +113,13 @@
 				<div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 					<!-- 검색창 -->
-
+					<form action="./cafe/list.do" method="post" onsubmit="searchValidate(this)">
 					<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
 						data-bs-toggle="offcanvas" data-bs-target="#searchcanvasTop"
 						aria-controls="offcanvasTop">
+						
 						<div class="input-group">
-							<input type="search" placeholder="여기에 카페를 검색하세요"
+							<input type="text" name="searchTxt" placeholder="여기에 카페를 검색하세요"
 								aria-describedby="button-addon1"
 								class="form-control border-0 bg-light">
 							<div class="input-group-append">
@@ -159,6 +130,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 
 				</div>
 
@@ -181,21 +153,20 @@
 				<h1 class="display-6 mb-5">이달의 카페</h1>
 			</div>
 			<div class="row g-4">
+			
 			<c:forEach items="${mainCafeList }" var="cafe" varStatus="loop">
 			
 				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item">
+					<div class="service-item h-100  border border-5 border-light border-top-0">
 						<div class="overflow-hidden">
 							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/service-1.jpg"
-								alt="">
+								src="<%=request.getContextPath()%>/resources/img/stores/${cafe.store_img }.jpg" alt="">
 						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">${cafe.store_name }</h4>
+						<div class="p-4">
+							<h4 class="mb-3 text-center">${cafe.store_name }</h4>
 							<p>카페전화번호 : ${cafe.store_phone } </p>
 							<p> 카페주소: ${cafe.store_localaddr }</p>
-							<a class="fw-medium" href="">Read More<i
+							<a class="fw-medium text-center" href="<%=request.getContextPath()%>/cafe/info.do?store_idx=${cafe.store_idx}">Read More<i
 								class="fa fa-arrow-right ms-2"></i></a>
 						</div>
 					</div>
@@ -211,6 +182,7 @@
 	border-radius: 2rem;
 }
 </style>
+
 
 	<!-- 중앙 Start -->
 
@@ -395,11 +367,11 @@
 								</c:choose>
 								</span>
 								<h3>
-									<a href="#"><c:out value="${lists.store_name}"/></a>
+									<a href="<%=request.getContextPath()%>/cafe/info.do?store_idx=${lists.store_idx}"><c:out value="${lists.store_name}"/></a>
 								</h3>
 								<p class="dolor">
 									<!-- $1870 -->
-									<img id="profile" src="<%=request.getContextPath()%>/resources/img/KakaoTalk_20220822_214450862.jpg"/>
+									<img id="profile" src="<%=request.getContextPath()%>/resources/img/user/KakaoTalk_20220822_214450862.jpg"/>
 									<span>${lists.mem_id }</span>
 								</p>
 							</div>

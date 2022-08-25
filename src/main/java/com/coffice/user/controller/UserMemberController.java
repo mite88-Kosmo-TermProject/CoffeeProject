@@ -101,7 +101,9 @@ public class UserMemberController {
 	public String logout(MemberDTO memberDTO, HttpSession session) throws Exception {
 
 		// 세션 영역 정보 지움 ㅎㅎ
-		session.invalidate();
+		//session.invalidate();
+		session.removeAttribute("siteUserInfo");
+		session.removeAttribute("user_id");
 
 		return "redirect:/";
 

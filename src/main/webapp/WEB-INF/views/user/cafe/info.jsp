@@ -328,6 +328,11 @@ p.txt:before {
 
 //리뷰 삭제 
 function deleteReview(x,idx,review_id,id) {
+	const urlParams = new URL(location.href).searchParams;
+
+	const store_idx = urlParams.get('store_idx');
+	console.log(store_idx);
+
 	if(id===null || id===""){
 		alert("로그인 후 이용해주세요.");
 		return false;
@@ -340,6 +345,7 @@ function deleteReview(x,idx,review_id,id) {
 		type : 'POST',
 		url : '../cafeSNS/delete',
 		data : {
+			"store_idx" : store_idx,
 			"review_idx" : idx,
 			"user_id" : id
 		},
@@ -460,11 +466,17 @@ function heart(x,idx,id) {
 								<div class="btn-group" role="group"">
 									<button type="button" class="btn btn-primary" id="map_url">길찾기</button>
 									<button type="button" class="btn btn-primary" id="send_url">즐겨찾기</button>
-									<button type="button" class="btn btn-primary"
+									 <c:if test="${sessionScope.siteUserInfo!=null}">
+										<button type="button" class="btn btn-primary"
 										id="review_coffee"
 										onclick="location.href='<%=request.getContextPath()%>/cafeSNS/writePage.do?store_idx=${resultList.store_idx }' ">리뷰쓰기</button>
+									</c:if>
 								</div>
+								
 							</div>
+							<c:if test="${sessionScope.siteUserInfo==null}">
+								<p>리뷰는 로그인 후 가능합니다</p>
+							</c:if>
 
 						</div>
 
@@ -700,6 +712,13 @@ function heart(x,idx,id) {
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<%=request.getParameter("store_idx")%>
 	<script>
+	$(".bar-1").css("width", "0%");
+	$(".bar-2").css("width", "0%");
+	$(".bar-3").css("width", "0%");
+	$(".bar-4").css("width", "0%");
+	$(".bar-5").css("width", "0%");
+	
+	
 	
 	//총별점 그리기
 	var star = $(".rating-box.totalNum").text();
@@ -794,11 +813,14 @@ function heart(x,idx,id) {
 							+ '<br>'
 							+`<a class="frmLike" onclick="like(this,`+data.review_idx+`,'`+user+`');">`
 							+'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-							+'<small name="hit" id="hit">'+data.like_hit+'</small>'
+							+'<small name="hit" id="hit">'+data.like_hit+'&nbsp;&nbsp;&nbsp;</small>'
+							+ `<button type="button"  class="btn btn-secondary" onclick="deleteReview(this,`+data.review_idx+`,`+`'`+data.memberDTO.mem_id+`'`+`,'`+user+`')">
+							<i class="bi bi-x-circle-fill text-light"></i>리뷰삭제</button>`				
 							/* +	'<input type="checkbox" id="chkLike0" title="좋아요" onclick="fnAddReviewLike();"	 href="javascript:;" style="display: none;"><label for="chkLike0">0</label>' */
 							+'</a></div>'
-							+		`<button type="button" onclick="deleteReview(this,`+data.review_idx+`,`+`'`+data.memberDTO.mem_id+`'`+`,'`+user+`')">리뷰삭제</button>`							+'<figure class="photoSet"  style="width:150px;" data-count="2">'
-							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
+							+'<figure class="photoSet"  style="width:150px;" data-count="2">'
+							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="'
+							+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
 							+		'<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" alt=""></a>'
 							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
 							+		'<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473" alt="" class="img-fluid"></a></figure>'

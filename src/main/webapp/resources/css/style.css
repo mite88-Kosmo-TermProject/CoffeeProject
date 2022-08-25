@@ -716,6 +716,7 @@ ul, ol {
 
 #caffee_map .mapSearchList > li {
     margin-top: 12px;
+    background: #fff;
 }
 #caffee_map .mapSearchList > li:first-child {
     margin-top: 0;
@@ -1438,4 +1439,16 @@ ul, ol {
 }
 .mapPin.stay.active {
     border-width: 5px;
+}
+
+/*반응형용*/
+@media (min-width: 992px){
+	#caffee_map .mapSearchList > li a figure + .inner {
+    	width: 100%;
+    	padding: 3px 0 0 0;
+	}
+	
+	#caffee_map .mapSearchList > li a .inner .conUtil span {
+   		margin-left: -15px;
+	}
 }
