@@ -156,6 +156,73 @@ namespace의 속성
   		#{mem_email}, #{mem_gender})
   	</insert>
   	
+  	<select id="checkpassoneday" parameterType="String" resultType="String">
+  		select to_char (point_postdate,'YYYY-MM-DD')
+		from 
+		(
+			select point_postdate
+			from point_log 
+			where mem_id like 'babana' and point_sources = 5 order by point_postdate desc
+		)
+		where rownum = 1
+  	</select>
+  	
+  	<!--이벤트 룰렛 포인트 지급  -->
+  	<insert id="inserteventpoint" parameterType="Object">
+  	{
+  	call
+  	declare
+  	begin
+  	update member set mem_point = mem_point +#{param2} where mem_id like #{param1} ;
+  	insert into point_log values(POINT_SEQUENCE.nextval,#{param1},#{param2},sysdate,5);
+  	end
+  	}
+  	
+  	
+  	</insert>
+  	<!--마이페이지 정보 가져오기 resultMap -->
+  	<resultMap type="com.coffice.dto.StoresDTO" id="StoresDTO">
+  		<result column="store_name" property="store_name"/>
+  	</resultMap>
+  	
+  	<resultMap type="com.coffice.dto.MypageDTO" id="MypageDTO">
+  		<result column="review_idx" property="review_idx"/>
+  		<result column="review_content" property="review_content"/>
+  		<result column="review_postdate" property="review_postdate"/>
+  		<result column="review_star" property="review_star"/>
+  		<result column="review_img" property="review_img"/>
+  		<collection property="storesDTO" resultMap="StoresDTO"></collection>
+  	</resultMap>
+  	
+  	<!--마이페이지 정보 가져오기  -->
+  	
+  	<select id="loaduserinfo" parameterType="String" resultMap="MypageDTO">
+  		select 
+		review_idx,review_content,review_postdate,review_star,review_img,store_name 
+		from review table1 
+		inner join stores table2 on(table1.store_idx = table2.store_idx)
+		where table1.mem_id like #{userName}
+  	</select>
+  	
+  	<resultMap type="com.coffice.dto.StoresDTO" id="storesdto">
+  		<result column="store_idx" property="store_idx"/>
+  		<result column="store_name" property="store_name"/>
+  		<result column="store_img" property="store_img"/>
+  	</resultMap>
+  	
+  	<resultMap type="com.coffice.dto.MypagejjimDTO" id="MypagejjimDTO">
+  		<result column="jjim_idx" property="jjim_idx"/>
+  		<result column="jjim_postdate" property="jjim_postdate"/>
+  		<collection property="storesdto" resultMap="storesdto"></collection>
+  	</resultMap>
+  	
+  	<select id="loadjjimlist" parameterType="String" resultMap="MypagejjimDTO">
+  		select 
+		jjim_idx,table2.store_idx as store_idx ,store_name,jjim_postdate,store_img
+		from jjim table1 
+        inner join stores table2 on(table1.store_idx = table2.store_idx)
+        where table1.mem_id like #{userName} and jjim_flag = 1 
+  	</select>
   </mapper>
   
   

@@ -96,8 +96,9 @@ a#CHAT_BTN:hover {
 <script>
 	//상단버튼용
 	$(function() {
+		var user_id="mangoman";//정해지면변경해야함
 		$("#CHAT_BTN").click(function() {
-		  var popup = window.open($(location).attr('origin')+'/CoffeeProject/storeowner/chtt/EchoServer.do', '채팅', 'width=500px,height=700px,scrollbars=yes');
+		  var popup = window.open($(location).attr('origin')+'/CoffeeProject/storeowner/chat?chat_id='+user_id, '채팅', 'width=500px,height=700px,scrollbars=yes');
 		});
 		/* $(window).scroll(function() {
 			if ($(this).scrollTop() > 100) {

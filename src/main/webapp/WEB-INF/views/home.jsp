@@ -20,12 +20,15 @@
 
 <!-- Go Trip CSS -->
 
+<link rel="stylesheet"
+	href="<%= request.getContextPath() %>/resources/css/adminpoint/event_roullet.css">
+
 <meta charset="utf-8">
 
 </head>
 
 <body>
-
+	<input id="pass" type="hidden" value="${passoneday}" readonly>
 	<!-- Carousel Start -->
 	<div class="container-fluid p-0 pb-5">
 		<div class="owl-carousel header-carousel position-relative">
@@ -133,13 +136,12 @@
 				<div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 					<!-- 검색창 -->
-					<form action="./cafe/list.do" method="post" onsubmit="searchValidate(this)">
+
 					<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
 						data-bs-toggle="offcanvas" data-bs-target="#searchcanvasTop"
 						aria-controls="offcanvasTop">
-						
 						<div class="input-group">
-							<input type="text" name="searchTxt" placeholder="여기에 카페를 검색하세요"
+							<input type="search" placeholder="여기에 카페를 검색하세요"
 								aria-describedby="button-addon1"
 								class="form-control border-0 bg-light">
 							<div class="input-group-append">
@@ -150,7 +152,6 @@
 							</div>
 						</div>
 					</div>
-					</form>
 
 				</div>
 
@@ -163,8 +164,48 @@
 			</div>
 		</div>
 	</div>
-	<!-- 검색 end -->
 
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" data-backdrop="static" data-keyboard="false">
+Open modal
+</button>
+<div class="modal fade" id="myModal" >
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 id="modal-title" class="modal-title"></h4>
+		  <button type="button" class="btn-close" disabled aria-label="Close"></button>
+		</div>
+		<div id="modal-body" class="modal-body" style="
+		display: flex; 
+		flex-flow: column; 
+		align-items: center;
+		background: url('<%= request.getContextPath() %>/resources/img/event/이벤트이미지.jpg');
+		background-size: 90%;">
+		  <div class="mb-3 row" id="roulette-outer">
+												
+					<div id="roulette-pin"></div>
+					<div id="roulette">
+						<!--값영역 -->
+						<div id="item-wrapper">
+						
+ -->					</div>
+						<!--선영역-->
+						<div id="line-wrapper">
+					
+						</div>
+					</div>
+			</div>
+			<div>
+				<button class="btn btn-success" type="button" onclick="MakeSetRouletteStr();">룰렛돌리기</button>
+			</div>
+		</div>
+	  </div>
+	</div>
+  </div>
+<!-- Modal -->
+ 
+	
 
 	<!-- 이달의 카페 -->
 	<div class="container-xxl py-5">
@@ -515,6 +556,111 @@
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 
 
-</body>
+	<!-- 검색 확장 -->
+	<div class="offcanvas offcanvas-top" tabindex="-1" id="searchcanvasTop"
+		aria-labelledby="offcanvasTopLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasTopLabel">카페를 검색하세요</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+				aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
 
+			<!-- 내용 -->
+			<form action="">
+				<div class="row mb-3">
+					<div class="col"></div>
+
+					<div class="col-md-6 ">
+						<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+
+							<div class="input-group">
+								<input type="search" placeholder="여기에 카페를 검색하세요"
+									aria-describedby="button-addon1"
+									class="form-control border-0 bg-light">
+								<div class="input-group-append">
+									<button id="button-addon1" type="submit"
+										class="btn btn-link text-primary">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<div class="col"></div>
+				</div>
+
+				<!-- 항목선택 -->
+				<div class="container text-center">
+					<div class="row">
+
+						<div class="col-md-4 mb-3">
+							<h5>테마검색</h5>
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">전통</button>
+								<button class="btn btn-outline-warning">레트로</button>
+								<button class="btn btn-outline-warning">모던</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">네추럴</button>
+								<button class="btn btn-outline-warning">개성</button>
+								<button class="btn btn-outline-warning">창고형</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">이국적</button>
+								<button class="btn btn-outline-warning">캐주얼</button>
+								<button class="btn btn-outline-warning">아기자기</button>
+							</ul>
+							
+						</div>
+						<div class="col-md-4">
+							<h5>키워드검색</h5>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">디저트</button>
+								<button class="btn btn-outline-warning">브런치</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">이색적인음료</button>
+								<button class="btn btn-outline-warning">핸드드립 전무</button>
+								
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">베이커리</button>
+								<button class="btn btn-outline-warning">단체석</button>
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">반려동물 가능</button>
+								<button class="btn btn-outline-warning">야외 공간</button>
+								
+							</ul>
+							
+							<ul class="projects-tags">
+								<button class="btn btn-outline-warning">독립 공간</button>
+								<button class="btn btn-outline-warning">노키즈존</button>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<h5>구독권 해택이 있는 가맹점을 많이 이용해주세요</h5>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</form>
+
+		</div>
+	</div>
+
+</body>
+<script src="<%= request.getContextPath() %>/resources/js/user_roulette.js"></script>
 </html>

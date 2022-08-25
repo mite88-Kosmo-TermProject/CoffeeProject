@@ -41,12 +41,11 @@
 
 							<div class="card">
 								<div class="card-header header-elements p-3 my-n1">
-									<h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">회원가입 리스트</h5>
+									<h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">회원리스트</h5>
 									<div class="card-action-element ms-auto py-0"></div>
 								</div>
 								<div class="card-body">
-									<!-- table 샘플입니다 ㅇㅊㅇ -->
-									<%@ include file="/WEB-INF/views/admin/table_sample.jsp"%>
+									<%@ include file="/WEB-INF/views/admin/table_member.jsp"%>
 
 								</div>
 							</div>

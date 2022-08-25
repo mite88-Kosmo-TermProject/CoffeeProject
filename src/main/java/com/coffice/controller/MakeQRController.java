@@ -36,13 +36,17 @@ public class MakeQRController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/makeQRajax.do")
+	@RequestMapping("/order/makeQRajax.do")
 	public String makeQRajax(HttpServletRequest request, HttpSession session) throws WriterException, IOException {
 
 		String root = request.getSession().getServletContext().getRealPath("resources"); // 현재 서비스가 돌아가고 있는 서블릿 경로의
+		String roottest = request.getServletContext().getRealPath("resources"); // 현재 서비스가 돌아가고 있는 서블릿 경로의
 																							// resources 폴더 찾기
-
-		String savePath = root + "\\qrCodes\\"; // 파일 경로
+		System.out.println("root = " + root);
+		System.out.println("roottest = " + roottest);
+		
+		
+		String savePath = root + "\\img\\qrcode\\"; // 파일 경로
 
 		// 파일 경로가 없으면 생성하기
 		File file = new File(savePath);
@@ -74,7 +78,7 @@ public class MakeQRController {
 
 		// 파일 이름에 저장한 날짜를 포함해주기 위해 date생성
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String fileName = sdf.format(new Date()) + storeName;
+		String fileName = storeName +"_"+ sdf.format(new Date());
 
 		// 파일 경로, 파일 이름 , 파일 확장자에 맡는 파일 생성
 		File temp = new File(savePath + fileName + ".png");
