@@ -27,7 +27,7 @@
 <body>
 	
 	<!-- content -->
-
+<h2>ㅎㅇ 난 가게 리스트 페이지</h2>
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 

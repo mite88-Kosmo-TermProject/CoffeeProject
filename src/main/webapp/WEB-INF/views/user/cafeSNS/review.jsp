@@ -7,8 +7,8 @@
  * </pre
 >
 */ --%> <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -183,7 +183,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
           <div class="row g-4" id="show_data">
             <!-- snsㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
-
+            
             <!-- // -->
           </div>
 
@@ -200,31 +200,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
 
     <!-- footer -->
-
-    <%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-    <!-- 좋아요 JS(정순만) -->
-    <script
-      type="text/javascript"
-      src="<%=request.getContextPath()%>/resources/js/like.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"
-    ></script>
-
-    <script>
-      //찜(하트)
-      function heart(x) {
-        if (x.className === "far fa-heart fa-lg") {
-          x.className = "fas fa-heart fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-heart fa-lg";
-          x.style.color = "black";
-        }
-      }
-    </script>
-
+  	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
+  	<!--리뷰 삭제  -->
+  	
+  	
+    
+    
+    <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
+    
+    
+    
     <!-- 사진 -->
     <link
       rel="stylesheet"
@@ -240,7 +226,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           fitImagesInViewport: false,
         });
       });
+      
     </script>
     <!-- footer -->
+   
   </body>
 </html>

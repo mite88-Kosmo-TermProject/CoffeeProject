@@ -1,6 +1,8 @@
 var nowPage=1;
 //거리 계산해주는 함수...
 
+
+    
 function getdistance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
@@ -71,12 +73,23 @@ function getCafeList(list){
                  let tableData="";
                //console.log("콜백성공"+data);
                //console.log(data[0].review_idx);
-               
+               var user = data.user;
+               console.log(user);
                var check_like = data.check_like;
                console.log(check_like);
                
                /*append 부분*/
                $(data.lists).each(function (index, data) {
+               var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
                var color = "black";
                for(var i =0; i<check_like.length; i++){
                		if(check_like[i].review_idx == data.review_idx){
@@ -87,31 +100,39 @@ function getCafeList(list){
                }
                
                if(data.imageDTO.image_save!=null){
+				console.log(data);
+	
                   var files = data.imageDTO.image_save.split("/");
                   console.log(files[0]);
                    tableData +=""
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
-                     +          '<p>다이아</p>'
+                     +          '<p>카페리뷰</p>'
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
-                     +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
-                     +           '</span>'
+                    +      '<span id="name">';
+                     if (data.memberDTO.mem_nickname == null ||
+					   data.memberDTO.mem_nickname == undefined ||
+					   data.memberDTO.mem_nickname == "null") {
+					   tableData += '<b>비회원</b>';
+				   } else {
+					   tableData += '<b>' + data.memberDTO.mem_nickname + '</b>';
+				   }
+				   tableData += '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                           <!-- 사진 -->
+                          //사진
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
-                     +          'data-lightbox="example-set">'
+                     +          'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
@@ -119,7 +140,7 @@ function getCafeList(list){
                      +        '<a style="display: none"'
                      +         'href="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
                      +         'class="img-fluid"'
-                     +         'data-lightbox="example-set">'
+                     +         'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
@@ -128,22 +149,26 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                             <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                             //업체정보
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
-                     +        '<b>'+data.storesDTO.store_name+'</b> </span>'
-                     +        '<i class="far fa-heart fa-lg"'
-                     +        'id="heart"'
-                     +         'onclick="heart(this)"></i>'
-                     +        '<span name="like" id="like" onclick="like(this,'+ data.review_idx+')">'
+                     +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
+                     +data.storesDTO.store_name+'</b> </a></span>'
+                     //+        '<i class="far fa-heart fa-lg"'
+                     //+        'id="heart"'
+                     //+         'onclick="heart(this)"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div>'
+                     +'</div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -154,24 +179,30 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
-                     +          '<p>다이아</p>'
+                     +          '<p>카페리뷰</p>'
                      +        '</div>'
                      +      '</span>'
-                     +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
-                     +           '</span>'
+                     +      '<span id="name">';
+                     if (data.memberDTO.mem_nickname == null ||
+					   data.memberDTO.mem_nickname == undefined ||
+					   data.memberDTO.mem_nickname == "null") {
+					   tableData += '<b>비회원</b>';
+				   } else {
+					   tableData += '<b>' + data.memberDTO.mem_nickname + '</b>';
+				   }
+				   tableData += '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                           <!-- 사진 -->
+                          //사진
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
-                     +          'data-lightbox="example-set">'
+                     +          'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
@@ -179,7 +210,7 @@ function getCafeList(list){
                      +        '<a style="display: none"'
                      +         'href="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
                      +         'class="img-fluid"'
-                     +         'data-lightbox="example-set">'
+                     +         'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
@@ -190,21 +221,25 @@ function getCafeList(list){
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			      +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
-                     +        '<b>'+data.storesDTO.store_name+'</b> </span>'
-                     +        '<i class="far fa-heart fa-lg"'
-                     +        'id="heart"'
-                     +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
+                    +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
+                     +data.storesDTO.store_name+'</b> </a></span>'
+                    // +        '<i class="far fa-heart fa-lg"'
+                    // +        'id="heart"'
+                    // +         'onclick="heart()"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'<i class="bi bi-trash3">리뷰삭제</i>'
+                     +		'</div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -230,10 +265,20 @@ function getCafeList(list){
                  let tableData="";
                //console.log("콜백성공"+data);
                //console.log(data[0].review_idx);
-               
+               var user = data.user;
                var check_like = data.check_like;
                /*append 부분*/
                $(data.lists).each(function (index, data) {
+                var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star" style="color:orange;"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star" style="color:orange;"></i>';
+						}
+					}
                var color = "black";
                for(var i =0; i<check_like.length; i++){
                		if(check_like[i].review_idx == data.review_idx){
@@ -250,25 +295,31 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
-                     +          '<p>다이아</p>'
+                     +          '<p>카페리뷰</p>'
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
                      +        '</div>'
                      +      '</span>'
-                     +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
-                     +           '</span>'
+                    +      '<span id="name">';
+                     if (data.memberDTO.mem_nickname == null ||
+					   data.memberDTO.mem_nickname == undefined ||
+					   data.memberDTO.mem_nickname == "null") {
+					   tableData += '<b>비회원</b>';
+				   } else {
+					   tableData += '<b>' + data.memberDTO.mem_nickname + '</b>';
+				   }
+				   tableData += '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                           <!-- 사진 -->
+                          //사진
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
-                     +          'data-lightbox="example-set">'
+                     +          'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="../resources/img/review/'+files[0]+'?max-width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
@@ -276,7 +327,7 @@ function getCafeList(list){
                      +        '<a style="display: none"'
                      +         'href="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
                      +         'class="img-fluid"'
-                     +         'data-lightbox="example-set">'
+                     +         'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="../resources/img/review/'+files[1]+'?max-width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
@@ -285,22 +336,26 @@ function getCafeList(list){
                      +    '</div>'
                      +    '<div class="options">'
                      +      '<div class="username">'
-                             <!-- 업체정보 -->
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+                             //업체정보
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
-                     +        '<b>'+data.storesDTO.store_name+'</b> </span>'
-                     +        '<i class="far fa-heart fa-lg"'
-                     +        'id="heart"'
-                     +         'onclick="heart(this)"></i>'
-                     +        '<span name="like" id="like" onclick="like(this,'+ data.review_idx+')">'
+                     +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
+                     +data.storesDTO.store_name+'</b> </a></span>'
+                     //+        '<i class="far fa-heart fa-lg"'
+                     //+        'id="heart"'
+                     //+         'onclick="heart(this)"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+         			 +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -311,24 +366,30 @@ function getCafeList(list){
                   +'<div class="col-md-6 col-lg-4 mb-5">'
                      +'<div id="snsList">'
                      +    '<div class="username">'
-                     +      '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +     '<span id="grade">'
                      +        '<div class="common-grade-badge d small has-text mb-2">'
                      +          '<i class="fas fa-coffee"></i>'
-                     +          '<p>다이아</p>'
+                     +          '<p>카페리뷰</p>'
                      +        '</div>'
                      +      '</span>'
-                     +      '<span id="name">'
-                     +        '<b>'+data.memberDTO.mem_id+'</b>'
-                     +           '</span>'
+                     +      '<span id="name">';
+                     if (data.memberDTO.mem_nickname == null ||
+					   data.memberDTO.mem_nickname == undefined ||
+					   data.memberDTO.mem_nickname == "null") {
+					   tableData += '<b>비회원</b>';
+				   } else {
+					   tableData += '<b>' + data.memberDTO.mem_nickname + '</b>';
+				   }
+				   tableData += '</span>'
                      +      '<i class="fas fa-ellipsis-v"></i>'
                      +    '</div>'
                      +    '<div style="position: relative">'
-                           <!-- 사진 -->
+                          //사진
                      +      '<figure class="photoSet" data-count="2">'
                      +        '<a href="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473" '
                      +          'class="img-fluid"'
-                     +          'data-lightbox="example-set">'
+                     +          'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="https://static-file.jejupass.com/download/781859?max-width=592&amp;height=473"'
                      +           'class="img-fluid image"'
                      +            'id="post"/>'
@@ -336,7 +397,7 @@ function getCafeList(list){
                      +        '<a style="display: none"'
                      +         'href="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
                      +         'class="img-fluid"'
-                     +         'data-lightbox="example-set">'
+                     +         'data-lightbox="example-set'+data.review_idx+'">'
                      +          '<img src="https://static-file.jejupass.com/download/781860?max-width=592&amp;height=473"'
                      +          'class="img-fluid image"'
                      +           'id="post"/>'
@@ -346,22 +407,25 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
-                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-                     +        '<img src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"/>'
+        			      +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
-                     +        '<b>'+data.storesDTO.store_name+'</b> </span>'
-                     +        '<i class="far fa-heart fa-lg"'
-                     +        'id="heart"'
-                     +         'onclick="heart()"></i>'
-                     +        '<span id="like">'
+                     +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
+                     +data.storesDTO.store_name+'</b> </a></span>'
+                     //+        '<i class="far fa-heart fa-lg"'
+                     //+        'id="heart"'
+                     //+         'onclick="heart()"></i>'
+                     +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
-                     +      '<span style="color: grey; font-size: 14px">별점:' +data.review_star+'</span>'
+                     +	'<div class="rating-box" style="text-align: left;">'
+					 + star_txt
+					 +		'</div></div>'
                      +    '</div>'
                      +    '<br />'
                      +  '</div>'
@@ -374,6 +438,7 @@ function getCafeList(list){
                console.log("에러발생" + err.status);
             }
            })});
+
    };
    // 실패했을때 호출되는 콜백함수
    var showError = function(error){

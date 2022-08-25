@@ -10,7 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,8 +159,6 @@ img+div {
 
 
 </head>
-
-
 
 <body class="Email"
 	style="margin: 0; padding: 0; border: 0; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; min-width: 100% !important; width: 100% !important;">

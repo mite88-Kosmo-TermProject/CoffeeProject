@@ -68,10 +68,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-	
-	
 	<!-- 오라클 DATE 설정 -->
-	
 
 	<!--파일업로드용 multipartResolver빈 (정다운) -->
 	
@@ -84,6 +81,6 @@
 		<websocket:mapping handler="echoHandler" path="/echo"/>
 		<websocket:sockjs/>
 	</websocket:handlers>
-
+	
 	
 </beans>

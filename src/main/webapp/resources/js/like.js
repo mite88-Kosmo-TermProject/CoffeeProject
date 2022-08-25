@@ -1,15 +1,17 @@
-function like(x, idx){
-var i = jQuery("i",x);
-var t = jQuery("small", x);
-console.log(x.style.color);
-console.log(x.text);
+function like(x, idx , id){
+var i = $("i",x);
+var t = $("small", x);
+console.log(id);
+if(id==="null" || id===""){
+	alert("로그인 후 이용해주세요");
+	return false;
+}
 		$.ajax({
 		 url : "../like.do",
          type : "POST",
          data : { "review_idx" : idx
          },
 	    success : (data)=> {
-	       console.log(data);
 	        if (data.likecheck==0) {
 	           i.css("color","red");
 	           t.text(data.like_hit);

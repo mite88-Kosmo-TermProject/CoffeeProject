@@ -1,7 +1,7 @@
 package com.coffice.user.controller;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Member;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,9 +71,9 @@ public class UserMemberController {
 //	}
 	//로그인
 	@RequestMapping(value="/member/loginAction.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO) throws Exception{
-		
-		if(sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"))==null) {
+	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO, Model model) throws Exception{
+		memberDTO = sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"));
+		if(memberDTO == null) {
 			 resp.setCharacterEncoding("utf-8");
 		     PrintWriter writer = resp.getWriter();
 		     writer.println("<script type='text/javascript'>");
@@ -86,10 +84,21 @@ public class UserMemberController {
 		     
 		}
 		else {
+			String passdate = sqlSession.getMapper(UserMemberImpl.class).checkpassoneday(req.getParameter("mem_id"));
+			String now = LocalDate.now().toString();
+			if(passdate.equals(now)) {
+				System.out.println(passdate);
+				System.out.println(now);
+				model.addAttribute("passoneday","true");
+			}
+			else {
+				System.out.println(passdate);
+				System.out.println(now);
+				model.addAttribute("passoneday","false");
+			}
 			session.setAttribute("siteUserInfo", memberDTO);
-			session.setAttribute("user_id", memberDTO.getMem_id());
 		}
-		return "redirect:/";
+		return "home";
 	}
 
 	//로그아웃
@@ -99,7 +108,7 @@ public class UserMemberController {
 		//세션 영역 정보 지움 ㅎㅎ
 		session.invalidate();
 		
-		return "redirect:/";
+		return "home";
 	}
 
 	//아이디 찾기 페이지
@@ -348,7 +357,17 @@ public class UserMemberController {
 	    		session.setAttribute("siteUserInfo", dto);
 	    	}
 	    	//메인 페이지 redirect로 설정 해야함
-	    	return "redirect:/";
+	    	return "home";
 	    	
 	    }
+	 //룰렛이벤트 포인트 지급
+	 @RequestMapping("/member/inserteventpoint.do")
+	 @ResponseBody
+	 public void insertEventPoint (HttpServletRequest req , HttpSession session) {
+		MemberDTO userdto =  (MemberDTO) session.getAttribute("siteUserInfo");
+		int point = Integer.parseInt(req.getParameter("point"));
+		String mem_id = userdto.getMem_id();
+		sqlSession.getMapper(UserMemberImpl.class).inserteventpoint(mem_id, point);
+	 }
+	 
 }
