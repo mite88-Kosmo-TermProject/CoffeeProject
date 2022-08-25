@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coffice.user.service.BoardImpl">
+
+
+ 	<select id="getTotalCountFlag" resultType="int">
+		SELECT COUNT(*) from board where board_flag = #{_flag}
+	</select>
+ 	
+ 	<select id="listPage" resultType="com.coffice.dto.BoardDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM(
+				SELECT * FROM board where board_flag = #{param3} ORDER BY board_idx DESC
+			) Tb
+		)
+		WHERE rNum BETWEEN #{param1} AND #{param2}
+	</select>
+	<select id="getMem" resultType="com.coffice.dto.MemberDTO" >
+		select * from member where mem_id = #{param}
+	</select>
+	<select id="boardView" resultType="com.coffice.dto.BoardDTO"
+		parameterType="com.coffice.dto.BoardDTO">
+		select * from board where board_idx = #{board_idx}
+	</select>
+	<insert id="boardWrite" >
+		INSERT INTO board (board_idx, mem_id, board_title, board_content, board_flag, board_visitcount)
+		VALUES
+		(idx_seq.nextval, #{param3}, #{param1}, #{param2}, #{param4}, 0)
+	</insert>
+	<update id="boardEdit" parameterType="com.coffice.dto.BoardDTO">
+		UPDATE board
+			SET board_title = #{board_title}, board_content = #{board_content}
+		WHERE board_idx = #{board_idx}
+	</update>
+	<update id="visitcountUp">
+		UPDATE board
+			SET board_visitcount = board_visitcount + 1
+		WHERE board_idx = #{board_idx}
+	</update>
+	<delete id="boardDelete" parameterType="com.coffice.dto.BoardDTO">
+		DELETE FROM board 
+		WHERE board_idx = #{board_idx}
+	</delete>
+</mapper>

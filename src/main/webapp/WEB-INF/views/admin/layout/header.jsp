@@ -152,7 +152,7 @@
 					
 					
 						
-					<li class="menu-item">
+					<li class="menu-item"> 
 						<a href="javascript:void(0);" class="menu-link menu-toggle"> 
 							<i class="menu-icon tf-icons bx bx-dock-top"></i>
 							금액관리(보류)
