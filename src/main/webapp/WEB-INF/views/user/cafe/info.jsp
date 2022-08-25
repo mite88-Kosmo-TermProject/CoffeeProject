@@ -324,6 +324,38 @@ p.txt:before {
 
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
+<script type="text/javascript">
+//찜(하트)
+function heart(x,idx,id) {
+   	if(id==="null" || id===""){
+  		alert("로그인 후 이용해주세요");
+  		return false;
+  	} 
+  	console.log(idx);
+  	console.log(id);
+  	$.ajax({
+  		url : "../jjim.do",
+  		type : "POST",
+  		data : {"review_idx" : idx,
+  				"user_id" : id	
+  		},
+  		dataType : "json",
+  		success : (data) =>{
+  			console.log(data.check);
+  			if (data.check === 0) {
+  		          x.className = "fas fa-heart fa-lg";
+  		          x.style.color = "red";
+  		        } else {
+  		          x.className = "far fa-heart fa-lg";
+  		          x.style.color = "black";
+  		        }
+  		},
+  		error : (err) =>{
+  			console.log("에러");
+  		},
+  	});
+}
+</script>
 </head>
 
 
@@ -392,6 +424,7 @@ p.txt:before {
 											${check_review}</li>
 										<li><i class="fa fa-solid fa-star mt-2"></i>
 											${resultList.store_star}</li>
+										<li><i class="far fa-heart fa-lg" id="heart" onclick="heart(this,'${resultList.store_idx}','${sessionScope.user_id }')"></i></li>
 									</ul>
 								</div>
 								<div class="btn-group" role="group"">

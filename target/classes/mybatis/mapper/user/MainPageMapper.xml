@@ -4,7 +4,48 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.coffice.user.service.HomeImpl">
-
+<resultMap type="com.coffice.dto.StoresDTO" id="StoreMap">
+		<id property="store_idx" column="store_idx"/>	
+		<id property="store_name" column="store_name"/>	
+		<id property="store_latitude" column="store_latitude"/>	
+		<id property="store_longitude" column="store_longitude"/>	
+	</resultMap>
+	
+	<resultMap type="com.coffice.dto.ImageDTO" id="ImageMap">
+		<id property="image_idx" column="image_idx"/>
+		<id property="review_idx" column="review_idx"/>
+		<id property="store_idx" column="store_idx"/>
+		<id property="image_origin" column="image_origin"/>
+		<id property="image_save" column="image_save"/>
+		<id property="image_postdate" column="image_postdate"/>
+		<id property="image_rprsn" column="image_rprsn"/>
+	</resultMap>
+	
+	<resultMap type="com.coffice.dto.MemberDTO" id="UserMap">
+		<id property="mem_id" column="mem_id"/>
+		<id property="mem_name" column="mem_name"/>
+		<id property="mem_nickname" column="mem_nickname"/>
+		<id property="mem_email" column="mem_email"/>
+		<id property="mem_phone" column="mem_phone"/>
+	</resultMap>
+	<resultMap type="com.coffice.dto.HeartDTO" id="HeartMap">
+		<id property="review_idx" column="review_idx"/>
+		<id property="like_flag" column="like_flag"/>
+		<id property="like_postdate" column="like_postdate"/>
+		<id property="mem_id" column="mem_id"/>
+	</resultMap>
+	
+	<resultMap type="com.coffice.dto.ReviewDTO" id="SNSMap">
+		<result property="review_idx" column="review_idx"/>
+		<result property="review_content" column="review_content"/>
+		<result property="review_star" column="review_star"/>
+		<result property="review_img" column="review_img"/>
+		<result property="like_hit" column="like_hit"/>
+		<result property="mem_id" column="mem_id"/>
+		<collection property="memberDTO" resultMap="UserMap"/>
+		<collection property="storesDTO" resultMap="StoreMap"/>
+		<collection property="imageDTO" resultMap="ImageMap"/>
+	</resultMap>
 
 <select id="getList" resultType="com.coffice.dto.StoresDTO">
 	SELECT store_idx, store_name, store_owner, store_phone,store_localaddr, store_menu, store_img
@@ -12,6 +53,15 @@
 	FROM stores ORDER BY store_idx DESC
 			)Tb
 		)
+		WHERE rNum BETWEEN 1 AND 6
+</select>
+
+<select id="mainpage_review" resultMap="SNSMap">
+		SELECT * FROM(select Tb.*, rownum rNum from(select store_name,review_content,review.store_idx, review.mem_id,review_star,like_hit,image_save
+		FROM review LEFT join image on review.review_idx = image.review_idx
+                    LEFT join stores on review.store_idx = stores.store_idx
+                    LEFT join member on review.mem_id = member.mem_id
+        order by like_hit desc)Tb)
 		WHERE rNum BETWEEN 1 AND 6
 </select>
 </mapper>

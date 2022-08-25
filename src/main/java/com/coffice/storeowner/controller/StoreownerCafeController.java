@@ -139,7 +139,7 @@ public class StoreownerCafeController {
 			@RequestParam("file") MultipartFile file, @RequestParam("multiFile") List<MultipartFile> multiFileList) throws Exception {
 
 		storesDTO.setStore_idx(Integer.parseInt(req.getParameter("store_idx")));
-		imageDTO.setStore_idx((req.getParameter("store_idx")));
+		imageDTO.setStore_idx(Integer.parseInt(req.getParameter("store_idx")));
 
 		storesDTO.setStore_zipcode(req.getParameter("addr1"));
 		storesDTO.setStore_roadaddr(req.getParameter("addr2"));
