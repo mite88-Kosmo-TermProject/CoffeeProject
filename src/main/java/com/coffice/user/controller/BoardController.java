@@ -86,6 +86,72 @@ public class BoardController {
 		return "user/community/boardList";
 	}
 
+	// 검색 기반 게시판 리스트
+		@RequestMapping(value = "/community/searchList.do", method = RequestMethod.GET)
+		public String searchList(Model model, HttpServletRequest req,  HttpServletResponse resp) {
+			
+			BoardDTO boardDTO = new BoardDTO();
+			
+			System.out.println("처음 컨트롤러는 실행?");
+			
+			String searchField = req.getParameter("searchField");
+			System.out.println("검색영역="+ searchField);
+			String searchTxt = req.getParameter("searchTxt");
+			System.out.println("검색단어="+ searchTxt);
+			String board_flag = req.getParameter("board_flag");
+			System.out.println("널초기화전 플래그"+ board_flag);
+			if(board_flag == null) {
+				board_flag = "1";
+			}
+			System.out.println("플래그 알려주세요"+board_flag);
+			boardDTO.setBoard_flag(board_flag);
+			boardDTO.setSearchField(searchField);
+			boardDTO.setSearchTxt(searchTxt);
+	
+			
+			model.addAttribute("board_flag",board_flag);
+			int totalRecordCount;
+			
+				totalRecordCount = sqlSession.getMapper(BoardImpl.class).getTotalCountFlagSearch(boardDTO);
+			
+				System.out.println("검색된 게시물 갯수"+totalRecordCount);
+
+			//검색어없는 게시물의 총개수를 출력 
+			//한페이지에 출력될 게시물 갯수
+			int pageSize = 10;
+			//페이지 블럭 갯수
+			int blockPage = 5;
+			//총페이지수
+			int totalPage = (int) Math.ceil((double) totalRecordCount / pageSize);
+
+			//현재페이지
+			int nowPage = req.getParameter("nowPage") == null ? 1 : Integer.parseInt(req.getParameter("nowPage"));
+			//구간의 시작값
+			int start = (nowPage - 1) * pageSize + 1;
+			//구간의 종료값
+			int end = nowPage * pageSize;
+
+			boardDTO.setStart(start);
+			boardDTO.setEnd(end);
+			//전체게시물 출력
+			ArrayList<BoardDTO> lists = sqlSession.getMapper(BoardImpl.class).listPageSearch(boardDTO);
+			for (BoardDTO boardDTO2 : lists) {
+				System.out.println(boardDTO2);
+			}
+			//페이지 버튼 누를시 이동할 경로 선택
+			String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
+					req.getContextPath() + "/community/searchList.do?searchField="+searchField+"&&searchTxt="+searchTxt+"&&");
+			//페이지 str 모델객체에 저장
+			model.addAttribute("pagingImg", pagingImg);
+			//목록용 나우페이지
+			model.addAttribute("nowPage",nowPage);
+			model.addAttribute("board_flag", board_flag);
+			//게시물 정보 저장
+			model.addAttribute("lists", lists);
+			//지도 검색 페이지 이동
+			return "user/community/boardList";
+		}
+
 	
 	// 게시물 상세
 	@RequestMapping(value = "/user/community/boardView.do", method = RequestMethod.GET)
@@ -161,15 +227,26 @@ public class BoardController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
+			String mem_case = "";
 			for (MemberDTO memberDTO : member) {
 				map.put("mem_case", memberDTO.getMem_case() );
+				mem_case = memberDTO.getMem_case();
 			}
-
+			System.out.println("mem_case"+mem_case);
 			model.addAttribute("map", map);
-			
+			String mode = "write";
 			String nowPage = req.getParameter("nowPage");
 			String board_flag = req.getParameter("board_flag");
 			
+			if(board_flag.equals("1") || board_flag.equals("2") ) {
+				if(!(mem_case.equals("4"))) {
+					model.addAttribute("mode", mode);
+					//목록용 나우페이지
+					model.addAttribute("nowPage",nowPage);
+					model.addAttribute("board_flag",board_flag);
+					return "/user/community/boardError";
+				}
+			}
 			model.addAttribute("nowPage",nowPage);
 			model.addAttribute("board_flag",board_flag);
 			System.out.println("컨트롤러 호출됨??");

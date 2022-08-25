@@ -29,18 +29,15 @@
 	<!-- content -->
 <div class="container">
 <c:if test="${mode eq 'write'}">
-<span>글 작성이</span>
+<span>글 작성을 </span>
 </c:if>
 <c:if test="${mode eq 'edit' }">
-<span>글 수정이</span>
+<span>글 수정을 </span>
 </c:if>
 <c:if test="${mode eq 'delete' }">
-<span>글 삭제가</span>
+<span>글 삭제를 </span>
 </c:if>
-<c:if test="${mode eq 'reply' }">
-<span>답변 달기가</span>
-</c:if>
-<span>실패했습니다.(본인 글에 대해서만 작업이 가능합니다.)</span>
+<span>실패했습니다.(권한 밖의 작업입니다.)</span>
 
 <button class="btn btn-dark" type="button" 
 			onclick="location.href='<%=request.getContextPath() %>/community/boardList.do?nowPage=${nowPage}&&board_flag=${board_flag }'">

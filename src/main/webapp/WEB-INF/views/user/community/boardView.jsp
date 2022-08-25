@@ -56,9 +56,6 @@
 			
 				<a href="<%=request.getContextPath() %>/community/boardEdit.do?nowPage=${nowPage}&&mode=edit&&board_idx=${board_idx}&&board_flag=${board_flag }"><button class="btn btn-dark">수정하기</button></a>
 			
-			<c:if test="${board_flag eq '3' }">
-				<a href="<%=request.getContextPath() %>/community/boardReply.do?nowPage=${nowPage}&&mode=reply"><button class="btn btn-dark">답변달기</button></a>
-			</c:if>
 				<a href="<%=request.getContextPath() %>/community/boardDelete.do?nowPage=${nowPage}&&mode=delete&&board_idx=${board_idx}&&board_flag=${board_flag }"><button class="btn btn-dark">삭제하기</button></a>
 			</td>
 			

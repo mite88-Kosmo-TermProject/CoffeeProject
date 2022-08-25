@@ -16,6 +16,33 @@
 		)
 		WHERE rNum BETWEEN #{param1} AND #{param2}
 	</select>
+	<select id="getTotalCountFlagSearch" resultType="int"
+	parameterType="com.coffice.dto.BoardDTO">
+        SELECT COUNT(*) from(
+		select * from board where board_flag = #{board_flag}
+		
+        )<if test="searchTxt!=null and !searchTxt.equals('')">
+		where #{searchField} LIKE '%'||#{searchTxt}||'%' 
+		</if> 
+	</select>
+ 	
+ 	<select id="listPageSearch" resultType="com.coffice.dto.BoardDTO"
+ 	parameterType="com.coffice.dto.BoardDTO">
+		select * from (
+			select Tb.*, rownum rNum FROM(
+				select * from (
+					select * from board
+					where board_flag = #{board_flag}
+				) 
+				<if test="searchTxt!=null and !searchTxt.equals('')">
+								where #{searchField} LIKE '%'||#{searchTxt}||'%' 
+				</if>
+				order by board_IDX desc
+				
+			)Tb 
+		)
+		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	</select>
 	<select id="getMem" resultType="com.coffice.dto.MemberDTO" >
 		select * from member where mem_id = #{param}
 	</select>

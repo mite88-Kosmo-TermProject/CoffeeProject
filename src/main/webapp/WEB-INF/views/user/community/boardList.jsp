@@ -29,7 +29,7 @@
 	
 	<!-- content -->
 
-	<div class="container-fluid">
+<div class="container-fluid">
 		<c:if test="${board_flag eq 1 }">
 			<h2>공지게시판</h2>
 		</c:if>
@@ -39,6 +39,19 @@
 		<c:if test="${board_flag eq 3 }">
 			<h2>자유게시판</h2>
 		</c:if>
+	<div>
+		<form action="<%=request.getContextPath() %>/community/searchList.do?">
+			<select name="searchField" id="searchField">
+				<option value="board_title">제목</option>
+				<option value="mem_id">작성자</option>
+				<option value="board_content">내용</option>
+			</select>
+			<input type="hidden" name="board_flag" value="${board_flag }" />
+			<input type="hidden" name="nowPage" value="${nowPage }" />
+			<input type="text" name="searchTxt" id="searchTxt" />
+			<button type="submit" class="btn btn-dark">검색</button>
+		</form>
+	</div>
 	<div >
 	  <table class="table table-hover">
 	    <tr>
