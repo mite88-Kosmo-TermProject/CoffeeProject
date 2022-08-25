@@ -46,11 +46,11 @@ input[type=checkbox] {
 							<form id="formAccountSettings" method="POST" enctype="multipart/form-data">
 								<input type="hid den" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
 								<input type="hid den" id="store_idx" name="store_idx" value="${edit.store_idx }" />
-								<input type="hid den" id="arrayParam" name="arrayParam" value="${edit.store_tag }"/>
-								<input type="hid den" id="store_latitude" name="store_latitude" value="${edit.store_latitude }"/>
-								<input type="hid den" id="store_longitude" name="store_longitude" value="${edit.store_longitude }"/>
-								<input type="hid den" id="store_sigungu" name="store_sigungu" value="${edit.store_sigungu }"/>
-								<input type="hid den" id="store_dong" name="store_dong"  value="${edit.store_dong }"/>
+								<input type="hidden" id="arrayParam" name="arrayParam" value="${edit.store_tag }"/>
+								<input type="hidden" id="store_latitude" name="store_latitude" value="${edit.store_latitude }"/>
+								<input type="hidden" id="store_longitude" name="store_longitude" value="${edit.store_longitude }"/>
+								<input type="hidden" id="store_sigungu" name="store_sigungu" value="${edit.store_sigungu }"/>
+								<input type="hidden" id="store_dong" name="store_dong"  value="${edit.store_dong }"/>
 								
 								<div class="card">
 									<div class="card-header header-elements p-3 my-n1">

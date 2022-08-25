@@ -7,11 +7,13 @@
 
 
 <select id="getList" resultType="com.coffice.dto.StoresDTO">
-	SELECT store_idx, store_name, store_owner, store_phone,store_localaddr, store_menu
-	 FROM (SELECT Tb.*, rownum rNum FROM(SELECT * 
-	FROM stores ORDER BY store_idx DESC
-			)Tb
-		)
+	SELECT *
+	 FROM (SELECT Tb.*, rownum rNum FROM
+	 	(SELECT * FROM stores join JJIM on stores.store_idx = jjim.store_idx 
+where to_char(jjim_postdate,'yyyy-mm')=to_char(sysdate, 'yyyy-mm')
+ORDER BY jjim_hit DESC)
+	 		Tb
+	 		)
 		WHERE rNum BETWEEN 1 AND 6
 </select>
 </mapper>

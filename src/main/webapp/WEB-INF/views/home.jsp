@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+<script
+	src="<%=request.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 <!-- header -->
 <%@ include file="/WEB-INF/views/user/layout/header.jsp"%>
 
@@ -15,12 +16,20 @@
 <!-- Go Trip CSS  -->
 
 <link rel="stylesheet"
-	href="<%= request.getContextPath() %>/resources/css/main.css">
+	href="<%=request.getContextPath()%>/resources/css/main.css">
 
 
 <!-- Go Trip CSS -->
 
 <meta charset="utf-8">
+<style>
+
+div[id*="carouselExampleControls"] img{
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+</style>
 
 </head>
 
@@ -44,7 +53,7 @@
 									Carpenter & Craftsman Services</h1>
 								<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?</p>
 								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
+								<a href="<%=request.getContextPath()%>/SignUp.do"
 									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
 									More</a> <a href=""
 									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
@@ -75,7 +84,7 @@
 
 
 								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
+								<a href="<%=request.getContextPath()%>/SignUp.do"
 									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
 									More</a> <a href=""
 									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
@@ -102,7 +111,7 @@
 									justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd
 									rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
 								<!-- 이거 누르면 회원가입으로 갑니다 -->
-								<a href="<%= request.getContextPath() %>/SignUp.do"
+								<a href="<%=request.getContextPath()%>/SignUp.do"
 									class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
 									More</a> <a href=""
 									class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
@@ -115,6 +124,9 @@
 		</div>
 	</div>
 	<!-- Carousel End -->
+
+
+
 
 
 	<!-- 검색창 -->
@@ -132,23 +144,24 @@
 				<div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s"
 					style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 					<!-- 검색창 -->
-					<form action="./cafe/list.do" method="post" onsubmit="searchValidate(this)">
-					<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
-						data-bs-toggle="offcanvas" data-bs-target="#searchcanvasTop"
-						aria-controls="offcanvasTop">
-						
-						<div class="input-group">
-							<input type="text" name="searchTxt" placeholder="여기에 카페를 검색하세요"
-								aria-describedby="button-addon1"
-								class="form-control border-0 bg-light">
-							<div class="input-group-append">
-								<button id="button-addon1" type="submit"
-									class="btn btn-link text-primary">
-									<i class="fa fa-search"></i>
-								</button>
+					<form action="./cafe/list.do" method="post"
+						onsubmit="searchValidate(this)">
+						<div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+							data-bs-toggle="offcanvas" data-bs-target="#searchcanvasTop"
+							aria-controls="offcanvasTop">
+
+							<div class="input-group">
+								<input type="text" name="searchTxt" placeholder="여기에 카페를 검색하세요"
+									aria-describedby="button-addon1"
+									class="form-control border-0 bg-light">
+								<div class="input-group-append">
+									<button id="button-addon1" type="submit"
+										class="btn btn-link text-primary">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
 					</form>
 
 				</div>
@@ -163,7 +176,32 @@
 		</div>
 	</div>
 	<!-- 검색 end -->
+	<%-- <c:forTokens items="${cafe.img }" delims="[]" var="list" varStatus="loop">
 
+				<img alt="" src="<%=request.getContextPath()%>/resources/img/owner/${list}">
+				console.log(${list})
+				</c:forTokens> --%>
+
+
+	<script>
+					$(function () {
+						<c:forEach items="${ mainCafeList }" var="img" varStatus="vs">
+							var img${vs.index} = "${img.store_img}"
+							console.log(img${vs.index})
+							var i_${vs.index} = img${vs.index}.split('/')
+							var content = "";
+							for(var i = 0; i < i_${vs.index}.length; i++) {
+								if(i==0){
+								content += "<div class='carousel-item active'><img class='d-block w-100' name='img' src='<c:url value='/' />resources/img/owner/" + i_${vs.index}[i] +"'></div>"
+								}else{
+								content += "<div class='carousel-item'><img class='d-block w-100' name='img' src='<c:url value='/' />resources/img/owner/" + i_${vs.index}[i] +"'></div>"
+								}
+		}
+							$('#img${vs.index}').append(content)
+						</c:forEach>
+					})
+
+				</script>
 
 	<!-- 이달의 카페 -->
 	<div class="container-xxl py-5">
@@ -172,28 +210,42 @@
 				<h1 class="display-6 mb-5">이달의 카페</h1>
 			</div>
 			<div class="row g-4">
-			
-			<c:forEach items="${mainCafeList }" var="cafe" varStatus="loop">
-			
-				<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item">
-						<div class="overflow-hidden">
-							<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/owner/"
-								alt="">
-						</div>
-						<div
-							class="p-4 text-center border border-5 border-light border-top-0">
-							<h4 class="mb-3">${cafe.store_name }</h4>
-							<p>카페전화번호 : ${cafe.store_phone } </p>
-							<p> 카페주소: ${cafe.store_localaddr }</p>
-							<a class="fw-medium" href="">Read More<i
-								class="fa fa-arrow-right ms-2"></i></a>
+
+				<c:forEach items="${ mainCafeList }" var="cafe" varStatus="loop">
+
+					<div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="service-item">
+							<div id="carouselExampleControls${loop.index }" class="carousel slide carousel-fade" data-bs-ride="carousel">
+								<div class="carousel-inner" id="img${loop.index }">
+								</div>
+								<button class="carousel-control-prev" type="button"
+									data-bs-target="#carouselExampleControls${loop.index }" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button"
+									data-bs-target="#carouselExampleControls${loop.index }" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+							</div>
+
+							<!-- <div class="overflow-hidden" id="img${loop.index }">
+
+										</div> -->
+							<div
+								class="p-4 text-center border border-5 border-light border-top-0">
+								<h4 class="mb-3">${cafe.store_name }</h4>
+								<p>카페전화번호 : ${cafe.store_phone }</p>
+								<p>카페주소: ${cafe.store_localaddr }</p>
+								<p>찜수 : ${cafe.jjim_hit }</p>
+								<a class="fw-medium" href="">Read More<i
+									class="fa fa-arrow-right ms-2"></i></a>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-				
+				</c:forEach>
+
 			</div>
 		</div>
 	</div>
@@ -229,10 +281,10 @@
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
 												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">Best
-													Carpenter & Craftsman Services</h1>
+													class="text-white text-uppercase mb-3 animated slideInDown">
+													Welcome To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													Best Carpenter & Craftsman Services</h1>
 												<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?
 												</p>
 												<a href=""
@@ -258,10 +310,10 @@
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
 												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">카페
-													추천1</h1>
+													class="text-white text-uppercase mb-3 animated slideInDown">
+													Welcome To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													카페 추천1</h1>
 												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
 													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
 													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
@@ -287,10 +339,10 @@
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
 												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">Best
-													Carpenter & Craftsman Services</h1>
+													class="text-white text-uppercase mb-3 animated slideInDown">
+													Welcome To WooDY</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													Best Carpenter & Craftsman Services</h1>
 												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
 													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
 													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea

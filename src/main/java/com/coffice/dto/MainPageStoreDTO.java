@@ -4,12 +4,10 @@ import java.sql.Date;
 import java.util.List;
 
 import lombok.Data;
-
-//매장정보
 @Data
-public class StoresDTO {
+public class MainPageStoreDTO {
 	
-	private Date postdate;
+private Date postdate;
 	
 	private int store_idx;
 	private String mem_id;
@@ -35,4 +33,5 @@ public class StoresDTO {
 	private String store_tag;
 	private String store_zipcode;
 	private int jjim_hit;
+	private List<String> img;
 }

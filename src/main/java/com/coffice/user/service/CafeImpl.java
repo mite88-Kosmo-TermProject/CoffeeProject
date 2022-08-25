@@ -30,8 +30,8 @@ public interface CafeImpl {
 	public int tagMD(StoresDTO storesDTO);
 	public int tagED(StoresDTO storesDTO);
 	
-	public int imgMD(ImageDTO imageDTO);
-	public int imgED(ImageDTO imageDTO);
+	public int imgMD(StoresDTO storesDTO);
+	public int imgED(StoresDTO storesDTO);
 
 }
 

@@ -73,7 +73,7 @@
                   <a href="<%=request.getContextPath() %>/mypage/main.do?mem_id=${siteUserInfo.mem_id}" class="nav-item nav-link">점주 신청하기</a>
                </span>
            		</c:if>
-           		<c:if test="${siteUserInfo.mem_case eq 5}">
+           		<c:if test="${siteUserInfo.mem_case eq 3}">
                <span style="float:right;">
                   <h6>승인 대기중</h6>
                </span>
@@ -90,9 +90,6 @@
                </span>
                
            		</c:if>
-           		<div>
-           			${siteUserInfo.mem_case}
-           		</div>
 				<!-- Profile Stats pc-->
 				<ul class="profile-numbers mb-1rem">
 					<li><a href="#"> <span class="profile-posts">6</span> 후기

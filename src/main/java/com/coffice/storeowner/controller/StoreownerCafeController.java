@@ -12,7 +12,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,7 +73,7 @@ public class StoreownerCafeController {
 		storesDTO.setStore_zipcode(req.getParameter("addr1"));
 		storesDTO.setStore_roadaddr(req.getParameter("addr2"));
 		storesDTO.setStore_localaddr(req.getParameter("addr3"));
-
+		
 		String tag = commandMap.get("arrayParam").toString();
 		System.out.println(tag);
 		storesDTO.setStore_tag(tag);
@@ -87,8 +86,8 @@ public class StoreownerCafeController {
 		System.out.println(fileList);
 		System.out.println(fileList.get(0).getOriginalFilename());
 		if (fileList.get(0).getOriginalFilename() != "") {
-			String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner";
-			//sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
+			String path = req.getSession().getServletContext().getRealPath("/resources/img/owner");
+			//String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner";
 
 			for (MultipartFile mf : fileList) {
 				String originalName = new String(mf.getOriginalFilename().getBytes(), "UTF-8");
@@ -104,31 +103,36 @@ public class StoreownerCafeController {
 				}
 				
 			}
-			imageDTO.setImage_save(imgfiles);
-			sqlSession.getMapper(CafeImpl.class).imgED(imageDTO);
+			storesDTO.setStore_img(imgfiles);
+			sqlSession.getMapper(CafeImpl.class).imgMD(storesDTO);
 			//sqlSession.getMapper(CafeImpl.class).imgin(storesDTO);
+		} if(file.getOriginalFilename() !="") {
+			
+			//단일 업로드
+			file = req.getFile("file");
+			String orf = new String(file.getOriginalFilename().getBytes(), "UTF-8");
+			String exf = orf.substring(orf.lastIndexOf('.'));
+			
+			
+			System.out.println("originFileName : " + orf);
+			//String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner/menu";
+			String path = req.getSession().getServletContext().getRealPath("/resources/img/owner/menu");
+			String safeFile = getUuid() + exf;
+			
+			try {
+				file.transferTo(new File(path+ File.separator +safeFile));
+				
+				storesDTO.setStore_menu_img(safeFile);
+				sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		//단일 업로드
-		file = req.getFile("file");
-		String orf = file.getOriginalFilename();
-		
-		System.out.println("originFileName : " + orf);
-		String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner/menu";
-		String safeFile = getUuid() + orf;
-		
-		 try {
-	            file.transferTo(new File(path+ File.separator +safeFile));
-	            
-	            storesDTO.setStore_menu(safeFile);
-	            sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
-	            
-	        } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
 
 		sqlSession.getMapper(UserMemberImpl.class).view2(storesDTO);
 
@@ -139,6 +143,7 @@ public class StoreownerCafeController {
 		return "/storeowner/index";
 	}
 
+	
 	// 카페 정보 수정하기
 	@RequestMapping(value = "/storeowner/cafe/updateaction.do", method = RequestMethod.POST)
 	public String update(MultipartHttpServletRequest req, StoresDTO storesDTO, ImageDTO imageDTO, Model model,
@@ -163,9 +168,10 @@ public class StoreownerCafeController {
 		System.out.println(fileList);
 		System.out.println(fileList.get(0).getOriginalFilename());
 		if (fileList.get(0).getOriginalFilename() != "") {
-			String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner";
-			//sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
-
+			String path = req.getSession().getServletContext().getRealPath("/img/owner");
+			
+			//String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner";
+			
 			for (MultipartFile mf : fileList) {
 				String originalName = new String(mf.getOriginalFilename().getBytes(), "UTF-8");
 				String ext = originalName.substring(originalName.lastIndexOf('.'));
@@ -179,31 +185,34 @@ public class StoreownerCafeController {
 					imgfiles += "/" + saveFileName;
 				}
 				System.out.println("123123 : "+imgfiles);
-				imageDTO.setImage_save(imgfiles);
+				storesDTO.setStore_img(imgfiles);
 				
 			}
-			sqlSession.getMapper(CafeImpl.class).imgMD(imageDTO);
+			sqlSession.getMapper(CafeImpl.class).imgMD(storesDTO);
+		} if(file.getOriginalFilename() !="") {
+			
+			file = req.getFile("file");
+			String orf = new String(file.getOriginalFilename().getBytes(), "UTF-8");
+			String exf = orf.substring(orf.lastIndexOf('.'));
+			//String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner/menu";
+			String path = req.getSession().getServletContext().getRealPath("/img/owner/menu");
+			String safeFile = getUuid() + exf;
+			
+			try {
+				file.transferTo(new File(path+ File.separator +safeFile));
+				
+				storesDTO.setStore_menu_img(safeFile);
+				sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		file = req.getFile("file");
-		String orf = file.getOriginalFilename();
 		
-		System.out.println("originFileName : " + orf);
-		String path = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/owner/menu";
-		String safeFile = getUuid() + orf;
-		
-		 try {
-			 	file.transferTo(new File(path+ File.separator +safeFile));
-	            
-	            storesDTO.setStore_menu(safeFile);
-	            sqlSession.getMapper(CafeImpl.class).menuimgMD(storesDTO);
-	            
-	        } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
 
 		/*
 		 * MultipartFile mfile = null; List<Object> resultList = new
@@ -239,10 +248,8 @@ public class StoreownerCafeController {
 		model.addAttribute("edit", edit);
 
 		int idx = storesDTO.getStore_idx();
-		if (req.getParameter("store_tag") != null) {
-
-			sqlSession.getMapper(CafeImpl.class).tagMD(storesDTO);
-		}
+		sqlSession.getMapper(CafeImpl.class).tagMD(storesDTO);
+		
 
 		return "/storeowner/index";
 	}
