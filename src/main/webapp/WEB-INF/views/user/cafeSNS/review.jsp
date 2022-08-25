@@ -18,166 +18,152 @@ pageEncoding="UTF-8"%>
     <!-- 여기에 새로운 css파일있으면 넣기 -->
 
     <style>
-#show_data>div {
-	box-shadow: 0 4px 6px -1px rgb(0 0 0/ 10%), 0 2px 4px -1px
-		rgb(0 0 0/ 6%);
-}
+      #snsList {
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%),
+          0 2px 4px -1px rgb(0 0 0 / 6%);
+      }
 
-.username {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-right: 20px;
-	border-bottom: 1px solid grey;
-	display: inline-grid;
-	width: 100%;
-	grid-template-columns: 1fr 3fr 1fr;
-}
+      .username {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 20px;
+        border-bottom: 1px solid grey;
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: 1fr 3fr 1fr;
+      }
 
-.username img {
-	width: 50px;
-    height: auto;
-	border-radius: 100%;
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 1;
-	grid-column-end: 1;
-}
+      .username img {
+        height: 50px;
+        border-radius: 100%;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 1;
+      }
 
-.username span {
-	font-size: 1rem;
-}
+      .username span {
+        font-size: 1rem;
+      }
 
-.username span#grade, .username span#cafename {
-	grid-row-start: 1;
-	grid-row-end: 1;
-	grid-column-start: 2;
-	grid-column-end: 2;
-}
+      .username span#grade,
+      .username span#cafename {
+        grid-row-start: 1;
+        grid-row-end: 1;
+        grid-column-start: 2;
+        grid-column-end: 2;
+      }
 
-.username span#name, .username span#cafeaddr {
-	grid-row-start: 2;
-	grid-row-end: 2;
-	grid-column-start: 2;
-	grid-column-end: 2;
-}
+      .username span#name,
+      .username span#cafeaddr {
+        grid-row-start: 2;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 2;
+      }
+      .username i:not(.fa-thumbs-up) {
+        float: right;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 3;
+        display: inline-grid;
+        justify-content: end;
+        vertical-align: middle;
+        align-items: center;
+        /*padding-top: 10px; */
+      }
 
-.username i:not(.fa-thumbs-up) {
-	float: right;
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 3;
-	grid-column-end: 3;
-	display: inline-grid;
-	justify-content: end;
-	vertical-align: middle;
-	align-items: center;
-	/*padding-top: 10px; */
-}
+      i#heart {
+        float: right;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 4;
+        display: inline-grid;
+        justify-content: end;
+        vertical-align: middle;
+        align-items: center;
+        /*padding-top: 10px; */
+      }
 
-i#heart {
-	float: right;
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 3;
-	grid-column-end: 4;
-	display: inline-grid;
-	justify-content: end;
-	vertical-align: middle;
-	align-items: center;
-	/*padding-top: 10px; */
-}
+      span#like {
+        float: right;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 5;
+        grid-column-end: 5;
+        display: inline-grid;
+        justify-content: end;
+        vertical-align: middle;
+        align-items: center;
+        /*padding-top: 10px; */
+      }
 
-span#like {
-	float: right;
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 5;
-	grid-column-end: 5;
-	display: inline-grid;
-	justify-content: end;
-	vertical-align: middle;
-	align-items: center;
-	/*padding-top: 10px; */
-}
+      span#like .fa-thumbs-up {
+        grid-row-start: 1;
+        grid-row-end: 1;
+        grid-column-start: 1;
+        grid-column-end: 1;
+      }
 
-span#like .fa-thumbs-up {
-	grid-row-start: 1;
-	grid-row-end: 1;
-	grid-column-start: 1;
-	grid-column-end: 1;
-}
+      span#like small {
+        grid-row-start: 1;
+        grid-row-end: 1;
+        grid-column-start: 2;
+        grid-column-end: 2;
+      }
 
-span#like small {
-	grid-row-start: 1;
-	grid-row-end: 1;
-	grid-column-start: 2;
-	grid-column-end: 2;
-}
+      .image {
+        width: 100%;
+      }
 
-.image {
-	width: 100%;
-}
+      .options {
+        padding: 10px;
+      }
 
-.options {
-	padding: 10px;
-}
+      .options i {
+        padding: 5px;
+        cursor: pointer;
+      }
 
-.options i {
-	padding: 5px;
-	cursor: pointer;
-}
+      .red {
+        color: red;
+      }
 
-.red {
-	color: red;
-}
+      .right {
+        float: right;
+      }
 
-.right {
-	float: right;
-}
+      .info {
+        padding-left: 15px;
+      }
 
-.info {
-	padding-left: 15px;
-}
+      .info img {
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        border: 3px solid white;
+      }
 
-.info img {
-	height: 20px;
-	width: 20px;
-	border-radius: 100%;
-	border: 3px solid white;
-}
+      .info img:first-child {
+        position: relative;
+        z-index: 4;
+      }
 
-.info img:first-child {
-	position: relative;
-	z-index: 4;
-}
+      .info img:nth-child(2) {
+        position: relative;
+        margin-left: -15px;
+        z-index: 3;
+      }
 
-.info img:nth-child(2) {
-	position: relative;
-	margin-left: -15px;
-	z-index: 3;
-}
-
-.info img:nth-child(3) {
-	position: relative;
-	margin-left: -15px;
-	z-index: 2;
-}
-
-/*이미지*/
-.photoSet {
-	width: 100%;
-	height: 200px;
-	overflow: hidden;
-	position: relative; /* 이미지 가운데 정렬을 위해 상대 위치로 고정 */
-}
-
-.photoSet img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-</style>
+      .info img:nth-child(3) {
+        position: relative;
+        margin-left: -15px;
+        z-index: 2;
+      }
+    </style>
 
     <!-- 리뷰 css -->
     <link
@@ -215,25 +201,16 @@ span#like small {
 
     <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-      <!-- 좋아요 JS(정순만) -->
+  	<!--리뷰 삭제  -->
+  	
+  	
+    
+    
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
     
-
-    <script>
-      //찜(하트)
-      function heart(x) {
-        if (x.className === "far fa-heart fa-lg") {
-          x.className = "fas fa-heart fa-lg";
-          x.style.color = "red";
-        } else {
-          x.className = "far fa-heart fa-lg";
-          x.style.color = "black";
-        }
-      }
-      
-    </script>
-
+    
+    
     <!-- 사진 -->
     <link
       rel="stylesheet"
@@ -248,9 +225,8 @@ span#like small {
           disableScrolling: false,
           fitImagesInViewport: false,
         });
-        
-
       });
+      
     </script>
     <!-- footer -->
    

@@ -13,4 +13,5 @@ public interface MemberDAOImpl {
 	public MemberDTO login(String mem_id, String mem_pw, int mem_case);
 	public MemberDTO baselogin(String mem_id, String mem_pw);
 	public ArrayList<MemberDTO> Alliancelist();
+
 }

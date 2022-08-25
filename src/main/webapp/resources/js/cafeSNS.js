@@ -1,6 +1,8 @@
 var nowPage=1;
 //거리 계산해주는 함수...
 
+
+    
 function getdistance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
@@ -157,12 +159,13 @@ function getCafeList(list){
                      //+         'onclick="heart(this)"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div>'
+                     +'</div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
                      +	'<div class="rating-box" style="text-align: left;">'
 					 + star_txt
 					 +		'</div></div>'
@@ -218,7 +221,7 @@ function getCafeList(list){
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
                      +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-        			+      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
+        			      +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                     +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
                      +data.storesDTO.store_name+'</b> </a></span>'
@@ -227,7 +230,9 @@ function getCafeList(list){
                     // +         'onclick="heart()"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'<i class="bi bi-trash3">리뷰삭제</i>'
+                     +		'</div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
@@ -341,7 +346,9 @@ function getCafeList(list){
                      //+         'onclick="heart(this)"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
@@ -400,8 +407,7 @@ function getCafeList(list){
                      +    '<div class="options">'
                      +      '<div class="username">'
 							//like에 보낼 리뷰 idx 값(정순만)
-                     +		  '<input type="hidden" id="review_idx" value="'+data.review_idx+'"/>'
-        			 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
+        			      +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" />'
                      +        '<span id="cafename">'
                      +        '<a href="../cafe/info.do?store_idx='+data.storesDTO.store_idx+'" style="color:#222;"><b>'
                      +data.storesDTO.store_name+'</b> </a></span>'
@@ -410,7 +416,9 @@ function getCafeList(list){
                      //+         'onclick="heart()"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+

@@ -324,6 +324,68 @@ p.txt:before {
 
 <meta charset="utf-8">
 <!-- 여기에 새로운 js,css파일있으면 넣기 -->
+<script type="text/javascript">
+
+//리뷰 삭제 
+function deleteReview(x,idx,review_id,id) {
+	if(id===null || id===""){
+		alert("로그인 후 이용해주세요.");
+		return false;
+	}
+	else if(id !== review_id){
+		alert("작성자만 삭제가능합니다.");
+		return false;
+	}
+	$.ajax({
+		type : 'POST',
+		url : '../cafeSNS/delete',
+		data : {
+			"review_idx" : idx,
+			"user_id" : id
+		},
+		success : function(){
+			location.reload();
+		},
+		error : function(err){
+			console.log("딜리트중 에러");
+		}
+		
+	});
+	console.log("딜리트호출");  
+	console.log("idx:"+idx+"리뷰 아이디:"+review_id+"로그인된 아이디:"+id);
+}
+
+//찜(하트)
+function heart(x,idx,id) {
+   	if(id==="null" || id===""){
+  		alert("로그인 후 이용해주세요");
+  		return false;
+  	} 
+  	console.log(idx);
+  	console.log(id);
+  	$.ajax({
+  		url : "../jjim.do",
+  		type : "POST",
+  		data : {"review_idx" : idx,
+  				"user_id" : id	
+  		},
+  		dataType : "json",
+  		success : (data) =>{
+  			console.log(data.check);
+  			if (data.check === 0) {
+  		          x.className = "fas fa-heart fa-lg";
+  		          x.style.color = "red";
+  		        } else {
+  		          x.className = "far fa-heart fa-lg";
+  		          x.style.color = "black";
+  		        }
+  		},
+  		error : (err) =>{
+  			console.log("에러");
+  		},
+  	});
+}
+</script>
 </head>
 
 
@@ -392,6 +454,7 @@ p.txt:before {
 											${check_review}</li>
 										<li><i class="fa fa-solid fa-star mt-2"></i>
 											${resultList.store_star}</li>
+										<li><i class="far fa-heart fa-lg" id="heart" onclick="heart(this,'${resultList.store_idx}','${sessionScope.user_id }')"></i></li>
 									</ul>
 								</div>
 								<div class="btn-group" role="group"">
@@ -666,8 +729,6 @@ p.txt:before {
 		review($(this).val());
 
 	});
-
-	
 	function review(type) {
 		const url = new URL($(location).attr('href'));
 		console.log(url);
@@ -736,8 +797,7 @@ p.txt:before {
 							+'<small name="hit" id="hit">'+data.like_hit+'</small>'
 							/* +	'<input type="checkbox" id="chkLike0" title="좋아요" onclick="fnAddReviewLike();"	 href="javascript:;" style="display: none;"><label for="chkLike0">0</label>' */
 							+'</a></div>'
-							
-							+'<figure class="photoSet"  style="width:150px;" data-count="2">'
+							+		`<button type="button" onclick="deleteReview(this,`+data.review_idx+`,`+`'`+data.memberDTO.mem_id+`'`+`,'`+user+`')">리뷰삭제</button>`							+'<figure class="photoSet"  style="width:150px;" data-count="2">'
 							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
 							+		'<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" alt=""></a>'
 							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'

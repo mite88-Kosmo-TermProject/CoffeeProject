@@ -33,9 +33,6 @@
 		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
 	</select>
 	
-	
-	
-	
 	<!-- 이클립스 문제인지 xml 경로를 계속 못 찾아서 일단 이쪽에 등록 해놨습니다. -->
 	<!-- 가게 정보등록 -->
 	<insert id="edit" parameterType="com.coffice.dto.StoresDTO">
@@ -90,7 +87,6 @@
   	<insert id="imgED" parameterType="com.coffice.dto.ImageDTO">
   		INSERT INTO image (image_save,store_idx) values (#{image_save},#{store_idx})
   	</insert>
-  	
   	
   	
 </mapper>

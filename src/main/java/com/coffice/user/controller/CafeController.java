@@ -381,5 +381,28 @@ public class CafeController {
 		System.out.println(map);
 		return map;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/jjim.do" , method = RequestMethod.POST)
+	public Map<String, Object> jjim(@RequestParam("review_idx") int idx, @RequestParam("user_id") String id) {
+		
+		int check_jjim = sqlSession.getMapper(CafeImpl.class).check_jjim(id, idx);
+		if(check_jjim==1) {
+			System.out.println("찜 취소");
+			sqlSession.getMapper(CafeImpl.class).delete_jjim(idx, id);
+			sqlSession.getMapper(CafeImpl.class).storeDelete_jjim(idx);
+			
+		}
+		else {
+			System.out.println("찜 하기");
+			sqlSession.getMapper(CafeImpl.class).insert_jjim(idx, id);
+			sqlSession.getMapper(CafeImpl.class).storeInsert_jjim(idx);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("check", check_jjim);
+		System.out.println(map);
+		return map;
+	}
+
 
 }

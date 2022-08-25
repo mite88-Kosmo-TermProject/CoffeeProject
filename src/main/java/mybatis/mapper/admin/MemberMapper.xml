@@ -16,8 +16,6 @@
  		TO_TIMESTAMP(MEM_REGIDATE, 'YY-MM-DD HH24:MI:SS') as mem_regidate ,MEM_POINT ,MEM_SUB ,MEM_IMG ,MEM_LEVEL
  		from member where MEM_CASE=3 order by MEM_REGIDATE DESC 
 	</select>
-
-
 	<insert id="join" parameterType="com.coffice.dto.MemberDTO" >
 		INSERT INTO member (MEM_ID, MEM_PW, MEM_NAME, MEM_EMAIL, MEM_PHONE,
 		MEM_GENDER, MEM_CASE)
