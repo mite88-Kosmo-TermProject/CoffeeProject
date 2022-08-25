@@ -55,6 +55,11 @@ public interface CafeSNSImpl {
     public int like_hit(@Param("_idx") int review_idx);
     
     public ArrayList<HeartDTO> check_like(@Param("user_id") String user);
-
     
+//    이미지 파일 찾기
+    public String find_img(@Param("_idx")int idx);
+// 리뷰 지우기
+    public int remove_review (@Param("_idx")int idx, @Param("_id") String user);
+// 이미지 테이블 지우기
+    public int remove_img (@Param("_img")String img);
 }

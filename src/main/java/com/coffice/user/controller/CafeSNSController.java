@@ -1,8 +1,10 @@
 package com.coffice.user.controller;
 
 import java.io.File;
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -160,6 +162,36 @@ public class CafeSNSController {
 		return "redirect:../cafe/info.do?store_idx="+Store_idx;
 	}
 	
+	//카페 SNS 파일 삭제
+	@RequestMapping(value = "/cafeSNS/delete" , method = RequestMethod.POST)
+	public String remove_review(@RequestParam("review_idx")int idx, @RequestParam("user_id")String user ,
+			HttpServletRequest req) {
+		//파일경로
+		String path = req.getSession().getServletContext().getRealPath("/resources/img/review");
+		
+		System.out.println("리뷰IDX= "+idx+"유저아이디="+user);
+		System.out.println("삭제컨트롤러 연결성공");
+		String img =sqlSession.getMapper(CafeSNSImpl.class).find_img(idx);
+		System.out.println(img);
+		String[] files = img.split("/");
+		for(int i=0; i<files.length; i++) {
+			File file = new File(path+File.separator+files[i]);
+			if(file.exists()) {
+				file.delete();
+				System.out.println(file + "삭제");
+			}
+		}
+		int count = sqlSession.getMapper(CafeSNSImpl.class).remove_review(idx,user);
+		System.out.println(count+"행 리뷰삭제");
+		
+		int count2 = sqlSession.getMapper(CafeSNSImpl.class).remove_img(img);
+		System.out.println(count2+"행 이미지테이블삭제");
+		
+		return "user/cafe/info";
+	}
+	
+	
+	
 	/*카페SNS페이지 연결*/
 	@RequestMapping("/cafeSNS/review2.do")
 	public String goCafeSNS() {
@@ -231,7 +263,7 @@ public class CafeSNSController {
 			/* System.out.println(dto); */
 		}
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(lists);
+//		System.out.println(lists);
 		
 		map.put("user", user);
 		map.put("check_like", check_like);

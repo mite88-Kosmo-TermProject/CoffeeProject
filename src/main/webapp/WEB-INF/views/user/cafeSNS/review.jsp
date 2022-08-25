@@ -201,9 +201,15 @@ pageEncoding="UTF-8"%>
 
     <!-- footer -->
   	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-      <!-- 좋아요 JS(정순만) -->
+  	<!--리뷰 삭제  -->
+  	
+  	
+    
+    
     <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/cafeSNS.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/like.js"></script>
+    
+    
     
     <!-- 사진 -->
     <link
@@ -220,6 +226,7 @@ pageEncoding="UTF-8"%>
           fitImagesInViewport: false,
         });
       });
+      
     </script>
     <!-- footer -->
    

@@ -1,6 +1,8 @@
 var nowPage=1;
 //거리 계산해주는 함수...
 
+
+    
 function getdistance(lat1, lon1, lat2, lon2, unit) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
@@ -157,12 +159,13 @@ function getCafeList(list){
                      //+         'onclick="heart(this)"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div>'
+                     +'</div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
                            '</div>'
-         
                      +	'<div class="rating-box" style="text-align: left;">'
 					 + star_txt
 					 +		'</div></div>'
@@ -227,7 +230,9 @@ function getCafeList(list){
                     // +         'onclick="heart()"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'<i class="bi bi-trash3">리뷰삭제</i>'
+                     +		'</div></div>'
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
@@ -341,7 +346,9 @@ function getCafeList(list){
                      //+         'onclick="heart(this)"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+
@@ -409,7 +416,9 @@ function getCafeList(list){
                      //+         'onclick="heart()"></i>'
                      +        `<span name="like" id="like" onclick="like(this,`+ data.review_idx+`,'`+user+`')">`
                      +		'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
-                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span></div></div>'
+                     +          '<small name="hit" id="hit">'+data.like_hit+'</small></span>'
+                     +		'</div></div>'
+                     
                      +    '<div class="info">'
                      +      '<div class="txt">'
                              +data.review_content+

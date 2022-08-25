@@ -60,7 +60,7 @@
 					review_idx = #{idx}
 				</foreach>
 			</if>
-	</select>
+	</select> 
 	
 	<select id="getnewList" resultMap="SNSMap" parameterType="com.coffice.dto.ParameterDTO">
 		SELECT * FROM (
@@ -161,4 +161,15 @@
 		select * from heart where mem_id = #{user_id}
 	</select>
 
+	<select id="find_img" resultType="string">
+		SELECT IMAGE_SAVE from image where review_idx = #{_idx}
+	</select>
+	
+	<delete id="remove_review">
+		delete from review where review_idx=#{_idx} and mem_id = #{_id}
+	</delete>
+	
+	<delete id="remove_img">
+		delete from image where IMAGE_SAVE=#{_img}
+	</delete>
 </mapper>
