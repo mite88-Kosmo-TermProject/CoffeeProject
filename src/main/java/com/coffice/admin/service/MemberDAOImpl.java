@@ -1,22 +1,17 @@
 package com.coffice.admin.service;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
 
 import com.coffice.dto.*;
 
-@Repository
-public class MemberDAOImpl implements MemberDAO{
-	@Autowired
-	SqlSession session;
-	String namespace="mybatis.mapper.admin.MemberMapper";
-	
-	@Override
-	public MemberDTO login(String mem_id) {
-		return session.selectOne(namespace + ".login", mem_id);
-	}
-	
-	
+@Service
+public interface MemberDAOImpl {
+	public MemberDTO login(String mem_id);
+	public int join(MemberDTO memberDTO);
+	public MemberDTO login(String mem_id, String mem_pw, int mem_case);
+	public MemberDTO baselogin(String mem_id, String mem_pw);
+	public ArrayList<MemberDTO> Alliancelist();
 
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class StoreownerHomeController {
 	//메인
-	@RequestMapping(value = "/storeowner/index.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/storeowner/index.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String index() {
 		System.out.println("!!!");
 		return "/storeowner/index";

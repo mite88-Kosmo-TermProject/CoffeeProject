@@ -29,7 +29,7 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
-	href="<%=request.getContextPath()%>/resources/admin/assets/img/favicon/favicon.ico" />
+	href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -105,27 +105,28 @@
 
 								<!-- 관리자 -->
 								<div class="tab-pane active" id="admin">
-									<form class="form-horizontal login-form" action="<%= request.getContextPath() %>/admin/index.do">
-
+								
+									<form class="form-horizontal login-form case1" action="<%= request.getContextPath() %>/admin/loginAction.do">
+										<input type="hidden" name="mem_case" value="4">
 										<div class="form-group relative">
-											<input class="form-control input-lg mb-3" id="login_username"
-												placeholder="E-mail Address" required="" type="email">
+											<input class="form-control input-lg mb-3" id="mem_id" name="mem_id"
+												placeholder="아이디" required="" type="text">
 											<i class='bx bxs-user'></i>
 										</div>
 										<div class="form-group relative">
-											<input class="form-control input-lg mb-3" id="login_password"
-												placeholder="Password" required="" type="password">
+											<input class="form-control input-lg mb-3" id="mem_pw" name="mem_pw"
+												placeholder="비밀번호" required="" type="password">
 											<i class='bx bxs-key'></i>
 										</div>
 										<div class="form-group">
 											<button class="btn btn-success btn-lg mb-3 btn-block"
 												type="submit">Login</button>
 										</div>
-										<div class="checkbox checkbox-success">
+										<!-- <div class="checkbox checkbox-success">
 											<input id="stay-sign" type="checkbox"> <label
 												for="stay-sign">Stay signed in</label>
-										</div>
-										<hr />
+										</div> -->
+										
 										<div class="text-center">
 											<label><a href="#">Forgot your password?</a></label>
 										</div>
@@ -135,29 +136,35 @@
 
 								<!-- 점주관리자 -->
 								<div class="tab-pane" id="storeowner">
-									<form class="form-horizontal login-form">
-
+									<form class="form-horizontal login-form case2" action="<%= request.getContextPath() %>/admin/loginAction.do">
+										<input type="hidden" name="mem_case" value="2">
 										<div class="form-group relative">
-											<input class="form-control input-lg mb-3" id="login_username"
-												placeholder="E-mail Address" required="" type="email">
+											<input class="form-control input-lg mb-3" id="mem_id" name="mem_id"
+												placeholder="아이디" required="" type="text">
 											<i class='bx bxs-user'></i>
 										</div>
 										<div class="form-group relative">
-											<input class="form-control input-lg mb-3" id="login_password"
-												placeholder="Password" required="" type="password">
+											<input class="form-control input-lg mb-3" id="mem_pw" name="mem_pw"
+												placeholder="비밀번호" required="" type="password">
 											<i class='bx bxs-key'></i>
 										</div>
 										<div class="form-group">
 											<button class="btn btn-success btn-lg mb-3 btn-block"
 												type="submit">Login</button>
 										</div>
-										<div class="checkbox checkbox-success">
+										<!-- <div class="checkbox checkbox-success">
 											<input id="stay-sign" type="checkbox"> <label
 												for="stay-sign">Stay signed in</label>
-										</div>
+										</div> -->
 										<hr />
 										<div class="text-center">
 											<label><a href="#">Forgot your password?</a></label>
+										</div>
+										
+										<hr />
+										<div class="text-center">
+											<button class="btn btn-success btn-lg mb-3 btn-block"
+												type="button" onclick="location.href='<%= request.getContextPath() %>/admin/alliance.do';">제휴문의</button>
 										</div>
 									</form>
 								</div>

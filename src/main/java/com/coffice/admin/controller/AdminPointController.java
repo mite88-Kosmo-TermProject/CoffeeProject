@@ -205,9 +205,11 @@ public class AdminPointController {
 
 	// 이벤트 설정변경
 	@RequestMapping(value = "/admin/point/eventSetting.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String eventSetting(@RequestParam("file") MultipartFile file , HttpServletRequest req)throws IllegalStateException {
 		ServletContext servletContext = req.getSession().getServletContext();
-	    String realPath = servletContext.getRealPath("/resources/img/event").replace( "\\" , "/");
+	    //String realPath = servletContext.getRealPath("/resources/img/event");
+	    String realPath = "C:/02Workspaces/k12Spring/CoffeeProject/src/main/webapp/resources/img/event";
 		String eventName = req.getParameter("eventname");
 		String eventImg = file.getOriginalFilename();
 		String fileType = eventImg.substring(eventImg.lastIndexOf("."));
@@ -253,6 +255,7 @@ public class AdminPointController {
 			JSONArray arr = new JSONArray();
 			arr.add(i++ , dto.getEvent_items_num());
 			arr.add(i++ ,dto.getEvent_items_name());
+			arr.add(i++ , dto.getEvent_item_ratio());
 			arr.add(i++ , dto.getEvent_items_prbbl());
 			arr.add(i++ , dto.getEvent_items_result());
 			topArray.add(arr);

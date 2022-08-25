@@ -4,6 +4,7 @@
     --light: #F5F5F5;
     --dark: #353535;
     font-size: 0.925rem !important;
+    background: #FFFBF2 !important;
 }
 
 .fw-medium {
@@ -41,6 +42,14 @@
     opacity: 1;
 }
 
+/*row col*/
+.row {
+display: flex; /* 하위 요소(child)의 높이를 동일하게 조정 */
+}
+
+.col {
+flex: 1; /* 이 코드를 가하면 폭도 동일하게 조정됩니다 */
+}
 
 /*** Button ***/
 .btn {
@@ -330,6 +339,8 @@
 /*** Service ***/
 .service-item img {
     transition: .5s;
+    height: 200px;
+    width: 100%;
 }
 
 .service-item:hover img {
@@ -705,6 +716,7 @@ ul, ol {
 
 #caffee_map .mapSearchList > li {
     margin-top: 12px;
+    background: #fff;
 }
 #caffee_map .mapSearchList > li:first-child {
     margin-top: 0;
@@ -780,6 +792,7 @@ ul, ol {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom: 20px;
 }
 #caffee_map .mapSearchList > li a .inner .tagWrap .tag {
     display: inline-block;
@@ -819,6 +832,7 @@ ul, ol {
     position: absolute;
     bottom: 0;
     left: 18px;
+    display: inline-flex;
 }
 #caffee_map .mapSearchList > li a .inner .conUtil span {
     font-size: .875rem;
@@ -1425,4 +1439,16 @@ ul, ol {
 }
 .mapPin.stay.active {
     border-width: 5px;
+}
+
+/*반응형용*/
+@media (min-width: 992px){
+	#caffee_map .mapSearchList > li a figure + .inner {
+    	width: 100%;
+    	padding: 3px 0 0 0;
+	}
+	
+	#caffee_map .mapSearchList > li a .inner .conUtil span {
+   		margin-left: -15px;
+	}
 }

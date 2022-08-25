@@ -10,8 +10,10 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link rel="icon" type="image/x-icon"
+	href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -223,9 +225,9 @@ p.txt:before {
 
 /*슬라이드*/
 .item {
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 /*리뷰*/
@@ -332,20 +334,23 @@ p.txt:before {
 	<!-- content -->
 	<!-- 상단 간단내용 -->
 	<c:forEach items="${resultList}" var="resultList">
+	<input type="hidden" value="${check_review}" id="total_store_star">
 
 		<section id="cafe_info" class="info container-xxl py-5">
 			<div class="container aos-init aos-animate" data-aos="fade-up">
 
 				<div class="row content">
 					<!-- 이미지 -->
-					
+
 					<div class="col-md-4">
 						<div class="owl-carousel">
-						
-							<c:forEach items="${fn:split(resultList.store_img,',') }" var="loopImg" varStatus="loop">
+
+							<c:forEach items="${fn:split(resultList.store_menu,',') }"
+								var="loopImg" varStatus="loop">
 								<div class="item">
 									<img class="img-fluid" id="code_${loop.index }"
-										src="<%=request.getContextPath()%>/resources/img/${loopImg}" alt="">
+										src="<%=request.getContextPath()%>/resources/img/stores/${loopImg}"
+										alt="">
 								</div>
 							</c:forEach>
 
@@ -361,17 +366,16 @@ p.txt:before {
 						<!-- 할인항목 -->
 						<ul class="list-group list-group-horizontal mb-3">
 							<li><span class="badge bg-secondary list-group-item me-3">아메리카노
-									무료1</span></li>
-							<li><span class="badge bg-secondary list-group-item">아메리카노
-									무료2</span></li>
+									무료</span></li>
+							<!-- <li><span class="badge bg-secondary list-group-item">아메리카노
+									무료2</span></li> -->
 						</ul>
 						<!-- 카페명 -->
 						<h2 class="titDep1 mb-3" cafename="">${resultList.store_name}</h2>
 
 						<!-- 해시태그 -->
 						<p class="tagWrap mb-3" displaykeyworlds="">
-							<span class="tag">#디저트카페</span> <span class="tag">#애월카페</span> <span
-								class="tag">#에그타르트맛집</span>
+							<span class="tag">#${check_tag[0].store_tag}</span>
 						</p>
 
 						<!-- 업체정보 -->
@@ -384,14 +388,18 @@ p.txt:before {
 							<div class="d-flex p-2 justify-content-between border-bottom">
 								<div class="">
 									<ul>
-										<li><i class="fa fa-solid fa-pen mt-2"></i> 3</li>
-										<li><i class="fa fa-solid fa-star mt-2"></i> ${resultList.store_star}</li>
+										<li><i class="fa fa-solid fa-pen mt-2"></i>
+											${check_review}</li>
+										<li><i class="fa fa-solid fa-star mt-2"></i>
+											${resultList.store_star}</li>
 									</ul>
 								</div>
 								<div class="btn-group" role="group"">
 									<button type="button" class="btn btn-primary" id="map_url">길찾기</button>
 									<button type="button" class="btn btn-primary" id="send_url">즐겨찾기</button>
-									<button type="button" class="btn btn-primary" id="review_coffee">리뷰쓰기</button>
+									<button type="button" class="btn btn-primary"
+										id="review_coffee"
+										onclick="location.href='<%=request.getContextPath()%>/cafeSNS/writePage.do?store_idx=${resultList.store_idx }' ">리뷰쓰기</button>
 								</div>
 							</div>
 
@@ -407,7 +415,8 @@ p.txt:before {
 			<section id="cafe_passBar" class="content container-xxl py-5">
 				<div class="container aos-init aos-animate" data-aos="fade-up">
 					<!-- 링크넣기 -->
-					<div class="card mb-3" onclick="location.href='<%= request.getContextPath()%>/order/subPay.do';">
+					<div class="card mb-3"
+						onclick="location.href='<%=request.getContextPath()%>/order/subPay.do';">
 						<div class="row g-0" style="align-items: center;">
 							<div class="col-md-8">
 								<div class="card-body">
@@ -421,9 +430,9 @@ p.txt:before {
 							</div>
 						</div>
 					</div>
-	
+
 				</div>
-	
+
 			</section>
 		</c:if>
 
@@ -434,7 +443,7 @@ p.txt:before {
 				<ul class="tabs clearfix" data-tabgroup="first-tab-group">
 					<li><a href="#tab1" class="active">업체정보</a></li>
 					<li><a href="#tab2">메뉴</a></li>
-					<li><a href="#tab3">리뷰(50)</a></li>
+					<li><a href="#tab3" onclick="review(1)">리뷰(${check_review})</a></li>
 				</ul>
 				<section id="first-tab-group" class="tabgroup">
 					<!-- 업체정보 -->
@@ -451,7 +460,7 @@ p.txt:before {
 									<dt>
 										<i class="fas fa-clock"></i>
 									</dt>
-									<dd class="store_time">${resultList.store_time} </dd>
+									<dd class="store_time">${resultList.store_time}</dd>
 
 									<!-- 휴무일 -->
 									<!-- <dt>
@@ -482,9 +491,9 @@ p.txt:before {
 					<div id="tab2">
 						<!-- 메뉴 이미지-->
 						<div class="bg-white border" style="text-align: center;">
-						
-						<img class="img-fluid"
-								src="<%=request.getContextPath()%>/resources/img/${resultList.store_menu}"
+
+							<img class="img-fluid"
+								src="<%=request.getContextPath()%>/resources/img/stores/${resultList.store_menu_img}"
 								alt="">
 							<!-- <img class="img-fluid"
 								src="https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Fpostfiles8.naver.net%2FMjAyMDAxMjNfMjYz%2FMDAxNTc5NzU0MzAwMTY5.NNPA_9J_DejIQHX4wmOAHce09R0YbeJg7AdAbMDwIScg.unCHym7bBOEkwYPc5UaWjkMrUmiIzzXYnzoF1B3aC5og.JPEG.ajsay%2FSE-71f049be-bf15-42a0-b719-858f273622ca.jpg%3Ftype%3Dw966"
@@ -493,17 +502,17 @@ p.txt:before {
 					</div>
 					<div id="tab3">
 						<!-- 별점정보 -->
+
+						<!-- 별점정보 -->
 						<div class="start_info mb-4">
 							<div class="row justify-content-left d-flex ">
 								<div
 									class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-3">
-									<div class="rating-box">
+									<div class="rating-box  totalNum">
 										<h1 class="pt-4">${resultList.store_star}</h1>
 									</div>
-									<div class="rating-box">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="far fa-star"></i>
+									<div class="rating-box totalStar">
+										
 									</div>
 								</div>
 								<div class="col-md-8">
@@ -515,10 +524,10 @@ p.txt:before {
 													<td class="rating-label">5</td>
 													<td class="rating-bar">
 														<div class="bar-container">
-															<div class="bar-5"></div>
+															<div class="bar-5" num="${bar5}"></div>
 														</div>
 													</td>
-													<td class="text-right">123</td>
+													<td class="text-right">${bar5}</td>
 												</tr>
 
 												<!-- 4점 -->
@@ -526,10 +535,10 @@ p.txt:before {
 													<td class="rating-label">4</td>
 													<td class="rating-bar">
 														<div class="bar-container">
-															<div class="bar-4"></div>
+															<div class="bar-4" num="${bar4}"></div>
 														</div>
 													</td>
-													<td class="text-right">23</td>
+													<td class="text-right">${bar4}</td>
 												</tr>
 
 												<!-- 3점 -->
@@ -537,10 +546,10 @@ p.txt:before {
 													<td class="rating-label">3</td>
 													<td class="rating-bar">
 														<div class="bar-container">
-															<div class="bar-3"></div>
+															<div class="bar-3" num="${bar3}"></div>
 														</div>
 													</td>
-													<td class="text-right">10</td>
+													<td class="text-right">${bar3}</td>
 												</tr>
 
 												<!-- 2점 -->
@@ -548,10 +557,10 @@ p.txt:before {
 													<td class="rating-label">2</td>
 													<td class="rating-bar">
 														<div class="bar-container">
-															<div class="bar-2"></div>
+															<div class="bar-2" num="${bar2}"></div>
 														</div>
 													</td>
-													<td class="text-right">3</td>
+													<td class="text-right">${bar2}</td>
 												</tr>
 
 												<!-- 1점 -->
@@ -559,10 +568,10 @@ p.txt:before {
 													<td class="rating-label">1</td>
 													<td class="rating-bar">
 														<div class="bar-container">
-															<div class="bar-1"></div>
+															<div class="bar-1" num="${bar1}"></div>
 														</div>
 													</td>
-													<td class="text-right">0</td>
+													<td class="text-right">${bar1}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -581,13 +590,13 @@ p.txt:before {
 							<div class="flex-shrink-0">
 								<select id="sendNotification" class="form-select"
 									name="sendNotification">
-									<option selected="">최신순</option>
-									<option>좋아요순</option>
-									<option>별점높은순</option>
-									<option>별점낮은순</option>
+									<option value="1" selected="">최신순</option>
+									<option value="2">좋아요순</option>
+									<option value="3">별점높은순</option>
+									<option value="4">별점낮은순</option>
 								</select>
 							</div>
-							<div class="flex-grow-1 row">
+							<!-- <div class="flex-grow-1 row">
 								<div class="col text-end">
 									<div class="form-check form-switch">
 										<label style="margin-right: 45px;">포토리뷰만</label> <input
@@ -595,29 +604,30 @@ p.txt:before {
 											role="switch" checked="">
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
+
 
 						<!-- 리뷰시작 -->
 						<ul class="reviewList">
 							<%@ include file="/WEB-INF/views/user/cafe/review.jsp"%>
 						</ul>
 						<!-- //리뷰 -->
-
 					</div>
 
 				</section>
 				<!-- tab end -->
 
 			</div>
-			</section>
+		</section>
 
 	</c:forEach>
 
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
-
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/js/like.js"></script>
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 	<script
@@ -625,8 +635,145 @@ p.txt:before {
 
 	<!--kakaotalk link share api-->
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-	
+	<%=request.getParameter("store_idx")%>
 	<script>
+	
+	//총별점 그리기
+	var star = $(".rating-box.totalNum").text();
+	var star_txt = "";
+	for (var i = 1; i < 6; i++) {
+		if(i<= star){
+			star_txt += '<i class="fas fa-star" style="color:#fd5a0f;"></i>';
+		}
+		else{
+			star_txt += '<i class="far fa-star" style="color:#fd5a0f;"></i>';
+		}
+	}
+	$(".rating-box.totalStar").append(star_txt);
+	//alert(Number($(".bar-1").attr("num")) +"/"+$("#total_store_star").val());
+	//별점별 막대그래프그리기
+	$(".bar-1").css("width", (Number($(".bar-1").attr("num")) /$("#total_store_star").val())*100 +"%");
+	$(".bar-2").css("width", (Number($(".bar-2").attr("num")) /$("#total_store_star").val())*100 +"%");
+	$(".bar-3").css("width", (Number($(".bar-3").attr("num")) /$("#total_store_star").val())*100 +"%");
+	$(".bar-4").css("width", (Number($(".bar-4").attr("num")) /$("#total_store_star").val())*100 +"%");
+	$(".bar-5").css("width", (Number($(".bar-5").attr("num"))  /$("#total_store_star").val())*100+"%");
+	
+	
+	//정렬
+	$("#sendNotification").on( "change", function() {
+		
+		//alert($(this).val());
+		review($(this).val());
+
+	});
+
+	
+	function review(type) {
+		const url = new URL($(location).attr('href'));
+		console.log(url);
+		const urlParam = url.searchParams;
+		const param = urlParam.get('store_idx');
+		
+		$.ajax({
+			type : 'POST',
+			url : '../cafe/review.do?store_idx='+param+'&type='+type,
+			dataType : 'json',
+			success : function (data) {
+				$(".reviewList #show_data").empty();//새로고침용
+				
+				var user = data.user;
+	               console.log(user);
+				let tableData = "";
+				const check_like = data.check_like;
+				const lists = data.review_list;
+				console.log(lists);
+				for (var i = 0; i < check_like.length; i++) {
+					console.log(check_like[i].review_idx);
+				}
+				$(lists).each(function (index, data) {
+					var star = data.review_star;
+					var star_txt = "";
+					for (var i = 1; i < 6; i++) {
+						if(i<= star){
+							star_txt += '<i class="fas fa-star"></i>';
+						}
+						else{
+							star_txt += '<i class="far fa-star"></i>';
+						}
+					}
+					var color = "black";
+					for(var i=0; i<check_like.length; i++){
+						if(check_like[i].review_idx == data.review_idx){
+							color = "red";
+							break;
+						}
+					}
+					var files = data.imageDTO.image_save.split("/");
+					tableData +='<li class="photoY">'
+							+'<div style="width:calc(100% - 200px);"><div class="reviewSet">'
+							+	'<span class="thum">'
+							 +      '<img src="../resources/img/user/'+data.memberDTO.mem_img+'"   onerror="this.style.display=&#39;none&#39;" /></span>'
+							+	'<div class="tit">'
+							+		'<div class="common-grade-badge d small has-text mb-2" >'
+							+			'<i class="fas fa-coffee"></i>'
+							+			'<p>카페리뷰</p></div>';
+							 if (data.memberDTO.mem_nickname == null ||
+									   data.memberDTO.mem_nickname == undefined ||
+									   data.memberDTO.mem_nickname == "null") {
+								 tableData += '<strong class="name">비회원</strong></div></div>';
+							 }else{
+								 tableData +='<strong class="name">'+data.memberDTO.mem_nickname+'</strong></div></div>';
+							 }
+							tableData +='<div class="reviewSet">'
+							+	'<div class="rating-box" style="text-align: left;">'
+							+ star_txt
+							+		'</div></div>'
+							+ '<br>'
+							+'<div class="txt_content">'+data.review_content+'</div>' 
+							+ '<br>'
+							+`<a class="frmLike" onclick="like(this,`+data.review_idx+`,'`+user+`');">`
+							+'<i class="far fa-thumbs-up fa-lg" id="thumb" style="color:'+color+' ;"  ></i>'
+							+'<small name="hit" id="hit">'+data.like_hit+'</small>'
+							/* +	'<input type="checkbox" id="chkLike0" title="좋아요" onclick="fnAddReviewLike();"	 href="javascript:;" style="display: none;"><label for="chkLike0">0</label>' */
+							+'</a></div>'
+							
+							+'<figure class="photoSet"  style="width:150px;" data-count="2">'
+							+	'<a href="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
+							+		'<img src="../resources/img/review/'+files[0]+'?width=592&amp;height=473" class="img-fluid" alt=""></a>'
+							+	'<a style="display:none;" href="../resources/img/review/'+files[1]+'?width=592&amp;height=473" class="img-fluid" data-title="'+data.memberDTO.mem_id+'님의리뷰" data-lightbox="example-set'+data.review_idx+'">'
+							+		'<img src="../resources/img/review/'+files[1]+'?width=592&amp;height=473" alt="" class="img-fluid"></a></figure>'
+							
+							
+							<!-- 사장님댓글 -->
+							<%-- <div class="comment mt-5" style="">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">
+											<i class="fas fa-level-up" style="transform: rotate(90deg);"></i>
+											<img src="<%= request.getContextPath() %>/resources/img/커피점원아이콘.png" alt="" class="img-fluid">
+											사장님
+										</h5>
+										<p class="card-text">This is another card with title and
+											supporting text below. This card has some additional content to
+											make it slightly taller overall.</p>
+										<p class="card-text">
+											<small class="text-muted">10분전</small>
+										</p>
+									</div>
+								</div>
+							</div> --%>
+
+						+'</li>'
+				});
+				$('#show_data').append(tableData);
+			},
+				error : function (err) {
+					console.log("에러발생"+ err.status);
+				}
+		});
+	}
+	
+
 	$(function() {
 		//alert("!!");
 		
@@ -696,7 +843,8 @@ p.txt:before {
 	    resizeDuration: 200,
 	    wrapAround: true,
 	    disableScrolling: false,
-	    fitImagesInViewport:false
+	    fitImagesInViewport:false,
+	    maxWidth : 800
 	})
 	
 	//모바일분류
@@ -817,8 +965,8 @@ p.txt:before {
 		
 		
 	</script>
-	
-	
+
+
 </body>
 
 </html>
