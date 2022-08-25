@@ -140,9 +140,13 @@ public class CafeSNSController {
 				star_total++;
 			}
 			
-			
-			
+			if(star_total<=1) {
+				star_num=star_num;
+			}else {
+				
 			star_num = star_num/star_total;
+			}
+			
 			
 			
 			int star_change = sqlSession.getMapper(CafeImpl.class).star_change(star_num, Integer.valueOf(imageDTO.getStore_idx()));
