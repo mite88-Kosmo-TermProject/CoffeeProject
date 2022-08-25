@@ -73,9 +73,13 @@ public class BoardController {
 		//전체게시물 출력
 		ArrayList<BoardDTO> lists = sqlSession.getMapper(BoardImpl.class).listPage(start, end, board_flag);
 
+		for (BoardDTO dto : lists) {
+			String temp = dto.getBoard_content().replace("\r\n","<br/>");
+			dto.setBoard_content(temp);
+		}
 		//페이지 버튼 누를시 이동할 경로 선택
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-				req.getContextPath() + "/community/boardList.do?");
+				req.getContextPath() + "/community/boardList.do?board_flag="+board_flag+"&&");
 		//페이지 str 모델객체에 저장
 		model.addAttribute("pagingImg", pagingImg);
 		//목록용 나우페이지
@@ -107,14 +111,12 @@ public class BoardController {
 			boardDTO.setBoard_flag(board_flag);
 			boardDTO.setSearchField(searchField);
 			boardDTO.setSearchTxt(searchTxt);
+			System.out.println("세팅된 dto="+boardDTO);
 	
 			
 			model.addAttribute("board_flag",board_flag);
-			int totalRecordCount;
-			
-				totalRecordCount = sqlSession.getMapper(BoardImpl.class).getTotalCountFlagSearch(boardDTO);
-			
-				System.out.println("검색된 게시물 갯수"+totalRecordCount);
+			int totalRecordCount = sqlSession.getMapper(BoardImpl.class).getTotalCountFlagSearch(boardDTO);
+			System.out.println("검색된 게시물 갯수"+totalRecordCount);
 
 			//검색어없는 게시물의 총개수를 출력 
 			//한페이지에 출력될 게시물 갯수
@@ -133,14 +135,19 @@ public class BoardController {
 
 			boardDTO.setStart(start);
 			boardDTO.setEnd(end);
+			System.out.println("세팅된 dto2="+boardDTO);
+			
+			
 			//전체게시물 출력
 			ArrayList<BoardDTO> lists = sqlSession.getMapper(BoardImpl.class).listPageSearch(boardDTO);
-			for (BoardDTO boardDTO2 : lists) {
-				System.out.println(boardDTO2);
+			System.out.println(lists);
+			for (BoardDTO dto : lists) {
+				String temp = dto.getBoard_content().replace("\r\n","<br/>");
+				dto.setBoard_content(temp);
 			}
 			//페이지 버튼 누를시 이동할 경로 선택
 			String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
-					req.getContextPath() + "/community/searchList.do?searchField="+searchField+"&&searchTxt="+searchTxt+"&&");
+					req.getContextPath() + "/community/searchList.do?searchField="+searchField+"&&searchTxt="+searchTxt+"&&board_flag="+board_flag+"&&");
 			//페이지 str 모델객체에 저장
 			model.addAttribute("pagingImg", pagingImg);
 			//목록용 나우페이지

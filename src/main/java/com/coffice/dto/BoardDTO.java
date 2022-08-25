@@ -15,8 +15,9 @@ public class BoardDTO {
 	private String board_flag;
 	private int board_visitcount;
 	private String mem_id;
+	private Date board_postdate;
+	
 	private String searchTxt;
 	private String searchField;
-	private Date board_postdate;
 	
 }
