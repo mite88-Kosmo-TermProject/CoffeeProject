@@ -33,7 +33,7 @@ public class BoardController {
 	}
 	
 	
-	// 공지, 이벤트게시판 최초리스트
+	// 게시판 리스트
 	@RequestMapping(value = "/community/boardList.do", method = RequestMethod.GET)
 	public String boardList(Model model, HttpServletRequest req,  HttpServletResponse resp) {
 		
@@ -87,7 +87,7 @@ public class BoardController {
 	}
 
 	
-	// 공지, 이벤트게시판 상세
+	// 게시물 상세
 	@RequestMapping(value = "/user/community/boardView.do", method = RequestMethod.GET)
 	public String boardView(Model model, HttpServletRequest req,  HttpServletResponse resp,
 			HttpSession session) {
@@ -146,7 +146,7 @@ public class BoardController {
 	
 	
 	
-	// 공지, 이벤트게시판 작성
+	// 게시물 작성 페이지 이동
 		@RequestMapping(value = "/community/boardWrite.do", method = RequestMethod.GET)
 		public String boardWrite(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
@@ -179,7 +179,7 @@ public class BoardController {
 		
 		
 		
-		
+		// 작성 처리
 		@RequestMapping(value = "/community/boardWriteAction.do", method = RequestMethod.POST)
 		public String boardWriteAction(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
@@ -210,7 +210,7 @@ public class BoardController {
 			
 		}
 		
-		// 공지, 이벤트게시판 상세
+		// 게시글 수정 페이지
 		@RequestMapping(value = "/community/boardEdit.do", method = RequestMethod.GET)
 		public String boardEdit(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
@@ -275,6 +275,7 @@ public class BoardController {
 			return "/user/community/editView";
 		}
 		
+		//수정처리
 		@RequestMapping(value = "/community/boardEditAction.do", method = RequestMethod.POST)
 		public String boardEditAction(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
@@ -306,6 +307,7 @@ public class BoardController {
 			return "/user/community/boardDone";
 		}
 		
+		//삭제 페이지 이동
 		@RequestMapping(value = "/community/boardDelete.do", method = RequestMethod.GET)
 		public String boardDelete(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
@@ -362,6 +364,7 @@ public class BoardController {
 			return "/user/community/deleteConfirm";
 		}
 		
+		//삭제 처리
 		@RequestMapping(value = "/community/deleteAction.do", method = RequestMethod.GET)
 		public String Delete(Model model, HttpServletRequest req,  HttpServletResponse resp,
 				HttpSession session) {
