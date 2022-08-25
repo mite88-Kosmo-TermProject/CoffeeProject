@@ -25,10 +25,19 @@
 
 
 <body>
-	
+<script type="text/javascript">
+function chkForm(f){
+	if(f.board_title.value==''){
+		alert('제목을 입력하세요');f.board_title.focus();return false;
+	}
+	if(f.board_content.value==''){
+		alert('내용을 입력하세요');f.board_contents.focus();return false;
+	}
+}	
+</script>
 	<!-- content -->
 <div class="container">
-<form action="<%=request.getContextPath() %>/community/boardWriteAction.do?nowPage=${nowPage}&&mode=write" method="post">
+<form action="<%=request.getContextPath() %>/community/boardWriteAction.do?nowPage=${nowPage}&&mode=write" method="post" onsubmit="return chkForm(this);">
 
 	<table class="table">
 		<tr>
@@ -50,7 +59,7 @@
 		<tr>
 			<th>글내용</th>
 <%-- 			<td>${list.board_content }</td> --%>
-			<td colspan="3"><textarea rows="15" name="board_content" cols="80" placeholder="내용을 입력하세요"></textarea> </td>
+			<td colspan="3"><textarea rows="15" id="board_content" name="board_content" cols="80" placeholder="내용을 입력하세요"></textarea> </td>
 		</tr>
 		<tr>
 			<td colspan="4"><button class="btn btn-dark" type="submit">작성하기</button>   <button class="btn btn-dark" type="button" 
