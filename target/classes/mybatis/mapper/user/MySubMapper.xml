@@ -24,8 +24,10 @@
 		SELECT * FROM member where mem_id = #{param1}
 	</select>
 
-
-
+	<select id="subInfo" resultType="com.coffice.dto.SubParameterDTO">
+		SELECT * FROM member
+	</select>
+	
 <!--
 INSERT INTO payment (pay_idx, mem_id, pay_import_key, sub_name, pay_price, pay_result_status, pay_successed_at, pay_case, pay_next_order_date) VALUES 
 			(#{pay_idx}, #{mem_id}, #{pay_import_key}, #{sub_name}, #{pay_price}, #{pay_result_status}, #{pay_successed_at}, #{pay_case}, #{pay_next_order_date})

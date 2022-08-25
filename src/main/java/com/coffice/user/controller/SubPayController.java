@@ -100,15 +100,7 @@ public class SubPayController {
 		subParameterDTO.setPay_next_order_date(String.valueOf(timestamp));
 		
 		
-				
-				
-		
 		subParameterDTO.setSub_coffee_num_left(Integer.parseInt(subParameterDTO.getSub_name().replaceAll("[^\\d]", "")));
-		
-		
-		
-		
-		
 		
 		
 		String root = req.getSession().getServletContext().getRealPath("resources"); // 현재 서비스가 돌아가고 있는 서블릿 경로의
@@ -196,14 +188,29 @@ public class SubPayController {
 	
 	// 패스구매완료
 	@RequestMapping(value = "/order/subPayResult.do", method = RequestMethod.GET)
-	public String subPayResult(MemberSubInfoDTO memberSubInfoDTO, Model model, HttpServletRequest req) {
+	public String subPayResult(HttpSession session, Model model, MemberDTO memberDTO, SubParameterDTO subParameterDTO) {
 			
-		return "/user/order/subPayResult";
+		//만약 세션영역에 siteUserInfo속성이 없다면 로그아웃 상태이므로...
+				if(session.getAttribute("siteUserInfo")==null) {
+					
+					//로그인 완료후 진입을 위한 backUrl
+					model.addAttribute("backUrl", "/user/order/subPay");
+					//로그인 페이지로 이동한다. 
+					return "redirect:/member/login.do";
+				}
+				
+		//회원정보 결제창에 가져오기
+		memberDTO = sqlSession.getMapper(SubPaylmpl.class)
+			.user(((MemberDTO)session.getAttribute("siteUserInfo")).getMem_id());
+		
+		subParameterDTO = sqlSession.getMapper(SubPaylmpl.class).subInfo();
+		
+		return "/";
 	}
 	
 	//WebHook 으로 정기결제 정보받아서 저장
 	@RequestMapping(value = "/order/subResult.do", method = RequestMethod.POST)
-	public void subResult(@RequestBody JSONObject jsonObject, SubParameterDTO subParameterDTO) {
+	public void subResult(@RequestBody JSONObject jsonObject, SubParameterDTO subParameterDTO,  HttpServletRequest req) throws WriterException, IOException {
 		
 		//예약결제의 경우 imp_uid의 값이 imps_ 로 시작함. -> 첫결제시 중복으로 DB에 insert하려는걸 막기위한 if문
 		if(jsonObject.get("imp_uid").toString().contains("imps_")) {
@@ -251,6 +258,61 @@ public class SubPayController {
 			subParameterDTO.setPay_case(resultJson.get("pg_provider").toString());
 			
 			subParameterDTO.setSub_coffee_num_left(Integer.parseInt(subParameterDTO.getSub_name().replaceAll("[^\\d]", "")));
+			
+			String root = req.getSession().getServletContext().getRealPath("resources"); // 현재 서비스가 돌아가고 있는 서블릿 경로의
+			String roottest = req.getServletContext().getRealPath("resources"); // 현재 서비스가 돌아가고 있는 서블릿 경로의
+																								// resources 폴더 찾기
+			System.out.println("root = " + root);
+			System.out.println("roottest = " + roottest);
+			
+			
+			String savePath = root + "\\img\\qrcode\\"; // 파일 경로
+
+			// 파일 경로가 없으면 생성하기
+			File file = new File(savePath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+
+			// 링크로 할 URL주소 == 자기 마이페이지 경로로 해놓으면 될듯
+			String url = "http://localhost:8082/CoffeeProject/order/subUsing.do";
+			// 파일명
+			String storeName = req.getParameter("storeName");
+			
+			System.out.println("url:"+url);
+
+			// 링크 생성값
+			String codeurl = new String(url.getBytes("UTF-8"), "ISO-8859-1");
+
+			// QRCode 색상값
+			int qrcodeColor = 0xFF2e4e96;
+			// QRCode 배경색상값
+			int backgroundColor = 0xFFFFFFFF;
+
+			// QRCode 생성
+			QRCodeWriter qrCodeWriter = new QRCodeWriter();
+			BitMatrix bitMatrix = qrCodeWriter.encode(codeurl, BarcodeFormat.QR_CODE, 200, 200); // 200,200은 width, height
+
+			MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor, backgroundColor);
+			BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix, matrixToImageConfig);
+
+			// 파일 이름에 저장한 날짜를 포함해주기 위해 date생성
+			SimpleDateFormat sdfm = new SimpleDateFormat("yyyyMMddHHmmss");
+			String fileName = storeName +"_"+ sdfm.format(new Date());
+
+			// 파일 경로, 파일 이름 , 파일 확장자에 맡는 파일 생성
+			File temp = new File(savePath + fileName + ".png");
+
+			System.out.println(savePath + fileName + ".png");
+
+			// ImageIO를 사용하여 파일쓰기
+			ImageIO.write(bufferedImage, "png", temp);
+
+			// 리턴은 사용자가 원하는 값을 리턴한다.
+			// 작성자는 QRCode 파일의 이름을 넘겨주고 싶었음.
+			String fn = fileName + ".png";
+			
+			subParameterDTO.setSub_qr_code(fn);
 			
 			int result = sqlSession.getMapper(SubPaylmpl.class).paymentInfo(subParameterDTO);
 			
