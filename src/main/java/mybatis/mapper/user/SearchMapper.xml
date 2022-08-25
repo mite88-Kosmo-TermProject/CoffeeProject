@@ -5,15 +5,17 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.coffice.user.service.CafeSearchImpl">
-
-	<select id="getTotalCountSearch" resultType="int">
-		SELECT COUNT(*) from (select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 
+<!-- 전체 -->
+<select id="getTotalCountSearch" resultType="int">
+	SELECT COUNT(*) from(
+		select * from(select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 		
 		<if test="searchTxt!=null and !searchTxt.equals('')">
-			where store_localAddr LIKE '%'||#{searchTxt}||'%' 
-						or store_tag LIKE '%'||#{searchTxt}||'%'
+						where store_localAddr LIKE '%'||#{searchTxt}||'%' 
 						or store_name LIKE '%'||#{searchTxt}||'%'
-						or store_item LIKE '%'||#{searchTxt}||'%'
+						or store_item LIKE '%'||#{searchTxt}||'%' 
+						or store_tag LIKE '%'||#{searchTxt}||'%' 
 		</if>
+        ) 
 	</select>
 	
 	<select id="listPageSearch" resultType="com.coffice.dto.SearchDTO"
@@ -28,10 +30,54 @@
 								or store_tag LIKE '%'||#{searchTxt}||'%' 
 				</if>
 				order by STORE_IDX desc
-			)Tb
+			)Tb 
 		)
 		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
 	</select>
+
+	<!-- 제휴회원 -->
+	<select id="getTotalCountSearchSTORE_AFLTD" resultType="int">
+	SELECT COUNT(*) from(
+		select * from(select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 		
+		 <choose>
+                <when test="searchTxt!=null and !searchTxt.equals('')">
+                    where (store_localAddr LIKE '%'||#{searchTxt}||'%' 
+						or store_name LIKE '%'||#{searchTxt}||'%'
+						or store_item LIKE '%'||#{searchTxt}||'%' 
+						or store_tag LIKE '%'||#{searchTxt}||'%' )
+						and STORE_AFLTD = 1 order by STORE_IDX desc          
+                </when>
+                <otherwise>
+                    where STORE_AFLTD = 1 order by STORE_IDX desc
+                </otherwise>
+                
+            </choose>
+        ) 
+	</select>
+	
+	<select id="listPageSearchSTORE_AFLTD" resultType="com.coffice.dto.SearchDTO"
+		parameterType="com.coffice.dto.SearchDTO">
+		select * from (
+			select Tb.*, rownum rNum FROM(
+				select * from (select st.*, store_tag from stores st , tag t  where st.STORE_IDX = t.STORE_IDX(+)) 
+				 <choose>
+                <when test="searchTxt!=null and !searchTxt.equals('')">
+                    where (store_localAddr LIKE '%'||#{searchTxt}||'%' 
+						or store_name LIKE '%'||#{searchTxt}||'%'
+						or store_item LIKE '%'||#{searchTxt}||'%' 
+						or store_tag LIKE '%'||#{searchTxt}||'%' )
+						and STORE_AFLTD = 1 order by STORE_IDX desc          
+                </when>
+                <otherwise>
+                    where STORE_AFLTD = 1 order by STORE_IDX desc
+                </otherwise>
+                
+            </choose>
+			)Tb 
+		)
+		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	</select>
+
 	
 	<!-- 이클립스 문제인지 xml 경로를 계속 못 찾아서 일단 이쪽에 등록 해놨습니다. -->
 	<!-- 가게 정보등록 -->

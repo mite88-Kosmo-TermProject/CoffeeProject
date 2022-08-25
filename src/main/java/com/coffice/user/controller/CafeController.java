@@ -79,7 +79,15 @@ public class CafeController {
 		System.out.println(searchDTO.getSearchTxt());
 
 		//해당되는 게시물의 총 갯수
-		int totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
+		int totalRecordCount =0;
+		if(searchDTO.getStore_afltd() == 0) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearchSTORE_AFLTD(searchDTO);
+		}
+
 		System.out.println(totalRecordCount);
 		//페이지 설정
 		int pageSize = 10;
@@ -94,7 +102,15 @@ public class CafeController {
 		System.out.println(end);
 
 		//검색어 기반 가게 정보 출력
-		ArrayList<SearchDTO> lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		ArrayList<SearchDTO> lists = new ArrayList<SearchDTO>();
+		if(searchDTO.getStore_afltd() == 0) {
+			//검색어 기반 가게 정보 출력
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			System.out.println("제휴");
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearchSTORE_AFLTD(searchDTO);
+		}
 
 		//페이지 버튼 누를시 이동할 경로 선택
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
@@ -182,9 +198,16 @@ public class CafeController {
 		searchDTO.setStore_afltd(AFLTD);
 
 		System.out.println(searchDTO.getSearchTxt());
+		
+		int totalRecordCount =0;
+		if(searchDTO.getStore_afltd() == 0) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearchSTORE_AFLTD(searchDTO);
+		}
 
-		//해당되는 게시물의 총 갯수
-		int totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
 		System.out.println(totalRecordCount);
 		//페이지 설정
 		int pageSize = 10;
@@ -198,8 +221,16 @@ public class CafeController {
 		System.out.println(start);
 		System.out.println(end);
 
-		//검색어 기반 가게 정보 출력
-		ArrayList<SearchDTO> lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		ArrayList<SearchDTO> lists = new ArrayList<SearchDTO>();
+		if(searchDTO.getStore_afltd() == 0) {
+			//검색어 기반 가게 정보 출력
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			System.out.println("제휴");
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearchSTORE_AFLTD(searchDTO);
+		}
+		
 
 		//페이지 버튼 누를시 이동할 경로 선택
 		String pagingImg = PagingUtil.pagingImg(totalRecordCount, pageSize, blockPage, nowPage,
@@ -248,7 +279,15 @@ public class CafeController {
 //		System.out.println(myStoreDTO.getSearchTxt());
 
 		//마커에 쓰일 게시물 수 추출
-		int totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
+		int totalRecordCount =0;
+		if(searchDTO.getStore_afltd() == 0) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			totalRecordCount = sqlSession.getMapper(CafeSearchImpl.class).getTotalCountSearchSTORE_AFLTD(searchDTO);
+		}
+
 		System.out.println("마커에 뜰 총 가게수 ="+totalRecordCount);
 
 
@@ -264,7 +303,15 @@ public class CafeController {
 		searchDTO.setEnd(end);
 
 		//마커 인포윈도우에 들어갈 매장 정보 추출
-		ArrayList<SearchDTO> lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		ArrayList<SearchDTO> lists = new ArrayList<SearchDTO>();
+		if(searchDTO.getStore_afltd() == 0) {
+			//검색어 기반 가게 정보 출력
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearch(searchDTO);
+		}else if(searchDTO.getStore_afltd() == 1) {
+			//해당되는 게시물의 총 갯수
+			System.out.println("제휴");
+			lists = sqlSession.getMapper(CafeSearchImpl.class).listPageSearchSTORE_AFLTD(searchDTO);
+		}
 
 		//매장정보값을 넘길 맵 객체 생성
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -123,9 +123,10 @@ span {
 								</div>
 							</c:when>
 							<c:otherwise>
+
 								<ul class="mapSearchList ">
 									<c:forEach items="${lists }" var="item">
-
+										
 										<li class="item"><a
 											href="<%= request.getContextPath() %>/cafe/info.do?store_idx=${item.store_idx }" role="button">
 												<figure>
@@ -182,7 +183,9 @@ span {
 													</div>
 													
 
-													<div class="kind cafe"></div>
+													<c:if test="${item.store_afltd eq '1'}">
+														<div class="kind cafe"></div>
+													</c:if>
 												</div>
 										</a></li>
 									</c:forEach>
