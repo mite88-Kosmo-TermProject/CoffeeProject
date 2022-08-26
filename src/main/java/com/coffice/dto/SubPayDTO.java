@@ -21,6 +21,8 @@ public class SubPayDTO {
 		private String pay_successed_at;
 		//결제한 pg사
 		private String pay_case;
+		//다음결제일
+		private String pay_next_order_date;
 		
 /*		
 

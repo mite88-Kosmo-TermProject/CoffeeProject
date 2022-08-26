@@ -73,7 +73,7 @@
             $(metadata).each(function (mi, mv) {
                 if (mv.type === 'delete') {
                     var td = $("<td/>")
-                        .html('<button type="button" class="' + options.deleteClass + '">' + options.deleteContent + '</button>')
+                        .html('<button class="' + options.deleteClass + '">' + options.deleteContent + '</button>')
                         .attr('data-tabullet-type', mv.type)
                         .appendTo(tr);
                     td.find('button').click(function (event) {

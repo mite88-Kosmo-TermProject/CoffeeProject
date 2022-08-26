@@ -10,7 +10,6 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/resources/img/icon.ico" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +21,96 @@
 .table > :not(caption) > * > * {
     padding: 0.5rem !important;
     }
+#roulette-outer{
+	position: relative;
+	left:80px;
+	bottom:50px;
+	overflow: hidden;
+	width: 350px;
+	height: 350px;
+	z-index: 1;
+	}
+#roulette{
+position: absolute;
+border:0px;
+padding:0px;
+top: 5%;
+left: 5%;
+right:5%;
+bottom:5% ;
+width:313px;
+border-radius: 50%;
+background: #D1B6E1;
+border: 2px solid black;
+z-index: 2;
+}
+#roulette > #item-wrapper > .item {
+	position: absolute;
+	font:25px bold;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	
+	padding-top: 10%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	
+}
+/*#roulette > #item-wrapper > .item:nth-child(1) {
+	transform: rotate(0deg);
+}
+#roulette > #item-wrapper > .item:nth-child(2) {
+	transform: rotate(72deg);
+}
+#roulette > #item-wrapper > .item:nth-child(3) {
+	transform: rotate(144deg);
+}
+#roulette > #item-wrapper > .item:nth-child(4) {
+	transform: rotate(216deg);
+}	
+#roulette > #item-wrapper > .item:nth-child(5) {
+	transform: rotate(288deg);
+}*/	
+#roulette > #line-wrapper > .line {
+	position: absolute;
+	top: 0;
+	bottom: 50%;
+	left: 50%;
+	width: 2px;
+	background: black;
+	transform-origin: bottom;
+	z-index: 3;
+}
+/*#roulette > #line-wrapper > .line:nth-child(1) {
+	transform: rotate(36deg);
+}
+#roulette > #line-wrapper > .line:nth-child(2) {
+	transform: rotate(108deg);
+}
+#roulette > #line-wrapper > .line:nth-child(3) {
+	transform: rotate(180deg);
+}
+#roulette > #line-wrapper > .line:nth-child(4) {
+	transform: rotate(252deg);
+}
+#roulette > #line-wrapper > .line:nth-child(5) {
+	transform: rotate(324deg);
+}*/
+#roulette-pin{
+position: absolute;
+top:5%;
+left:173px;
+width:4px;
+padding-left:0px;
+padding-right:0px;
+margin-right:10px;
+height:20px;
+background:red;
+z-index: 4;
+}
+
 
 </style>
 
@@ -94,6 +183,32 @@
 												</div>
 											</form>
 											</div>
+											<div class="mb-3 row" id="roulette-outer" style="display: flex;">
+												
+											<div id="roulette-pin"></div>
+												<div id="roulette">
+												<!--값영역 -->
+												<div id="item-wrapper">
+													<!-- <div class="item">100점</div>
+													<div class="item">200점</div>
+													<div class="item">300점</div>
+													<div class="item">-50점</div>
+													<div class="item">-20점</div> -->
+												</div>
+												<!--선영역-->
+												<div id="line-wrapper">
+													<!-- <div class="line"></div>
+													<div class="line"></div>
+													<div class="line"></div>
+													<div class="line"></div>
+													<div class="line"></div> -->
+												</div>
+											</div>
+											</div>
+											<div>
+												<button type="button" onclick="calculateItemAndRatio();">룰렛만들기</button>
+												<button type="button" onclick="MakeSetRouletteStr();">룰렛돌려보기</button>
+											</div>
 
 											<!-- 오른편 -->
 											<div class="col-md-12">
@@ -102,12 +217,10 @@
 														<thead>
 															<tr data-tabullet-map="id">
 																<th data-tabullet-map="0">항목번호</th>
-																<th data-tabullet-map="1">항목명</th>
-																<th data-tabullet-map="2">비율</th>
-																<th data-tabullet-map="3">확률</th>
-																<th data-tabullet-map="4">항목상품</th>
-																<th width="50" data-tabullet-type="edit"></th>
-																<th width="50" data-tabullet-type="delete"></th>
+																<th data-tabullet-map="1">항목명</th>												
+																<th data-tabullet-map="2">확률</th>
+																<th data-tabullet-map="3">항목상품</th>
+																<th width="50" data-tabullet-type="edit"></th>	
 															</tr>
 														</thead>
 													</table>
@@ -115,8 +228,8 @@
 
 											</div>
 											<div class="mt-2">
-												<button type="button" class="btn btn-primary me-2">저장</button>
-												<button type="reset" class="btn btn-outline-secondary">Cancel</button>
+												<button type="button" onclick="insertEventItem();" class="btn btn-primary me-2">저장</button>
+												<button type="reset" onclick="resetItem();" class="btn btn-outline-secondary">룰렛판&항목초기화</button>
 											</div>
 
 										</div>
@@ -150,74 +263,7 @@
 
 	<!-- 여기에 새로운 js파일있으면 넣기 -->
 	<script src="<%= request.getContextPath() %>/resources/lib/Dynamic-Table/Tabullet.js"></script>
-
-	<script type="text/javascript">
-		var source = [];
-		var eventname = document.getElementsByName("eventname")[0];
-		var file = document.getElementsByName("file")[0];
-		var desc = document.getElementsByName("desc")[0];
-		
-		function setSource(){
-			$.ajax({
-				url:'../../admin/point/loadevent_item.do',
-				dataType:'json',
-				success:function(data){
-					source = data;
-					resetTabullet();
-					
-				},
-				error:function(msg){
-					console.log(msg);
-				}
-			});
-		 }
-		function loadEventSetting(){
-			$.ajax({
-				url:'../../admin/point/loadeventsetting.do',
-				dataType:'json',
-				success:function(data){					
-					eventname.placeholder = data.name;
-					desc.placeholder = data.desc;
-				},
-				error:function(msg){
-					console.log(msg);
-				}
-			});
-		}
-		 function resetTabullet() {
-             $("#table").tabullet({
-                 data: source,
-                 action: function (mode, data) {
-                     console.dir(mode);
-                     if (mode === 'save') {
-                         source.push(data);
-                     }
-                     if (mode === 'edit') {
-                         for (var i = 0; i < source.length; i++) {
-                             if (source[i][0] == data[0]) {
-                            	 console.log(data);
-                                 source[i] = data;
-                             }
-                         }
-                     }
-                     if(mode == 'delete'){
-                         for (var i = 0; i < source.length; i++) {
-                             if (source[i][0] == data[0]) {
-                                 source.splice(i,1);
-                                 break;
-                             }
-                         }
-                     }
-                     resetTabullet();
-                 }
-             });
-         }
-	 $(function () {
-		 //동적테이블 
-		 setSource();
-		 loadEventSetting();
-     });
- </script>
+	<script src="<%= request.getContextPath() %>/resources/admin/js/admin_test_roulette.js"></script>
 </body>
 
 </html>

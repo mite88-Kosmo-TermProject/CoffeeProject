@@ -81,73 +81,44 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- Topbar End -->
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-      <a
-        href="<%=request.getContextPath() %>"
-        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
-      >
-        <h2 class="m-0 text-primary">Coffee Pass</h2>
-      </a>
-      <button
-        type="button"
-        class="navbar-toggler me-4"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
-          <a
-            href="<%=request.getContextPath() %>/cafe/search.do"
-            class="nav-item nav-link active"
-            >검색</a
-          >
-          <a
-            href="<%=request.getContextPath() %>/cafeSNS/review.do"
-            class="nav-item nav-link"
-            >카페SNS</a
-          >
-          <a
-            href="<%=request.getContextPath() %>/community/boardList.do"
-            class="nav-item nav-link"
-            >게시판</a
-          >
-          <c:if test="${sessionScope.siteUserInfo!=null}">
-            <span style="float: right">
-              <a
-                href="<%=request.getContextPath() %>/mypage/main.do?"
-                class="nav-item nav-link"
-                >마이페이지</a
-              >
-            </span>
-          </c:if>
-          <span style="float: right">
-            <a
-              href="<%=request.getContextPath() %>/order/subPay.do"
-              class="nav-item nav-link"
-              >패스구매</a
-            >
-          </span>
+	<!-- Navbar Start -->
+	<nav
+		class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+		<a href="<%=request.getContextPath() %>"
+			class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+			<h2 class="m-0 text-primary">Coffee Pass</h2>
+		</a>
+		<button type="button" class="navbar-toggler me-4"
+			data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<div class="navbar-nav ms-auto p-4 p-lg-0">
+				<a href="<%=request.getContextPath() %>/cafe/map.do" class="nav-item nav-link active">검색</a> 
+				<a href="<%=request.getContextPath() %>/cafeSNS/review.do" class="nav-item nav-link">카페SNS</a> 
+				<c:if test="${sessionScope.siteUserInfo!=null}">
+               <span style="float:right;">
+                  <a href="<%=request.getContextPath() %>/mypage/main.do" class="nav-item nav-link">마이페이지</a>
+               </span>
+        </c:if>
+				
+				
+				<a href="<%=request.getContextPath() %>/order/subPay.do" class="nav-item nav-link">패스구매</a>
+				
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle"
+						data-bs-toggle="dropdown">커뮤니티</a>
+					<div class="dropdown-menu fade-up m-0">
+						<a href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=1" class="dropdown-item">공지게시판</a> <a
+							href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=2" class="dropdown-item">이벤트게시판</a> <a
+							href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=3" class="dropdown-item">자유게시판</a> <a
+							href="testimonial.html" class="dropdown-item">Testimonial</a> <a
+							href="404.html" class="dropdown-item">404 Page</a>
+					</div>
+				</div>
 
-          <div class="nav-item dropdown">
-            <a
-              href="#"
-              class="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-              >Pages</a
-            >
-            <div class="dropdown-menu fade-up m-0">
-              <a href="feature.html" class="dropdown-item">Feature</a>
-              <a href="quote.html" class="dropdown-item">Free Quote</a>
-              <a href="team.html" class="dropdown-item">Our Team</a>
-              <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-              <a href="404.html" class="dropdown-item">404 Page</a>
-            </div>
-          </div>
-        </div>
-        <c:if test="${sessionScope.siteUserInfo!=null}">
+			</div>
+			<c:if test="${sessionScope.siteUserInfo!=null}">
           <span style="float: right">
             <a href="<%=request.getContextPath() %>/member/logout.do"
               >로그아웃</a
@@ -163,6 +134,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </c:if>
       </div>
     </nav>
-    <!-- Navbar End -->
-  </body>
+	<!-- Navbar End -->
+</body>
 </html>

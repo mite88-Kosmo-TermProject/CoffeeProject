@@ -1,7 +1,7 @@
 package com.coffice.user.controller;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Member;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,36 +73,46 @@ public class UserMemberController {
 	// return mv;
 	// }
 	// 로그인
-	@RequestMapping(value="/member/loginAction.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public void loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO) throws Exception{
-		
-		
-		if(sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"))==null) {
-			 PrintWriter writer = resp.getWriter();
-			 resp.setCharacterEncoding("UTF-8");
-			 resp.setContentType("text/html; charset=UTF-8");
+	@RequestMapping(value = "/member/loginAction.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public void loginaction(HttpServletRequest req, HttpServletResponse resp, HttpSession session,
+			MemberDTO memberDTO, Model model) throws Exception {
+		memberDTO = sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"),
+				req.getParameter("mem_pw"));
+		if (memberDTO == null) {
+			PrintWriter writer = resp.getWriter();
+			resp.setCharacterEncoding("UTF-8");
+			resp.setContentType("text/html; charset=UTF-8");
 
-		     writer.println("<script type='text/javascript'>");
-		     writer.println("alert('아이디/비밀번호를 확인해주세요.');");
-		     writer.println("history.back();");
-		     writer.println("</script>");
-		     writer.flush();
-		     
-		}
-		else {
-			String path = req.getScheme() + "://" + req.getServerName() +":" + req.getServerPort();
-			System.out.println("path:"+path);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('아이디/비밀번호를 확인해주세요.');");
+			writer.println("history.back();");
+			writer.println("</script>");
+			writer.flush();
+
+		} else {
+			String passdate = sqlSession.getMapper(UserMemberImpl.class).checkpassoneday(req.getParameter("mem_id"));
+			String now = LocalDate.now().toString();
+			if (passdate.equals(now)) {
+				System.out.println(passdate);
+				System.out.println(now);
+				model.addAttribute("passoneday", "true");
+			} else {
+				System.out.println(passdate);
+				System.out.println(now);
+				model.addAttribute("passoneday", "false");
+			}
+
+			String path = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort();
+			System.out.println("path:" + path);
 			session.setAttribute("siteUserInfo", memberDTO);
 			session.setAttribute("user_id", memberDTO.getMem_id());
-			 PrintWriter writer2 = resp.getWriter();
-			 writer2.println("<script type='text/javascript'>");
-		     writer2.println("location.href = 'http://localhost:8082/CoffeeProject/';");
-		     writer2.println("</script>");
-		     writer2.flush();
-			
+			PrintWriter writer2 = resp.getWriter();
+			writer2.println("<script type='text/javascript'>");
+			writer2.println("location.href = 'http://localhost:8082/CoffeeProject/';");
+			writer2.println("</script>");
+			writer2.flush();
 
 		}
-		//return "redirect:/";
 	}
 
 	// 로그아웃
@@ -112,12 +120,11 @@ public class UserMemberController {
 	public String logout(MemberDTO memberDTO, HttpSession session) throws Exception {
 
 		// 세션 영역 정보 지움 ㅎㅎ
-		//session.invalidate();
+		// session.invalidate();
 		session.removeAttribute("siteUserInfo");
 		session.removeAttribute("user_id");
 
-		return "redirect:/";
-
+		return "home";
 	}
 
 	// 아이디 찾기 페이지
@@ -268,11 +275,9 @@ public class UserMemberController {
 		System.out.println("!!" + req.getParameter("mem_id"));
 
 		// Mapper의 view메서드를 호출한다. 이 때 DTO 객체를 인수로 전달한다.
-
 		MemberDTO dto = sqlSession.getMapper(UserMemberImpl.class).view(parameterDTO);
 
 		model.addAttribute("dto", dto);
-
 		return "/user/member/modify";
 	}
 
@@ -366,7 +371,18 @@ public class UserMemberController {
 			session.setAttribute("siteUserInfo", dto);
 		}
 		// 메인 페이지 redirect로 설정 해야함
-		return "redirect:/";
+		return "home";
 
 	}
+
+	// 룰렛이벤트 포인트 지급
+	@RequestMapping("/member/inserteventpoint.do")
+	 @ResponseBody
+	 public void insertEventPoint (HttpServletRequest req , HttpSession session) {
+		MemberDTO userdto =  (MemberDTO) session.getAttribute("siteUserInfo");
+		int point = Integer.parseInt(req.getParameter("point"));
+		String mem_id = userdto.getMem_id();
+		sqlSession.getMapper(UserMemberImpl.class).inserteventpoint(mem_id, point);
+	 }
+
 }

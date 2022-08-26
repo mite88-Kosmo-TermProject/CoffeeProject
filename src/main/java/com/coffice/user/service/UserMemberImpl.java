@@ -16,7 +16,10 @@ import org.springframework.stereotype.Service;
  */
 
 import com.coffice.dto.MemberDTO;
+import com.coffice.dto.MypageDTO;
+import com.coffice.dto.MypagejjimDTO;
 import com.coffice.dto.ParameterDTO;
+import com.coffice.dto.PointDTO;
 import com.coffice.dto.StoresDTO;
 
 
@@ -42,8 +45,6 @@ public interface UserMemberImpl {
 	public int join(MemberDTO memberDTO);
 	
 	public MemberDTO view(ParameterDTO parameterDTO);
-	public StoresDTO view2(StoresDTO storesDTO);
-	//public MemberDTO view(String mem_id);
 	public int modify(MemberDTO memberDTO);
 	
 	public int delete(String idx);
@@ -68,6 +69,16 @@ public interface UserMemberImpl {
 	
 	public int kakaojoin(MemberDTO memberDTO);
 	public String pw(String mem_id, String mem_eamil);
-	public MemberDTO view_one(String mem_id);
-
+	
+	//로그인시 하루지났는지 확인후 포인트적립
+	public String checkpassoneday (@Param("userName") String name);
+	public void inserteventpoint(String name , int point);
+	
+	//마이페이지 기능
+	public ArrayList<MypageDTO> loaduserinfo (@Param("userName") String name);
+	public ArrayList<MypagejjimDTO> loadjjimlist (@Param("userName") String name);
+	public StoresDTO view2(StoresDTO storesDTO);
+	
+	
+	
 }

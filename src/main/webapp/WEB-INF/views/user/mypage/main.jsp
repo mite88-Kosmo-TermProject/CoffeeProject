@@ -10,7 +10,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,12 +28,17 @@
 	href="<%= request.getContextPath() %>/resources/css/mypage/style.css"
 	rel="stylesheet">
 
+<style>
+#postsgallery > .pic {
+	padding-bottom: 40px;
+}
+</style>
 </head>
 
 
 
 <body>
-	
+
 	<!-- content -->
 
 	<div class="page">
@@ -59,49 +64,24 @@
 		<div class="profile-wrap mb-2rem">
 			<div class="profile-avatar">
 				<div class="circ-story circ-gradient"></div>
-				<img
-					src="https://i.pinimg.com/236x/ec/f0/a1/ecf0a1fff1ddf788883644722b57d82c.jpg"
+				<img id="profileimg"
+					src="<%= request.getContextPath() %>/resources/img/user/${sessionScope.siteUserInfo.mem_img}"
 					class="img-fluid " />
 			</div>
 			<div class="profile-info">
 				<div class="profile-title mb-1rem">
-					<h2>${siteUserInfo.mem_id }</h2>
+					<h2>${sessionScope.siteUserInfo.mem_nickname }</h2>
 					<button class="btn btn-primary">회원수정</button>
 				</div>
-				<c:if test="${siteUserInfo.mem_case eq 1}">
-               <span style="float:right;">
-                  <a href="<%=request.getContextPath() %>/mypage/main.do?mem_id=${siteUserInfo.mem_id}" class="nav-item nav-link">점주 신청하기</a>
-               </span>
-           		</c:if>
-           		<c:if test="${siteUserInfo.mem_case eq 5}">
-               <span style="float:right;">
-                  <h6>승인 대기중</h6>
-               </span>
-           		</c:if>
-           		<c:if test="${siteUserInfo.mem_case eq 2}">
-               <span style="float:right;">
-               <form action="<%=request.getContextPath() %>/storeowner/index.do" method="POST" class="nav-item nav-link">
-               <button type="submit">
-               	카페 관리하기
-               </button>
-               	<input type="hidden" id="mem_id" name="mem_id" value="${siteUserInfo.mem_id }" />
-               	</form>
-               <%--    <a href="<%=request.getContextPath() %>/storeowner/index.do?mem_id=${siteUserInfo.mem_id}" class="nav-item nav-link">카페 관리하기</a> --%>
-               </span>
-               
-           		</c:if>
-           		<div>
-           			${siteUserInfo.mem_case}
-           		</div>
 				<!-- Profile Stats pc-->
 				<ul class="profile-numbers mb-1rem">
-					<li><a href="#"> <span class="profile-posts">6</span> 후기
+					<li><a href="#"> <span id="posts" class="profile-posts">6</span> 후기
 					</a></li>
-					<li><a href="#"> <span class="profile-followers">800B</span>
+					<li><a href="#"> <span  id="followers" class="profile-followers"></span>
 							찜(북마크)
 					</a></li>
-					<li><a href="#"> <span class="profile-following">10</span>
-							???
+					<li><a href="#"> <span  id="userpoint" class="profile-following">${sessionScope.siteUserInfo.mem_point }</span>
+							유저포인트
 					</a></li>
 				</ul>
 				<!-- <div class="profile-bio">
@@ -173,7 +153,7 @@
 		</div>
 		<!-- RESPONSIVE PROFILE NUMBERS 모바일-->
 		<ul class="profile-numbers responsive-profile">
-			<li><a href="#"> <span class="profile-posts">6</span>
+			<li><a href="#"> <span class="profile-posts"></span>
 					후기(모바일시 따로)
 			</a></li>
 			<li><a href="#"> <span class="profile-followers">800B</span>
@@ -219,7 +199,7 @@
 	
 				<!-- GALLERY -->
 					<div class="gallery-pics inner-wrap">
-						<div class="pic-wrap">
+						<div id="postsgallery" class="pic-wrap">
 							<div class="pic">
 								<div class="opacity-overlay">
 									<img src="https://source.unsplash.com/1600x900/?beach">
@@ -227,7 +207,12 @@
 								<div class="icons">
 									<i class="fas fa-coffee">00가게</i><br/>
 									<i class="fa fa-heart">200m</i> 
+									<i class="fa fa-calendar">2022/08/23</i>
 								</div>
+								<div style="background-color: yellow;">
+									아이스아메리카노가 맛있네요....
+								</div>
+									<span><i class="fas fa-star"></i><span>8.0 Superb</span>
 							</div>
 							<div class="pic">
 								<div class="opacity-overlay">
@@ -272,6 +257,7 @@
 								<div class="icons">
 									<i class="fas fa-coffee">00가게</i><br/>
 									<i class="fa fa-heart">200m</i> 
+						
 								</div>
 							</div>
 						</div>
@@ -280,7 +266,37 @@
 				</div>
 		
 				<div class="tab-pane fade" id="tab2" role="tabpanel">
-					2
+				<div class="gallery-pics inner-wrap">
+					<div id="jjimgallery" class="pic-wrap">
+						<div class="pic">
+							<div class="opacity-overlay">
+								<img src="https://source.unsplash.com/1600x900/?beach">
+							</div>
+							<div class="icons">
+								<i class="fas fa-coffee">00가게</i><br/>
+								<i class="fa fa-heart">200m</i> 
+								<i class="fa fa-calendar">2022/08/23</i>
+							</div>
+							<div style="background-color: yellow;">
+								
+							</div>
+							
+						</div>
+						<div class="pic">
+							<div class="opacity-overlay">
+								<img src="https://source.unsplash.com/1600x900/?beach">
+							</div>
+							<div class="icons">
+								<i class="fas fa-coffee">00가게</i><br/>
+								<i class="fa fa-heart">200m</i> 
+								<i class="fa fa-calendar">2022/08/23</i>
+							</div>
+							<div style="background-color: yellow;">
+								
+							</div>
+							
+						</div>
+						
 				</div>
 			
 			</div>
@@ -295,5 +311,87 @@
 	<%@ include file="/WEB-INF/views/user/layout/footer.jsp"%>
 
 </body>
+<script>
+	var postswrap = document.getElementById("postsgallery");
+	var profileImg = document.getElementById("profileimg");
+	var posts = document.getElementById("posts");
+	var followers = document.getElementById("followers");
+	var userpoint = document.getElementById("userpoint");
+	
+	function loadinformation(){
+		$.ajax({
+			url:'../mypage/loadinfo.do',
+			dataType:'json',
+			success:function(data){
+				posts.innerText = data.length;
+				makeReviewList(data);
+				
+			},
+			error :function(msg){
+				console.log(msg);
+			}
 
+
+		});
+	}
+	function loadJjiminformation(){
+		$.ajax({
+			url:'../mypage/loadjjiminfo.do',
+			dataType:'json',
+			success:function(data){
+				followers.innerText = data.length;
+				makeJjimList(data);
+				
+				
+			},
+			error :function(msg){
+				console.log(msg);
+			}
+
+
+		});
+	}
+	function makeReviewList(data){
+		var listStr = "";
+		console.log(data[0].review_img);
+		for(let i =0; i<data.length; i++){
+			listStr +=	"<div class='pic'>";
+			listStr +=	   "<div class='opacity-overlay'>";
+			listStr +=		 "<img src='../resources/img/review/"+data[i].review_img+"'>";
+			listStr +=	"</div>";
+			listStr +=	"<div class='icons'>";
+			listStr +=		"<i class='fas fa-coffee'>"+data[i].store_info.store_name+"</i><br/>";
+			listStr +=		"<i class='fa fa-heart'>200m</i> ";
+			listStr +=		"<i class='fa fa-calendar'>"+data[i].review_postdate+"</i>";
+			listStr +=		"</div>";
+			listStr +=		"<div style='background-color: yellow;'>";
+			listStr +=		data[i].review_content
+			listStr +=		"<div><i class='fas fa-star'></i><span>"+data[i].review_star+"별점</div>";
+			listStr +=		"</div>";
+			listStr +=	"</div>";
+		}
+		$("#postsgallery").append(listStr);
+	}
+	function makeJjimList(data){
+		var jjimStr = "";
+		console.log(data[0].review_img);
+		for(let i =0; i<data.length; i++){
+			jjimStr +=	"<div class='pic'>";
+			jjimStr +=	   "<div class='opacity-overlay'>";
+			jjimStr +=		 "<img src='../resources/img/stores/"+data[i].store_info.store_img+"'>";
+			jjimStr +=	"</div>";
+			jjimStr +=	"<div class='icons'>";
+			jjimStr +=		"<i class='fas fa-coffee'>"+data[i].store_info.store_name+"</i><br/>";
+			jjimStr +=		"<i class='fa fa-heart'>200m</i> ";
+			jjimStr +=		"<i class='fa fa-calendar'>"+data[i].jjim_postdate+"</i>";
+			jjimStr +=		"</div>";
+			jjimStr +=	"</div>";
+		}
+		$("#jjimgallery").append(jjimStr);
+	}
+	$(function(){
+		loadinformation();
+		loadJjiminformation();
+	});
+</script>
 </html>
