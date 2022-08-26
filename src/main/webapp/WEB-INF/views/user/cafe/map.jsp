@@ -342,6 +342,18 @@ span {
 				var store_idx7 = resdata.store_idx7;
 				var store_idx8 = resdata.store_idx8;
 				var store_idx9 = resdata.store_idx9;
+				
+				//가맹점표시용STORE_AFLTD
+				var store_afltd0 = resdata.store_afltd0;
+				var store_afltd1 = resdata.store_afltd1;
+				var store_afltd2 = resdata.store_afltd2;
+				var store_afltd3 = resdata.store_afltd3;
+				var store_afltd4 = resdata.store_afltd4;
+				var store_afltd5 = resdata.store_afltd5;
+				var store_afltd6 = resdata.store_afltd6;
+				var store_afltd7 = resdata.store_afltd7;
+				var store_afltd8 = resdata.store_afltd8;
+				var store_afltd9 = resdata.store_afltd9;
 			
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -358,55 +370,66 @@ span {
 			    var positions = [
 			        {
 			        	store_idx : store_idx0, 
-			        	content: '<div class="row"><div>가게명:'+store_name0+'</div><hr><br><div>가게평점:'+store_star0+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name0+'<hr>'+
+			        	'<div>가게평점:'+store_star0+'</div></div>', 
 			            latlng: new kakao.maps.LatLng( latitude0, longitude0)
 			        },
 			        {
 			        	store_idx : store_idx1,
-			        	content: '<div class="row"><div>가게명:'+store_name1+'</div><hr><br><div>가게평점:'+store_star1+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name1+'<hr>'+
+			        	'<div>가게평점:'+store_star1+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude1, longitude1)
 			        },
 			        {
 			        	store_idx : store_idx2,
-			        	content: '<div class="row"><div>가게명:'+store_name2+'</div><hr><br><div>가게평점:'+store_star2+'</div></div>',  
+			        	content: '<div class="row info-title"><div>가게명:'+store_name2+'<hr>'+
+			        	'<div>가게평점:'+store_star2+'</div></div>',   
 			            latlng: new kakao.maps.LatLng(latitude2, longitude2)
 			        },
 			        {
 			        	store_idx : store_idx3,
-			        	content: '<div class="row"><div>가게명:'+store_name3+'</div><hr><br><div>가게평점:'+store_star3+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name3+'<hr>'+
+			        	'<div>가게평점:'+store_star3+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude3, longitude3)
 			        },
 			        {
 			        	store_idx : store_idx4,
-			        	content: '<div class="row"><div>가게명:'+store_name4+'</div><hr><br><div>가게평점:'+store_star4+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name4+'<hr>'+
+			        	'<div>가게평점:'+store_star4+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude4, longitude4 )
 			        },
 			        {
 			        	store_idx : store_idx5,
-			        	content: '<div class="row"><div>가게명:'+store_name5+'</div><hr><br><div>가게평점:'+store_star5+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name5+'<hr>'+
+			        	'<div>가게평점:'+store_star5+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude5, longitude5)
 			        },
 			        {
 			        	store_idx : store_idx6,
-			        	content: '<div class="row"><div>가게명:'+store_name6+'</div><hr><br><div>가게평점:'+store_star6+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name6+'<hr>'+
+			        	'<div>가게평점:'+store_star6+'</div></div>', 
 			            latlng: new kakao.maps.LatLng( latitude6, longitude6 )
 			        },
 			        {
 			        	store_idx : store_idx7,
-			        	content: '<div class="row"><div>가게명:'+store_name7+'</div><hr><br><div>가게평점:'+store_star7+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name7+'<hr>'+
+			        	'<div>가게평점:'+store_star7+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude7, longitude7 )
 			        },
 			        {
 			        	store_idx : store_idx8,
-			        	content: '<div class="row"><div>가게명:'+store_name8+'</div><hr><br><div>가게평점:'+store_star8+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name8+'<hr>'+
+			        	'<div>가게평점:'+store_star8+'</div></div>', 
 			            latlng: new kakao.maps.LatLng(latitude8, longitude8)
 			        },
 			        {
 			        	store_idx : store_idx9,
-			        	content: '<div class="row"><div>가게명:'+store_name9+'</div><hr><br><div>가게평점:'+store_star9+'</div></div>', 
+			        	content: '<div class="row info-title"><div>가게명:'+store_name9+'<hr>'+
+			        	'<div>가게평점:'+store_star9+'</div></div>',  
 			            latlng: new kakao.maps.LatLng(latitude9, longitude9)
 			        }
 			    ];
+	
 				
 			    if(AFLTD == 0){
 					var MARKER_WIDTH = 33, // 기본, 클릭 마커의 너비
@@ -447,6 +470,7 @@ span {
 				        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 				        kakao.maps.event.addListener(marker, 'click', makeClickListener(positions[i]));
 				    }
+
 			    }
 			    if(AFLTD == 1){
 			    	// 마커 이미지의 이미지 주소입니다

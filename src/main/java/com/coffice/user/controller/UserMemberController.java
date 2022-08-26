@@ -76,11 +76,14 @@ public class UserMemberController {
 	// }
 	// 로그인
 	@RequestMapping(value="/member/loginAction.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public String loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO) throws Exception{
+	public void loginaction(HttpServletRequest req, HttpServletResponse resp,  HttpSession session, MemberDTO memberDTO) throws Exception{
+		
 		
 		if(sqlSession.getMapper(UserMemberImpl.class).login(req.getParameter("mem_id"), req.getParameter("mem_pw"))==null) {
-			 resp.setCharacterEncoding("utf-8");
-		     PrintWriter writer = resp.getWriter();
+			 PrintWriter writer = resp.getWriter();
+			 resp.setCharacterEncoding("UTF-8");
+			 resp.setContentType("text/html; charset=UTF-8");
+
 		     writer.println("<script type='text/javascript'>");
 		     writer.println("alert('아이디/비밀번호를 확인해주세요.');");
 		     writer.println("history.back();");
@@ -89,11 +92,19 @@ public class UserMemberController {
 		     
 		}
 		else {
+			String path = req.getScheme() + "://" + req.getServerName() +":" + req.getServerPort();
+			System.out.println("path:"+path);
 			session.setAttribute("siteUserInfo", memberDTO);
 			session.setAttribute("user_id", memberDTO.getMem_id());
+			 PrintWriter writer2 = resp.getWriter();
+			 writer2.println("<script type='text/javascript'>");
+		     writer2.println("location.href = 'http://localhost:8082/CoffeeProject/';");
+		     writer2.println("</script>");
+		     writer2.flush();
+			
 
 		}
-		return "redirect:/";
+		//return "redirect:/";
 	}
 
 	// 로그아웃

@@ -837,7 +837,7 @@ ul, ol {
 #caffee_map .mapSearchList > li a .inner .conUtil span {
     font-size: .875rem;
 }
-#caffee_map .mapSearchList > li a .inner .kind {
+#caffee_map .mapSearchList > li a .inner .kind, .kind {
     position: absolute;
     top: 7px;
     right: -5px;
@@ -845,7 +845,8 @@ ul, ol {
     height: 18px;
     background: url(/CoffeeProject/resources/img/spr_kind.png) no-repeat;
 }
-#caffee_map .mapSearchList > li a .inner .kind.cafe {
+#caffee_map .mapSearchList > li a .inner .kind.cafe,
+.kind.cafe {
     background-position: -18px 0;
 }
 #caffee_map .mapSearchList > li a .inner .kind.trip {
@@ -1439,6 +1440,22 @@ ul, ol {
 }
 .mapPin.stay.active {
     border-width: 5px;
+}
+
+/*지도 인포윈도우*/
+.info-title {
+    display: block;
+    width:200px;
+    background: #50627F;
+    color: #fff;
+    text-align: center;
+    height: auto;
+    border-radius:4px;
+    padding:0px 10px;
+}
+
+.info-title *{
+	 color: #fff;
 }
 
 /*반응형용*/

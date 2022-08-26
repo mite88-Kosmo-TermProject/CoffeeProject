@@ -15,8 +15,8 @@
 <!-- Go Trip CSS  -->
 <style type="text/css">
 #profile {
-        height: 50px;
-        width: 15%;
+        height: 40px;
+        width: 40px;
         border-radius: 100%;
         grid-row-start: 1;
         grid-row-end: 3;
@@ -537,7 +537,7 @@
 
 
 	<!-- 검색 확장 -->
-	<div class="offcanvas offcanvas-top" tabindex="-1" id="searchcanvasTop"
+	<!-- <div class="offcanvas offcanvas-top" tabindex="-1" id="searchcanvasTop"
 		aria-labelledby="offcanvasTopLabel">
 		<div class="offcanvas-header">
 			<h5 class="offcanvas-title" id="offcanvasTopLabel">카페를 검색하세요</h5>
@@ -546,7 +546,7 @@
 		</div>
 		<div class="offcanvas-body">
 
-			<!-- 내용 -->
+			내용
 			<form action="">
 				<div class="row mb-3">
 					<div class="col"></div>
@@ -572,7 +572,7 @@
 					<div class="col"></div>
 				</div>
 
-				<!-- 항목선택 -->
+				항목선택
 				<div class="container text-center">
 					<div class="row">
 
@@ -639,7 +639,7 @@
 			</form>
 
 		</div>
-	</div>
+	</div> -->
 
 </body>
 
