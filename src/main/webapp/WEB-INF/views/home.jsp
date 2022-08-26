@@ -251,7 +251,7 @@ Open modal
 	<div class="container-xxl py-5" id="main_story">
 		<div class="container">
 			<div class="section-title text-center">
-				<h1 class="display-6 mb-5">카페 STORY</h1>
+				<h1 class="display-6 mb-5">카페패스 EVENT</h1>
 			</div>
 			<div class="row g-4">
 				<div class="col-12">
@@ -270,18 +270,21 @@ Open modal
 									<div class="container">
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
-												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">Best
-													Carpenter & Craftsman Services</h1>
-												<p class="fs-5 fw-medium text-white mb-4 pb-2">무엇을 넣을까?
+												<h5 class="text-white text-uppercase mb-3 animated slideInDown">
+													기존 구독자들을 위한 썸머 페스티벌!!
+												</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													커피패스를 찍을 때마다 자동 응모!!
+												</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">모히또에서 말리부 마실 수 있는 기회
 												</p>
-												<a href=""
-													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-													More</a> <a href=""
-													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-													Quote</a>
+												<a href="./user/community/boardView.do?board_idx=67&&board_flag=2&&nowPage=1"
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">
+													자세히보기
+													</a> <a href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=2"
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">
+														다른 이벤트보기
+													</a>
 											</div>
 										</div>
 									</div>
@@ -300,19 +303,22 @@ Open modal
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
 												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">카페
-													추천1</h1>
-												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
-													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
-													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
-													elitr.</p>
-												<a href=""
-													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-													More</a> <a href=""
-													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-													Quote</a>
+													class="text-white text-uppercase mb-3 animated slideInDown">
+															첫 구독 회원 한 달 구독권이 100원!!!
+													</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													처음 이용해주시는 고객님들 대상
+													</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">
+												첫 달 구독권을 100원에 판매하고 있습니다.
+													</p>
+												<a href="./user/community/boardView.do?board_idx=66&&board_flag=2&&nowPage=1"
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">
+													자세히보기
+													</a> <a href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=2"
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">
+														다른 이벤트보기
+													</a>
 											</div>
 										</div>
 									</div>
@@ -329,19 +335,22 @@ Open modal
 										<div class="row justify-content-center">
 											<div class="col-12 col-lg-8 text-center">
 												<h5
-													class="text-white text-uppercase mb-3 animated slideInDown">Welcome
-													To WooDY</h5>
-												<h1 class="display-6 text-white animated slideInDown mb-4">Best
-													Carpenter & Craftsman Services</h1>
-												<p class="fs-5 fw-medium text-white mb-4 pb-2">Vero
-													elitr justo clita lorem. Ipsum dolor at sed stet sit diam
-													no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
-													elitr.</p>
-												<a href=""
-													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-													More</a> <a href=""
-													class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-													Quote</a>
+													class="text-white text-uppercase mb-3 animated slideInDown">
+													사장님들 힘내세요!! 이벤트
+													</h5>
+												<h1 class="display-6 text-white animated slideInDown mb-4">
+													고객들을 위해 뛰는 사장님들 대상
+													</h1>
+												<p class="fs-5 fw-medium text-white mb-4 pb-2">
+													제휴하신 카페 중 3곳을 뽑아 최신형 돌체 엔 가바나 ㄴ커피머신을 쏩니다!!!!!
+													</p>
+												<a href="./user/community/boardView.do?board_idx=68&&board_flag=2&&nowPage=1"
+													class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">
+													자세히보기
+													</a> <a href="<%=request.getContextPath() %>/community/boardList.do?nowPage=1&&board_flag=2"
+													class="btn btn-light py-md-3 px-md-5 animated slideInRight">
+														다른 이벤트보기
+													</a>
 											</div>
 										</div>
 									</div>

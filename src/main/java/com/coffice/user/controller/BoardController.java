@@ -197,6 +197,10 @@ public class BoardController {
 
 			model.addAttribute("sessionMem_id"+mem_id);
 		}
+		for (BoardDTO dto : list) {
+			String temp = dto.getBoard_content().replace("\r\n","<br/>");
+			dto.setBoard_content(temp);
+		}
 		for ( BoardDTO dto : list) {
 			map.put("board_title", dto.getBoard_title());
 			map.put("board_content", dto.getBoard_content());
